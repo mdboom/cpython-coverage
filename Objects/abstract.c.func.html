@@ -1,0 +1,596 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Objects/abstract.c - functions</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Objects</a> - abstract.c<span style="font-size: 80%;"> (<a href="abstract.c.gcov.html">source</a> / functions)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1171</td>
+            <td class="headerCovTableEntry">1517</td>
+            <td class="headerCovTableEntryMed">77.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">111</td>
+            <td class="headerCovTableEntry">131</td>
+            <td class="headerCovTableEntryMed">84.7 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <center>
+  <table width="60%" cellpadding=1 cellspacing=1 border=0>
+    <tr><td><br></td></tr>
+    <tr>
+      <td width="80%" class="tableHead">Function Name <span class="tableHeadSort"><img src="../glass.png" width=10 height=14 alt="Sort by function name" title="Sort by function name" border=0></span></td>
+      <td width="20%" class="tableHead">Hit count <span class="tableHeadSort"><a href="abstract.c.func-sort-c.html"><img src="../updown.png" width=10 height=14 alt="Sort by hit count" title="Sort by hit count" border=0></a></span></td>
+    </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2836">PyAIter_Check</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#683">PyBuffer_FillContiguousStrides</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#707">PyBuffer_FillInfo</a></td>
+              <td class="coverFnHi">21424500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#560">PyBuffer_FromContiguous</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#477">PyBuffer_GetPointer</a></td>
+              <td class="coverFnHi">60309</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#461">PyBuffer_IsContiguous</a></td>
+              <td class="coverFnHi">12666300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#746">PyBuffer_Release</a></td>
+              <td class="coverFnHi">27475500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#525">PyBuffer_SizeFromFormat</a></td>
+              <td class="coverFnHi">3</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1387">PyIndex_Check</a></td>
+              <td class="coverFnHi">9707220</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2828">PyIter_Check</a></td>
+              <td class="coverFnHi">79682200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2852">PyIter_Next</a></td>
+              <td class="coverFnHi">122063000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2868">PyIter_Send</a></td>
+              <td class="coverFnHi">6806660</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2294">PyMapping_Check</a></td>
+              <td class="coverFnHi">3672140</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2333">PyMapping_GetItemString</a></td>
+              <td class="coverFnHi">16786</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2383">PyMapping_HasKey</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2369">PyMapping_HasKeyString</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2441">PyMapping_Items</a></td>
+              <td class="coverFnHi">177505</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2429">PyMapping_Keys</a></td>
+              <td class="coverFnHi">127491</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2326">PyMapping_Length</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2350">PyMapping_SetItemString</a></td>
+              <td class="coverFnHi">8592</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2301">PyMapping_Size</a></td>
+              <td class="coverFnHi">1221010</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2453">PyMapping_Values</a></td>
+              <td class="coverFnHi">104</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1369">PyNumber_Absolute</a></td>
+              <td class="coverFnHi">2894090</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1062">PyNumber_Add</a></td>
+              <td class="coverFnHi">15531300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1055">PyNumber_And</a></td>
+              <td class="coverFnHi">7741980</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1458">PyNumber_AsSsize_t</a></td>
+              <td class="coverFnHi">180067000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#823">PyNumber_Check</a></td>
+              <td class="coverFnHi">1124520</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1059">PyNumber_Divmod</a></td>
+              <td class="coverFnHi">1423870</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1625">PyNumber_Float</a></td>
+              <td class="coverFnHi">3414510</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1125">PyNumber_FloorDivide</a></td>
+              <td class="coverFnHi">3279780</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1250">PyNumber_InPlaceAdd</a></td>
+              <td class="coverFnHi">936845</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1240">PyNumber_InPlaceAnd</a></td>
+              <td class="coverFnHi">58971</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1245">PyNumber_InPlaceFloorDivide</a></td>
+              <td class="coverFnHi">307410</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1241">PyNumber_InPlaceLshift</a></td>
+              <td class="coverFnHi">566584</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1244">PyNumber_InPlaceMatrixMultiply</a></td>
+              <td class="coverFnHi">16</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1273">PyNumber_InPlaceMultiply</a></td>
+              <td class="coverFnHi">11734</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1238">PyNumber_InPlaceOr</a></td>
+              <td class="coverFnHi">3085260</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1302">PyNumber_InPlacePower</a></td>
+              <td class="coverFnHi">21</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1247">PyNumber_InPlaceRemainder</a></td>
+              <td class="coverFnHi">603</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1242">PyNumber_InPlaceRshift</a></td>
+              <td class="coverFnHi">5327</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1243">PyNumber_InPlaceSubtract</a></td>
+              <td class="coverFnHi">43606</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1246">PyNumber_InPlaceTrueDivide</a></td>
+              <td class="coverFnHi">2098960</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1239">PyNumber_InPlaceXor</a></td>
+              <td class="coverFnHi">13712</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1446">PyNumber_Index</a></td>
+              <td class="coverFnHi">8363380</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1352">PyNumber_Invert</a></td>
+              <td class="coverFnHi">824899</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1509">PyNumber_Long</a></td>
+              <td class="coverFnHi">3304870</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1056">PyNumber_Lshift</a></td>
+              <td class="coverFnHi">880550</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1119">PyNumber_MatrixMultiply</a></td>
+              <td class="coverFnHi">22</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1100">PyNumber_Multiply</a></td>
+              <td class="coverFnHi">9142130</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1318">PyNumber_Negative</a></td>
+              <td class="coverFnHi">1591310</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1053">PyNumber_Or</a></td>
+              <td class="coverFnHi">1536920</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1335">PyNumber_Positive</a></td>
+              <td class="coverFnHi">608</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1143">PyNumber_Power</a></td>
+              <td class="coverFnHi">1814680</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1137">PyNumber_Remainder</a></td>
+              <td class="coverFnHi">2627140</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1057">PyNumber_Rshift</a></td>
+              <td class="coverFnHi">1459230</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1058">PyNumber_Subtract</a></td>
+              <td class="coverFnHi">4440380</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1686">PyNumber_ToBase</a></td>
+              <td class="coverFnHi">515191</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1131">PyNumber_TrueDivide</a></td>
+              <td class="coverFnHi">5742900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1054">PyNumber_Xor</a></td>
+              <td class="coverFnHi">388615</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#335">PyObject_AsCharBuffer</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#342">PyObject_AsReadBuffer</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#349">PyObject_AsWriteBuffer</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#289">PyObject_CheckBuffer</a></td>
+              <td class="coverFnHi">7301260</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#300">PyObject_CheckReadBuffer</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#612">PyObject_CopyData</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#235">PyObject_DelItem</a></td>
+              <td class="coverFnHi">2857820</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#269">PyObject_DelItemString</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#761">PyObject_Format</a></td>
+              <td class="coverFnHi">4027220</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2808">PyObject_GetAIter</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#378">PyObject_GetBuffer</a></td>
+              <td class="coverFnHi">24814900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#147">PyObject_GetItem</a></td>
+              <td class="coverFnHi">131024000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2782">PyObject_GetIter</a></td>
+              <td class="coverFnHi">76082900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2673">PyObject_IsInstance</a></td>
+              <td class="coverFnHi">43390700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2761">PyObject_IsSubclass</a></td>
+              <td class="coverFnHi">4134440</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#70">PyObject_Length</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#89">PyObject_LengthHint</a></td>
+              <td class="coverFnHi">1797320</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#201">PyObject_SetItem</a></td>
+              <td class="coverFnHi">10721500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#51">PyObject_Size</a></td>
+              <td class="coverFnHi">32397900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#37">PyObject_Type</a></td>
+              <td class="coverFnHi">26856</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1705">PySequence_Check</a></td>
+              <td class="coverFnHi">787523</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1745">PySequence_Concat</a></td>
+              <td class="coverFnHi">54298</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2265">PySequence_Contains</a></td>
+              <td class="coverFnHi">93727000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2256">PySequence_Count</a></td>
+              <td class="coverFnHi">23</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1950">PySequence_DelItem</a></td>
+              <td class="coverFnHi">354551</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2006">PySequence_DelSlice</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2136">PySequence_Fast</a></td>
+              <td class="coverFnHi">20982800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1865">PySequence_GetItem</a></td>
+              <td class="coverFnHi">7395750</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1895">PySequence_GetSlice</a></td>
+              <td class="coverFnHi">17245</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2280">PySequence_In</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1802">PySequence_InPlaceConcat</a></td>
+              <td class="coverFnHi">1</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1831">PySequence_InPlaceRepeat</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2286">PySequence_Index</a></td>
+              <td class="coverFnHi">375</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1738">PySequence_Length</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2113">PySequence_List</a></td>
+              <td class="coverFnHi">1711950</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1771">PySequence_Repeat</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1917">PySequence_SetItem</a></td>
+              <td class="coverFnHi">5893</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1983">PySequence_SetSlice</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1714">PySequence_Size</a></td>
+              <td class="coverFnHi">342979</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2029">PySequence_Tuple</a></td>
+              <td class="coverFnHi">11617100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#434">_IsCContiguous</a></td>
+              <td class="coverFnHi">11278100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#394">_IsFortranContiguous</a></td>
+              <td class="coverFnHi">981660</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1309">_PyNumber_InPlacePowerNoMod</a></td>
+              <td class="coverFnHi">20</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1399">_PyNumber_Index</a></td>
+              <td class="coverFnHi">202412000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1149">_PyNumber_PowerNoMod</a></td>
+              <td class="coverFnHi">1695880</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#77">_PyObject_HasLen</a></td>
+              <td class="coverFnHi">1806740</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2769">_PyObject_RealIsInstance</a></td>
+              <td class="coverFnHi">379397</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2775">_PyObject_RealIsSubclass</a></td>
+              <td class="coverFnHi">11996100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2901">_PySequence_BytesToCharpArray</a></td>
+              <td class="coverFnHi">13209</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2171">_PySequence_IterSearch</a></td>
+              <td class="coverFnHi">1177</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2960">_Py_FreeCharPArray</a></td>
+              <td class="coverFnHi">13206</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#509">_Py_add_one_to_index_C</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#493">_Py_add_one_to_index_F</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2491">abstract_get_bases</a></td>
+              <td class="coverFnHi">268</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2505">abstract_issubclass</a></td>
+              <td class="coverFnHi">105</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#317">as_read_buffer</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1203">binary_iop</a></td>
+              <td class="coverFnHi">6180450</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1171">binary_iop1</a></td>
+              <td class="coverFnHi">7129030</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#921">binary_op</a></td>
+              <td class="coverFnHi">29521400</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#850">binary_op1</a></td>
+              <td class="coverFnHi">58897600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#909">binop_type_error</a></td>
+              <td class="coverFnHi">691</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2556">check_class</a></td>
+              <td class="coverFnHi">157</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2400">method_output_as_list</a></td>
+              <td class="coverFnHi">277078</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#24">null_error</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2572">object_isinstance</a></td>
+              <td class="coverFnHi">24270700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2701">object_issubclass</a></td>
+              <td class="coverFnHi">4192870</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2608">object_recursive_isinstance</a></td>
+              <td class="coverFnHi">48726300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#2681">recursive_issubclass</a></td>
+              <td class="coverFnHi">12629600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1081">sequence_repeat</a></td>
+              <td class="coverFnHi">1888270</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#1215">ternary_iop</a></td>
+              <td class="coverFnHi">21</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#954">ternary_op</a></td>
+              <td class="coverFnHi">1814690</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="abstract.c.gcov.html#17">type_error</a></td>
+              <td class="coverFnHi">68984</td>
+            </tr>
+  </table>
+  <br>
+  </center>
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,2028 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Parser/parser.c - functions</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Parser</a> - parser.c<span style="font-size: 80%;"> (<a href="parser.c.gcov.html">source</a> / functions)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">17421</td>
+            <td class="headerCovTableEntry">24435</td>
+            <td class="headerCovTableEntryLo">71.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">488</td>
+            <td class="headerCovTableEntry">489</td>
+            <td class="headerCovTableEntryHi">99.8 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <center>
+  <table width="60%" cellpadding=1 cellspacing=1 border=0>
+    <tr><td><br></td></tr>
+    <tr>
+      <td width="80%" class="tableHead">Function Name <span class="tableHeadSort"><a href="parser.c.func.html"><img src="../updown.png" width=10 height=14 alt="Sort by function name" title="Sort by function name" border=0></a></span></td>
+      <td width="20%" class="tableHead">Hit count <span class="tableHeadSort"><img src="../glass.png" width=10 height=14 alt="Sort by hit count" title="Sort by hit count" border=0></span></td>
+    </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38071">_tmp_236_rule</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26950">_gather_55_rule</a></td>
+              <td class="coverFnHi">1</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26872">_loop0_56_rule</a></td>
+              <td class="coverFnHi">1</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37164">_tmp_218_rule</a></td>
+              <td class="coverFnHi">1</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36048">_gather_196_rule</a></td>
+              <td class="coverFnHi">3</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35970">_loop0_197_rule</a></td>
+              <td class="coverFnHi">3</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23373">invalid_kvpair_rule</a></td>
+              <td class="coverFnHi">3</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34801">_loop0_179_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33679">_loop1_161_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34454">_tmp_173_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35638">_tmp_191_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35696">_tmp_192_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36810">_tmp_211_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38172">_tmp_238_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38487">_tmp_245_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22617">invalid_class_argument_pattern_rule</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34879">_gather_178_rule</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32372">_loop0_142_rule</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33083">_loop0_152_rule</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34512">_tmp_174_rule</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36940">_tmp_214_rule</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36288">_gather_200_rule</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36210">_loop0_201_rule</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36894">_tmp_213_rule</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22845">invalid_else_stmt_rule</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32252">_loop0_140_rule</a></td>
+              <td class="coverFnHi">7</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35850">_loop0_195_rule</a></td>
+              <td class="coverFnHi">7</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32775">_tmp_148_rule</a></td>
+              <td class="coverFnHi">7</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32450">_gather_141_rule</a></td>
+              <td class="coverFnHi">8</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35569">_loop0_190_rule</a></td>
+              <td class="coverFnHi">8</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35511">_tmp_189_rule</a></td>
+              <td class="coverFnHi">8</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36584">_tmp_206_rule</a></td>
+              <td class="coverFnHi">8</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22760">invalid_elif_stmt_rule</a></td>
+              <td class="coverFnHi">8</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32132">_loop0_138_rule</a></td>
+              <td class="coverFnHi">9</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38013">_tmp_235_rule</a></td>
+              <td class="coverFnHi">9</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38258">_tmp_240_rule</a></td>
+              <td class="coverFnHi">9</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38571">_tmp_247_rule</a></td>
+              <td class="coverFnHi">9</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32012">_loop0_136_rule</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34979">_loop0_181_rule</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35450">_tmp_188_rule</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38445">_tmp_244_rule</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21548">invalid_import_from_targets_rule</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35928">_gather_194_rule</a></td>
+              <td class="coverFnHi">11</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36515">_loop0_205_rule</a></td>
+              <td class="coverFnHi">11</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32534">_tmp_144_rule</a></td>
+              <td class="coverFnHi">11</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32833">_tmp_149_rule</a></td>
+              <td class="coverFnHi">11</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23550">_loop0_2_rule</a></td>
+              <td class="coverFnHi">12</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33811">_loop0_163_rule</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33290">_tmp_155_rule</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35773">_tmp_193_rule</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38129">_tmp_237_rule</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32330">_gather_139_rule</a></td>
+              <td class="coverFnHi">15</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35233">_loop0_185_rule</a></td>
+              <td class="coverFnHi">15</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23167">invalid_class_def_raw_rule</a></td>
+              <td class="coverFnHi">15</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22094">invalid_finally_stmt_rule</a></td>
+              <td class="coverFnHi">15</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32210">_gather_137_rule</a></td>
+              <td class="coverFnHi">17</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35175">_tmp_184_rule</a></td>
+              <td class="coverFnHi">17</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32090">_gather_135_rule</a></td>
+              <td class="coverFnHi">18</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36768">_tmp_210_rule</a></td>
+              <td class="coverFnHi">18</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1180">func_type_rule</a></td>
+              <td class="coverFnHi">18</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#18585">type_expressions_rule</a></td>
+              <td class="coverFnHi">18</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34385">_loop0_172_rule</a></td>
+              <td class="coverFnHi">19</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22566">invalid_class_pattern_rule</a></td>
+              <td class="coverFnHi">19</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21190">invalid_lambda_kwds_rule</a></td>
+              <td class="coverFnHi">19</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26489">_loop0_49_rule</a></td>
+              <td class="coverFnHi">20</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36726">_tmp_209_rule</a></td>
+              <td class="coverFnHi">21</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22391">invalid_case_block_rule</a></td>
+              <td class="coverFnHi">21</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36090">_loop0_199_rule</a></td>
+              <td class="coverFnHi">22</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34327">_tmp_171_rule</a></td>
+              <td class="coverFnHi">23</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36668">_tmp_208_rule</a></td>
+              <td class="coverFnHi">23</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22899">invalid_while_stmt_rule</a></td>
+              <td class="coverFnHi">23</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21074">invalid_lambda_star_etc_rule</a></td>
+              <td class="coverFnHi">25</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35302">_loop1_186_rule</a></td>
+              <td class="coverFnHi">26</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32492">_tmp_143_rule</a></td>
+              <td class="coverFnHi">27</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38529">_tmp_246_rule</a></td>
+              <td class="coverFnHi">28</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21362">invalid_with_item_rule</a></td>
+              <td class="coverFnHi">28</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36168">_gather_198_rule</a></td>
+              <td class="coverFnHi">29</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34266">_tmp_170_rule</a></td>
+              <td class="coverFnHi">29</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36626">_tmp_207_rule</a></td>
+              <td class="coverFnHi">29</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38687">_loop1_249_rule</a></td>
+              <td class="coverFnHi">30</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38343">_tmp_242_rule</a></td>
+              <td class="coverFnHi">30</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34065">_loop0_167_rule</a></td>
+              <td class="coverFnHi">33</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35106">_loop0_183_rule</a></td>
+              <td class="coverFnHi">33</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35048">_tmp_182_rule</a></td>
+              <td class="coverFnHi">33</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33025">_tmp_151_rule</a></td>
+              <td class="coverFnHi">34</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38215">_tmp_239_rule</a></td>
+              <td class="coverFnHi">35</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19923">invalid_del_stmt_rule</a></td>
+              <td class="coverFnHi">37</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20138">invalid_dict_comprehension_rule</a></td>
+              <td class="coverFnHi">37</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22673">invalid_if_stmt_rule</a></td>
+              <td class="coverFnHi">39</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34921">_tmp_180_rule</a></td>
+              <td class="coverFnHi">40</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34007">_tmp_166_rule</a></td>
+              <td class="coverFnHi">41</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36330">_tmp_202_rule</a></td>
+              <td class="coverFnHi">41</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21600">invalid_with_stmt_rule</a></td>
+              <td class="coverFnHi">45</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34732">_loop0_177_rule</a></td>
+              <td class="coverFnHi">47</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#35376">_loop1_187_rule</a></td>
+              <td class="coverFnHi">47</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5677">star_annotation_rule</a></td>
+              <td class="coverFnHi">47</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36388">_loop0_203_rule</a></td>
+              <td class="coverFnHi">49</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38613">_loop1_248_rule</a></td>
+              <td class="coverFnHi">49</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36457">_tmp_204_rule</a></td>
+              <td class="coverFnHi">49</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38301">_tmp_241_rule</a></td>
+              <td class="coverFnHi">49</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8865">imaginary_number_rule</a></td>
+              <td class="coverFnHi">50</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21465">invalid_group_rule</a></td>
+              <td class="coverFnHi">50</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21811">invalid_try_stmt_rule</a></td>
+              <td class="coverFnHi">51</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34663">_loop0_176_rule</a></td>
+              <td class="coverFnHi">52</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21008">invalid_lambda_parameters_helper_rule</a></td>
+              <td class="coverFnHi">52</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20792">invalid_lambda_parameters_rule</a></td>
+              <td class="coverFnHi">52</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22986">invalid_for_stmt_rule</a></td>
+              <td class="coverFnHi">54</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29561">_loop0_97_rule</a></td>
+              <td class="coverFnHi">58</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22240">invalid_except_star_stmt_indent_rule</a></td>
+              <td class="coverFnHi">58</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21306">invalid_double_type_comments_rule</a></td>
+              <td class="coverFnHi">63</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21700">invalid_with_stmt_indent_rule</a></td>
+              <td class="coverFnHi">63</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36852">_tmp_212_rule</a></td>
+              <td class="coverFnHi">66</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26632">_loop0_52_rule</a></td>
+              <td class="coverFnHi">68</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26710">_gather_51_rule</a></td>
+              <td class="coverFnHi">69</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28313">_loop0_79_rule</a></td>
+              <td class="coverFnHi">75</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22148">invalid_except_stmt_indent_rule</a></td>
+              <td class="coverFnHi">78</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29423">_loop0_95_rule</a></td>
+              <td class="coverFnHi">79</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29492">_loop0_96_rule</a></td>
+              <td class="coverFnHi">79</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#18923">invalid_arguments_rule</a></td>
+              <td class="coverFnHi">94</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30350">_loop1_108_rule</a></td>
+              <td class="coverFnHi">103</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21935">invalid_except_stmt_rule</a></td>
+              <td class="coverFnHi">103</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22484">invalid_as_pattern_rule</a></td>
+              <td class="coverFnHi">107</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27818">_tmp_70_rule</a></td>
+              <td class="coverFnHi">111</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28391">_gather_78_rule</a></td>
+              <td class="coverFnHi">118</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10348">keyword_patterns_rule</a></td>
+              <td class="coverFnHi">118</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19970">invalid_block_rule</a></td>
+              <td class="coverFnHi">136</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10387">keyword_pattern_rule</a></td>
+              <td class="coverFnHi">174</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23092">invalid_def_raw_rule</a></td>
+              <td class="coverFnHi">217</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20607">invalid_kwds_rule</a></td>
+              <td class="coverFnHi">242</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34208">_tmp_169_rule</a></td>
+              <td class="coverFnHi">245</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20464">invalid_star_etc_rule</a></td>
+              <td class="coverFnHi">252</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34134">_loop1_168_rule</a></td>
+              <td class="coverFnHi">253</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33938">_loop0_165_rule</a></td>
+              <td class="coverFnHi">265</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33880">_tmp_164_rule</a></td>
+              <td class="coverFnHi">265</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33753">_tmp_162_rule</a></td>
+              <td class="coverFnHi">275</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28193">_loop0_77_rule</a></td>
+              <td class="coverFnHi">276</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33610">_loop0_160_rule</a></td>
+              <td class="coverFnHi">284</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#34589">_loop1_175_rule</a></td>
+              <td class="coverFnHi">288</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27263">_loop1_61_rule</a></td>
+              <td class="coverFnHi">297</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30281">_loop0_107_rule</a></td>
+              <td class="coverFnHi">302</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33541">_loop0_159_rule</a></td>
+              <td class="coverFnHi">302</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20723">invalid_parameters_helper_rule</a></td>
+              <td class="coverFnHi">302</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20200">invalid_parameters_rule</a></td>
+              <td class="coverFnHi">302</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28271">_gather_76_rule</a></td>
+              <td class="coverFnHi">313</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10304">positional_patterns_rule</a></td>
+              <td class="coverFnHi">313</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27384">_tmp_63_rule</a></td>
+              <td class="coverFnHi">339</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10021">double_star_pattern_rule</a></td>
+              <td class="coverFnHi">368</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26992">_loop0_58_rule</a></td>
+              <td class="coverFnHi">373</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27070">_gather_57_rule</a></td>
+              <td class="coverFnHi">374</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25700">_loop0_38_rule</a></td>
+              <td class="coverFnHi">375</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30742">_loop0_114_rule</a></td>
+              <td class="coverFnHi">508</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#21414">invalid_for_target_rule</a></td>
+              <td class="coverFnHi">535</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10073">class_pattern_rule</a></td>
+              <td class="coverFnHi">552</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37681">_tmp_228_rule</a></td>
+              <td class="coverFnHi">568</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27683">_tmp_68_rule</a></td>
+              <td class="coverFnHi">581</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27895">_loop0_72_rule</a></td>
+              <td class="coverFnHi">622</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28015">_loop0_74_rule</a></td>
+              <td class="coverFnHi">622</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28093">_gather_73_rule</a></td>
+              <td class="coverFnHi">645</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9932">items_pattern_rule</a></td>
+              <td class="coverFnHi">645</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7149">except_star_block_rule</a></td>
+              <td class="coverFnHi">659</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31851">_tmp_132_rule</a></td>
+              <td class="coverFnHi">735</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27973">_gather_71_rule</a></td>
+              <td class="coverFnHi">748</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9516">maybe_sequence_pattern_rule</a></td>
+              <td class="coverFnHi">748</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33221">_loop0_154_rule</a></td>
+              <td class="coverFnHi">774</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15310">lambda_param_maybe_default_rule</a></td>
+              <td class="coverFnHi">775</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37971">_tmp_234_rule</a></td>
+              <td class="coverFnHi">779</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33152">_loop0_153_rule</a></td>
+              <td class="coverFnHi">796</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37929">_tmp_233_rule</a></td>
+              <td class="coverFnHi">803</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28135">_tmp_75_rule</a></td>
+              <td class="coverFnHi">809</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9971">key_value_pattern_rule</a></td>
+              <td class="coverFnHi">809</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8357">literal_expr_rule</a></td>
+              <td class="coverFnHi">809</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#22304">invalid_match_stmt_rule</a></td>
+              <td class="coverFnHi">829</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19629">invalid_assignment_rule</a></td>
+              <td class="coverFnHi">901</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19835">invalid_ann_assign_target_rule</a></td>
+              <td class="coverFnHi">913</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24642">_loop0_21_rule</a></td>
+              <td class="coverFnHi">927</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24720">_gather_20_rule</a></td>
+              <td class="coverFnHi">929</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3023">nonlocal_stmt_rule</a></td>
+              <td class="coverFnHi">929</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9732">mapping_pattern_rule</a></td>
+              <td class="coverFnHi">984</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31228">_loop0_123_rule</a></td>
+              <td class="coverFnHi">1039</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32672">_tmp_146_rule</a></td>
+              <td class="coverFnHi">1125</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32595">_tmp_145_rule</a></td>
+              <td class="coverFnHi">1130</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19133">invalid_kwarg_rule</a></td>
+              <td class="coverFnHi">1130</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19245">expression_without_invalid_rule</a></td>
+              <td class="coverFnHi">1161</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32891">_tmp_150_rule</a></td>
+              <td class="coverFnHi">1239</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27431">_loop1_64_rule</a></td>
+              <td class="coverFnHi">1264</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24936">_loop1_25_rule</a></td>
+              <td class="coverFnHi">1274</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27625">_tmp_67_rule</a></td>
+              <td class="coverFnHi">1353</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16226">setcomp_rule</a></td>
+              <td class="coverFnHi">1577</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9359">sequence_pattern_rule</a></td>
+              <td class="coverFnHi">1668</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20414">invalid_default_rule</a></td>
+              <td class="coverFnHi">1775</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7596">guard_rule</a></td>
+              <td class="coverFnHi">1794</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27741">_tmp_69_rule</a></td>
+              <td class="coverFnHi">1807</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24522">_loop0_19_rule</a></td>
+              <td class="coverFnHi">1839</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7643">patterns_rule</a></td>
+              <td class="coverFnHi">1839</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24600">_gather_18_rule</a></td>
+              <td class="coverFnHi">1841</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#2958">global_stmt_rule</a></td>
+              <td class="coverFnHi">1841</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9466">open_sequence_pattern_rule</a></td>
+              <td class="coverFnHi">1924</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9309">group_pattern_rule</a></td>
+              <td class="coverFnHi">1925</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24238">_tmp_13_rule</a></td>
+              <td class="coverFnHi">1969</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9081">value_pattern_rule</a></td>
+              <td class="coverFnHi">1985</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9182">attr_raw</a></td>
+              <td class="coverFnHi">2172</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9019">wildcard_pattern_rule</a></td>
+              <td class="coverFnHi">2291</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7434">subject_expr_rule</a></td>
+              <td class="coverFnHi">2379</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19502">invalid_named_expression_rule</a></td>
+              <td class="coverFnHi">2435</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37327">_tmp_221_rule</a></td>
+              <td class="coverFnHi">2644</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19367">invalid_legacy_expression_rule</a></td>
+              <td class="coverFnHi">2674</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23693">_loop0_5_rule</a></td>
+              <td class="coverFnHi">2679</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#32714">_tmp_147_rule</a></td>
+              <td class="coverFnHi">2706</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#19418">invalid_expression_rule</a></td>
+              <td class="coverFnHi">2706</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33483">_tmp_158_rule</a></td>
+              <td class="coverFnHi">2896</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33425">_tmp_157_rule</a></td>
+              <td class="coverFnHi">2900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#33348">_tmp_156_rule</a></td>
+              <td class="coverFnHi">2906</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#20019">invalid_comprehension_rule</a></td>
+              <td class="coverFnHi">2906</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7521">case_block_rule</a></td>
+              <td class="coverFnHi">3039</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29773">_loop1_100_rule</a></td>
+              <td class="coverFnHi">3131</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8909">capture_pattern_rule</a></td>
+              <td class="coverFnHi">3227</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9564">maybe_star_pattern_rule</a></td>
+              <td class="coverFnHi">3443</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9622">star_pattern_rule</a></td>
+              <td class="coverFnHi">3443</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25515">_tmp_35_rule</a></td>
+              <td class="coverFnHi">3498</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8971">pattern_capture_target_rule</a></td>
+              <td class="coverFnHi">3682</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8546">complex_number_rule</a></td>
+              <td class="coverFnHi">3707</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#36986">_loop0_216_rule</a></td>
+              <td class="coverFnHi">3800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37106">_tmp_217_rule</a></td>
+              <td class="coverFnHi">3807</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9251">name_or_attr_rule</a></td>
+              <td class="coverFnHi">3887</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#18417">del_t_atom_rule</a></td>
+              <td class="coverFnHi">4610</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8122">literal_pattern_rule</a></td>
+              <td class="coverFnHi">4778</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1393">statement_newline_rule</a></td>
+              <td class="coverFnHi">5063</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1086">interactive_rule</a></td>
+              <td class="coverFnHi">5080</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16408">dictcomp_rule</a></td>
+              <td class="coverFnHi">5366</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8653">signed_number_rule</a></td>
+              <td class="coverFnHi">5587</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26558">_loop1_50_rule</a></td>
+              <td class="coverFnHi">5922</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#9147">attr_rule</a></td>
+              <td class="coverFnHi">5924</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5249">param_no_default_star_annotation_rule</a></td>
+              <td class="coverFnHi">5952</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7782">as_pattern_rule</a></td>
+              <td class="coverFnHi">6743</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7724">pattern_rule</a></td>
+              <td class="coverFnHi">6743</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8737">signed_real_number_rule</a></td>
+              <td class="coverFnHi">7388</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#8821">real_number_rule</a></td>
+              <td class="coverFnHi">7428</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31468">_loop0_127_rule</a></td>
+              <td class="coverFnHi">7541</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#2389">annotated_rhs_rule</a></td>
+              <td class="coverFnHi">7608</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31306">_gather_122_rule</a></td>
+              <td class="coverFnHi">8559</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24762">_tmp_22_rule</a></td>
+              <td class="coverFnHi">8933</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3088">del_stmt_rule</a></td>
+              <td class="coverFnHi">8979</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31892">_loop0_134_rule</a></td>
+              <td class="coverFnHi">8999</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31970">_gather_133_rule</a></td>
+              <td class="coverFnHi">9065</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#18228">del_targets_rule</a></td>
+              <td class="coverFnHi">9065</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24122">_tmp_11_rule</a></td>
+              <td class="coverFnHi">9486</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24820">_tmp_23_rule</a></td>
+              <td class="coverFnHi">9780</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3236">assert_stmt_rule</a></td>
+              <td class="coverFnHi">9782</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#18279">del_target_rule</a></td>
+              <td class="coverFnHi">10900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#6141">while_stmt_rule</a></td>
+              <td class="coverFnHi">11785</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5565">param_star_annotation_rule</a></td>
+              <td class="coverFnHi">11901</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31657">_loop0_130_rule</a></td>
+              <td class="coverFnHi">12171</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27505">_loop0_66_rule</a></td>
+              <td class="coverFnHi">12593</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27583">_gather_65_rule</a></td>
+              <td class="coverFnHi">13457</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7869">or_pattern_rule</a></td>
+              <td class="coverFnHi">13457</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15636">set_rule</a></td>
+              <td class="coverFnHi">13742</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37064">_gather_215_rule</a></td>
+              <td class="coverFnHi">13748</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23263">invalid_double_starred_kvpairs_rule</a></td>
+              <td class="coverFnHi">13748</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7939">closed_pattern_rule</a></td>
+              <td class="coverFnHi">14685</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3174">yield_stmt_rule</a></td>
+              <td class="coverFnHi">15365</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31777">_loop1_131_rule</a></td>
+              <td class="coverFnHi">16570</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27112">_tmp_59_rule</a></td>
+              <td class="coverFnHi">16845</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25562">_loop0_36_rule</a></td>
+              <td class="coverFnHi">17415</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25631">_loop0_37_rule</a></td>
+              <td class="coverFnHi">17415</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28967">_loop0_89_rule</a></td>
+              <td class="coverFnHi">21669</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29045">_gather_88_rule</a></td>
+              <td class="coverFnHi">21764</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25912">_loop1_41_rule</a></td>
+              <td class="coverFnHi">24739</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24417">_tmp_16_rule</a></td>
+              <td class="coverFnHi">25695</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26420">_loop0_48_rule</a></td>
+              <td class="coverFnHi">27138</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16136">listcomp_rule</a></td>
+              <td class="coverFnHi">29421</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17205">star_targets_tuple_seq_rule</a></td>
+              <td class="coverFnHi">31707</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37882">_tmp_232_rule</a></td>
+              <td class="coverFnHi">33010</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29704">_loop0_99_rule</a></td>
+              <td class="coverFnHi">34292</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29630">_loop1_98_rule</a></td>
+              <td class="coverFnHi">37423</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30138">_loop0_105_rule</a></td>
+              <td class="coverFnHi">37539</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30207">_loop1_106_rule</a></td>
+              <td class="coverFnHi">37539</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15092">lambda_kwds_rule</a></td>
+              <td class="coverFnHi">37554</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29921">_loop1_102_rule</a></td>
+              <td class="coverFnHi">37557</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14627">lambda_parameters_rule</a></td>
+              <td class="coverFnHi">37560</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14963">lambda_star_etc_rule</a></td>
+              <td class="coverFnHi">37560</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14564">lambda_params_rule</a></td>
+              <td class="coverFnHi">37587</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29995">_loop0_103_rule</a></td>
+              <td class="coverFnHi">37596</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30064">_loop1_104_rule</a></td>
+              <td class="coverFnHi">37596</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14874">lambda_slash_with_default_rule</a></td>
+              <td class="coverFnHi">37596</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29847">_loop1_101_rule</a></td>
+              <td class="coverFnHi">37633</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14793">lambda_slash_no_default_rule</a></td>
+              <td class="coverFnHi">37633</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26752">_loop0_54_rule</a></td>
+              <td class="coverFnHi">38584</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26830">_gather_53_rule</a></td>
+              <td class="coverFnHi">38604</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#6436">with_stmt_rule</a></td>
+              <td class="coverFnHi">39289</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#6706">with_item_rule</a></td>
+              <td class="coverFnHi">39873</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27189">_loop1_60_rule</a></td>
+              <td class="coverFnHi">42157</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#27337">_tmp_62_rule</a></td>
+              <td class="coverFnHi">42367</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31735">_gather_129_rule</a></td>
+              <td class="coverFnHi">42800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17157">star_targets_list_seq_rule</a></td>
+              <td class="coverFnHi">42800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25010">_loop0_27_rule</a></td>
+              <td class="coverFnHi">45029</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25177">_loop0_30_rule</a></td>
+              <td class="coverFnHi">45171</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25255">_gather_29_rule</a></td>
+              <td class="coverFnHi">45189</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3794">dotted_as_names_rule</a></td>
+              <td class="coverFnHi">45189</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3549">import_from_targets_rule</a></td>
+              <td class="coverFnHi">46167</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24867">_loop0_24_rule</a></td>
+              <td class="coverFnHi">46171</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25088">_gather_26_rule</a></td>
+              <td class="coverFnHi">46181</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3685">import_from_as_names_rule</a></td>
+              <td class="coverFnHi">46181</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3429">import_from_rule</a></td>
+              <td class="coverFnHi">46187</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25297">_tmp_31_rule</a></td>
+              <td class="coverFnHi">46418</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3838">dotted_as_name_rule</a></td>
+              <td class="coverFnHi">46436</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37623">_tmp_227_rule</a></td>
+              <td class="coverFnHi">48014</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1039">file_rule</a></td>
+              <td class="coverFnHi">49568</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#6805">try_stmt_rule</a></td>
+              <td class="coverFnHi">49660</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30811">_loop0_115_rule</a></td>
+              <td class="coverFnHi">51383</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5415">param_maybe_default_rule</a></td>
+              <td class="coverFnHi">52141</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24475">_tmp_17_rule</a></td>
+              <td class="coverFnHi">56670</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25418">_tmp_33_rule</a></td>
+              <td class="coverFnHi">56790</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4215">class_def_raw_rule</a></td>
+              <td class="coverFnHi">56811</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4149">class_def_rule</a></td>
+              <td class="coverFnHi">56811</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31588">_loop0_128_rule</a></td>
+              <td class="coverFnHi">57095</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37269">_tmp_220_rule</a></td>
+              <td class="coverFnHi">57973</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#2857">raise_stmt_rule</a></td>
+              <td class="coverFnHi">61395</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#6238">for_stmt_rule</a></td>
+              <td class="coverFnHi">61778</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37728">_tmp_229_rule</a></td>
+              <td class="coverFnHi">63959</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30548">_loop0_112_rule</a></td>
+              <td class="coverFnHi">65010</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29087">_tmp_90_rule</a></td>
+              <td class="coverFnHi">69157</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23481">_loop0_1_rule</a></td>
+              <td class="coverFnHi">73421</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28433">_loop1_80_rule</a></td>
+              <td class="coverFnHi">73442</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10437">expressions_rule</a></td>
+              <td class="coverFnHi">74328</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1130">eval_rule</a></td>
+              <td class="coverFnHi">75155</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25130">_tmp_28_rule</a></td>
+              <td class="coverFnHi">77512</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3729">import_from_as_name_rule</a></td>
+              <td class="coverFnHi">80036</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#6995">except_block_rule</a></td>
+              <td class="coverFnHi">86737</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3362">import_name_rule</a></td>
+              <td class="coverFnHi">91360</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3304">import_stmt_rule</a></td>
+              <td class="coverFnHi">91360</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7264">finally_block_rule</a></td>
+              <td class="coverFnHi">91722</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1242">fstring_rule</a></td>
+              <td class="coverFnHi">96126</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31348">_loop0_125_rule</a></td>
+              <td class="coverFnHi">97876</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31108">_loop0_121_rule</a></td>
+              <td class="coverFnHi">98915</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30626">_gather_111_rule</a></td>
+              <td class="coverFnHi">112966</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29269">_tmp_93_rule</a></td>
+              <td class="coverFnHi">112966</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15704">dict_rule</a></td>
+              <td class="coverFnHi">112966</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15797">double_starred_kvpairs_rule</a></td>
+              <td class="coverFnHi">112966</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15231">lambda_param_with_default_rule</a></td>
+              <td class="coverFnHi">113713</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37835">_tmp_231_rule</a></td>
+              <td class="coverFnHi">136232</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3940">dotted_name_raw</a></td>
+              <td class="coverFnHi">223997</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38760">_PyPegen_parse</a></td>
+              <td class="coverFnHi">225947</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#2792">return_stmt_rule</a></td>
+              <td class="coverFnHi">241295</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29211">_tmp_92_rule</a></td>
+              <td class="coverFnHi">262274</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15500">list_rule</a></td>
+              <td class="coverFnHi">264426</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29365">_tmp_94_rule</a></td>
+              <td class="coverFnHi">293962</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14424">group_rule</a></td>
+              <td class="coverFnHi">293962</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25843">_loop0_40_rule</a></td>
+              <td class="coverFnHi">300289</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#3905">dotted_name_rule</a></td>
+              <td class="coverFnHi">316604</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25769">_loop1_39_rule</a></td>
+              <td class="coverFnHi">325028</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26277">_loop0_46_rule</a></td>
+              <td class="coverFnHi">325862</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26346">_loop1_47_rule</a></td>
+              <td class="coverFnHi">325862</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26060">_loop1_43_rule</a></td>
+              <td class="coverFnHi">326158</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26134">_loop0_44_rule</a></td>
+              <td class="coverFnHi">326225</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#26203">_loop1_45_rule</a></td>
+              <td class="coverFnHi">326225</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4850">slash_with_default_rule</a></td>
+              <td class="coverFnHi">326225</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25468">_tmp_34_rule</a></td>
+              <td class="coverFnHi">339010</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#18830">func_type_comment_rule</a></td>
+              <td class="coverFnHi">342507</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5102">kwds_rule</a></td>
+              <td class="coverFnHi">342808</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4940">star_etc_rule</a></td>
+              <td class="coverFnHi">342818</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4605">parameters_rule</a></td>
+              <td class="coverFnHi">342831</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4542">params_rule</a></td>
+              <td class="coverFnHi">342881</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25986">_loop1_42_rule</a></td>
+              <td class="coverFnHi">343371</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4769">slash_no_default_rule</a></td>
+              <td class="coverFnHi">343371</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4308">function_def_rule</a></td>
+              <td class="coverFnHi">346581</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4377">function_def_raw_rule</a></td>
+              <td class="coverFnHi">349746</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5724">default_rule</a></td>
+              <td class="coverFnHi">350306</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#25344">_loop1_32_rule</a></td>
+              <td class="coverFnHi">403392</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4105">decorators_rule</a></td>
+              <td class="coverFnHi">403392</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37385">_tmp_222_rule</a></td>
+              <td class="coverFnHi">443836</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5793">if_stmt_rule</a></td>
+              <td class="coverFnHi">489180</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37435">_tmp_223_rule</a></td>
+              <td class="coverFnHi">514664</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5934">elif_stmt_rule</a></td>
+              <td class="coverFnHi">523196</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31546">_gather_126_rule</a></td>
+              <td class="coverFnHi">558802</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16939">kwarg_or_double_starred_rule</a></td>
+              <td class="coverFnHi">567452</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#6072">else_block_rule</a></td>
+              <td class="coverFnHi">604598</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28581">_loop0_83_rule</a></td>
+              <td class="coverFnHi">650587</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31426">_gather_124_rule</a></td>
+              <td class="coverFnHi">656678</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31186">_gather_120_rule</a></td>
+              <td class="coverFnHi">657731</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16675">kwargs_rule</a></td>
+              <td class="coverFnHi">657731</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#2460">augassign_rule</a></td>
+              <td class="coverFnHi">763771</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24359">_tmp_15_rule</a></td>
+              <td class="coverFnHi">807926</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28659">_gather_82_rule</a></td>
+              <td class="coverFnHi">826180</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11041">star_named_expressions_rule</a></td>
+              <td class="coverFnHi">826180</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#29134">_tmp_91_rule</a></td>
+              <td class="coverFnHi">866593</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30498">_tmp_110_rule</a></td>
+              <td class="coverFnHi">866646</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15568">tuple_rule</a></td>
+              <td class="coverFnHi">868733</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13944">slices_rule</a></td>
+              <td class="coverFnHi">1001270</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15158">lambda_param_no_default_rule</a></td>
+              <td class="coverFnHi">1034510</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23619">_loop1_3_rule</a></td>
+              <td class="coverFnHi">1045380</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1281">statements_rule</a></td>
+              <td class="coverFnHi">1045380</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23771">_gather_4_rule</a></td>
+              <td class="coverFnHi">1047930</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14036">slice_rule</a></td>
+              <td class="coverFnHi">1049280</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10721">yield_expr_rule</a></td>
+              <td class="coverFnHi">1151340</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5328">param_with_default_rule</a></td>
+              <td class="coverFnHi">1216990</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23813">_tmp_6_rule</a></td>
+              <td class="coverFnHi">1280900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30940">_loop0_118_rule</a></td>
+              <td class="coverFnHi">1349900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31061">_tmp_119_rule</a></td>
+              <td class="coverFnHi">1349900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16828">kwarg_or_starred_rule</a></td>
+              <td class="coverFnHi">1482340</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15845">double_starred_kvpair_rule</a></td>
+              <td class="coverFnHi">1608460</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15911">kvpair_rule</a></td>
+              <td class="coverFnHi">1610720</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30424">_loop1_109_rule</a></td>
+              <td class="coverFnHi">1611000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15389">lambda_param_rule</a></td>
+              <td class="coverFnHi">1621880</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#4009">block_rule</a></td>
+              <td class="coverFnHi">1739560</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#31019">_gather_117_rule</a></td>
+              <td class="coverFnHi">1934900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16574">args_rule</a></td>
+              <td class="coverFnHi">1934900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28507">_loop1_81_rule</a></td>
+              <td class="coverFnHi">2105940</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30668">_loop1_113_rule</a></td>
+              <td class="coverFnHi">2133110</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15961">for_if_clauses_rule</a></td>
+              <td class="coverFnHi">2133110</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37482">_tmp_224_rule</a></td>
+              <td class="coverFnHi">2134100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16008">for_if_clause_rule</a></td>
+              <td class="coverFnHi">2185000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14493">lambdef_rule</a></td>
+              <td class="coverFnHi">2305080</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17678">single_target_rule</a></td>
+              <td class="coverFnHi">2413360</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#38385">_tmp_243_rule</a></td>
+              <td class="coverFnHi">2749390</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37775">_tmp_230_rule</a></td>
+              <td class="coverFnHi">2760360</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#7335">match_stmt_rule</a></td>
+              <td class="coverFnHi">3011970</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#30880">_tmp_116_rule</a></td>
+              <td class="coverFnHi">3099980</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16498">arguments_rule</a></td>
+              <td class="coverFnHi">3130560</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24064">_tmp_10_rule</a></td>
+              <td class="coverFnHi">3134970</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24006">_tmp_9_rule</a></td>
+              <td class="coverFnHi">3173960</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24285">_loop1_14_rule</a></td>
+              <td class="coverFnHi">3218750</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#24169">_tmp_12_rule</a></td>
+              <td class="coverFnHi">3220940</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1525">simple_stmts_rule</a></td>
+              <td class="coverFnHi">3222740</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#2170">assignment_rule</a></td>
+              <td class="coverFnHi">3230430</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23948">_tmp_8_rule</a></td>
+              <td class="coverFnHi">3230730</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#15451">strings_rule</a></td>
+              <td class="coverFnHi">3427630</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10828">star_expressions_rule</a></td>
+              <td class="coverFnHi">3641140</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16763">starred_expression_rule</a></td>
+              <td class="coverFnHi">3896780</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17517">star_atom_rule</a></td>
+              <td class="coverFnHi">4017420</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37222">_tmp_219_rule</a></td>
+              <td class="coverFnHi">4035830</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1325">statement_rule</a></td>
+              <td class="coverFnHi">4057380</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#23871">_tmp_7_rule</a></td>
+              <td class="coverFnHi">4062440</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1979">compound_stmt_rule</a></td>
+              <td class="coverFnHi">4062440</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5168">param_no_default_rule</a></td>
+              <td class="coverFnHi">4079850</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17062">star_targets_rule</a></td>
+              <td class="coverFnHi">4151060</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#1618">simple_stmt_rule</a></td>
+              <td class="coverFnHi">4278360</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17375">target_with_star_atom_rule</a></td>
+              <td class="coverFnHi">4342570</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5630">annotation_rule</a></td>
+              <td class="coverFnHi">4442550</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11089">star_named_expression_rule</a></td>
+              <td class="coverFnHi">4674380</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17773">single_subscript_attribute_target_rule</a></td>
+              <td class="coverFnHi">5634280</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17283">star_target_rule</a></td>
+              <td class="coverFnHi">6296950</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11248">named_expression_rule</a></td>
+              <td class="coverFnHi">7043630</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17929">t_primary_raw</a></td>
+              <td class="coverFnHi">7208840</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#18151">t_lookahead_rule</a></td>
+              <td class="coverFnHi">7316250</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#5500">param_rule</a></td>
+              <td class="coverFnHi">9437020</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28701">_loop1_84_rule</a></td>
+              <td class="coverFnHi">9747010</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28775">_loop1_85_rule</a></td>
+              <td class="coverFnHi">9775950</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37529">_tmp_225_rule</a></td>
+              <td class="coverFnHi">9775950</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28849">_loop1_86_rule</a></td>
+              <td class="coverFnHi">9822190</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#37576">_tmp_226_rule</a></td>
+              <td class="coverFnHi">9822190</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12327">is_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9862180</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12277">isnot_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9890570</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12230">in_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9922690</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12180">notin_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9933630</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12133">gt_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9946980</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12086">gte_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9955160</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12039">lt_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9970220</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11992">lte_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9979020</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#28923">_tmp_87_rule</a></td>
+              <td class="coverFnHi">9996680</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11945">noteq_bitwise_or_rule</a></td>
+              <td class="coverFnHi">9996680</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11688">compare_op_bitwise_or_pair_rule</a></td>
+              <td class="coverFnHi">10068300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11898">eq_bitwise_or_rule</a></td>
+              <td class="coverFnHi">10068300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10952">star_expression_rule</a></td>
+              <td class="coverFnHi">10912300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11594">comparison_rule</a></td>
+              <td class="coverFnHi">12127700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11173">assignment_expression_rule</a></td>
+              <td class="coverFnHi">12893000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13519">power_rule</a></td>
+              <td class="coverFnHi">12951500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#16318">genexp_rule</a></td>
+              <td class="coverFnHi">14536600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12411">bitwise_or_raw</a></td>
+              <td class="coverFnHi">22455200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12535">bitwise_xor_raw</a></td>
+              <td class="coverFnHi">22464200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12659">bitwise_and_raw</a></td>
+              <td class="coverFnHi">22471600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12783">shift_expr_raw</a></td>
+              <td class="coverFnHi">22482800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12946">sum_raw</a></td>
+              <td class="coverFnHi">22630400</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#10566">expression_rule</a></td>
+              <td class="coverFnHi">22849400</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13115">term_raw</a></td>
+              <td class="coverFnHi">23179800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13358">factor_rule</a></td>
+              <td class="coverFnHi">23248900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11327">disjunction_rule</a></td>
+              <td class="coverFnHi">24096000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11416">conjunction_rule</a></td>
+              <td class="coverFnHi">24106900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#11505">inversion_rule</a></td>
+              <td class="coverFnHi">24226300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13606">await_primary_rule</a></td>
+              <td class="coverFnHi">25896700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13737">primary_raw</a></td>
+              <td class="coverFnHi">27941700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#14141">atom_rule</a></td>
+              <td class="coverFnHi">29092800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#17894">t_primary_rule</a></td>
+              <td class="coverFnHi">44542100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12500">bitwise_xor_rule</a></td>
+              <td class="coverFnHi">44919300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12624">bitwise_and_rule</a></td>
+              <td class="coverFnHi">44935800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12376">bitwise_or_rule</a></td>
+              <td class="coverFnHi">46720000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12748">shift_expr_rule</a></td>
+              <td class="coverFnHi">67433700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#12911">sum_rule</a></td>
+              <td class="coverFnHi">67649600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13702">primary_rule</a></td>
+              <td class="coverFnHi">116932000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="parser.c.gcov.html#13080">term_rule</a></td>
+              <td class="coverFnHi">137113000</td>
+            </tr>
+  </table>
+  <br>
+  </center>
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

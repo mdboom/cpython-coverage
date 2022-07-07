@@ -1,0 +1,420 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Parser/pegen.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Parser</a> - pegen.h<span style="font-size: 80%;"> (source / <a href="pegen.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntry">45</td>
+            <td class="headerCovTableEntryMed">82.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef PEGEN_H</a>
+<a name="2"><span class="lineNum">       2 </span>            : #define PEGEN_H</a>
+<a name="3"><span class="lineNum">       3 </span>            : </a>
+<a name="4"><span class="lineNum">       4 </span>            : #define PY_SSIZE_T_CLEAN</a>
+<a name="5"><span class="lineNum">       5 </span>            : #include &lt;Python.h&gt;</a>
+<a name="6"><span class="lineNum">       6 </span>            : #include &lt;pycore_ast.h&gt;</a>
+<a name="7"><span class="lineNum">       7 </span>            : #include &lt;pycore_token.h&gt;</a>
+<a name="8"><span class="lineNum">       8 </span>            : </a>
+<a name="9"><span class="lineNum">       9 </span>            : #if 0</a>
+<a name="10"><span class="lineNum">      10 </span>            : #define PyPARSE_YIELD_IS_KEYWORD        0x0001</a>
+<a name="11"><span class="lineNum">      11 </span>            : #endif</a>
+<a name="12"><span class="lineNum">      12 </span>            : </a>
+<a name="13"><span class="lineNum">      13 </span>            : #define PyPARSE_DONT_IMPLY_DEDENT       0x0002</a>
+<a name="14"><span class="lineNum">      14 </span>            : </a>
+<a name="15"><span class="lineNum">      15 </span>            : #if 0</a>
+<a name="16"><span class="lineNum">      16 </span>            : #define PyPARSE_WITH_IS_KEYWORD         0x0003</a>
+<a name="17"><span class="lineNum">      17 </span>            : #define PyPARSE_PRINT_IS_FUNCTION       0x0004</a>
+<a name="18"><span class="lineNum">      18 </span>            : #define PyPARSE_UNICODE_LITERALS        0x0008</a>
+<a name="19"><span class="lineNum">      19 </span>            : #endif</a>
+<a name="20"><span class="lineNum">      20 </span>            : </a>
+<a name="21"><span class="lineNum">      21 </span>            : #define PyPARSE_IGNORE_COOKIE 0x0010</a>
+<a name="22"><span class="lineNum">      22 </span>            : #define PyPARSE_BARRY_AS_BDFL 0x0020</a>
+<a name="23"><span class="lineNum">      23 </span>            : #define PyPARSE_TYPE_COMMENTS 0x0040</a>
+<a name="24"><span class="lineNum">      24 </span>            : #define PyPARSE_ASYNC_HACKS   0x0080</a>
+<a name="25"><span class="lineNum">      25 </span>            : #define PyPARSE_ALLOW_INCOMPLETE_INPUT 0x0100</a>
+<a name="26"><span class="lineNum">      26 </span>            : </a>
+<a name="27"><span class="lineNum">      27 </span>            : #define CURRENT_POS (-5)</a>
+<a name="28"><span class="lineNum">      28 </span>            : </a>
+<a name="29"><span class="lineNum">      29 </span>            : typedef struct _memo {</a>
+<a name="30"><span class="lineNum">      30 </span>            :     int type;</a>
+<a name="31"><span class="lineNum">      31 </span>            :     void *node;</a>
+<a name="32"><span class="lineNum">      32 </span>            :     int mark;</a>
+<a name="33"><span class="lineNum">      33 </span>            :     struct _memo *next;</a>
+<a name="34"><span class="lineNum">      34 </span>            : } Memo;</a>
+<a name="35"><span class="lineNum">      35 </span>            : </a>
+<a name="36"><span class="lineNum">      36 </span>            : typedef struct {</a>
+<a name="37"><span class="lineNum">      37 </span>            :     int type;</a>
+<a name="38"><span class="lineNum">      38 </span>            :     PyObject *bytes;</a>
+<a name="39"><span class="lineNum">      39 </span>            :     int level;</a>
+<a name="40"><span class="lineNum">      40 </span>            :     int lineno, col_offset, end_lineno, end_col_offset;</a>
+<a name="41"><span class="lineNum">      41 </span>            :     Memo *memo;</a>
+<a name="42"><span class="lineNum">      42 </span>            : } Token;</a>
+<a name="43"><span class="lineNum">      43 </span>            : </a>
+<a name="44"><span class="lineNum">      44 </span>            : typedef struct {</a>
+<a name="45"><span class="lineNum">      45 </span>            :     char *str;</a>
+<a name="46"><span class="lineNum">      46 </span>            :     int type;</a>
+<a name="47"><span class="lineNum">      47 </span>            : } KeywordToken;</a>
+<a name="48"><span class="lineNum">      48 </span>            : </a>
+<a name="49"><span class="lineNum">      49 </span>            : </a>
+<a name="50"><span class="lineNum">      50 </span>            : typedef struct {</a>
+<a name="51"><span class="lineNum">      51 </span>            :     struct {</a>
+<a name="52"><span class="lineNum">      52 </span>            :         int lineno;</a>
+<a name="53"><span class="lineNum">      53 </span>            :         char *comment;  // The &quot; &lt;tag&gt;&quot; in &quot;# type: ignore &lt;tag&gt;&quot;</a>
+<a name="54"><span class="lineNum">      54 </span>            :     } *items;</a>
+<a name="55"><span class="lineNum">      55 </span>            :     size_t size;</a>
+<a name="56"><span class="lineNum">      56 </span>            :     size_t num_items;</a>
+<a name="57"><span class="lineNum">      57 </span>            : } growable_comment_array;</a>
+<a name="58"><span class="lineNum">      58 </span>            : </a>
+<a name="59"><span class="lineNum">      59 </span>            : typedef struct {</a>
+<a name="60"><span class="lineNum">      60 </span>            :     struct tok_state *tok;</a>
+<a name="61"><span class="lineNum">      61 </span>            :     Token **tokens;</a>
+<a name="62"><span class="lineNum">      62 </span>            :     int mark;</a>
+<a name="63"><span class="lineNum">      63 </span>            :     int fill, size;</a>
+<a name="64"><span class="lineNum">      64 </span>            :     PyArena *arena;</a>
+<a name="65"><span class="lineNum">      65 </span>            :     KeywordToken **keywords;</a>
+<a name="66"><span class="lineNum">      66 </span>            :     char **soft_keywords;</a>
+<a name="67"><span class="lineNum">      67 </span>            :     int n_keyword_lists;</a>
+<a name="68"><span class="lineNum">      68 </span>            :     int start_rule;</a>
+<a name="69"><span class="lineNum">      69 </span>            :     int *errcode;</a>
+<a name="70"><span class="lineNum">      70 </span>            :     int parsing_started;</a>
+<a name="71"><span class="lineNum">      71 </span>            :     PyObject* normalize;</a>
+<a name="72"><span class="lineNum">      72 </span>            :     int starting_lineno;</a>
+<a name="73"><span class="lineNum">      73 </span>            :     int starting_col_offset;</a>
+<a name="74"><span class="lineNum">      74 </span>            :     int error_indicator;</a>
+<a name="75"><span class="lineNum">      75 </span>            :     int flags;</a>
+<a name="76"><span class="lineNum">      76 </span>            :     int feature_version;</a>
+<a name="77"><span class="lineNum">      77 </span>            :     growable_comment_array type_ignore_comments;</a>
+<a name="78"><span class="lineNum">      78 </span>            :     Token *known_err_token;</a>
+<a name="79"><span class="lineNum">      79 </span>            :     int level;</a>
+<a name="80"><span class="lineNum">      80 </span>            :     int call_invalid_rules;</a>
+<a name="81"><span class="lineNum">      81 </span>            :     int debug;</a>
+<a name="82"><span class="lineNum">      82 </span>            : } Parser;</a>
+<a name="83"><span class="lineNum">      83 </span>            : </a>
+<a name="84"><span class="lineNum">      84 </span>            : typedef struct {</a>
+<a name="85"><span class="lineNum">      85 </span>            :     cmpop_ty cmpop;</a>
+<a name="86"><span class="lineNum">      86 </span>            :     expr_ty expr;</a>
+<a name="87"><span class="lineNum">      87 </span>            : } CmpopExprPair;</a>
+<a name="88"><span class="lineNum">      88 </span>            : </a>
+<a name="89"><span class="lineNum">      89 </span>            : typedef struct {</a>
+<a name="90"><span class="lineNum">      90 </span>            :     expr_ty key;</a>
+<a name="91"><span class="lineNum">      91 </span>            :     expr_ty value;</a>
+<a name="92"><span class="lineNum">      92 </span>            : } KeyValuePair;</a>
+<a name="93"><span class="lineNum">      93 </span>            : </a>
+<a name="94"><span class="lineNum">      94 </span>            : typedef struct {</a>
+<a name="95"><span class="lineNum">      95 </span>            :     expr_ty key;</a>
+<a name="96"><span class="lineNum">      96 </span>            :     pattern_ty pattern;</a>
+<a name="97"><span class="lineNum">      97 </span>            : } KeyPatternPair;</a>
+<a name="98"><span class="lineNum">      98 </span>            : </a>
+<a name="99"><span class="lineNum">      99 </span>            : typedef struct {</a>
+<a name="100"><span class="lineNum">     100 </span>            :     arg_ty arg;</a>
+<a name="101"><span class="lineNum">     101 </span>            :     expr_ty value;</a>
+<a name="102"><span class="lineNum">     102 </span>            : } NameDefaultPair;</a>
+<a name="103"><span class="lineNum">     103 </span>            : </a>
+<a name="104"><span class="lineNum">     104 </span>            : typedef struct {</a>
+<a name="105"><span class="lineNum">     105 </span>            :     asdl_arg_seq *plain_names;</a>
+<a name="106"><span class="lineNum">     106 </span>            :     asdl_seq *names_with_defaults; // asdl_seq* of NameDefaultsPair's</a>
+<a name="107"><span class="lineNum">     107 </span>            : } SlashWithDefault;</a>
+<a name="108"><span class="lineNum">     108 </span>            : </a>
+<a name="109"><span class="lineNum">     109 </span>            : typedef struct {</a>
+<a name="110"><span class="lineNum">     110 </span>            :     arg_ty vararg;</a>
+<a name="111"><span class="lineNum">     111 </span>            :     asdl_seq *kwonlyargs; // asdl_seq* of NameDefaultsPair's</a>
+<a name="112"><span class="lineNum">     112 </span>            :     arg_ty kwarg;</a>
+<a name="113"><span class="lineNum">     113 </span>            : } StarEtc;</a>
+<a name="114"><span class="lineNum">     114 </span>            : </a>
+<a name="115"><span class="lineNum">     115 </span>            : typedef struct { operator_ty kind; } AugOperator;</a>
+<a name="116"><span class="lineNum">     116 </span>            : typedef struct {</a>
+<a name="117"><span class="lineNum">     117 </span>            :     void *element;</a>
+<a name="118"><span class="lineNum">     118 </span>            :     int is_keyword;</a>
+<a name="119"><span class="lineNum">     119 </span>            : } KeywordOrStarred;</a>
+<a name="120"><span class="lineNum">     120 </span>            : </a>
+<a name="121"><span class="lineNum">     121 </span>            : // Internal parser functions</a>
+<a name="122"><span class="lineNum">     122 </span>            : #if defined(Py_DEBUG)</a>
+<a name="123"><span class="lineNum">     123 </span>            : void _PyPegen_clear_memo_statistics(void);</a>
+<a name="124"><span class="lineNum">     124 </span>            : PyObject *_PyPegen_get_memo_statistics(void);</a>
+<a name="125"><span class="lineNum">     125 </span>            : #endif</a>
+<a name="126"><span class="lineNum">     126 </span>            : </a>
+<a name="127"><span class="lineNum">     127 </span>            : int _PyPegen_insert_memo(Parser *p, int mark, int type, void *node);</a>
+<a name="128"><span class="lineNum">     128 </span>            : int _PyPegen_update_memo(Parser *p, int mark, int type, void *node);</a>
+<a name="129"><span class="lineNum">     129 </span>            : int _PyPegen_is_memoized(Parser *p, int type, void *pres);</a>
+<a name="130"><span class="lineNum">     130 </span>            : </a>
+<a name="131"><span class="lineNum">     131 </span>            : int _PyPegen_lookahead_with_name(int, expr_ty (func)(Parser *), Parser *);</a>
+<a name="132"><span class="lineNum">     132 </span>            : int _PyPegen_lookahead_with_int(int, Token *(func)(Parser *, int), Parser *, int);</a>
+<a name="133"><span class="lineNum">     133 </span>            : int _PyPegen_lookahead_with_string(int , expr_ty (func)(Parser *, const char*), Parser *, const char*);</a>
+<a name="134"><span class="lineNum">     134 </span>            : int _PyPegen_lookahead(int, void *(func)(Parser *), Parser *);</a>
+<a name="135"><span class="lineNum">     135 </span>            : </a>
+<a name="136"><span class="lineNum">     136 </span>            : Token *_PyPegen_expect_token(Parser *p, int type);</a>
+<a name="137"><span class="lineNum">     137 </span>            : void* _PyPegen_expect_forced_result(Parser *p, void* result, const char* expected);</a>
+<a name="138"><span class="lineNum">     138 </span>            : Token *_PyPegen_expect_forced_token(Parser *p, int type, const char* expected);</a>
+<a name="139"><span class="lineNum">     139 </span>            : expr_ty _PyPegen_expect_soft_keyword(Parser *p, const char *keyword);</a>
+<a name="140"><span class="lineNum">     140 </span>            : expr_ty _PyPegen_soft_keyword_token(Parser *p);</a>
+<a name="141"><span class="lineNum">     141 </span>            : Token *_PyPegen_get_last_nonnwhitespace_token(Parser *);</a>
+<a name="142"><span class="lineNum">     142 </span>            : int _PyPegen_fill_token(Parser *p);</a>
+<a name="143"><span class="lineNum">     143 </span>            : expr_ty _PyPegen_name_token(Parser *p);</a>
+<a name="144"><span class="lineNum">     144 </span>            : expr_ty _PyPegen_number_token(Parser *p);</a>
+<a name="145"><span class="lineNum">     145 </span>            : void *_PyPegen_string_token(Parser *p);</a>
+<a name="146"><span class="lineNum">     146 </span>            : Py_ssize_t _PyPegen_byte_offset_to_character_offset(PyObject *line, Py_ssize_t col_offset);</a>
+<a name="147"><span class="lineNum">     147 </span>            : </a>
+<a name="148"><span class="lineNum">     148 </span>            : // Error handling functions and APIs</a>
+<a name="149"><span class="lineNum">     149 </span>            : typedef enum {</a>
+<a name="150"><span class="lineNum">     150 </span>            :     STAR_TARGETS,</a>
+<a name="151"><span class="lineNum">     151 </span>            :     DEL_TARGETS,</a>
+<a name="152"><span class="lineNum">     152 </span>            :     FOR_TARGETS</a>
+<a name="153"><span class="lineNum">     153 </span>            : } TARGETS_TYPE;</a>
+<a name="154"><span class="lineNum">     154 </span>            : </a>
+<a name="155"><span class="lineNum">     155 </span>            : int _Pypegen_raise_decode_error(Parser *p);</a>
+<a name="156"><span class="lineNum">     156 </span>            : void _PyPegen_raise_tokenizer_init_error(PyObject *filename);</a>
+<a name="157"><span class="lineNum">     157 </span>            : int _Pypegen_tokenizer_error(Parser *p);</a>
+<a name="158"><span class="lineNum">     158 </span>            : void *_PyPegen_raise_error(Parser *p, PyObject *errtype, const char *errmsg, ...);</a>
+<a name="159"><span class="lineNum">     159 </span>            : void *_PyPegen_raise_error_known_location(Parser *p, PyObject *errtype,</a>
+<a name="160"><span class="lineNum">     160 </span>            :                                           Py_ssize_t lineno, Py_ssize_t col_offset,</a>
+<a name="161"><span class="lineNum">     161 </span>            :                                           Py_ssize_t end_lineno, Py_ssize_t end_col_offset,</a>
+<a name="162"><span class="lineNum">     162 </span>            :                                           const char *errmsg, va_list va);</a>
+<a name="163"><span class="lineNum">     163 </span>            : void _Pypegen_set_syntax_error(Parser* p, Token* last_token);</a>
+<a name="164"><span class="lineNum">     164 </span>            : Py_LOCAL_INLINE(void *)</a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">       1050 : RAISE_ERROR_KNOWN_LOCATION(Parser *p, PyObject *errtype,</span></a>
+<a name="166"><span class="lineNum">     166 </span>            :                            Py_ssize_t lineno, Py_ssize_t col_offset,</a>
+<a name="167"><span class="lineNum">     167 </span>            :                            Py_ssize_t end_lineno, Py_ssize_t end_col_offset,</a>
+<a name="168"><span class="lineNum">     168 </span>            :                            const char *errmsg, ...)</a>
+<a name="169"><span class="lineNum">     169 </span>            : {</a>
+<a name="170"><span class="lineNum">     170 </span>            :     va_list va;</a>
+<a name="171"><span class="lineNum">     171 </span><span class="lineCov">       1050 :     va_start(va, errmsg);</span></a>
+<a name="172"><span class="lineNum">     172 </span><span class="lineCov">       1050 :     Py_ssize_t _col_offset = (col_offset == CURRENT_POS ? CURRENT_POS : col_offset + 1);</span></a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">       1050 :     Py_ssize_t _end_col_offset = (end_col_offset == CURRENT_POS ? CURRENT_POS : end_col_offset + 1);</span></a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">       1050 :     _PyPegen_raise_error_known_location(p, errtype, lineno, _col_offset, end_lineno, _end_col_offset, errmsg, va);</span></a>
+<a name="175"><span class="lineNum">     175 </span><span class="lineCov">       1050 :     va_end(va);</span></a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">       1050 :     return NULL;</span></a>
+<a name="177"><span class="lineNum">     177 </span>            : }</a>
+<a name="178"><span class="lineNum">     178 </span>            : #define RAISE_SYNTAX_ERROR(msg, ...) _PyPegen_raise_error(p, PyExc_SyntaxError, msg, ##__VA_ARGS__)</a>
+<a name="179"><span class="lineNum">     179 </span>            : #define RAISE_INDENTATION_ERROR(msg, ...) _PyPegen_raise_error(p, PyExc_IndentationError, msg, ##__VA_ARGS__)</a>
+<a name="180"><span class="lineNum">     180 </span>            : #define RAISE_SYNTAX_ERROR_KNOWN_RANGE(a, b, msg, ...) \</a>
+<a name="181"><span class="lineNum">     181 </span>            :     RAISE_ERROR_KNOWN_LOCATION(p, PyExc_SyntaxError, (a)-&gt;lineno, (a)-&gt;col_offset, (b)-&gt;end_lineno, (b)-&gt;end_col_offset, msg, ##__VA_ARGS__)</a>
+<a name="182"><span class="lineNum">     182 </span>            : #define RAISE_SYNTAX_ERROR_KNOWN_LOCATION(a, msg, ...) \</a>
+<a name="183"><span class="lineNum">     183 </span>            :     RAISE_ERROR_KNOWN_LOCATION(p, PyExc_SyntaxError, (a)-&gt;lineno, (a)-&gt;col_offset, (a)-&gt;end_lineno, (a)-&gt;end_col_offset, msg, ##__VA_ARGS__)</a>
+<a name="184"><span class="lineNum">     184 </span>            : #define RAISE_SYNTAX_ERROR_STARTING_FROM(a, msg, ...) \</a>
+<a name="185"><span class="lineNum">     185 </span>            :     RAISE_ERROR_KNOWN_LOCATION(p, PyExc_SyntaxError, (a)-&gt;lineno, (a)-&gt;col_offset, CURRENT_POS, CURRENT_POS, msg, ##__VA_ARGS__)</a>
+<a name="186"><span class="lineNum">     186 </span>            : #define RAISE_SYNTAX_ERROR_INVALID_TARGET(type, e) _RAISE_SYNTAX_ERROR_INVALID_TARGET(p, type, e)</a>
+<a name="187"><span class="lineNum">     187 </span>            : </a>
+<a name="188"><span class="lineNum">     188 </span>            : Py_LOCAL_INLINE(void *)</a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">    1264110 : CHECK_CALL(Parser *p, void *result)</span></a>
+<a name="190"><span class="lineNum">     190 </span>            : {</a>
+<a name="191"><span class="lineNum">     191 </span><span class="lineCov">    1264110 :     if (result == NULL) {</span></a>
+<a name="192"><span class="lineNum">     192 </span><span class="lineNoCov">          0 :         assert(PyErr_Occurred());</span></a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineNoCov">          0 :         p-&gt;error_indicator = 1;</span></a>
+<a name="194"><span class="lineNum">     194 </span>            :     }</a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">    1264110 :     return result;</span></a>
+<a name="196"><span class="lineNum">     196 </span>            : }</a>
+<a name="197"><span class="lineNum">     197 </span>            : </a>
+<a name="198"><span class="lineNum">     198 </span>            : /* This is needed for helper functions that are allowed to</a>
+<a name="199"><span class="lineNum">     199 </span>            :    return NULL without an error. Example: _PyPegen_seq_extract_starred_exprs */</a>
+<a name="200"><span class="lineNum">     200 </span>            : Py_LOCAL_INLINE(void *)</a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">      77720 : CHECK_CALL_NULL_ALLOWED(Parser *p, void *result)</span></a>
+<a name="202"><span class="lineNum">     202 </span>            : {</a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineCov">      77720 :     if (result == NULL &amp;&amp; PyErr_Occurred()) {</span></a>
+<a name="204"><span class="lineNum">     204 </span><span class="lineNoCov">          0 :         p-&gt;error_indicator = 1;</span></a>
+<a name="205"><span class="lineNum">     205 </span>            :     }</a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineCov">      77720 :     return result;</span></a>
+<a name="207"><span class="lineNum">     207 </span>            : }</a>
+<a name="208"><span class="lineNum">     208 </span>            : </a>
+<a name="209"><span class="lineNum">     209 </span>            : #define CHECK(type, result) ((type) CHECK_CALL(p, result))</a>
+<a name="210"><span class="lineNum">     210 </span>            : #define CHECK_NULL_ALLOWED(type, result) ((type) CHECK_CALL_NULL_ALLOWED(p, result))</a>
+<a name="211"><span class="lineNum">     211 </span>            : </a>
+<a name="212"><span class="lineNum">     212 </span>            : expr_ty _PyPegen_get_invalid_target(expr_ty e, TARGETS_TYPE targets_type);</a>
+<a name="213"><span class="lineNum">     213 </span>            : const char *_PyPegen_get_expr_name(expr_ty);</a>
+<a name="214"><span class="lineNum">     214 </span>            : Py_LOCAL_INLINE(void *)</a>
+<a name="215"><span class="lineNum">     215 </span><span class="lineCov">         84 : _RAISE_SYNTAX_ERROR_INVALID_TARGET(Parser *p, TARGETS_TYPE type, void *e)</span></a>
+<a name="216"><span class="lineNum">     216 </span>            : {</a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">         84 :     expr_ty invalid_target = CHECK_NULL_ALLOWED(expr_ty, _PyPegen_get_invalid_target(e, type));</span></a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">         84 :     if (invalid_target != NULL) {</span></a>
+<a name="219"><span class="lineNum">     219 </span>            :         const char *msg;</a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineCov">         75 :         if (type == STAR_TARGETS || type == FOR_TARGETS) {</span></a>
+<a name="221"><span class="lineNum">     221 </span><span class="lineCov">         46 :             msg = &quot;cannot assign to %s&quot;;</span></a>
+<a name="222"><span class="lineNum">     222 </span>            :         }</a>
+<a name="223"><span class="lineNum">     223 </span>            :         else {</a>
+<a name="224"><span class="lineNum">     224 </span><span class="lineCov">         29 :             msg = &quot;cannot delete %s&quot;;</span></a>
+<a name="225"><span class="lineNum">     225 </span>            :         }</a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">         75 :         return RAISE_SYNTAX_ERROR_KNOWN_LOCATION(</span></a>
+<a name="227"><span class="lineNum">     227 </span>            :             invalid_target,</a>
+<a name="228"><span class="lineNum">     228 </span>            :             msg,</a>
+<a name="229"><span class="lineNum">     229 </span>            :             _PyPegen_get_expr_name(invalid_target)</a>
+<a name="230"><span class="lineNum">     230 </span>            :         );</a>
+<a name="231"><span class="lineNum">     231 </span>            :         return RAISE_SYNTAX_ERROR_KNOWN_LOCATION(invalid_target, &quot;invalid syntax&quot;);</a>
+<a name="232"><span class="lineNum">     232 </span>            :     }</a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">          9 :     return NULL;</span></a>
+<a name="234"><span class="lineNum">     234 </span>            : }</a>
+<a name="235"><span class="lineNum">     235 </span>            : </a>
+<a name="236"><span class="lineNum">     236 </span>            : // Action utility functions</a>
+<a name="237"><span class="lineNum">     237 </span>            : </a>
+<a name="238"><span class="lineNum">     238 </span>            : void *_PyPegen_dummy_name(Parser *p, ...);</a>
+<a name="239"><span class="lineNum">     239 </span>            : void * _PyPegen_seq_last_item(asdl_seq *seq);</a>
+<a name="240"><span class="lineNum">     240 </span>            : #define PyPegen_last_item(seq, type) ((type)_PyPegen_seq_last_item((asdl_seq*)seq))</a>
+<a name="241"><span class="lineNum">     241 </span>            : void * _PyPegen_seq_first_item(asdl_seq *seq);</a>
+<a name="242"><span class="lineNum">     242 </span>            : #define PyPegen_first_item(seq, type) ((type)_PyPegen_seq_first_item((asdl_seq*)seq))</a>
+<a name="243"><span class="lineNum">     243 </span>            : #define UNUSED(expr) do { (void)(expr); } while (0)</a>
+<a name="244"><span class="lineNum">     244 </span>            : #define EXTRA_EXPR(head, tail) head-&gt;lineno, (head)-&gt;col_offset, (tail)-&gt;end_lineno, (tail)-&gt;end_col_offset, p-&gt;arena</a>
+<a name="245"><span class="lineNum">     245 </span>            : #define EXTRA _start_lineno, _start_col_offset, _end_lineno, _end_col_offset, p-&gt;arena</a>
+<a name="246"><span class="lineNum">     246 </span>            : PyObject *_PyPegen_new_type_comment(Parser *, const char *);</a>
+<a name="247"><span class="lineNum">     247 </span>            : </a>
+<a name="248"><span class="lineNum">     248 </span>            : Py_LOCAL_INLINE(PyObject *)</a>
+<a name="249"><span class="lineNum">     249 </span><span class="lineCov">    1250870 : NEW_TYPE_COMMENT(Parser *p, Token *tc)</span></a>
+<a name="250"><span class="lineNum">     250 </span>            : {</a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">    1250870 :     if (tc == NULL) {</span></a>
+<a name="252"><span class="lineNum">     252 </span><span class="lineCov">    1250770 :         return NULL;</span></a>
+<a name="253"><span class="lineNum">     253 </span>            :     }</a>
+<a name="254"><span class="lineNum">     254 </span><span class="lineCov">         92 :     const char *bytes = PyBytes_AsString(tc-&gt;bytes);</span></a>
+<a name="255"><span class="lineNum">     255 </span><span class="lineCov">         92 :     if (bytes == NULL) {</span></a>
+<a name="256"><span class="lineNum">     256 </span><span class="lineNoCov">          0 :         goto error;</span></a>
+<a name="257"><span class="lineNum">     257 </span>            :     }</a>
+<a name="258"><span class="lineNum">     258 </span><span class="lineCov">         92 :     PyObject *tco = _PyPegen_new_type_comment(p, bytes);</span></a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineCov">         92 :     if (tco == NULL) {</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :         goto error;</span></a>
+<a name="261"><span class="lineNum">     261 </span>            :     }</a>
+<a name="262"><span class="lineNum">     262 </span><span class="lineCov">         92 :     return tco;</span></a>
+<a name="263"><span class="lineNum">     263 </span><span class="lineNoCov">          0 :  error:</span></a>
+<a name="264"><span class="lineNum">     264 </span><span class="lineNoCov">          0 :     p-&gt;error_indicator = 1;  // Inline CHECK_CALL</span></a>
+<a name="265"><span class="lineNum">     265 </span><span class="lineNoCov">          0 :     return NULL;</span></a>
+<a name="266"><span class="lineNum">     266 </span>            : }</a>
+<a name="267"><span class="lineNum">     267 </span>            : </a>
+<a name="268"><span class="lineNum">     268 </span>            : Py_LOCAL_INLINE(void *)</a>
+<a name="269"><span class="lineNum">     269 </span><span class="lineCov">      19698 : INVALID_VERSION_CHECK(Parser *p, int version, char *msg, void *node)</span></a>
+<a name="270"><span class="lineNum">     270 </span>            : {</a>
+<a name="271"><span class="lineNum">     271 </span><span class="lineCov">      19698 :     if (node == NULL) {</span></a>
+<a name="272"><span class="lineNum">     272 </span><span class="lineCov">          1 :         p-&gt;error_indicator = 1;  // Inline CHECK_CALL</span></a>
+<a name="273"><span class="lineNum">     273 </span><span class="lineCov">          1 :         return NULL;</span></a>
+<a name="274"><span class="lineNum">     274 </span>            :     }</a>
+<a name="275"><span class="lineNum">     275 </span><span class="lineCov">      19697 :     if (p-&gt;feature_version &lt; version) {</span></a>
+<a name="276"><span class="lineNum">     276 </span><span class="lineCov">          4 :         p-&gt;error_indicator = 1;</span></a>
+<a name="277"><span class="lineNum">     277 </span><span class="lineCov">          4 :         return RAISE_SYNTAX_ERROR(&quot;%s only supported in Python 3.%i and greater&quot;,</span></a>
+<a name="278"><span class="lineNum">     278 </span>            :                                   msg, version);</a>
+<a name="279"><span class="lineNum">     279 </span>            :     }</a>
+<a name="280"><span class="lineNum">     280 </span><span class="lineCov">      19693 :     return node;</span></a>
+<a name="281"><span class="lineNum">     281 </span>            : }</a>
+<a name="282"><span class="lineNum">     282 </span>            : </a>
+<a name="283"><span class="lineNum">     283 </span>            : #define CHECK_VERSION(type, version, msg, node) ((type) INVALID_VERSION_CHECK(p, version, msg, node))</a>
+<a name="284"><span class="lineNum">     284 </span>            : </a>
+<a name="285"><span class="lineNum">     285 </span>            : arg_ty _PyPegen_add_type_comment_to_arg(Parser *, arg_ty, Token *);</a>
+<a name="286"><span class="lineNum">     286 </span>            : PyObject *_PyPegen_new_identifier(Parser *, const char *);</a>
+<a name="287"><span class="lineNum">     287 </span>            : asdl_seq *_PyPegen_singleton_seq(Parser *, void *);</a>
+<a name="288"><span class="lineNum">     288 </span>            : asdl_seq *_PyPegen_seq_insert_in_front(Parser *, void *, asdl_seq *);</a>
+<a name="289"><span class="lineNum">     289 </span>            : asdl_seq *_PyPegen_seq_append_to_end(Parser *, asdl_seq *, void *);</a>
+<a name="290"><span class="lineNum">     290 </span>            : asdl_seq *_PyPegen_seq_flatten(Parser *, asdl_seq *);</a>
+<a name="291"><span class="lineNum">     291 </span>            : expr_ty _PyPegen_join_names_with_dot(Parser *, expr_ty, expr_ty);</a>
+<a name="292"><span class="lineNum">     292 </span>            : int _PyPegen_seq_count_dots(asdl_seq *);</a>
+<a name="293"><span class="lineNum">     293 </span>            : alias_ty _PyPegen_alias_for_star(Parser *, int, int, int, int, PyArena *);</a>
+<a name="294"><span class="lineNum">     294 </span>            : asdl_identifier_seq *_PyPegen_map_names_to_ids(Parser *, asdl_expr_seq *);</a>
+<a name="295"><span class="lineNum">     295 </span>            : CmpopExprPair *_PyPegen_cmpop_expr_pair(Parser *, cmpop_ty, expr_ty);</a>
+<a name="296"><span class="lineNum">     296 </span>            : asdl_int_seq *_PyPegen_get_cmpops(Parser *p, asdl_seq *);</a>
+<a name="297"><span class="lineNum">     297 </span>            : asdl_expr_seq *_PyPegen_get_exprs(Parser *, asdl_seq *);</a>
+<a name="298"><span class="lineNum">     298 </span>            : expr_ty _PyPegen_set_expr_context(Parser *, expr_ty, expr_context_ty);</a>
+<a name="299"><span class="lineNum">     299 </span>            : KeyValuePair *_PyPegen_key_value_pair(Parser *, expr_ty, expr_ty);</a>
+<a name="300"><span class="lineNum">     300 </span>            : asdl_expr_seq *_PyPegen_get_keys(Parser *, asdl_seq *);</a>
+<a name="301"><span class="lineNum">     301 </span>            : asdl_expr_seq *_PyPegen_get_values(Parser *, asdl_seq *);</a>
+<a name="302"><span class="lineNum">     302 </span>            : KeyPatternPair *_PyPegen_key_pattern_pair(Parser *, expr_ty, pattern_ty);</a>
+<a name="303"><span class="lineNum">     303 </span>            : asdl_expr_seq *_PyPegen_get_pattern_keys(Parser *, asdl_seq *);</a>
+<a name="304"><span class="lineNum">     304 </span>            : asdl_pattern_seq *_PyPegen_get_patterns(Parser *, asdl_seq *);</a>
+<a name="305"><span class="lineNum">     305 </span>            : NameDefaultPair *_PyPegen_name_default_pair(Parser *, arg_ty, expr_ty, Token *);</a>
+<a name="306"><span class="lineNum">     306 </span>            : SlashWithDefault *_PyPegen_slash_with_default(Parser *, asdl_arg_seq *, asdl_seq *);</a>
+<a name="307"><span class="lineNum">     307 </span>            : StarEtc *_PyPegen_star_etc(Parser *, arg_ty, asdl_seq *, arg_ty);</a>
+<a name="308"><span class="lineNum">     308 </span>            : arguments_ty _PyPegen_make_arguments(Parser *, asdl_arg_seq *, SlashWithDefault *,</a>
+<a name="309"><span class="lineNum">     309 </span>            :                                      asdl_arg_seq *, asdl_seq *, StarEtc *);</a>
+<a name="310"><span class="lineNum">     310 </span>            : arguments_ty _PyPegen_empty_arguments(Parser *);</a>
+<a name="311"><span class="lineNum">     311 </span>            : AugOperator *_PyPegen_augoperator(Parser*, operator_ty type);</a>
+<a name="312"><span class="lineNum">     312 </span>            : stmt_ty _PyPegen_function_def_decorators(Parser *, asdl_expr_seq *, stmt_ty);</a>
+<a name="313"><span class="lineNum">     313 </span>            : stmt_ty _PyPegen_class_def_decorators(Parser *, asdl_expr_seq *, stmt_ty);</a>
+<a name="314"><span class="lineNum">     314 </span>            : KeywordOrStarred *_PyPegen_keyword_or_starred(Parser *, void *, int);</a>
+<a name="315"><span class="lineNum">     315 </span>            : asdl_expr_seq *_PyPegen_seq_extract_starred_exprs(Parser *, asdl_seq *);</a>
+<a name="316"><span class="lineNum">     316 </span>            : asdl_keyword_seq *_PyPegen_seq_delete_starred_exprs(Parser *, asdl_seq *);</a>
+<a name="317"><span class="lineNum">     317 </span>            : expr_ty _PyPegen_collect_call_seqs(Parser *, asdl_expr_seq *, asdl_seq *,</a>
+<a name="318"><span class="lineNum">     318 </span>            :                      int lineno, int col_offset, int end_lineno,</a>
+<a name="319"><span class="lineNum">     319 </span>            :                      int end_col_offset, PyArena *arena);</a>
+<a name="320"><span class="lineNum">     320 </span>            : expr_ty _PyPegen_concatenate_strings(Parser *p, asdl_seq *);</a>
+<a name="321"><span class="lineNum">     321 </span>            : expr_ty _PyPegen_ensure_imaginary(Parser *p, expr_ty);</a>
+<a name="322"><span class="lineNum">     322 </span>            : expr_ty _PyPegen_ensure_real(Parser *p, expr_ty);</a>
+<a name="323"><span class="lineNum">     323 </span>            : asdl_seq *_PyPegen_join_sequences(Parser *, asdl_seq *, asdl_seq *);</a>
+<a name="324"><span class="lineNum">     324 </span>            : int _PyPegen_check_barry_as_flufl(Parser *, Token *);</a>
+<a name="325"><span class="lineNum">     325 </span>            : int _PyPegen_check_legacy_stmt(Parser *p, expr_ty t);</a>
+<a name="326"><span class="lineNum">     326 </span>            : mod_ty _PyPegen_make_module(Parser *, asdl_stmt_seq *);</a>
+<a name="327"><span class="lineNum">     327 </span>            : void *_PyPegen_arguments_parsing_error(Parser *, expr_ty);</a>
+<a name="328"><span class="lineNum">     328 </span>            : expr_ty _PyPegen_get_last_comprehension_item(comprehension_ty comprehension);</a>
+<a name="329"><span class="lineNum">     329 </span>            : void *_PyPegen_nonparen_genexp_in_call(Parser *p, expr_ty args, asdl_comprehension_seq *comprehensions);</a>
+<a name="330"><span class="lineNum">     330 </span>            : </a>
+<a name="331"><span class="lineNum">     331 </span>            : // Parser API</a>
+<a name="332"><span class="lineNum">     332 </span>            : </a>
+<a name="333"><span class="lineNum">     333 </span>            : Parser *_PyPegen_Parser_New(struct tok_state *, int, int, int, int *, PyArena *);</a>
+<a name="334"><span class="lineNum">     334 </span>            : void _PyPegen_Parser_Free(Parser *);</a>
+<a name="335"><span class="lineNum">     335 </span>            : mod_ty _PyPegen_run_parser_from_file_pointer(FILE *, int, PyObject *, const char *,</a>
+<a name="336"><span class="lineNum">     336 </span>            :                                     const char *, const char *, PyCompilerFlags *, int *, PyArena *);</a>
+<a name="337"><span class="lineNum">     337 </span>            : void *_PyPegen_run_parser(Parser *);</a>
+<a name="338"><span class="lineNum">     338 </span>            : mod_ty _PyPegen_run_parser_from_string(const char *, int, PyObject *, PyCompilerFlags *, PyArena *);</a>
+<a name="339"><span class="lineNum">     339 </span>            : asdl_stmt_seq *_PyPegen_interactive_exit(Parser *);</a>
+<a name="340"><span class="lineNum">     340 </span>            : </a>
+<a name="341"><span class="lineNum">     341 </span>            : // Generated function in parse.c - function definition in python.gram</a>
+<a name="342"><span class="lineNum">     342 </span>            : void *_PyPegen_parse(Parser *);</a>
+<a name="343"><span class="lineNum">     343 </span>            : </a>
+<a name="344"><span class="lineNum">     344 </span>            : #endif</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Modules/clinic/_gdbmmodule.c.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">Modules/clinic</a> - _gdbmmodule.c.h<span style="font-size: 80%;"> (source / <a href="_gdbmmodule.c.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">64</td>
+            <td class="headerCovTableEntry">82</td>
+            <td class="headerCovTableEntryMed">78.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /*[clinic input]</a>
+<a name="2"><span class="lineNum">       2 </span>            : preserve</a>
+<a name="3"><span class="lineNum">       3 </span>            : [clinic start generated code]*/</a>
+<a name="4"><span class="lineNum">       4 </span>            : </a>
+<a name="5"><span class="lineNum">       5 </span>            : PyDoc_STRVAR(_gdbm_gdbm_get__doc__,</a>
+<a name="6"><span class="lineNum">       6 </span>            : &quot;get($self, key, default=None, /)\n&quot;</a>
+<a name="7"><span class="lineNum">       7 </span>            : &quot;--\n&quot;</a>
+<a name="8"><span class="lineNum">       8 </span>            : &quot;\n&quot;</a>
+<a name="9"><span class="lineNum">       9 </span>            : &quot;Get the value for key, or default if not present.&quot;);</a>
+<a name="10"><span class="lineNum">      10 </span>            : </a>
+<a name="11"><span class="lineNum">      11 </span>            : #define _GDBM_GDBM_GET_METHODDEF    \</a>
+<a name="12"><span class="lineNum">      12 </span>            :     {&quot;get&quot;, _PyCFunction_CAST(_gdbm_gdbm_get), METH_FASTCALL, _gdbm_gdbm_get__doc__},</a>
+<a name="13"><span class="lineNum">      13 </span>            : </a>
+<a name="14"><span class="lineNum">      14 </span>            : static PyObject *</a>
+<a name="15"><span class="lineNum">      15 </span>            : _gdbm_gdbm_get_impl(gdbmobject *self, PyObject *key, PyObject *default_value);</a>
+<a name="16"><span class="lineNum">      16 </span>            : </a>
+<a name="17"><span class="lineNum">      17 </span>            : static PyObject *</a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          7 : _gdbm_gdbm_get(gdbmobject *self, PyObject *const *args, Py_ssize_t nargs)</span></a>
+<a name="19"><span class="lineNum">      19 </span>            : {</a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          7 :     PyObject *return_value = NULL;</span></a>
+<a name="21"><span class="lineNum">      21 </span>            :     PyObject *key;</a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          7 :     PyObject *default_value = Py_None;</span></a>
+<a name="23"><span class="lineNum">      23 </span>            : </a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          7 :     if (!_PyArg_CheckPositional(&quot;get&quot;, nargs, 1, 2)) {</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="26"><span class="lineNum">      26 </span>            :     }</a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          7 :     key = args[0];</span></a>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          7 :     if (nargs &lt; 2) {</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          5 :         goto skip_optional;</span></a>
+<a name="30"><span class="lineNum">      30 </span>            :     }</a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          2 :     default_value = args[1];</span></a>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">          7 : skip_optional:</span></a>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">          7 :     return_value = _gdbm_gdbm_get_impl(self, key, default_value);</span></a>
+<a name="34"><span class="lineNum">      34 </span>            : </a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineCov">          7 : exit:</span></a>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">          7 :     return return_value;</span></a>
+<a name="37"><span class="lineNum">      37 </span>            : }</a>
+<a name="38"><span class="lineNum">      38 </span>            : </a>
+<a name="39"><span class="lineNum">      39 </span>            : PyDoc_STRVAR(_gdbm_gdbm_setdefault__doc__,</a>
+<a name="40"><span class="lineNum">      40 </span>            : &quot;setdefault($self, key, default=None, /)\n&quot;</a>
+<a name="41"><span class="lineNum">      41 </span>            : &quot;--\n&quot;</a>
+<a name="42"><span class="lineNum">      42 </span>            : &quot;\n&quot;</a>
+<a name="43"><span class="lineNum">      43 </span>            : &quot;Get value for key, or set it to default and return default if not present.&quot;);</a>
+<a name="44"><span class="lineNum">      44 </span>            : </a>
+<a name="45"><span class="lineNum">      45 </span>            : #define _GDBM_GDBM_SETDEFAULT_METHODDEF    \</a>
+<a name="46"><span class="lineNum">      46 </span>            :     {&quot;setdefault&quot;, _PyCFunction_CAST(_gdbm_gdbm_setdefault), METH_FASTCALL, _gdbm_gdbm_setdefault__doc__},</a>
+<a name="47"><span class="lineNum">      47 </span>            : </a>
+<a name="48"><span class="lineNum">      48 </span>            : static PyObject *</a>
+<a name="49"><span class="lineNum">      49 </span>            : _gdbm_gdbm_setdefault_impl(gdbmobject *self, PyObject *key,</a>
+<a name="50"><span class="lineNum">      50 </span>            :                            PyObject *default_value);</a>
+<a name="51"><span class="lineNum">      51 </span>            : </a>
+<a name="52"><span class="lineNum">      52 </span>            : static PyObject *</a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          3 : _gdbm_gdbm_setdefault(gdbmobject *self, PyObject *const *args, Py_ssize_t nargs)</span></a>
+<a name="54"><span class="lineNum">      54 </span>            : {</a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">          3 :     PyObject *return_value = NULL;</span></a>
+<a name="56"><span class="lineNum">      56 </span>            :     PyObject *key;</a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          3 :     PyObject *default_value = Py_None;</span></a>
+<a name="58"><span class="lineNum">      58 </span>            : </a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          3 :     if (!_PyArg_CheckPositional(&quot;setdefault&quot;, nargs, 1, 2)) {</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="61"><span class="lineNum">      61 </span>            :     }</a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          3 :     key = args[0];</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          3 :     if (nargs &lt; 2) {</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">          1 :         goto skip_optional;</span></a>
+<a name="65"><span class="lineNum">      65 </span>            :     }</a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          2 :     default_value = args[1];</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          3 : skip_optional:</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          3 :     return_value = _gdbm_gdbm_setdefault_impl(self, key, default_value);</span></a>
+<a name="69"><span class="lineNum">      69 </span>            : </a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          3 : exit:</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          3 :     return return_value;</span></a>
+<a name="72"><span class="lineNum">      72 </span>            : }</a>
+<a name="73"><span class="lineNum">      73 </span>            : </a>
+<a name="74"><span class="lineNum">      74 </span>            : PyDoc_STRVAR(_gdbm_gdbm_close__doc__,</a>
+<a name="75"><span class="lineNum">      75 </span>            : &quot;close($self, /)\n&quot;</a>
+<a name="76"><span class="lineNum">      76 </span>            : &quot;--\n&quot;</a>
+<a name="77"><span class="lineNum">      77 </span>            : &quot;\n&quot;</a>
+<a name="78"><span class="lineNum">      78 </span>            : &quot;Close the database.&quot;);</a>
+<a name="79"><span class="lineNum">      79 </span>            : </a>
+<a name="80"><span class="lineNum">      80 </span>            : #define _GDBM_GDBM_CLOSE_METHODDEF    \</a>
+<a name="81"><span class="lineNum">      81 </span>            :     {&quot;close&quot;, (PyCFunction)_gdbm_gdbm_close, METH_NOARGS, _gdbm_gdbm_close__doc__},</a>
+<a name="82"><span class="lineNum">      82 </span>            : </a>
+<a name="83"><span class="lineNum">      83 </span>            : static PyObject *</a>
+<a name="84"><span class="lineNum">      84 </span>            : _gdbm_gdbm_close_impl(gdbmobject *self);</a>
+<a name="85"><span class="lineNum">      85 </span>            : </a>
+<a name="86"><span class="lineNum">      86 </span>            : static PyObject *</a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineCov">        201 : _gdbm_gdbm_close(gdbmobject *self, PyObject *Py_UNUSED(ignored))</span></a>
+<a name="88"><span class="lineNum">      88 </span>            : {</a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">        201 :     return _gdbm_gdbm_close_impl(self);</span></a>
+<a name="90"><span class="lineNum">      90 </span>            : }</a>
+<a name="91"><span class="lineNum">      91 </span>            : </a>
+<a name="92"><span class="lineNum">      92 </span>            : PyDoc_STRVAR(_gdbm_gdbm_keys__doc__,</a>
+<a name="93"><span class="lineNum">      93 </span>            : &quot;keys($self, /)\n&quot;</a>
+<a name="94"><span class="lineNum">      94 </span>            : &quot;--\n&quot;</a>
+<a name="95"><span class="lineNum">      95 </span>            : &quot;\n&quot;</a>
+<a name="96"><span class="lineNum">      96 </span>            : &quot;Get a list of all keys in the database.&quot;);</a>
+<a name="97"><span class="lineNum">      97 </span>            : </a>
+<a name="98"><span class="lineNum">      98 </span>            : #define _GDBM_GDBM_KEYS_METHODDEF    \</a>
+<a name="99"><span class="lineNum">      99 </span>            :     {&quot;keys&quot;, _PyCFunction_CAST(_gdbm_gdbm_keys), METH_METHOD|METH_FASTCALL|METH_KEYWORDS, _gdbm_gdbm_keys__doc__},</a>
+<a name="100"><span class="lineNum">     100 </span>            : </a>
+<a name="101"><span class="lineNum">     101 </span>            : static PyObject *</a>
+<a name="102"><span class="lineNum">     102 </span>            : _gdbm_gdbm_keys_impl(gdbmobject *self, PyTypeObject *cls);</a>
+<a name="103"><span class="lineNum">     103 </span>            : </a>
+<a name="104"><span class="lineNum">     104 </span>            : static PyObject *</a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">        250 : _gdbm_gdbm_keys(gdbmobject *self, PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames)</span></a>
+<a name="106"><span class="lineNum">     106 </span>            : {</a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">        250 :     if (nargs) {</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_TypeError, &quot;keys() takes no arguments&quot;);</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="110"><span class="lineNum">     110 </span>            :     }</a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineCov">        250 :     return _gdbm_gdbm_keys_impl(self, cls);</span></a>
+<a name="112"><span class="lineNum">     112 </span>            : }</a>
+<a name="113"><span class="lineNum">     113 </span>            : </a>
+<a name="114"><span class="lineNum">     114 </span>            : PyDoc_STRVAR(_gdbm_gdbm_firstkey__doc__,</a>
+<a name="115"><span class="lineNum">     115 </span>            : &quot;firstkey($self, /)\n&quot;</a>
+<a name="116"><span class="lineNum">     116 </span>            : &quot;--\n&quot;</a>
+<a name="117"><span class="lineNum">     117 </span>            : &quot;\n&quot;</a>
+<a name="118"><span class="lineNum">     118 </span>            : &quot;Return the starting key for the traversal.\n&quot;</a>
+<a name="119"><span class="lineNum">     119 </span>            : &quot;\n&quot;</a>
+<a name="120"><span class="lineNum">     120 </span>            : &quot;It\'s possible to loop over every key in the database using this method\n&quot;</a>
+<a name="121"><span class="lineNum">     121 </span>            : &quot;and the nextkey() method.  The traversal is ordered by GDBM\'s internal\n&quot;</a>
+<a name="122"><span class="lineNum">     122 </span>            : &quot;hash values, and won\'t be sorted by the key values.&quot;);</a>
+<a name="123"><span class="lineNum">     123 </span>            : </a>
+<a name="124"><span class="lineNum">     124 </span>            : #define _GDBM_GDBM_FIRSTKEY_METHODDEF    \</a>
+<a name="125"><span class="lineNum">     125 </span>            :     {&quot;firstkey&quot;, _PyCFunction_CAST(_gdbm_gdbm_firstkey), METH_METHOD|METH_FASTCALL|METH_KEYWORDS, _gdbm_gdbm_firstkey__doc__},</a>
+<a name="126"><span class="lineNum">     126 </span>            : </a>
+<a name="127"><span class="lineNum">     127 </span>            : static PyObject *</a>
+<a name="128"><span class="lineNum">     128 </span>            : _gdbm_gdbm_firstkey_impl(gdbmobject *self, PyTypeObject *cls);</a>
+<a name="129"><span class="lineNum">     129 </span>            : </a>
+<a name="130"><span class="lineNum">     130 </span>            : static PyObject *</a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineCov">          1 : _gdbm_gdbm_firstkey(gdbmobject *self, PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames)</span></a>
+<a name="132"><span class="lineNum">     132 </span>            : {</a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :     if (nargs) {</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_TypeError, &quot;firstkey() takes no arguments&quot;);</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="136"><span class="lineNum">     136 </span>            :     }</a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          1 :     return _gdbm_gdbm_firstkey_impl(self, cls);</span></a>
+<a name="138"><span class="lineNum">     138 </span>            : }</a>
+<a name="139"><span class="lineNum">     139 </span>            : </a>
+<a name="140"><span class="lineNum">     140 </span>            : PyDoc_STRVAR(_gdbm_gdbm_nextkey__doc__,</a>
+<a name="141"><span class="lineNum">     141 </span>            : &quot;nextkey($self, key, /)\n&quot;</a>
+<a name="142"><span class="lineNum">     142 </span>            : &quot;--\n&quot;</a>
+<a name="143"><span class="lineNum">     143 </span>            : &quot;\n&quot;</a>
+<a name="144"><span class="lineNum">     144 </span>            : &quot;Returns the key that follows key in the traversal.\n&quot;</a>
+<a name="145"><span class="lineNum">     145 </span>            : &quot;\n&quot;</a>
+<a name="146"><span class="lineNum">     146 </span>            : &quot;The following code prints every key in the database db, without having\n&quot;</a>
+<a name="147"><span class="lineNum">     147 </span>            : &quot;to create a list in memory that contains them all:\n&quot;</a>
+<a name="148"><span class="lineNum">     148 </span>            : &quot;\n&quot;</a>
+<a name="149"><span class="lineNum">     149 </span>            : &quot;      k = db.firstkey()\n&quot;</a>
+<a name="150"><span class="lineNum">     150 </span>            : &quot;      while k is not None:\n&quot;</a>
+<a name="151"><span class="lineNum">     151 </span>            : &quot;          print(k)\n&quot;</a>
+<a name="152"><span class="lineNum">     152 </span>            : &quot;          k = db.nextkey(k)&quot;);</a>
+<a name="153"><span class="lineNum">     153 </span>            : </a>
+<a name="154"><span class="lineNum">     154 </span>            : #define _GDBM_GDBM_NEXTKEY_METHODDEF    \</a>
+<a name="155"><span class="lineNum">     155 </span>            :     {&quot;nextkey&quot;, _PyCFunction_CAST(_gdbm_gdbm_nextkey), METH_METHOD|METH_FASTCALL|METH_KEYWORDS, _gdbm_gdbm_nextkey__doc__},</a>
+<a name="156"><span class="lineNum">     156 </span>            : </a>
+<a name="157"><span class="lineNum">     157 </span>            : static PyObject *</a>
+<a name="158"><span class="lineNum">     158 </span>            : _gdbm_gdbm_nextkey_impl(gdbmobject *self, PyTypeObject *cls, const char *key,</a>
+<a name="159"><span class="lineNum">     159 </span>            :                         Py_ssize_t key_length);</a>
+<a name="160"><span class="lineNum">     160 </span>            : </a>
+<a name="161"><span class="lineNum">     161 </span>            : static PyObject *</a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">          3 : _gdbm_gdbm_nextkey(gdbmobject *self, PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames)</span></a>
+<a name="163"><span class="lineNum">     163 </span>            : {</a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">          3 :     PyObject *return_value = NULL;</span></a>
+<a name="165"><span class="lineNum">     165 </span>            :     static const char * const _keywords[] = {&quot;&quot;, NULL};</a>
+<a name="166"><span class="lineNum">     166 </span>            :     static _PyArg_Parser _parser = {&quot;s#:nextkey&quot;, _keywords, 0};</a>
+<a name="167"><span class="lineNum">     167 </span>            :     const char *key;</a>
+<a name="168"><span class="lineNum">     168 </span>            :     Py_ssize_t key_length;</a>
+<a name="169"><span class="lineNum">     169 </span>            : </a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">          3 :     if (!_PyArg_ParseStackAndKeywords(args, nargs, kwnames, &amp;_parser,</span></a>
+<a name="171"><span class="lineNum">     171 </span>            :         &amp;key, &amp;key_length)) {</a>
+<a name="172"><span class="lineNum">     172 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="173"><span class="lineNum">     173 </span>            :     }</a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">          3 :     return_value = _gdbm_gdbm_nextkey_impl(self, cls, key, key_length);</span></a>
+<a name="175"><span class="lineNum">     175 </span>            : </a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">          3 : exit:</span></a>
+<a name="177"><span class="lineNum">     177 </span><span class="lineCov">          3 :     return return_value;</span></a>
+<a name="178"><span class="lineNum">     178 </span>            : }</a>
+<a name="179"><span class="lineNum">     179 </span>            : </a>
+<a name="180"><span class="lineNum">     180 </span>            : PyDoc_STRVAR(_gdbm_gdbm_reorganize__doc__,</a>
+<a name="181"><span class="lineNum">     181 </span>            : &quot;reorganize($self, /)\n&quot;</a>
+<a name="182"><span class="lineNum">     182 </span>            : &quot;--\n&quot;</a>
+<a name="183"><span class="lineNum">     183 </span>            : &quot;\n&quot;</a>
+<a name="184"><span class="lineNum">     184 </span>            : &quot;Reorganize the database.\n&quot;</a>
+<a name="185"><span class="lineNum">     185 </span>            : &quot;\n&quot;</a>
+<a name="186"><span class="lineNum">     186 </span>            : &quot;If you have carried out a lot of deletions and would like to shrink\n&quot;</a>
+<a name="187"><span class="lineNum">     187 </span>            : &quot;the space used by the GDBM file, this routine will reorganize the\n&quot;</a>
+<a name="188"><span class="lineNum">     188 </span>            : &quot;database.  GDBM will not shorten the length of a database file except\n&quot;</a>
+<a name="189"><span class="lineNum">     189 </span>            : &quot;by using this reorganization; otherwise, deleted file space will be\n&quot;</a>
+<a name="190"><span class="lineNum">     190 </span>            : &quot;kept and reused as new (key,value) pairs are added.&quot;);</a>
+<a name="191"><span class="lineNum">     191 </span>            : </a>
+<a name="192"><span class="lineNum">     192 </span>            : #define _GDBM_GDBM_REORGANIZE_METHODDEF    \</a>
+<a name="193"><span class="lineNum">     193 </span>            :     {&quot;reorganize&quot;, _PyCFunction_CAST(_gdbm_gdbm_reorganize), METH_METHOD|METH_FASTCALL|METH_KEYWORDS, _gdbm_gdbm_reorganize__doc__},</a>
+<a name="194"><span class="lineNum">     194 </span>            : </a>
+<a name="195"><span class="lineNum">     195 </span>            : static PyObject *</a>
+<a name="196"><span class="lineNum">     196 </span>            : _gdbm_gdbm_reorganize_impl(gdbmobject *self, PyTypeObject *cls);</a>
+<a name="197"><span class="lineNum">     197 </span>            : </a>
+<a name="198"><span class="lineNum">     198 </span>            : static PyObject *</a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">          1 : _gdbm_gdbm_reorganize(gdbmobject *self, PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames)</span></a>
+<a name="200"><span class="lineNum">     200 </span>            : {</a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">          1 :     if (nargs) {</span></a>
+<a name="202"><span class="lineNum">     202 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_TypeError, &quot;reorganize() takes no arguments&quot;);</span></a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="204"><span class="lineNum">     204 </span>            :     }</a>
+<a name="205"><span class="lineNum">     205 </span><span class="lineCov">          1 :     return _gdbm_gdbm_reorganize_impl(self, cls);</span></a>
+<a name="206"><span class="lineNum">     206 </span>            : }</a>
+<a name="207"><span class="lineNum">     207 </span>            : </a>
+<a name="208"><span class="lineNum">     208 </span>            : PyDoc_STRVAR(_gdbm_gdbm_sync__doc__,</a>
+<a name="209"><span class="lineNum">     209 </span>            : &quot;sync($self, /)\n&quot;</a>
+<a name="210"><span class="lineNum">     210 </span>            : &quot;--\n&quot;</a>
+<a name="211"><span class="lineNum">     211 </span>            : &quot;\n&quot;</a>
+<a name="212"><span class="lineNum">     212 </span>            : &quot;Flush the database to the disk file.\n&quot;</a>
+<a name="213"><span class="lineNum">     213 </span>            : &quot;\n&quot;</a>
+<a name="214"><span class="lineNum">     214 </span>            : &quot;When the database has been opened in fast mode, this method forces\n&quot;</a>
+<a name="215"><span class="lineNum">     215 </span>            : &quot;any unwritten data to be written to the disk.&quot;);</a>
+<a name="216"><span class="lineNum">     216 </span>            : </a>
+<a name="217"><span class="lineNum">     217 </span>            : #define _GDBM_GDBM_SYNC_METHODDEF    \</a>
+<a name="218"><span class="lineNum">     218 </span>            :     {&quot;sync&quot;, _PyCFunction_CAST(_gdbm_gdbm_sync), METH_METHOD|METH_FASTCALL|METH_KEYWORDS, _gdbm_gdbm_sync__doc__},</a>
+<a name="219"><span class="lineNum">     219 </span>            : </a>
+<a name="220"><span class="lineNum">     220 </span>            : static PyObject *</a>
+<a name="221"><span class="lineNum">     221 </span>            : _gdbm_gdbm_sync_impl(gdbmobject *self, PyTypeObject *cls);</a>
+<a name="222"><span class="lineNum">     222 </span>            : </a>
+<a name="223"><span class="lineNum">     223 </span>            : static PyObject *</a>
+<a name="224"><span class="lineNum">     224 </span><span class="lineCov">        163 : _gdbm_gdbm_sync(gdbmobject *self, PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames)</span></a>
+<a name="225"><span class="lineNum">     225 </span>            : {</a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">        163 :     if (nargs) {</span></a>
+<a name="227"><span class="lineNum">     227 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_TypeError, &quot;sync() takes no arguments&quot;);</span></a>
+<a name="228"><span class="lineNum">     228 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="229"><span class="lineNum">     229 </span>            :     }</a>
+<a name="230"><span class="lineNum">     230 </span><span class="lineCov">        163 :     return _gdbm_gdbm_sync_impl(self, cls);</span></a>
+<a name="231"><span class="lineNum">     231 </span>            : }</a>
+<a name="232"><span class="lineNum">     232 </span>            : </a>
+<a name="233"><span class="lineNum">     233 </span>            : PyDoc_STRVAR(dbmopen__doc__,</a>
+<a name="234"><span class="lineNum">     234 </span>            : &quot;open($module, filename, flags=\'r\', mode=0o666, /)\n&quot;</a>
+<a name="235"><span class="lineNum">     235 </span>            : &quot;--\n&quot;</a>
+<a name="236"><span class="lineNum">     236 </span>            : &quot;\n&quot;</a>
+<a name="237"><span class="lineNum">     237 </span>            : &quot;Open a dbm database and return a dbm object.\n&quot;</a>
+<a name="238"><span class="lineNum">     238 </span>            : &quot;\n&quot;</a>
+<a name="239"><span class="lineNum">     239 </span>            : &quot;The filename argument is the name of the database file.\n&quot;</a>
+<a name="240"><span class="lineNum">     240 </span>            : &quot;\n&quot;</a>
+<a name="241"><span class="lineNum">     241 </span>            : &quot;The optional flags argument can be \'r\' (to open an existing database\n&quot;</a>
+<a name="242"><span class="lineNum">     242 </span>            : &quot;for reading only -- default), \'w\' (to open an existing database for\n&quot;</a>
+<a name="243"><span class="lineNum">     243 </span>            : &quot;reading and writing), \'c\' (which creates the database if it doesn\'t\n&quot;</a>
+<a name="244"><span class="lineNum">     244 </span>            : &quot;exist), or \'n\' (which always creates a new empty database).\n&quot;</a>
+<a name="245"><span class="lineNum">     245 </span>            : &quot;\n&quot;</a>
+<a name="246"><span class="lineNum">     246 </span>            : &quot;Some versions of gdbm support additional flags which must be\n&quot;</a>
+<a name="247"><span class="lineNum">     247 </span>            : &quot;appended to one of the flags described above.  The module constant\n&quot;</a>
+<a name="248"><span class="lineNum">     248 </span>            : &quot;\'open_flags\' is a string of valid additional flags.  The \'f\' flag\n&quot;</a>
+<a name="249"><span class="lineNum">     249 </span>            : &quot;opens the database in fast mode; altered data will not automatically\n&quot;</a>
+<a name="250"><span class="lineNum">     250 </span>            : &quot;be written to the disk after every change.  This results in faster\n&quot;</a>
+<a name="251"><span class="lineNum">     251 </span>            : &quot;writes to the database, but may result in an inconsistent database\n&quot;</a>
+<a name="252"><span class="lineNum">     252 </span>            : &quot;if the program crashes while the database is still open.  Use the\n&quot;</a>
+<a name="253"><span class="lineNum">     253 </span>            : &quot;sync() method to force any unwritten data to be written to the disk.\n&quot;</a>
+<a name="254"><span class="lineNum">     254 </span>            : &quot;The \'s\' flag causes all database operations to be synchronized to\n&quot;</a>
+<a name="255"><span class="lineNum">     255 </span>            : &quot;disk.  The \'u\' flag disables locking of the database file.\n&quot;</a>
+<a name="256"><span class="lineNum">     256 </span>            : &quot;\n&quot;</a>
+<a name="257"><span class="lineNum">     257 </span>            : &quot;The optional mode argument is the Unix mode of the file, used only\n&quot;</a>
+<a name="258"><span class="lineNum">     258 </span>            : &quot;when the database has to be created.  It defaults to octal 0o666.&quot;);</a>
+<a name="259"><span class="lineNum">     259 </span>            : </a>
+<a name="260"><span class="lineNum">     260 </span>            : #define DBMOPEN_METHODDEF    \</a>
+<a name="261"><span class="lineNum">     261 </span>            :     {&quot;open&quot;, _PyCFunction_CAST(dbmopen), METH_FASTCALL, dbmopen__doc__},</a>
+<a name="262"><span class="lineNum">     262 </span>            : </a>
+<a name="263"><span class="lineNum">     263 </span>            : static PyObject *</a>
+<a name="264"><span class="lineNum">     264 </span>            : dbmopen_impl(PyObject *module, PyObject *filename, const char *flags,</a>
+<a name="265"><span class="lineNum">     265 </span>            :              int mode);</a>
+<a name="266"><span class="lineNum">     266 </span>            : </a>
+<a name="267"><span class="lineNum">     267 </span>            : static PyObject *</a>
+<a name="268"><span class="lineNum">     268 </span><span class="lineCov">        216 : dbmopen(PyObject *module, PyObject *const *args, Py_ssize_t nargs)</span></a>
+<a name="269"><span class="lineNum">     269 </span>            : {</a>
+<a name="270"><span class="lineNum">     270 </span><span class="lineCov">        216 :     PyObject *return_value = NULL;</span></a>
+<a name="271"><span class="lineNum">     271 </span>            :     PyObject *filename;</a>
+<a name="272"><span class="lineNum">     272 </span><span class="lineCov">        216 :     const char *flags = &quot;r&quot;;</span></a>
+<a name="273"><span class="lineNum">     273 </span><span class="lineCov">        216 :     int mode = 438;</span></a>
+<a name="274"><span class="lineNum">     274 </span>            : </a>
+<a name="275"><span class="lineNum">     275 </span><span class="lineCov">        216 :     if (!_PyArg_CheckPositional(&quot;open&quot;, nargs, 1, 3)) {</span></a>
+<a name="276"><span class="lineNum">     276 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="277"><span class="lineNum">     277 </span>            :     }</a>
+<a name="278"><span class="lineNum">     278 </span><span class="lineCov">        216 :     filename = args[0];</span></a>
+<a name="279"><span class="lineNum">     279 </span><span class="lineCov">        216 :     if (nargs &lt; 2) {</span></a>
+<a name="280"><span class="lineNum">     280 </span><span class="lineCov">          1 :         goto skip_optional;</span></a>
+<a name="281"><span class="lineNum">     281 </span>            :     }</a>
+<a name="282"><span class="lineNum">     282 </span><span class="lineCov">        215 :     if (!PyUnicode_Check(args[1])) {</span></a>
+<a name="283"><span class="lineNum">     283 </span><span class="lineNoCov">          0 :         _PyArg_BadArgument(&quot;open&quot;, &quot;argument 2&quot;, &quot;str&quot;, args[1]);</span></a>
+<a name="284"><span class="lineNum">     284 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="285"><span class="lineNum">     285 </span>            :     }</a>
+<a name="286"><span class="lineNum">     286 </span>            :     Py_ssize_t flags_length;</a>
+<a name="287"><span class="lineNum">     287 </span><span class="lineCov">        215 :     flags = PyUnicode_AsUTF8AndSize(args[1], &amp;flags_length);</span></a>
+<a name="288"><span class="lineNum">     288 </span><span class="lineCov">        215 :     if (flags == NULL) {</span></a>
+<a name="289"><span class="lineNum">     289 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="290"><span class="lineNum">     290 </span>            :     }</a>
+<a name="291"><span class="lineNum">     291 </span><span class="lineCov">        215 :     if (strlen(flags) != (size_t)flags_length) {</span></a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_ValueError, &quot;embedded null character&quot;);</span></a>
+<a name="293"><span class="lineNum">     293 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="294"><span class="lineNum">     294 </span>            :     }</a>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">        215 :     if (nargs &lt; 3) {</span></a>
+<a name="296"><span class="lineNum">     296 </span><span class="lineCov">         37 :         goto skip_optional;</span></a>
+<a name="297"><span class="lineNum">     297 </span>            :     }</a>
+<a name="298"><span class="lineNum">     298 </span><span class="lineCov">        178 :     mode = _PyLong_AsInt(args[2]);</span></a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineCov">        178 :     if (mode == -1 &amp;&amp; PyErr_Occurred()) {</span></a>
+<a name="300"><span class="lineNum">     300 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="301"><span class="lineNum">     301 </span>            :     }</a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineCov">        178 : skip_optional:</span></a>
+<a name="303"><span class="lineNum">     303 </span><span class="lineCov">        216 :     return_value = dbmopen_impl(module, filename, flags, mode);</span></a>
+<a name="304"><span class="lineNum">     304 </span>            : </a>
+<a name="305"><span class="lineNum">     305 </span><span class="lineCov">        216 : exit:</span></a>
+<a name="306"><span class="lineNum">     306 </span><span class="lineCov">        216 :     return return_value;</span></a>
+<a name="307"><span class="lineNum">     307 </span>            : }</a>
+<a name="308"><span class="lineNum">     308 </span>            : /*[clinic end generated code: output=617117d16956ac4d input=a9049054013a1b77]*/</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

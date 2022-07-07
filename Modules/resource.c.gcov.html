@@ -1,0 +1,622 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Modules/resource.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Modules</a> - resource.c<span style="font-size: 80%;"> (source / <a href="resource.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">116</td>
+            <td class="headerCovTableEntry">152</td>
+            <td class="headerCovTableEntryMed">76.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : </a>
+<a name="2"><span class="lineNum">       2 </span>            : #include &quot;Python.h&quot;</a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &lt;sys/resource.h&gt;</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &lt;sys/time.h&gt;</a>
+<a name="5"><span class="lineNum">       5 </span>            : #include &lt;string.h&gt;</a>
+<a name="6"><span class="lineNum">       6 </span>            : #include &lt;errno.h&gt;</a>
+<a name="7"><span class="lineNum">       7 </span>            : #include &lt;unistd.h&gt;</a>
+<a name="8"><span class="lineNum">       8 </span>            : </a>
+<a name="9"><span class="lineNum">       9 </span>            : /* On some systems, these aren't in any header file.</a>
+<a name="10"><span class="lineNum">      10 </span>            :    On others they are, with inconsistent prototypes.</a>
+<a name="11"><span class="lineNum">      11 </span>            :    We declare the (default) return type, to shut up gcc -Wall;</a>
+<a name="12"><span class="lineNum">      12 </span>            :    but we can't declare the prototype, to avoid errors</a>
+<a name="13"><span class="lineNum">      13 </span>            :    when the header files declare it different.</a>
+<a name="14"><span class="lineNum">      14 </span>            :    Worse, on some Linuxes, getpagesize() returns a size_t... */</a>
+<a name="15"><span class="lineNum">      15 </span>            : </a>
+<a name="16"><span class="lineNum">      16 </span>            : #define doubletime(TV) ((double)(TV).tv_sec + (TV).tv_usec * 0.000001)</a>
+<a name="17"><span class="lineNum">      17 </span>            : </a>
+<a name="18"><span class="lineNum">      18 </span>            : /*[clinic input]</a>
+<a name="19"><span class="lineNum">      19 </span>            : module resource</a>
+<a name="20"><span class="lineNum">      20 </span>            : [clinic start generated code]*/</a>
+<a name="21"><span class="lineNum">      21 </span>            : /*[clinic end generated code: output=da39a3ee5e6b4b0d input=e89d38ed52609d7c]*/</a>
+<a name="22"><span class="lineNum">      22 </span>            : </a>
+<a name="23"><span class="lineNum">      23 </span>            : /*[python input]</a>
+<a name="24"><span class="lineNum">      24 </span>            : class pid_t_converter(CConverter):</a>
+<a name="25"><span class="lineNum">      25 </span>            :     type = 'pid_t'</a>
+<a name="26"><span class="lineNum">      26 </span>            :     format_unit = '&quot; _Py_PARSE_PID &quot;'</a>
+<a name="27"><span class="lineNum">      27 </span>            : [python start generated code]*/</a>
+<a name="28"><span class="lineNum">      28 </span>            : /*[python end generated code: output=da39a3ee5e6b4b0d input=0c1d19f640d57e48]*/</a>
+<a name="29"><span class="lineNum">      29 </span>            : </a>
+<a name="30"><span class="lineNum">      30 </span>            : #include &quot;clinic/resource.c.h&quot;</a>
+<a name="31"><span class="lineNum">      31 </span>            : </a>
+<a name="32"><span class="lineNum">      32 </span>            : PyDoc_STRVAR(struct_rusage__doc__,</a>
+<a name="33"><span class="lineNum">      33 </span>            : &quot;struct_rusage: Result from getrusage.\n\n&quot;</a>
+<a name="34"><span class="lineNum">      34 </span>            : &quot;This object may be accessed either as a tuple of\n&quot;</a>
+<a name="35"><span class="lineNum">      35 </span>            : &quot;    (utime,stime,maxrss,ixrss,idrss,isrss,minflt,majflt,\n&quot;</a>
+<a name="36"><span class="lineNum">      36 </span>            : &quot;    nswap,inblock,oublock,msgsnd,msgrcv,nsignals,nvcsw,nivcsw)\n&quot;</a>
+<a name="37"><span class="lineNum">      37 </span>            : &quot;or via the attributes ru_utime, ru_stime, ru_maxrss, and so on.&quot;);</a>
+<a name="38"><span class="lineNum">      38 </span>            : </a>
+<a name="39"><span class="lineNum">      39 </span>            : static PyStructSequence_Field struct_rusage_fields[] = {</a>
+<a name="40"><span class="lineNum">      40 </span>            :     {&quot;ru_utime&quot;,        &quot;user time used&quot;},</a>
+<a name="41"><span class="lineNum">      41 </span>            :     {&quot;ru_stime&quot;,        &quot;system time used&quot;},</a>
+<a name="42"><span class="lineNum">      42 </span>            :     {&quot;ru_maxrss&quot;,       &quot;max. resident set size&quot;},</a>
+<a name="43"><span class="lineNum">      43 </span>            :     {&quot;ru_ixrss&quot;,        &quot;shared memory size&quot;},</a>
+<a name="44"><span class="lineNum">      44 </span>            :     {&quot;ru_idrss&quot;,        &quot;unshared data size&quot;},</a>
+<a name="45"><span class="lineNum">      45 </span>            :     {&quot;ru_isrss&quot;,        &quot;unshared stack size&quot;},</a>
+<a name="46"><span class="lineNum">      46 </span>            :     {&quot;ru_minflt&quot;,       &quot;page faults not requiring I/O&quot;},</a>
+<a name="47"><span class="lineNum">      47 </span>            :     {&quot;ru_majflt&quot;,       &quot;page faults requiring I/O&quot;},</a>
+<a name="48"><span class="lineNum">      48 </span>            :     {&quot;ru_nswap&quot;,        &quot;number of swap outs&quot;},</a>
+<a name="49"><span class="lineNum">      49 </span>            :     {&quot;ru_inblock&quot;,      &quot;block input operations&quot;},</a>
+<a name="50"><span class="lineNum">      50 </span>            :     {&quot;ru_oublock&quot;,      &quot;block output operations&quot;},</a>
+<a name="51"><span class="lineNum">      51 </span>            :     {&quot;ru_msgsnd&quot;,       &quot;IPC messages sent&quot;},</a>
+<a name="52"><span class="lineNum">      52 </span>            :     {&quot;ru_msgrcv&quot;,       &quot;IPC messages received&quot;},</a>
+<a name="53"><span class="lineNum">      53 </span>            :     {&quot;ru_nsignals&quot;,     &quot;signals received&quot;},</a>
+<a name="54"><span class="lineNum">      54 </span>            :     {&quot;ru_nvcsw&quot;,        &quot;voluntary context switches&quot;},</a>
+<a name="55"><span class="lineNum">      55 </span>            :     {&quot;ru_nivcsw&quot;,       &quot;involuntary context switches&quot;},</a>
+<a name="56"><span class="lineNum">      56 </span>            :     {0}</a>
+<a name="57"><span class="lineNum">      57 </span>            : };</a>
+<a name="58"><span class="lineNum">      58 </span>            : </a>
+<a name="59"><span class="lineNum">      59 </span>            : static PyStructSequence_Desc struct_rusage_desc = {</a>
+<a name="60"><span class="lineNum">      60 </span>            :     &quot;resource.struct_rusage&quot;,           /* name */</a>
+<a name="61"><span class="lineNum">      61 </span>            :     struct_rusage__doc__,       /* doc */</a>
+<a name="62"><span class="lineNum">      62 </span>            :     struct_rusage_fields,       /* fields */</a>
+<a name="63"><span class="lineNum">      63 </span>            :     16          /* n_in_sequence */</a>
+<a name="64"><span class="lineNum">      64 </span>            : };</a>
+<a name="65"><span class="lineNum">      65 </span>            : </a>
+<a name="66"><span class="lineNum">      66 </span>            : typedef struct {</a>
+<a name="67"><span class="lineNum">      67 </span>            :   PyTypeObject *StructRUsageType;</a>
+<a name="68"><span class="lineNum">      68 </span>            : } resourcemodulestate;</a>
+<a name="69"><span class="lineNum">      69 </span>            : </a>
+<a name="70"><span class="lineNum">      70 </span>            : </a>
+<a name="71"><span class="lineNum">      71 </span>            : static inline resourcemodulestate*</a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">      68065 : get_resource_state(PyObject *module)</span></a>
+<a name="73"><span class="lineNum">      73 </span>            : {</a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">      68065 :     void *state = PyModule_GetState(module);</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">      68065 :     assert(state != NULL);</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">      68065 :     return (resourcemodulestate *)state;</span></a>
+<a name="77"><span class="lineNum">      77 </span>            : }</a>
+<a name="78"><span class="lineNum">      78 </span>            : </a>
+<a name="79"><span class="lineNum">      79 </span>            : static struct PyModuleDef resourcemodule;</a>
+<a name="80"><span class="lineNum">      80 </span>            : </a>
+<a name="81"><span class="lineNum">      81 </span>            : #ifdef HAVE_GETRUSAGE</a>
+<a name="82"><span class="lineNum">      82 </span>            : /*[clinic input]</a>
+<a name="83"><span class="lineNum">      83 </span>            : resource.getrusage</a>
+<a name="84"><span class="lineNum">      84 </span>            : </a>
+<a name="85"><span class="lineNum">      85 </span>            :     who: int</a>
+<a name="86"><span class="lineNum">      86 </span>            :     /</a>
+<a name="87"><span class="lineNum">      87 </span>            : </a>
+<a name="88"><span class="lineNum">      88 </span>            : [clinic start generated code]*/</a>
+<a name="89"><span class="lineNum">      89 </span>            : </a>
+<a name="90"><span class="lineNum">      90 </span>            : static PyObject *</a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          3 : resource_getrusage_impl(PyObject *module, int who)</span></a>
+<a name="92"><span class="lineNum">      92 </span>            : /*[clinic end generated code: output=8fad2880ba6a9843 input=5c857bcc5b9ccb1b]*/</a>
+<a name="93"><span class="lineNum">      93 </span>            : {</a>
+<a name="94"><span class="lineNum">      94 </span>            :     struct rusage ru;</a>
+<a name="95"><span class="lineNum">      95 </span>            :     PyObject *result;</a>
+<a name="96"><span class="lineNum">      96 </span>            : </a>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">          3 :     if (getrusage(who, &amp;ru) == -1) {</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineNoCov">          0 :         if (errno == EINVAL) {</span></a>
+<a name="99"><span class="lineNum">      99 </span><span class="lineNoCov">          0 :             PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="100"><span class="lineNum">     100 </span>            :                             &quot;invalid who parameter&quot;);</a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineNoCov">          0 :             return NULL;</span></a>
+<a name="102"><span class="lineNum">     102 </span>            :         }</a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineNoCov">          0 :         PyErr_SetFromErrno(PyExc_OSError);</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="105"><span class="lineNum">     105 </span>            :     }</a>
+<a name="106"><span class="lineNum">     106 </span>            : </a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">          3 :     result = PyStructSequence_New(</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">          3 :         get_resource_state(module)-&gt;StructRUsageType);</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          3 :     if (!result)</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="111"><span class="lineNum">     111 </span>            : </a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 0,</span></a>
+<a name="113"><span class="lineNum">     113 </span>            :                     PyFloat_FromDouble(doubletime(ru.ru_utime)));</a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 1,</span></a>
+<a name="115"><span class="lineNum">     115 </span>            :                     PyFloat_FromDouble(doubletime(ru.ru_stime)));</a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 2, PyLong_FromLong(ru.ru_maxrss));</span></a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 3, PyLong_FromLong(ru.ru_ixrss));</span></a>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 4, PyLong_FromLong(ru.ru_idrss));</span></a>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 5, PyLong_FromLong(ru.ru_isrss));</span></a>
+<a name="120"><span class="lineNum">     120 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 6, PyLong_FromLong(ru.ru_minflt));</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 7, PyLong_FromLong(ru.ru_majflt));</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 8, PyLong_FromLong(ru.ru_nswap));</span></a>
+<a name="123"><span class="lineNum">     123 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 9, PyLong_FromLong(ru.ru_inblock));</span></a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 10, PyLong_FromLong(ru.ru_oublock));</span></a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 11, PyLong_FromLong(ru.ru_msgsnd));</span></a>
+<a name="126"><span class="lineNum">     126 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 12, PyLong_FromLong(ru.ru_msgrcv));</span></a>
+<a name="127"><span class="lineNum">     127 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 13, PyLong_FromLong(ru.ru_nsignals));</span></a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 14, PyLong_FromLong(ru.ru_nvcsw));</span></a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">          3 :     PyStructSequence_SET_ITEM(result, 15, PyLong_FromLong(ru.ru_nivcsw));</span></a>
+<a name="130"><span class="lineNum">     130 </span>            : </a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineCov">          3 :     if (PyErr_Occurred()) {</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineNoCov">          0 :         Py_DECREF(result);</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="134"><span class="lineNum">     134 </span>            :     }</a>
+<a name="135"><span class="lineNum">     135 </span>            : </a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">          3 :     return result;</span></a>
+<a name="137"><span class="lineNum">     137 </span>            : }</a>
+<a name="138"><span class="lineNum">     138 </span>            : #endif</a>
+<a name="139"><span class="lineNum">     139 </span>            : </a>
+<a name="140"><span class="lineNum">     140 </span>            : static int</a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">        162 : py2rlimit(PyObject *limits, struct rlimit *rl_out)</span></a>
+<a name="142"><span class="lineNum">     142 </span>            : {</a>
+<a name="143"><span class="lineNum">     143 </span>            :     PyObject *curobj, *maxobj;</a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">        162 :     limits = PySequence_Tuple(limits);</span></a>
+<a name="145"><span class="lineNum">     145 </span><span class="lineCov">        162 :     if (!limits)</span></a>
+<a name="146"><span class="lineNum">     146 </span>            :         /* Here limits is a borrowed reference */</a>
+<a name="147"><span class="lineNum">     147 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="148"><span class="lineNum">     148 </span>            : </a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">        162 :     if (PyTuple_GET_SIZE(limits) != 2) {</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="151"><span class="lineNum">     151 </span>            :                         &quot;expected a tuple of 2 integers&quot;);</a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineNoCov">          0 :         goto error;</span></a>
+<a name="153"><span class="lineNum">     153 </span>            :     }</a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">        162 :     curobj = PyTuple_GET_ITEM(limits, 0);</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">        162 :     maxobj = PyTuple_GET_ITEM(limits, 1);</span></a>
+<a name="156"><span class="lineNum">     156 </span>            : #if !defined(HAVE_LARGEFILE_SUPPORT)</a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">        162 :     rl_out-&gt;rlim_cur = PyLong_AsLong(curobj);</span></a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">        162 :     if (rl_out-&gt;rlim_cur == (rlim_t)-1 &amp;&amp; PyErr_Occurred())</span></a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">          1 :         goto error;</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">        161 :     rl_out-&gt;rlim_max = PyLong_AsLong(maxobj);</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">        161 :     if (rl_out-&gt;rlim_max == (rlim_t)-1 &amp;&amp; PyErr_Occurred())</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">          1 :         goto error;</span></a>
+<a name="163"><span class="lineNum">     163 </span>            : #else</a>
+<a name="164"><span class="lineNum">     164 </span>            :     /* The limits are probably bigger than a long */</a>
+<a name="165"><span class="lineNum">     165 </span>            :     rl_out-&gt;rlim_cur = PyLong_AsLongLong(curobj);</a>
+<a name="166"><span class="lineNum">     166 </span>            :     if (rl_out-&gt;rlim_cur == (rlim_t)-1 &amp;&amp; PyErr_Occurred())</a>
+<a name="167"><span class="lineNum">     167 </span>            :         goto error;</a>
+<a name="168"><span class="lineNum">     168 </span>            :     rl_out-&gt;rlim_max = PyLong_AsLongLong(maxobj);</a>
+<a name="169"><span class="lineNum">     169 </span>            :     if (rl_out-&gt;rlim_max == (rlim_t)-1 &amp;&amp; PyErr_Occurred())</a>
+<a name="170"><span class="lineNum">     170 </span>            :         goto error;</a>
+<a name="171"><span class="lineNum">     171 </span>            : #endif</a>
+<a name="172"><span class="lineNum">     172 </span>            : </a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">        160 :     Py_DECREF(limits);</span></a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">        160 :     rl_out-&gt;rlim_cur = rl_out-&gt;rlim_cur &amp; RLIM_INFINITY;</span></a>
+<a name="175"><span class="lineNum">     175 </span><span class="lineCov">        160 :     rl_out-&gt;rlim_max = rl_out-&gt;rlim_max &amp; RLIM_INFINITY;</span></a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">        160 :     return 0;</span></a>
+<a name="177"><span class="lineNum">     177 </span>            : </a>
+<a name="178"><span class="lineNum">     178 </span><span class="lineCov">          2 : error:</span></a>
+<a name="179"><span class="lineNum">     179 </span><span class="lineCov">          2 :     Py_DECREF(limits);</span></a>
+<a name="180"><span class="lineNum">     180 </span><span class="lineCov">          2 :     return -1;</span></a>
+<a name="181"><span class="lineNum">     181 </span>            : }</a>
+<a name="182"><span class="lineNum">     182 </span>            : </a>
+<a name="183"><span class="lineNum">     183 </span>            : static PyObject*</a>
+<a name="184"><span class="lineNum">     184 </span><span class="lineCov">        605 : rlimit2py(struct rlimit rl)</span></a>
+<a name="185"><span class="lineNum">     185 </span>            : {</a>
+<a name="186"><span class="lineNum">     186 </span>            :     if (sizeof(rl.rlim_cur) &gt; sizeof(long)) {</a>
+<a name="187"><span class="lineNum">     187 </span>            :         return Py_BuildValue(&quot;LL&quot;,</a>
+<a name="188"><span class="lineNum">     188 </span>            :                              (long long) rl.rlim_cur,</a>
+<a name="189"><span class="lineNum">     189 </span>            :                              (long long) rl.rlim_max);</a>
+<a name="190"><span class="lineNum">     190 </span>            :     }</a>
+<a name="191"><span class="lineNum">     191 </span><span class="lineCov">        605 :     return Py_BuildValue(&quot;ll&quot;, (long) rl.rlim_cur, (long) rl.rlim_max);</span></a>
+<a name="192"><span class="lineNum">     192 </span>            : }</a>
+<a name="193"><span class="lineNum">     193 </span>            : </a>
+<a name="194"><span class="lineNum">     194 </span>            : /*[clinic input]</a>
+<a name="195"><span class="lineNum">     195 </span>            : resource.getrlimit</a>
+<a name="196"><span class="lineNum">     196 </span>            : </a>
+<a name="197"><span class="lineNum">     197 </span>            :     resource: int</a>
+<a name="198"><span class="lineNum">     198 </span>            :     /</a>
+<a name="199"><span class="lineNum">     199 </span>            : </a>
+<a name="200"><span class="lineNum">     200 </span>            : [clinic start generated code]*/</a>
+<a name="201"><span class="lineNum">     201 </span>            : </a>
+<a name="202"><span class="lineNum">     202 </span>            : static PyObject *</a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineCov">        602 : resource_getrlimit_impl(PyObject *module, int resource)</span></a>
+<a name="204"><span class="lineNum">     204 </span>            : /*[clinic end generated code: output=98327b25061ffe39 input=a697cb0004cb3c36]*/</a>
+<a name="205"><span class="lineNum">     205 </span>            : {</a>
+<a name="206"><span class="lineNum">     206 </span>            :     struct rlimit rl;</a>
+<a name="207"><span class="lineNum">     207 </span>            : </a>
+<a name="208"><span class="lineNum">     208 </span><span class="lineCov">        602 :     if (resource &lt; 0 || resource &gt;= RLIM_NLIMITS) {</span></a>
+<a name="209"><span class="lineNum">     209 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="210"><span class="lineNum">     210 </span>            :                         &quot;invalid resource specified&quot;);</a>
+<a name="211"><span class="lineNum">     211 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="212"><span class="lineNum">     212 </span>            :     }</a>
+<a name="213"><span class="lineNum">     213 </span>            : </a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">        602 :     if (getrlimit(resource, &amp;rl) == -1) {</span></a>
+<a name="215"><span class="lineNum">     215 </span><span class="lineNoCov">          0 :         PyErr_SetFromErrno(PyExc_OSError);</span></a>
+<a name="216"><span class="lineNum">     216 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="217"><span class="lineNum">     217 </span>            :     }</a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">        602 :     return rlimit2py(rl);</span></a>
+<a name="219"><span class="lineNum">     219 </span>            : }</a>
+<a name="220"><span class="lineNum">     220 </span>            : </a>
+<a name="221"><span class="lineNum">     221 </span>            : /*[clinic input]</a>
+<a name="222"><span class="lineNum">     222 </span>            : resource.setrlimit</a>
+<a name="223"><span class="lineNum">     223 </span>            : </a>
+<a name="224"><span class="lineNum">     224 </span>            :     resource: int</a>
+<a name="225"><span class="lineNum">     225 </span>            :     limits: object</a>
+<a name="226"><span class="lineNum">     226 </span>            :     /</a>
+<a name="227"><span class="lineNum">     227 </span>            : </a>
+<a name="228"><span class="lineNum">     228 </span>            : [clinic start generated code]*/</a>
+<a name="229"><span class="lineNum">     229 </span>            : </a>
+<a name="230"><span class="lineNum">     230 </span>            : static PyObject *</a>
+<a name="231"><span class="lineNum">     231 </span><span class="lineCov">        160 : resource_setrlimit_impl(PyObject *module, int resource, PyObject *limits)</span></a>
+<a name="232"><span class="lineNum">     232 </span>            : /*[clinic end generated code: output=4e82ec3f34d013d1 input=6235a6ce23b4ca75]*/</a>
+<a name="233"><span class="lineNum">     233 </span>            : {</a>
+<a name="234"><span class="lineNum">     234 </span>            :     struct rlimit rl;</a>
+<a name="235"><span class="lineNum">     235 </span>            : </a>
+<a name="236"><span class="lineNum">     236 </span><span class="lineCov">        160 :     if (resource &lt; 0 || resource &gt;= RLIM_NLIMITS) {</span></a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="238"><span class="lineNum">     238 </span>            :                         &quot;invalid resource specified&quot;);</a>
+<a name="239"><span class="lineNum">     239 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="240"><span class="lineNum">     240 </span>            :     }</a>
+<a name="241"><span class="lineNum">     241 </span>            : </a>
+<a name="242"><span class="lineNum">     242 </span><span class="lineCov">        160 :     if (PySys_Audit(&quot;resource.setrlimit&quot;, &quot;iO&quot;, resource,</span></a>
+<a name="243"><span class="lineNum">     243 </span>            :                     limits ? limits : Py_None) &lt; 0) {</a>
+<a name="244"><span class="lineNum">     244 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="245"><span class="lineNum">     245 </span>            :     }</a>
+<a name="246"><span class="lineNum">     246 </span>            : </a>
+<a name="247"><span class="lineNum">     247 </span><span class="lineCov">        160 :     if (py2rlimit(limits, &amp;rl) &lt; 0) {</span></a>
+<a name="248"><span class="lineNum">     248 </span><span class="lineCov">          2 :         return NULL;</span></a>
+<a name="249"><span class="lineNum">     249 </span>            :     }</a>
+<a name="250"><span class="lineNum">     250 </span>            : </a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">        158 :     if (setrlimit(resource, &amp;rl) == -1) {</span></a>
+<a name="252"><span class="lineNum">     252 </span><span class="lineNoCov">          0 :         if (errno == EINVAL)</span></a>
+<a name="253"><span class="lineNum">     253 </span><span class="lineNoCov">          0 :             PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="254"><span class="lineNum">     254 </span>            :                             &quot;current limit exceeds maximum limit&quot;);</a>
+<a name="255"><span class="lineNum">     255 </span><span class="lineNoCov">          0 :         else if (errno == EPERM)</span></a>
+<a name="256"><span class="lineNum">     256 </span><span class="lineNoCov">          0 :             PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="257"><span class="lineNum">     257 </span>            :                             &quot;not allowed to raise maximum limit&quot;);</a>
+<a name="258"><span class="lineNum">     258 </span>            :         else</a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineNoCov">          0 :             PyErr_SetFromErrno(PyExc_OSError);</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="261"><span class="lineNum">     261 </span>            :     }</a>
+<a name="262"><span class="lineNum">     262 </span><span class="lineCov">        158 :     Py_RETURN_NONE;</span></a>
+<a name="263"><span class="lineNum">     263 </span>            : }</a>
+<a name="264"><span class="lineNum">     264 </span>            : </a>
+<a name="265"><span class="lineNum">     265 </span>            : #ifdef HAVE_PRLIMIT</a>
+<a name="266"><span class="lineNum">     266 </span>            : /*[clinic input]</a>
+<a name="267"><span class="lineNum">     267 </span>            : resource.prlimit</a>
+<a name="268"><span class="lineNum">     268 </span>            : </a>
+<a name="269"><span class="lineNum">     269 </span>            :     pid: pid_t</a>
+<a name="270"><span class="lineNum">     270 </span>            :     resource: int</a>
+<a name="271"><span class="lineNum">     271 </span>            :     [</a>
+<a name="272"><span class="lineNum">     272 </span>            :     limits: object</a>
+<a name="273"><span class="lineNum">     273 </span>            :     ]</a>
+<a name="274"><span class="lineNum">     274 </span>            :     /</a>
+<a name="275"><span class="lineNum">     275 </span>            : </a>
+<a name="276"><span class="lineNum">     276 </span>            : [clinic start generated code]*/</a>
+<a name="277"><span class="lineNum">     277 </span>            : </a>
+<a name="278"><span class="lineNum">     278 </span>            : static PyObject *</a>
+<a name="279"><span class="lineNum">     279 </span><span class="lineCov">          4 : resource_prlimit_impl(PyObject *module, pid_t pid, int resource,</span></a>
+<a name="280"><span class="lineNum">     280 </span>            :                       int group_right_1, PyObject *limits)</a>
+<a name="281"><span class="lineNum">     281 </span>            : /*[clinic end generated code: output=ee976b393187a7a3 input=b77743bdccc83564]*/</a>
+<a name="282"><span class="lineNum">     282 </span>            : {</a>
+<a name="283"><span class="lineNum">     283 </span>            :     struct rlimit old_limit, new_limit;</a>
+<a name="284"><span class="lineNum">     284 </span>            :     int retval;</a>
+<a name="285"><span class="lineNum">     285 </span>            : </a>
+<a name="286"><span class="lineNum">     286 </span><span class="lineCov">          4 :     if (resource &lt; 0 || resource &gt;= RLIM_NLIMITS) {</span></a>
+<a name="287"><span class="lineNum">     287 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="288"><span class="lineNum">     288 </span>            :                         &quot;invalid resource specified&quot;);</a>
+<a name="289"><span class="lineNum">     289 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="290"><span class="lineNum">     290 </span>            :     }</a>
+<a name="291"><span class="lineNum">     291 </span>            : </a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineCov">          4 :     if (PySys_Audit(&quot;resource.prlimit&quot;, &quot;iiO&quot;, pid, resource,</span></a>
+<a name="293"><span class="lineNum">     293 </span>            :                     limits ? limits : Py_None) &lt; 0) {</a>
+<a name="294"><span class="lineNum">     294 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="295"><span class="lineNum">     295 </span>            :     }</a>
+<a name="296"><span class="lineNum">     296 </span>            : </a>
+<a name="297"><span class="lineNum">     297 </span><span class="lineCov">          4 :     if (group_right_1) {</span></a>
+<a name="298"><span class="lineNum">     298 </span><span class="lineCov">          2 :         if (py2rlimit(limits, &amp;new_limit) &lt; 0) {</span></a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineNoCov">          0 :             return NULL;</span></a>
+<a name="300"><span class="lineNum">     300 </span>            :         }</a>
+<a name="301"><span class="lineNum">     301 </span><span class="lineCov">          2 :         retval = prlimit(pid, resource, &amp;new_limit, &amp;old_limit);</span></a>
+<a name="302"><span class="lineNum">     302 </span>            :     }</a>
+<a name="303"><span class="lineNum">     303 </span>            :     else {</a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">          2 :         retval = prlimit(pid, resource, NULL, &amp;old_limit);</span></a>
+<a name="305"><span class="lineNum">     305 </span>            :     }</a>
+<a name="306"><span class="lineNum">     306 </span>            : </a>
+<a name="307"><span class="lineNum">     307 </span><span class="lineCov">          4 :     if (retval == -1) {</span></a>
+<a name="308"><span class="lineNum">     308 </span><span class="lineCov">          1 :         if (errno == EINVAL) {</span></a>
+<a name="309"><span class="lineNum">     309 </span><span class="lineNoCov">          0 :             PyErr_SetString(PyExc_ValueError,</span></a>
+<a name="310"><span class="lineNum">     310 </span>            :                             &quot;current limit exceeds maximum limit&quot;);</a>
+<a name="311"><span class="lineNum">     311 </span>            :         } else {</a>
+<a name="312"><span class="lineNum">     312 </span><span class="lineCov">          1 :             PyErr_SetFromErrno(PyExc_OSError);</span></a>
+<a name="313"><span class="lineNum">     313 </span>            :         }</a>
+<a name="314"><span class="lineNum">     314 </span><span class="lineCov">          1 :         return NULL;</span></a>
+<a name="315"><span class="lineNum">     315 </span>            :     }</a>
+<a name="316"><span class="lineNum">     316 </span><span class="lineCov">          3 :     return rlimit2py(old_limit);</span></a>
+<a name="317"><span class="lineNum">     317 </span>            : }</a>
+<a name="318"><span class="lineNum">     318 </span>            : #endif /* HAVE_PRLIMIT */</a>
+<a name="319"><span class="lineNum">     319 </span>            : </a>
+<a name="320"><span class="lineNum">     320 </span>            : /*[clinic input]</a>
+<a name="321"><span class="lineNum">     321 </span>            : resource.getpagesize -&gt; int</a>
+<a name="322"><span class="lineNum">     322 </span>            : [clinic start generated code]*/</a>
+<a name="323"><span class="lineNum">     323 </span>            : </a>
+<a name="324"><span class="lineNum">     324 </span>            : static int</a>
+<a name="325"><span class="lineNum">     325 </span><span class="lineCov">          1 : resource_getpagesize_impl(PyObject *module)</span></a>
+<a name="326"><span class="lineNum">     326 </span>            : /*[clinic end generated code: output=9ba93eb0f3d6c3a9 input=546545e8c1f42085]*/</a>
+<a name="327"><span class="lineNum">     327 </span>            : {</a>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">          1 :     long pagesize = 0;</span></a>
+<a name="329"><span class="lineNum">     329 </span>            : #if defined(HAVE_GETPAGESIZE)</a>
+<a name="330"><span class="lineNum">     330 </span><span class="lineCov">          1 :     pagesize = getpagesize();</span></a>
+<a name="331"><span class="lineNum">     331 </span>            : #elif defined(HAVE_SYSCONF) &amp;&amp; defined(_SC_PAGE_SIZE)</a>
+<a name="332"><span class="lineNum">     332 </span>            :     pagesize = sysconf(_SC_PAGE_SIZE);</a>
+<a name="333"><span class="lineNum">     333 </span>            : #else</a>
+<a name="334"><span class="lineNum">     334 </span>            : #   error &quot;unsupported platform: resource.getpagesize()&quot;</a>
+<a name="335"><span class="lineNum">     335 </span>            : #endif</a>
+<a name="336"><span class="lineNum">     336 </span><span class="lineCov">          1 :     return pagesize;</span></a>
+<a name="337"><span class="lineNum">     337 </span>            : }</a>
+<a name="338"><span class="lineNum">     338 </span>            : </a>
+<a name="339"><span class="lineNum">     339 </span>            : /* List of functions */</a>
+<a name="340"><span class="lineNum">     340 </span>            : </a>
+<a name="341"><span class="lineNum">     341 </span>            : static struct PyMethodDef</a>
+<a name="342"><span class="lineNum">     342 </span>            : resource_methods[] = {</a>
+<a name="343"><span class="lineNum">     343 </span>            :     RESOURCE_GETRUSAGE_METHODDEF</a>
+<a name="344"><span class="lineNum">     344 </span>            :     RESOURCE_GETRLIMIT_METHODDEF</a>
+<a name="345"><span class="lineNum">     345 </span>            :     RESOURCE_PRLIMIT_METHODDEF</a>
+<a name="346"><span class="lineNum">     346 </span>            :     RESOURCE_SETRLIMIT_METHODDEF</a>
+<a name="347"><span class="lineNum">     347 </span>            :     RESOURCE_GETPAGESIZE_METHODDEF</a>
+<a name="348"><span class="lineNum">     348 </span>            :     {NULL, NULL}                             /* sentinel */</a>
+<a name="349"><span class="lineNum">     349 </span>            : };</a>
+<a name="350"><span class="lineNum">     350 </span>            : </a>
+<a name="351"><span class="lineNum">     351 </span>            : </a>
+<a name="352"><span class="lineNum">     352 </span>            : /* Module initialization */</a>
+<a name="353"><span class="lineNum">     353 </span>            : </a>
+<a name="354"><span class="lineNum">     354 </span>            : static int</a>
+<a name="355"><span class="lineNum">     355 </span><span class="lineCov">        525 : resource_exec(PyObject *module)</span></a>
+<a name="356"><span class="lineNum">     356 </span>            : {</a>
+<a name="357"><span class="lineNum">     357 </span><span class="lineCov">        525 :     resourcemodulestate *state = get_resource_state(module);</span></a>
+<a name="358"><span class="lineNum">     358 </span>            : #define ADD_INT(module, value)                                    \</a>
+<a name="359"><span class="lineNum">     359 </span>            :     do {                                                          \</a>
+<a name="360"><span class="lineNum">     360 </span>            :         if (PyModule_AddIntConstant(module, #value, value) &lt; 0) { \</a>
+<a name="361"><span class="lineNum">     361 </span>            :             return -1;                                            \</a>
+<a name="362"><span class="lineNum">     362 </span>            :         }                                                         \</a>
+<a name="363"><span class="lineNum">     363 </span>            :     } while (0)</a>
+<a name="364"><span class="lineNum">     364 </span>            : </a>
+<a name="365"><span class="lineNum">     365 </span>            :     /* Add some symbolic constants to the module */</a>
+<a name="366"><span class="lineNum">     366 </span><span class="lineCov">        525 :     Py_INCREF(PyExc_OSError);</span></a>
+<a name="367"><span class="lineNum">     367 </span><span class="lineCov">        525 :     if (PyModule_AddObject(module, &quot;error&quot;, PyExc_OSError) &lt; 0) {</span></a>
+<a name="368"><span class="lineNum">     368 </span><span class="lineNoCov">          0 :         Py_DECREF(PyExc_OSError);</span></a>
+<a name="369"><span class="lineNum">     369 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="370"><span class="lineNum">     370 </span>            :     }</a>
+<a name="371"><span class="lineNum">     371 </span>            : </a>
+<a name="372"><span class="lineNum">     372 </span><span class="lineCov">        525 :     state-&gt;StructRUsageType = PyStructSequence_NewType(&amp;struct_rusage_desc);</span></a>
+<a name="373"><span class="lineNum">     373 </span><span class="lineCov">        525 :     if (state-&gt;StructRUsageType == NULL) {</span></a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="375"><span class="lineNum">     375 </span>            :     }</a>
+<a name="376"><span class="lineNum">     376 </span><span class="lineCov">        525 :     if (PyModule_AddType(module, state-&gt;StructRUsageType) &lt; 0) {</span></a>
+<a name="377"><span class="lineNum">     377 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="378"><span class="lineNum">     378 </span>            :     }</a>
+<a name="379"><span class="lineNum">     379 </span>            : </a>
+<a name="380"><span class="lineNum">     380 </span>            :     /* insert constants */</a>
+<a name="381"><span class="lineNum">     381 </span>            : #ifdef RLIMIT_CPU</a>
+<a name="382"><span class="lineNum">     382 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_CPU);</span></a>
+<a name="383"><span class="lineNum">     383 </span>            : #endif</a>
+<a name="384"><span class="lineNum">     384 </span>            : </a>
+<a name="385"><span class="lineNum">     385 </span>            : #ifdef RLIMIT_FSIZE</a>
+<a name="386"><span class="lineNum">     386 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_FSIZE);</span></a>
+<a name="387"><span class="lineNum">     387 </span>            : #endif</a>
+<a name="388"><span class="lineNum">     388 </span>            : </a>
+<a name="389"><span class="lineNum">     389 </span>            : #ifdef RLIMIT_DATA</a>
+<a name="390"><span class="lineNum">     390 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_DATA);</span></a>
+<a name="391"><span class="lineNum">     391 </span>            : #endif</a>
+<a name="392"><span class="lineNum">     392 </span>            : </a>
+<a name="393"><span class="lineNum">     393 </span>            : #ifdef RLIMIT_STACK</a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_STACK);</span></a>
+<a name="395"><span class="lineNum">     395 </span>            : #endif</a>
+<a name="396"><span class="lineNum">     396 </span>            : </a>
+<a name="397"><span class="lineNum">     397 </span>            : #ifdef RLIMIT_CORE</a>
+<a name="398"><span class="lineNum">     398 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_CORE);</span></a>
+<a name="399"><span class="lineNum">     399 </span>            : #endif</a>
+<a name="400"><span class="lineNum">     400 </span>            : </a>
+<a name="401"><span class="lineNum">     401 </span>            : #ifdef RLIMIT_NOFILE</a>
+<a name="402"><span class="lineNum">     402 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_NOFILE);</span></a>
+<a name="403"><span class="lineNum">     403 </span>            : #endif</a>
+<a name="404"><span class="lineNum">     404 </span>            : </a>
+<a name="405"><span class="lineNum">     405 </span>            : #ifdef RLIMIT_OFILE</a>
+<a name="406"><span class="lineNum">     406 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_OFILE);</span></a>
+<a name="407"><span class="lineNum">     407 </span>            : #endif</a>
+<a name="408"><span class="lineNum">     408 </span>            : </a>
+<a name="409"><span class="lineNum">     409 </span>            : #ifdef RLIMIT_VMEM</a>
+<a name="410"><span class="lineNum">     410 </span>            :     ADD_INT(module, RLIMIT_VMEM);</a>
+<a name="411"><span class="lineNum">     411 </span>            : #endif</a>
+<a name="412"><span class="lineNum">     412 </span>            : </a>
+<a name="413"><span class="lineNum">     413 </span>            : #ifdef RLIMIT_AS</a>
+<a name="414"><span class="lineNum">     414 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_AS);</span></a>
+<a name="415"><span class="lineNum">     415 </span>            : #endif</a>
+<a name="416"><span class="lineNum">     416 </span>            : </a>
+<a name="417"><span class="lineNum">     417 </span>            : #ifdef RLIMIT_RSS</a>
+<a name="418"><span class="lineNum">     418 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_RSS);</span></a>
+<a name="419"><span class="lineNum">     419 </span>            : #endif</a>
+<a name="420"><span class="lineNum">     420 </span>            : </a>
+<a name="421"><span class="lineNum">     421 </span>            : #ifdef RLIMIT_NPROC</a>
+<a name="422"><span class="lineNum">     422 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_NPROC);</span></a>
+<a name="423"><span class="lineNum">     423 </span>            : #endif</a>
+<a name="424"><span class="lineNum">     424 </span>            : </a>
+<a name="425"><span class="lineNum">     425 </span>            : #ifdef RLIMIT_MEMLOCK</a>
+<a name="426"><span class="lineNum">     426 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_MEMLOCK);</span></a>
+<a name="427"><span class="lineNum">     427 </span>            : #endif</a>
+<a name="428"><span class="lineNum">     428 </span>            : </a>
+<a name="429"><span class="lineNum">     429 </span>            : #ifdef RLIMIT_SBSIZE</a>
+<a name="430"><span class="lineNum">     430 </span>            :     ADD_INT(module, RLIMIT_SBSIZE);</a>
+<a name="431"><span class="lineNum">     431 </span>            : #endif</a>
+<a name="432"><span class="lineNum">     432 </span>            : </a>
+<a name="433"><span class="lineNum">     433 </span>            : /* Linux specific */</a>
+<a name="434"><span class="lineNum">     434 </span>            : #ifdef RLIMIT_MSGQUEUE</a>
+<a name="435"><span class="lineNum">     435 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_MSGQUEUE);</span></a>
+<a name="436"><span class="lineNum">     436 </span>            : #endif</a>
+<a name="437"><span class="lineNum">     437 </span>            : </a>
+<a name="438"><span class="lineNum">     438 </span>            : #ifdef RLIMIT_NICE</a>
+<a name="439"><span class="lineNum">     439 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_NICE);</span></a>
+<a name="440"><span class="lineNum">     440 </span>            : #endif</a>
+<a name="441"><span class="lineNum">     441 </span>            : </a>
+<a name="442"><span class="lineNum">     442 </span>            : #ifdef RLIMIT_RTPRIO</a>
+<a name="443"><span class="lineNum">     443 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_RTPRIO);</span></a>
+<a name="444"><span class="lineNum">     444 </span>            : #endif</a>
+<a name="445"><span class="lineNum">     445 </span>            : </a>
+<a name="446"><span class="lineNum">     446 </span>            : #ifdef RLIMIT_RTTIME</a>
+<a name="447"><span class="lineNum">     447 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_RTTIME);</span></a>
+<a name="448"><span class="lineNum">     448 </span>            : #endif</a>
+<a name="449"><span class="lineNum">     449 </span>            : </a>
+<a name="450"><span class="lineNum">     450 </span>            : #ifdef RLIMIT_SIGPENDING</a>
+<a name="451"><span class="lineNum">     451 </span><span class="lineCov">        525 :     ADD_INT(module, RLIMIT_SIGPENDING);</span></a>
+<a name="452"><span class="lineNum">     452 </span>            : #endif</a>
+<a name="453"><span class="lineNum">     453 </span>            : </a>
+<a name="454"><span class="lineNum">     454 </span>            : /* target */</a>
+<a name="455"><span class="lineNum">     455 </span>            : #ifdef RUSAGE_SELF</a>
+<a name="456"><span class="lineNum">     456 </span><span class="lineCov">        525 :     ADD_INT(module, RUSAGE_SELF);</span></a>
+<a name="457"><span class="lineNum">     457 </span>            : #endif</a>
+<a name="458"><span class="lineNum">     458 </span>            : </a>
+<a name="459"><span class="lineNum">     459 </span>            : #ifdef RUSAGE_CHILDREN</a>
+<a name="460"><span class="lineNum">     460 </span><span class="lineCov">        525 :     ADD_INT(module, RUSAGE_CHILDREN);</span></a>
+<a name="461"><span class="lineNum">     461 </span>            : #endif</a>
+<a name="462"><span class="lineNum">     462 </span>            : </a>
+<a name="463"><span class="lineNum">     463 </span>            : #ifdef RUSAGE_BOTH</a>
+<a name="464"><span class="lineNum">     464 </span>            :     ADD_INT(module, RUSAGE_BOTH);</a>
+<a name="465"><span class="lineNum">     465 </span>            : #endif</a>
+<a name="466"><span class="lineNum">     466 </span>            : </a>
+<a name="467"><span class="lineNum">     467 </span>            : #ifdef RUSAGE_THREAD</a>
+<a name="468"><span class="lineNum">     468 </span><span class="lineCov">        525 :     ADD_INT(module, RUSAGE_THREAD);</span></a>
+<a name="469"><span class="lineNum">     469 </span>            : #endif</a>
+<a name="470"><span class="lineNum">     470 </span>            : </a>
+<a name="471"><span class="lineNum">     471 </span>            : /* FreeBSD specific */</a>
+<a name="472"><span class="lineNum">     472 </span>            : </a>
+<a name="473"><span class="lineNum">     473 </span>            : #ifdef RLIMIT_SWAP</a>
+<a name="474"><span class="lineNum">     474 </span>            :     ADD_INT(module, RLIMIT_SWAP);</a>
+<a name="475"><span class="lineNum">     475 </span>            : #endif</a>
+<a name="476"><span class="lineNum">     476 </span>            : </a>
+<a name="477"><span class="lineNum">     477 </span>            : #ifdef RLIMIT_SBSIZE</a>
+<a name="478"><span class="lineNum">     478 </span>            :     ADD_INT(module, RLIMIT_SBSIZE);</a>
+<a name="479"><span class="lineNum">     479 </span>            : #endif</a>
+<a name="480"><span class="lineNum">     480 </span>            : </a>
+<a name="481"><span class="lineNum">     481 </span>            : #ifdef RLIMIT_NPTS</a>
+<a name="482"><span class="lineNum">     482 </span>            :     ADD_INT(module, RLIMIT_NPTS);</a>
+<a name="483"><span class="lineNum">     483 </span>            : #endif</a>
+<a name="484"><span class="lineNum">     484 </span>            : </a>
+<a name="485"><span class="lineNum">     485 </span>            : #ifdef RLIMIT_KQUEUES</a>
+<a name="486"><span class="lineNum">     486 </span>            :     ADD_INT(module, RLIMIT_KQUEUES);</a>
+<a name="487"><span class="lineNum">     487 </span>            : #endif</a>
+<a name="488"><span class="lineNum">     488 </span>            : </a>
+<a name="489"><span class="lineNum">     489 </span>            :     PyObject *v;</a>
+<a name="490"><span class="lineNum">     490 </span>            :     if (sizeof(RLIM_INFINITY) &gt; sizeof(long)) {</a>
+<a name="491"><span class="lineNum">     491 </span>            :         v = PyLong_FromLongLong((long long) RLIM_INFINITY);</a>
+<a name="492"><span class="lineNum">     492 </span>            :     } else</a>
+<a name="493"><span class="lineNum">     493 </span>            :     {</a>
+<a name="494"><span class="lineNum">     494 </span><span class="lineCov">        525 :         v = PyLong_FromLong((long) RLIM_INFINITY);</span></a>
+<a name="495"><span class="lineNum">     495 </span>            :     }</a>
+<a name="496"><span class="lineNum">     496 </span><span class="lineCov">        525 :     if (!v) {</span></a>
+<a name="497"><span class="lineNum">     497 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="498"><span class="lineNum">     498 </span>            :     }</a>
+<a name="499"><span class="lineNum">     499 </span>            : </a>
+<a name="500"><span class="lineNum">     500 </span><span class="lineCov">        525 :     if (PyModule_AddObject(module, &quot;RLIM_INFINITY&quot;, v) &lt; 0) {</span></a>
+<a name="501"><span class="lineNum">     501 </span><span class="lineNoCov">          0 :         Py_DECREF(v);</span></a>
+<a name="502"><span class="lineNum">     502 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="503"><span class="lineNum">     503 </span>            :     }</a>
+<a name="504"><span class="lineNum">     504 </span><span class="lineCov">        525 :     return 0;</span></a>
+<a name="505"><span class="lineNum">     505 </span>            : </a>
+<a name="506"><span class="lineNum">     506 </span>            : #undef ADD_INT</a>
+<a name="507"><span class="lineNum">     507 </span>            : }</a>
+<a name="508"><span class="lineNum">     508 </span>            : </a>
+<a name="509"><span class="lineNum">     509 </span>            : static struct PyModuleDef_Slot resource_slots[] = {</a>
+<a name="510"><span class="lineNum">     510 </span>            :     {Py_mod_exec, resource_exec},</a>
+<a name="511"><span class="lineNum">     511 </span>            :     {0, NULL}</a>
+<a name="512"><span class="lineNum">     512 </span>            : };</a>
+<a name="513"><span class="lineNum">     513 </span>            : </a>
+<a name="514"><span class="lineNum">     514 </span>            : static int</a>
+<a name="515"><span class="lineNum">     515 </span><span class="lineCov">      32984 : resourcemodule_traverse(PyObject *m, visitproc visit, void *arg) {</span></a>
+<a name="516"><span class="lineNum">     516 </span><span class="lineCov">      32984 :     Py_VISIT(get_resource_state(m)-&gt;StructRUsageType);</span></a>
+<a name="517"><span class="lineNum">     517 </span><span class="lineCov">      32984 :     return 0;</span></a>
+<a name="518"><span class="lineNum">     518 </span>            : }</a>
+<a name="519"><span class="lineNum">     519 </span>            : </a>
+<a name="520"><span class="lineNum">     520 </span>            : static int</a>
+<a name="521"><span class="lineNum">     521 </span><span class="lineCov">       1046 : resourcemodule_clear(PyObject *m) {</span></a>
+<a name="522"><span class="lineNum">     522 </span><span class="lineCov">       1046 :     Py_CLEAR(get_resource_state(m)-&gt;StructRUsageType);</span></a>
+<a name="523"><span class="lineNum">     523 </span><span class="lineCov">       1046 :     return 0;</span></a>
+<a name="524"><span class="lineNum">     524 </span>            : }</a>
+<a name="525"><span class="lineNum">     525 </span>            : </a>
+<a name="526"><span class="lineNum">     526 </span>            : static void</a>
+<a name="527"><span class="lineNum">     527 </span><span class="lineCov">        523 : resourcemodule_free(void *m) {</span></a>
+<a name="528"><span class="lineNum">     528 </span><span class="lineCov">        523 :     resourcemodule_clear((PyObject *)m);</span></a>
+<a name="529"><span class="lineNum">     529 </span><span class="lineCov">        523 : }</span></a>
+<a name="530"><span class="lineNum">     530 </span>            : </a>
+<a name="531"><span class="lineNum">     531 </span>            : static struct PyModuleDef resourcemodule = {</a>
+<a name="532"><span class="lineNum">     532 </span>            :     PyModuleDef_HEAD_INIT,</a>
+<a name="533"><span class="lineNum">     533 </span>            :     .m_name = &quot;resource&quot;,</a>
+<a name="534"><span class="lineNum">     534 </span>            :     .m_size = sizeof(resourcemodulestate),</a>
+<a name="535"><span class="lineNum">     535 </span>            :     .m_methods = resource_methods,</a>
+<a name="536"><span class="lineNum">     536 </span>            :     .m_slots = resource_slots,</a>
+<a name="537"><span class="lineNum">     537 </span>            :     .m_traverse = resourcemodule_traverse,</a>
+<a name="538"><span class="lineNum">     538 </span>            :     .m_clear = resourcemodule_clear,</a>
+<a name="539"><span class="lineNum">     539 </span>            :     .m_free = resourcemodule_free,</a>
+<a name="540"><span class="lineNum">     540 </span>            : };</a>
+<a name="541"><span class="lineNum">     541 </span>            : </a>
+<a name="542"><span class="lineNum">     542 </span>            : PyMODINIT_FUNC</a>
+<a name="543"><span class="lineNum">     543 </span><span class="lineCov">        525 : PyInit_resource(void)</span></a>
+<a name="544"><span class="lineNum">     544 </span>            : {</a>
+<a name="545"><span class="lineNum">     545 </span><span class="lineCov">        525 :     return PyModuleDef_Init(&amp;resourcemodule);</span></a>
+<a name="546"><span class="lineNum">     546 </span>            : }</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

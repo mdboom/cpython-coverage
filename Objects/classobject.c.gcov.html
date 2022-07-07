@@ -1,0 +1,621 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Objects/classobject.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Objects</a> - classobject.c<span style="font-size: 80%;"> (source / <a href="classobject.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">136</td>
+            <td class="headerCovTableEntry">218</td>
+            <td class="headerCovTableEntryLo">62.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /* Class object implementation (dead now except for methods) */</a>
+<a name="2"><span class="lineNum">       2 </span>            : </a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &quot;Python.h&quot;</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &quot;pycore_call.h&quot;          // _PyObject_VectorcallTstate()</a>
+<a name="5"><span class="lineNum">       5 </span>            : #include &quot;pycore_object.h&quot;</a>
+<a name="6"><span class="lineNum">       6 </span>            : #include &quot;pycore_pyerrors.h&quot;</a>
+<a name="7"><span class="lineNum">       7 </span>            : #include &quot;pycore_pystate.h&quot;       // _PyThreadState_GET()</a>
+<a name="8"><span class="lineNum">       8 </span>            : #include &quot;structmember.h&quot;         // PyMemberDef</a>
+<a name="9"><span class="lineNum">       9 </span>            : </a>
+<a name="10"><span class="lineNum">      10 </span>            : #include &quot;clinic/classobject.c.h&quot;</a>
+<a name="11"><span class="lineNum">      11 </span>            : </a>
+<a name="12"><span class="lineNum">      12 </span>            : #define TP_DESCR_GET(t) ((t)-&gt;tp_descr_get)</a>
+<a name="13"><span class="lineNum">      13 </span>            : </a>
+<a name="14"><span class="lineNum">      14 </span>            : /*[clinic input]</a>
+<a name="15"><span class="lineNum">      15 </span>            : class method &quot;PyMethodObject *&quot; &quot;&amp;PyMethod_Type&quot;</a>
+<a name="16"><span class="lineNum">      16 </span>            : [clinic start generated code]*/</a>
+<a name="17"><span class="lineNum">      17 </span>            : /*[clinic end generated code: output=da39a3ee5e6b4b0d input=b16e47edf6107c23]*/</a>
+<a name="18"><span class="lineNum">      18 </span>            : </a>
+<a name="19"><span class="lineNum">      19 </span>            : </a>
+<a name="20"><span class="lineNum">      20 </span>            : PyObject *</a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineNoCov">          0 : PyMethod_Function(PyObject *im)</span></a>
+<a name="22"><span class="lineNum">      22 </span>            : {</a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineNoCov">          0 :     if (!PyMethod_Check(im)) {</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineNoCov">          0 :         PyErr_BadInternalCall();</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="26"><span class="lineNum">      26 </span>            :     }</a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineNoCov">          0 :     return ((PyMethodObject *)im)-&gt;im_func;</span></a>
+<a name="28"><span class="lineNum">      28 </span>            : }</a>
+<a name="29"><span class="lineNum">      29 </span>            : </a>
+<a name="30"><span class="lineNum">      30 </span>            : PyObject *</a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineNoCov">          0 : PyMethod_Self(PyObject *im)</span></a>
+<a name="32"><span class="lineNum">      32 </span>            : {</a>
+<a name="33"><span class="lineNum">      33 </span><span class="lineNoCov">          0 :     if (!PyMethod_Check(im)) {</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineNoCov">          0 :         PyErr_BadInternalCall();</span></a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="36"><span class="lineNum">      36 </span>            :     }</a>
+<a name="37"><span class="lineNum">      37 </span><span class="lineNoCov">          0 :     return ((PyMethodObject *)im)-&gt;im_self;</span></a>
+<a name="38"><span class="lineNum">      38 </span>            : }</a>
+<a name="39"><span class="lineNum">      39 </span>            : </a>
+<a name="40"><span class="lineNum">      40 </span>            : </a>
+<a name="41"><span class="lineNum">      41 </span>            : static PyObject *</a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">    9998710 : method_vectorcall(PyObject *method, PyObject *const *args,</span></a>
+<a name="43"><span class="lineNum">      43 </span>            :                   size_t nargsf, PyObject *kwnames)</a>
+<a name="44"><span class="lineNum">      44 </span>            : {</a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">    9998710 :     assert(Py_IS_TYPE(method, &amp;PyMethod_Type));</span></a>
+<a name="46"><span class="lineNum">      46 </span>            : </a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">    9998710 :     PyThreadState *tstate = _PyThreadState_GET();</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">    9998710 :     PyObject *self = PyMethod_GET_SELF(method);</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">    9998710 :     PyObject *func = PyMethod_GET_FUNCTION(method);</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">    9998710 :     Py_ssize_t nargs = PyVectorcall_NARGS(nargsf);</span></a>
+<a name="51"><span class="lineNum">      51 </span>            : </a>
+<a name="52"><span class="lineNum">      52 </span>            :     PyObject *result;</a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">    9998710 :     if (nargsf &amp; PY_VECTORCALL_ARGUMENTS_OFFSET) {</span></a>
+<a name="54"><span class="lineNum">      54 </span>            :         /* PY_VECTORCALL_ARGUMENTS_OFFSET is set, so we are allowed to mutate the vector */</a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">    3855030 :         PyObject **newargs = (PyObject**)args - 1;</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">    3855030 :         nargs += 1;</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">    3855030 :         PyObject *tmp = newargs[0];</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">    3855030 :         newargs[0] = self;</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">    3855030 :         result = _PyObject_VectorcallTstate(tstate, func, newargs,</span></a>
+<a name="60"><span class="lineNum">      60 </span>            :                                             nargs, kwnames);</a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">    3855030 :         newargs[0] = tmp;</span></a>
+<a name="62"><span class="lineNum">      62 </span>            :     }</a>
+<a name="63"><span class="lineNum">      63 </span>            :     else {</a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">    6143680 :         Py_ssize_t nkwargs = (kwnames == NULL) ? 0 : PyTuple_GET_SIZE(kwnames);</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">    6143680 :         Py_ssize_t totalargs = nargs + nkwargs;</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">    6143680 :         if (totalargs == 0) {</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">    3041100 :             return _PyObject_VectorcallTstate(tstate, func, &amp;self, 1, NULL);</span></a>
+<a name="68"><span class="lineNum">      68 </span>            :         }</a>
+<a name="69"><span class="lineNum">      69 </span>            : </a>
+<a name="70"><span class="lineNum">      70 </span>            :         PyObject *newargs_stack[_PY_FASTCALL_SMALL_STACK];</a>
+<a name="71"><span class="lineNum">      71 </span>            :         PyObject **newargs;</a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    3102580 :         if (totalargs &lt;= (Py_ssize_t)Py_ARRAY_LENGTH(newargs_stack) - 1) {</span></a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">    3024350 :             newargs = newargs_stack;</span></a>
+<a name="74"><span class="lineNum">      74 </span>            :         }</a>
+<a name="75"><span class="lineNum">      75 </span>            :         else {</a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">      78234 :             newargs = PyMem_Malloc((totalargs+1) * sizeof(PyObject *));</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">      78234 :             if (newargs == NULL) {</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineNoCov">          0 :                 _PyErr_NoMemory(tstate);</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineNoCov">          0 :                 return NULL;</span></a>
+<a name="80"><span class="lineNum">      80 </span>            :             }</a>
+<a name="81"><span class="lineNum">      81 </span>            :         }</a>
+<a name="82"><span class="lineNum">      82 </span>            :         /* use borrowed references */</a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">    3102580 :         newargs[0] = self;</span></a>
+<a name="84"><span class="lineNum">      84 </span>            :         /* bpo-37138: since totalargs &gt; 0, it's impossible that args is NULL.</a>
+<a name="85"><span class="lineNum">      85 </span>            :          * We need this, since calling memcpy() with a NULL pointer is</a>
+<a name="86"><span class="lineNum">      86 </span>            :          * undefined behaviour. */</a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineCov">    3102580 :         assert(args != NULL);</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">    3102580 :         memcpy(newargs + 1, args, totalargs * sizeof(PyObject *));</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">    3102580 :         result = _PyObject_VectorcallTstate(tstate, func,</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">    3102580 :                                             newargs, nargs+1, kwnames);</span></a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">    3102540 :         if (newargs != newargs_stack) {</span></a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">      78234 :             PyMem_Free(newargs);</span></a>
+<a name="93"><span class="lineNum">      93 </span>            :         }</a>
+<a name="94"><span class="lineNum">      94 </span>            :     }</a>
+<a name="95"><span class="lineNum">      95 </span><span class="lineCov">    6957570 :     return result;</span></a>
+<a name="96"><span class="lineNum">      96 </span>            : }</a>
+<a name="97"><span class="lineNum">      97 </span>            : </a>
+<a name="98"><span class="lineNum">      98 </span>            : </a>
+<a name="99"><span class="lineNum">      99 </span>            : /* Method objects are used for bound instance methods returned by</a>
+<a name="100"><span class="lineNum">     100 </span>            :    instancename.methodname. ClassName.methodname returns an ordinary</a>
+<a name="101"><span class="lineNum">     101 </span>            :    function.</a>
+<a name="102"><span class="lineNum">     102 </span>            : */</a>
+<a name="103"><span class="lineNum">     103 </span>            : </a>
+<a name="104"><span class="lineNum">     104 </span>            : PyObject *</a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">   27823600 : PyMethod_New(PyObject *func, PyObject *self)</span></a>
+<a name="106"><span class="lineNum">     106 </span>            : {</a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">   27823600 :     if (self == NULL) {</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 :         PyErr_BadInternalCall();</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="110"><span class="lineNum">     110 </span>            :     }</a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineCov">   27823600 :     PyMethodObject *im = PyObject_GC_New(PyMethodObject, &amp;PyMethod_Type);</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">   27823600 :     if (im == NULL) {</span></a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="114"><span class="lineNum">     114 </span>            :     }</a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">   27823600 :     im-&gt;im_weakreflist = NULL;</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">   27823600 :     Py_INCREF(func);</span></a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">   27823600 :     im-&gt;im_func = func;</span></a>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">   27823600 :     Py_INCREF(self);</span></a>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">   27823600 :     im-&gt;im_self = self;</span></a>
+<a name="120"><span class="lineNum">     120 </span><span class="lineCov">   27823600 :     im-&gt;vectorcall = method_vectorcall;</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">   27823600 :     _PyObject_GC_TRACK(im);</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">   27823600 :     return (PyObject *)im;</span></a>
+<a name="123"><span class="lineNum">     123 </span>            : }</a>
+<a name="124"><span class="lineNum">     124 </span>            : </a>
+<a name="125"><span class="lineNum">     125 </span>            : /*[clinic input]</a>
+<a name="126"><span class="lineNum">     126 </span>            : method.__reduce__</a>
+<a name="127"><span class="lineNum">     127 </span>            : [clinic start generated code]*/</a>
+<a name="128"><span class="lineNum">     128 </span>            : </a>
+<a name="129"><span class="lineNum">     129 </span>            : static PyObject *</a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">        574 : method___reduce___impl(PyMethodObject *self)</span></a>
+<a name="131"><span class="lineNum">     131 </span>            : /*[clinic end generated code: output=6c04506d0fa6fdcb input=143a0bf5e96de6e8]*/</a>
+<a name="132"><span class="lineNum">     132 </span>            : {</a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">        574 :     PyObject *funcself = PyMethod_GET_SELF(self);</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">        574 :     PyObject *func = PyMethod_GET_FUNCTION(self);</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">        574 :     PyObject *funcname = PyObject_GetAttr(func, &amp;_Py_ID(__name__));</span></a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">        574 :     if (funcname == NULL) {</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="138"><span class="lineNum">     138 </span>            :     }</a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">        574 :     return Py_BuildValue(</span></a>
+<a name="140"><span class="lineNum">     140 </span>            :             &quot;N(ON)&quot;, _PyEval_GetBuiltin(&amp;_Py_ID(getattr)), funcself, funcname);</a>
+<a name="141"><span class="lineNum">     141 </span>            : }</a>
+<a name="142"><span class="lineNum">     142 </span>            : </a>
+<a name="143"><span class="lineNum">     143 </span>            : static PyMethodDef method_methods[] = {</a>
+<a name="144"><span class="lineNum">     144 </span>            :     METHOD___REDUCE___METHODDEF</a>
+<a name="145"><span class="lineNum">     145 </span>            :     {NULL, NULL}</a>
+<a name="146"><span class="lineNum">     146 </span>            : };</a>
+<a name="147"><span class="lineNum">     147 </span>            : </a>
+<a name="148"><span class="lineNum">     148 </span>            : /* Descriptors for PyMethod attributes */</a>
+<a name="149"><span class="lineNum">     149 </span>            : </a>
+<a name="150"><span class="lineNum">     150 </span>            : /* im_func and im_self are stored in the PyMethod object */</a>
+<a name="151"><span class="lineNum">     151 </span>            : </a>
+<a name="152"><span class="lineNum">     152 </span>            : #define MO_OFF(x) offsetof(PyMethodObject, x)</a>
+<a name="153"><span class="lineNum">     153 </span>            : </a>
+<a name="154"><span class="lineNum">     154 </span>            : static PyMemberDef method_memberlist[] = {</a>
+<a name="155"><span class="lineNum">     155 </span>            :     {&quot;__func__&quot;, T_OBJECT, MO_OFF(im_func), READONLY,</a>
+<a name="156"><span class="lineNum">     156 </span>            :      &quot;the function (or other callable) implementing a method&quot;},</a>
+<a name="157"><span class="lineNum">     157 </span>            :     {&quot;__self__&quot;, T_OBJECT, MO_OFF(im_self), READONLY,</a>
+<a name="158"><span class="lineNum">     158 </span>            :      &quot;the instance to which a method is bound&quot;},</a>
+<a name="159"><span class="lineNum">     159 </span>            :     {NULL}      /* Sentinel */</a>
+<a name="160"><span class="lineNum">     160 </span>            : };</a>
+<a name="161"><span class="lineNum">     161 </span>            : </a>
+<a name="162"><span class="lineNum">     162 </span>            : /* Christian Tismer argued convincingly that method attributes should</a>
+<a name="163"><span class="lineNum">     163 </span>            :    (nearly) always override function attributes.</a>
+<a name="164"><span class="lineNum">     164 </span>            :    The one exception is __doc__; there's a default __doc__ which</a>
+<a name="165"><span class="lineNum">     165 </span>            :    should only be used for the class, not for instances */</a>
+<a name="166"><span class="lineNum">     166 </span>            : </a>
+<a name="167"><span class="lineNum">     167 </span>            : static PyObject *</a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">     215301 : method_get_doc(PyMethodObject *im, void *context)</span></a>
+<a name="169"><span class="lineNum">     169 </span>            : {</a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">     215301 :     return PyObject_GetAttr(im-&gt;im_func, &amp;_Py_ID(__doc__));</span></a>
+<a name="171"><span class="lineNum">     171 </span>            : }</a>
+<a name="172"><span class="lineNum">     172 </span>            : </a>
+<a name="173"><span class="lineNum">     173 </span>            : static PyGetSetDef method_getset[] = {</a>
+<a name="174"><span class="lineNum">     174 </span>            :     {&quot;__doc__&quot;, (getter)method_get_doc, NULL, NULL},</a>
+<a name="175"><span class="lineNum">     175 </span>            :     {0}</a>
+<a name="176"><span class="lineNum">     176 </span>            : };</a>
+<a name="177"><span class="lineNum">     177 </span>            : </a>
+<a name="178"><span class="lineNum">     178 </span>            : static PyObject *</a>
+<a name="179"><span class="lineNum">     179 </span><span class="lineCov">     341905 : method_getattro(PyObject *obj, PyObject *name)</span></a>
+<a name="180"><span class="lineNum">     180 </span>            : {</a>
+<a name="181"><span class="lineNum">     181 </span><span class="lineCov">     341905 :     PyMethodObject *im = (PyMethodObject *)obj;</span></a>
+<a name="182"><span class="lineNum">     182 </span><span class="lineCov">     341905 :     PyTypeObject *tp = Py_TYPE(obj);</span></a>
+<a name="183"><span class="lineNum">     183 </span><span class="lineCov">     341905 :     PyObject *descr = NULL;</span></a>
+<a name="184"><span class="lineNum">     184 </span>            : </a>
+<a name="185"><span class="lineNum">     185 </span>            :     {</a>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">     341905 :         if (tp-&gt;tp_dict == NULL) {</span></a>
+<a name="187"><span class="lineNum">     187 </span><span class="lineNoCov">          0 :             if (PyType_Ready(tp) &lt; 0)</span></a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineNoCov">          0 :                 return NULL;</span></a>
+<a name="189"><span class="lineNum">     189 </span>            :         }</a>
+<a name="190"><span class="lineNum">     190 </span><span class="lineCov">     341905 :         descr = _PyType_Lookup(tp, name);</span></a>
+<a name="191"><span class="lineNum">     191 </span>            :     }</a>
+<a name="192"><span class="lineNum">     192 </span>            : </a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">     341905 :     if (descr != NULL) {</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineCov">     230010 :         descrgetfunc f = TP_DESCR_GET(Py_TYPE(descr));</span></a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">     230010 :         if (f != NULL)</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">     229950 :             return f(descr, obj, (PyObject *)Py_TYPE(obj));</span></a>
+<a name="197"><span class="lineNum">     197 </span>            :         else {</a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">         60 :             Py_INCREF(descr);</span></a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">         60 :             return descr;</span></a>
+<a name="200"><span class="lineNum">     200 </span>            :         }</a>
+<a name="201"><span class="lineNum">     201 </span>            :     }</a>
+<a name="202"><span class="lineNum">     202 </span>            : </a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineCov">     111895 :     return PyObject_GetAttr(im-&gt;im_func, name);</span></a>
+<a name="204"><span class="lineNum">     204 </span>            : }</a>
+<a name="205"><span class="lineNum">     205 </span>            : </a>
+<a name="206"><span class="lineNum">     206 </span>            : /*[clinic input]</a>
+<a name="207"><span class="lineNum">     207 </span>            : @classmethod</a>
+<a name="208"><span class="lineNum">     208 </span>            : method.__new__ as method_new</a>
+<a name="209"><span class="lineNum">     209 </span>            :     function: object</a>
+<a name="210"><span class="lineNum">     210 </span>            :     instance: object</a>
+<a name="211"><span class="lineNum">     211 </span>            :     /</a>
+<a name="212"><span class="lineNum">     212 </span>            : </a>
+<a name="213"><span class="lineNum">     213 </span>            : Create a bound instance method object.</a>
+<a name="214"><span class="lineNum">     214 </span>            : [clinic start generated code]*/</a>
+<a name="215"><span class="lineNum">     215 </span>            : </a>
+<a name="216"><span class="lineNum">     216 </span>            : static PyObject *</a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">       1006 : method_new_impl(PyTypeObject *type, PyObject *function, PyObject *instance)</span></a>
+<a name="218"><span class="lineNum">     218 </span>            : /*[clinic end generated code: output=d33ef4ebf702e1f7 input=4e32facc3c3108ae]*/</a>
+<a name="219"><span class="lineNum">     219 </span>            : {</a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineCov">       1006 :     if (!PyCallable_Check(function)) {</span></a>
+<a name="221"><span class="lineNum">     221 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_TypeError,</span></a>
+<a name="222"><span class="lineNum">     222 </span>            :                         &quot;first argument must be callable&quot;);</a>
+<a name="223"><span class="lineNum">     223 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="224"><span class="lineNum">     224 </span>            :     }</a>
+<a name="225"><span class="lineNum">     225 </span><span class="lineCov">       1006 :     if (instance == NULL || instance == Py_None) {</span></a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_TypeError,</span></a>
+<a name="227"><span class="lineNum">     227 </span>            :             &quot;instance must not be None&quot;);</a>
+<a name="228"><span class="lineNum">     228 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="229"><span class="lineNum">     229 </span>            :     }</a>
+<a name="230"><span class="lineNum">     230 </span>            : </a>
+<a name="231"><span class="lineNum">     231 </span><span class="lineCov">       1006 :     return PyMethod_New(function, instance);</span></a>
+<a name="232"><span class="lineNum">     232 </span>            : }</a>
+<a name="233"><span class="lineNum">     233 </span>            : </a>
+<a name="234"><span class="lineNum">     234 </span>            : static void</a>
+<a name="235"><span class="lineNum">     235 </span><span class="lineCov">   27823300 : method_dealloc(PyMethodObject *im)</span></a>
+<a name="236"><span class="lineNum">     236 </span>            : {</a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">   27823300 :     _PyObject_GC_UNTRACK(im);</span></a>
+<a name="238"><span class="lineNum">     238 </span><span class="lineCov">   27823300 :     if (im-&gt;im_weakreflist != NULL)</span></a>
+<a name="239"><span class="lineNum">     239 </span><span class="lineCov">          1 :         PyObject_ClearWeakRefs((PyObject *)im);</span></a>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">   27823300 :     Py_DECREF(im-&gt;im_func);</span></a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineCov">   27823300 :     Py_XDECREF(im-&gt;im_self);</span></a>
+<a name="242"><span class="lineNum">     242 </span><span class="lineCov">   27823300 :     PyObject_GC_Del(im);</span></a>
+<a name="243"><span class="lineNum">     243 </span><span class="lineCov">   27823300 : }</span></a>
+<a name="244"><span class="lineNum">     244 </span>            : </a>
+<a name="245"><span class="lineNum">     245 </span>            : static PyObject *</a>
+<a name="246"><span class="lineNum">     246 </span><span class="lineCov">         79 : method_richcompare(PyObject *self, PyObject *other, int op)</span></a>
+<a name="247"><span class="lineNum">     247 </span>            : {</a>
+<a name="248"><span class="lineNum">     248 </span>            :     PyMethodObject *a, *b;</a>
+<a name="249"><span class="lineNum">     249 </span>            :     PyObject *res;</a>
+<a name="250"><span class="lineNum">     250 </span>            :     int eq;</a>
+<a name="251"><span class="lineNum">     251 </span>            : </a>
+<a name="252"><span class="lineNum">     252 </span><span class="lineCov">        150 :     if ((op != Py_EQ &amp;&amp; op != Py_NE) ||</span></a>
+<a name="253"><span class="lineNum">     253 </span><span class="lineCov">        142 :         !PyMethod_Check(self) ||</span></a>
+<a name="254"><span class="lineNum">     254 </span><span class="lineCov">         71 :         !PyMethod_Check(other))</span></a>
+<a name="255"><span class="lineNum">     255 </span>            :     {</a>
+<a name="256"><span class="lineNum">     256 </span><span class="lineCov">         12 :         Py_RETURN_NOTIMPLEMENTED;</span></a>
+<a name="257"><span class="lineNum">     257 </span>            :     }</a>
+<a name="258"><span class="lineNum">     258 </span><span class="lineCov">         67 :     a = (PyMethodObject *)self;</span></a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineCov">         67 :     b = (PyMethodObject *)other;</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineCov">         67 :     eq = PyObject_RichCompareBool(a-&gt;im_func, b-&gt;im_func, Py_EQ);</span></a>
+<a name="261"><span class="lineNum">     261 </span><span class="lineCov">         67 :     if (eq == 1) {</span></a>
+<a name="262"><span class="lineNum">     262 </span><span class="lineCov">         65 :         eq = (a-&gt;im_self == b-&gt;im_self);</span></a>
+<a name="263"><span class="lineNum">     263 </span>            :     }</a>
+<a name="264"><span class="lineNum">     264 </span><span class="lineCov">          2 :     else if (eq &lt; 0)</span></a>
+<a name="265"><span class="lineNum">     265 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="266"><span class="lineNum">     266 </span><span class="lineCov">         67 :     if (op == Py_EQ)</span></a>
+<a name="267"><span class="lineNum">     267 </span><span class="lineCov">         34 :         res = eq ? Py_True : Py_False;</span></a>
+<a name="268"><span class="lineNum">     268 </span>            :     else</a>
+<a name="269"><span class="lineNum">     269 </span><span class="lineCov">         33 :         res = eq ? Py_False : Py_True;</span></a>
+<a name="270"><span class="lineNum">     270 </span><span class="lineCov">         67 :     Py_INCREF(res);</span></a>
+<a name="271"><span class="lineNum">     271 </span><span class="lineCov">         67 :     return res;</span></a>
+<a name="272"><span class="lineNum">     272 </span>            : }</a>
+<a name="273"><span class="lineNum">     273 </span>            : </a>
+<a name="274"><span class="lineNum">     274 </span>            : static PyObject *</a>
+<a name="275"><span class="lineNum">     275 </span><span class="lineCov">       1796 : method_repr(PyMethodObject *a)</span></a>
+<a name="276"><span class="lineNum">     276 </span>            : {</a>
+<a name="277"><span class="lineNum">     277 </span><span class="lineCov">       1796 :     PyObject *self = a-&gt;im_self;</span></a>
+<a name="278"><span class="lineNum">     278 </span><span class="lineCov">       1796 :     PyObject *func = a-&gt;im_func;</span></a>
+<a name="279"><span class="lineNum">     279 </span>            :     PyObject *funcname, *result;</a>
+<a name="280"><span class="lineNum">     280 </span><span class="lineCov">       1796 :     const char *defname = &quot;?&quot;;</span></a>
+<a name="281"><span class="lineNum">     281 </span>            : </a>
+<a name="282"><span class="lineNum">     282 </span><span class="lineCov">       1796 :     if (_PyObject_LookupAttr(func, &amp;_Py_ID(__qualname__), &amp;funcname) &lt; 0 ||</span></a>
+<a name="283"><span class="lineNum">     283 </span><span class="lineCov">       1799 :         (funcname == NULL &amp;&amp;</span></a>
+<a name="284"><span class="lineNum">     284 </span><span class="lineCov">          3 :          _PyObject_LookupAttr(func, &amp;_Py_ID(__name__), &amp;funcname) &lt; 0))</span></a>
+<a name="285"><span class="lineNum">     285 </span>            :     {</a>
+<a name="286"><span class="lineNum">     286 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="287"><span class="lineNum">     287 </span>            :     }</a>
+<a name="288"><span class="lineNum">     288 </span>            : </a>
+<a name="289"><span class="lineNum">     289 </span><span class="lineCov">       1796 :     if (funcname != NULL &amp;&amp; !PyUnicode_Check(funcname)) {</span></a>
+<a name="290"><span class="lineNum">     290 </span><span class="lineNoCov">          0 :         Py_DECREF(funcname);</span></a>
+<a name="291"><span class="lineNum">     291 </span><span class="lineNoCov">          0 :         funcname = NULL;</span></a>
+<a name="292"><span class="lineNum">     292 </span>            :     }</a>
+<a name="293"><span class="lineNum">     293 </span>            : </a>
+<a name="294"><span class="lineNum">     294 </span>            :     /* XXX Shouldn't use repr()/%R here! */</a>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">       1796 :     result = PyUnicode_FromFormat(&quot;&lt;bound method %V of %R&gt;&quot;,</span></a>
+<a name="296"><span class="lineNum">     296 </span>            :                                   funcname, defname, self);</a>
+<a name="297"><span class="lineNum">     297 </span>            : </a>
+<a name="298"><span class="lineNum">     298 </span><span class="lineCov">       1796 :     Py_XDECREF(funcname);</span></a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineCov">       1796 :     return result;</span></a>
+<a name="300"><span class="lineNum">     300 </span>            : }</a>
+<a name="301"><span class="lineNum">     301 </span>            : </a>
+<a name="302"><span class="lineNum">     302 </span>            : static Py_hash_t</a>
+<a name="303"><span class="lineNum">     303 </span><span class="lineCov">        100 : method_hash(PyMethodObject *a)</span></a>
+<a name="304"><span class="lineNum">     304 </span>            : {</a>
+<a name="305"><span class="lineNum">     305 </span>            :     Py_hash_t x, y;</a>
+<a name="306"><span class="lineNum">     306 </span><span class="lineCov">        100 :     x = _Py_HashPointer(a-&gt;im_self);</span></a>
+<a name="307"><span class="lineNum">     307 </span><span class="lineCov">        100 :     y = PyObject_Hash(a-&gt;im_func);</span></a>
+<a name="308"><span class="lineNum">     308 </span><span class="lineCov">        100 :     if (y == -1)</span></a>
+<a name="309"><span class="lineNum">     309 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="310"><span class="lineNum">     310 </span><span class="lineCov">        100 :     x = x ^ y;</span></a>
+<a name="311"><span class="lineNum">     311 </span><span class="lineCov">        100 :     if (x == -1)</span></a>
+<a name="312"><span class="lineNum">     312 </span><span class="lineNoCov">          0 :         x = -2;</span></a>
+<a name="313"><span class="lineNum">     313 </span><span class="lineCov">        100 :     return x;</span></a>
+<a name="314"><span class="lineNum">     314 </span>            : }</a>
+<a name="315"><span class="lineNum">     315 </span>            : </a>
+<a name="316"><span class="lineNum">     316 </span>            : static int</a>
+<a name="317"><span class="lineNum">     317 </span><span class="lineCov">    7823080 : method_traverse(PyMethodObject *im, visitproc visit, void *arg)</span></a>
+<a name="318"><span class="lineNum">     318 </span>            : {</a>
+<a name="319"><span class="lineNum">     319 </span><span class="lineCov">    7823080 :     Py_VISIT(im-&gt;im_func);</span></a>
+<a name="320"><span class="lineNum">     320 </span><span class="lineCov">    7823070 :     Py_VISIT(im-&gt;im_self);</span></a>
+<a name="321"><span class="lineNum">     321 </span><span class="lineCov">    7823070 :     return 0;</span></a>
+<a name="322"><span class="lineNum">     322 </span>            : }</a>
+<a name="323"><span class="lineNum">     323 </span>            : </a>
+<a name="324"><span class="lineNum">     324 </span>            : PyTypeObject PyMethod_Type = {</a>
+<a name="325"><span class="lineNum">     325 </span>            :     PyVarObject_HEAD_INIT(&amp;PyType_Type, 0)</a>
+<a name="326"><span class="lineNum">     326 </span>            :     .tp_name = &quot;method&quot;,</a>
+<a name="327"><span class="lineNum">     327 </span>            :     .tp_basicsize = sizeof(PyMethodObject),</a>
+<a name="328"><span class="lineNum">     328 </span>            :     .tp_dealloc = (destructor)method_dealloc,</a>
+<a name="329"><span class="lineNum">     329 </span>            :     .tp_vectorcall_offset = offsetof(PyMethodObject, vectorcall),</a>
+<a name="330"><span class="lineNum">     330 </span>            :     .tp_repr = (reprfunc)method_repr,</a>
+<a name="331"><span class="lineNum">     331 </span>            :     .tp_hash = (hashfunc)method_hash,</a>
+<a name="332"><span class="lineNum">     332 </span>            :     .tp_call = PyVectorcall_Call,</a>
+<a name="333"><span class="lineNum">     333 </span>            :     .tp_getattro = method_getattro,</a>
+<a name="334"><span class="lineNum">     334 </span>            :     .tp_setattro = PyObject_GenericSetAttr,</a>
+<a name="335"><span class="lineNum">     335 </span>            :     .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC |</a>
+<a name="336"><span class="lineNum">     336 </span>            :                 Py_TPFLAGS_HAVE_VECTORCALL,</a>
+<a name="337"><span class="lineNum">     337 </span>            :     .tp_doc = method_new__doc__,</a>
+<a name="338"><span class="lineNum">     338 </span>            :     .tp_traverse = (traverseproc)method_traverse,</a>
+<a name="339"><span class="lineNum">     339 </span>            :     .tp_richcompare = method_richcompare,</a>
+<a name="340"><span class="lineNum">     340 </span>            :     .tp_weaklistoffset = offsetof(PyMethodObject, im_weakreflist),</a>
+<a name="341"><span class="lineNum">     341 </span>            :     .tp_methods = method_methods,</a>
+<a name="342"><span class="lineNum">     342 </span>            :     .tp_members = method_memberlist,</a>
+<a name="343"><span class="lineNum">     343 </span>            :     .tp_getset = method_getset,</a>
+<a name="344"><span class="lineNum">     344 </span>            :     .tp_new = method_new,</a>
+<a name="345"><span class="lineNum">     345 </span>            : };</a>
+<a name="346"><span class="lineNum">     346 </span>            : </a>
+<a name="347"><span class="lineNum">     347 </span>            : /* ------------------------------------------------------------------------</a>
+<a name="348"><span class="lineNum">     348 </span>            :  * instance method</a>
+<a name="349"><span class="lineNum">     349 </span>            :  */</a>
+<a name="350"><span class="lineNum">     350 </span>            : </a>
+<a name="351"><span class="lineNum">     351 </span>            : /*[clinic input]</a>
+<a name="352"><span class="lineNum">     352 </span>            : class instancemethod &quot;PyInstanceMethodObject *&quot; &quot;&amp;PyInstanceMethod_Type&quot;</a>
+<a name="353"><span class="lineNum">     353 </span>            : [clinic start generated code]*/</a>
+<a name="354"><span class="lineNum">     354 </span>            : /*[clinic end generated code: output=da39a3ee5e6b4b0d input=28c9762a9016f4d2]*/</a>
+<a name="355"><span class="lineNum">     355 </span>            : </a>
+<a name="356"><span class="lineNum">     356 </span>            : PyObject *</a>
+<a name="357"><span class="lineNum">     357 </span><span class="lineCov">          2 : PyInstanceMethod_New(PyObject *func) {</span></a>
+<a name="358"><span class="lineNum">     358 </span>            :     PyInstanceMethodObject *method;</a>
+<a name="359"><span class="lineNum">     359 </span><span class="lineCov">          2 :     method = PyObject_GC_New(PyInstanceMethodObject,</span></a>
+<a name="360"><span class="lineNum">     360 </span>            :                              &amp;PyInstanceMethod_Type);</a>
+<a name="361"><span class="lineNum">     361 </span><span class="lineCov">          2 :     if (method == NULL) return NULL;</span></a>
+<a name="362"><span class="lineNum">     362 </span><span class="lineCov">          2 :     Py_INCREF(func);</span></a>
+<a name="363"><span class="lineNum">     363 </span><span class="lineCov">          2 :     method-&gt;func = func;</span></a>
+<a name="364"><span class="lineNum">     364 </span><span class="lineCov">          2 :     _PyObject_GC_TRACK(method);</span></a>
+<a name="365"><span class="lineNum">     365 </span><span class="lineCov">          2 :     return (PyObject *)method;</span></a>
+<a name="366"><span class="lineNum">     366 </span>            : }</a>
+<a name="367"><span class="lineNum">     367 </span>            : </a>
+<a name="368"><span class="lineNum">     368 </span>            : PyObject *</a>
+<a name="369"><span class="lineNum">     369 </span><span class="lineNoCov">          0 : PyInstanceMethod_Function(PyObject *im)</span></a>
+<a name="370"><span class="lineNum">     370 </span>            : {</a>
+<a name="371"><span class="lineNum">     371 </span><span class="lineNoCov">          0 :     if (!PyInstanceMethod_Check(im)) {</span></a>
+<a name="372"><span class="lineNum">     372 </span><span class="lineNoCov">          0 :         PyErr_BadInternalCall();</span></a>
+<a name="373"><span class="lineNum">     373 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="374"><span class="lineNum">     374 </span>            :     }</a>
+<a name="375"><span class="lineNum">     375 </span><span class="lineNoCov">          0 :     return PyInstanceMethod_GET_FUNCTION(im);</span></a>
+<a name="376"><span class="lineNum">     376 </span>            : }</a>
+<a name="377"><span class="lineNum">     377 </span>            : </a>
+<a name="378"><span class="lineNum">     378 </span>            : #define IMO_OFF(x) offsetof(PyInstanceMethodObject, x)</a>
+<a name="379"><span class="lineNum">     379 </span>            : </a>
+<a name="380"><span class="lineNum">     380 </span>            : static PyMemberDef instancemethod_memberlist[] = {</a>
+<a name="381"><span class="lineNum">     381 </span>            :     {&quot;__func__&quot;, T_OBJECT, IMO_OFF(func), READONLY,</a>
+<a name="382"><span class="lineNum">     382 </span>            :      &quot;the function (or other callable) implementing a method&quot;},</a>
+<a name="383"><span class="lineNum">     383 </span>            :     {NULL}      /* Sentinel */</a>
+<a name="384"><span class="lineNum">     384 </span>            : };</a>
+<a name="385"><span class="lineNum">     385 </span>            : </a>
+<a name="386"><span class="lineNum">     386 </span>            : static PyObject *</a>
+<a name="387"><span class="lineNum">     387 </span><span class="lineNoCov">          0 : instancemethod_get_doc(PyObject *self, void *context)</span></a>
+<a name="388"><span class="lineNum">     388 </span>            : {</a>
+<a name="389"><span class="lineNum">     389 </span><span class="lineNoCov">          0 :     return PyObject_GetAttr(PyInstanceMethod_GET_FUNCTION(self),</span></a>
+<a name="390"><span class="lineNum">     390 </span>            :                             &amp;_Py_ID(__doc__));</a>
+<a name="391"><span class="lineNum">     391 </span>            : }</a>
+<a name="392"><span class="lineNum">     392 </span>            : </a>
+<a name="393"><span class="lineNum">     393 </span>            : static PyGetSetDef instancemethod_getset[] = {</a>
+<a name="394"><span class="lineNum">     394 </span>            :     {&quot;__doc__&quot;, (getter)instancemethod_get_doc, NULL, NULL},</a>
+<a name="395"><span class="lineNum">     395 </span>            :     {0}</a>
+<a name="396"><span class="lineNum">     396 </span>            : };</a>
+<a name="397"><span class="lineNum">     397 </span>            : </a>
+<a name="398"><span class="lineNum">     398 </span>            : static PyObject *</a>
+<a name="399"><span class="lineNum">     399 </span><span class="lineNoCov">          0 : instancemethod_getattro(PyObject *self, PyObject *name)</span></a>
+<a name="400"><span class="lineNum">     400 </span>            : {</a>
+<a name="401"><span class="lineNum">     401 </span><span class="lineNoCov">          0 :     PyTypeObject *tp = Py_TYPE(self);</span></a>
+<a name="402"><span class="lineNum">     402 </span><span class="lineNoCov">          0 :     PyObject *descr = NULL;</span></a>
+<a name="403"><span class="lineNum">     403 </span>            : </a>
+<a name="404"><span class="lineNum">     404 </span><span class="lineNoCov">          0 :     if (tp-&gt;tp_dict == NULL) {</span></a>
+<a name="405"><span class="lineNum">     405 </span><span class="lineNoCov">          0 :         if (PyType_Ready(tp) &lt; 0)</span></a>
+<a name="406"><span class="lineNum">     406 </span><span class="lineNoCov">          0 :             return NULL;</span></a>
+<a name="407"><span class="lineNum">     407 </span>            :     }</a>
+<a name="408"><span class="lineNum">     408 </span><span class="lineNoCov">          0 :     descr = _PyType_Lookup(tp, name);</span></a>
+<a name="409"><span class="lineNum">     409 </span>            : </a>
+<a name="410"><span class="lineNum">     410 </span><span class="lineNoCov">          0 :     if (descr != NULL) {</span></a>
+<a name="411"><span class="lineNum">     411 </span><span class="lineNoCov">          0 :         descrgetfunc f = TP_DESCR_GET(Py_TYPE(descr));</span></a>
+<a name="412"><span class="lineNum">     412 </span><span class="lineNoCov">          0 :         if (f != NULL)</span></a>
+<a name="413"><span class="lineNum">     413 </span><span class="lineNoCov">          0 :             return f(descr, self, (PyObject *)Py_TYPE(self));</span></a>
+<a name="414"><span class="lineNum">     414 </span>            :         else {</a>
+<a name="415"><span class="lineNum">     415 </span><span class="lineNoCov">          0 :             Py_INCREF(descr);</span></a>
+<a name="416"><span class="lineNum">     416 </span><span class="lineNoCov">          0 :             return descr;</span></a>
+<a name="417"><span class="lineNum">     417 </span>            :         }</a>
+<a name="418"><span class="lineNum">     418 </span>            :     }</a>
+<a name="419"><span class="lineNum">     419 </span>            : </a>
+<a name="420"><span class="lineNum">     420 </span><span class="lineNoCov">          0 :     return PyObject_GetAttr(PyInstanceMethod_GET_FUNCTION(self), name);</span></a>
+<a name="421"><span class="lineNum">     421 </span>            : }</a>
+<a name="422"><span class="lineNum">     422 </span>            : </a>
+<a name="423"><span class="lineNum">     423 </span>            : static void</a>
+<a name="424"><span class="lineNum">     424 </span><span class="lineCov">          2 : instancemethod_dealloc(PyObject *self) {</span></a>
+<a name="425"><span class="lineNum">     425 </span><span class="lineCov">          2 :     _PyObject_GC_UNTRACK(self);</span></a>
+<a name="426"><span class="lineNum">     426 </span><span class="lineCov">          2 :     Py_DECREF(PyInstanceMethod_GET_FUNCTION(self));</span></a>
+<a name="427"><span class="lineNum">     427 </span><span class="lineCov">          2 :     PyObject_GC_Del(self);</span></a>
+<a name="428"><span class="lineNum">     428 </span><span class="lineCov">          2 : }</span></a>
+<a name="429"><span class="lineNum">     429 </span>            : </a>
+<a name="430"><span class="lineNum">     430 </span>            : static int</a>
+<a name="431"><span class="lineNum">     431 </span><span class="lineCov">        208 : instancemethod_traverse(PyObject *self, visitproc visit, void *arg) {</span></a>
+<a name="432"><span class="lineNum">     432 </span><span class="lineCov">        208 :     Py_VISIT(PyInstanceMethod_GET_FUNCTION(self));</span></a>
+<a name="433"><span class="lineNum">     433 </span><span class="lineCov">        208 :     return 0;</span></a>
+<a name="434"><span class="lineNum">     434 </span>            : }</a>
+<a name="435"><span class="lineNum">     435 </span>            : </a>
+<a name="436"><span class="lineNum">     436 </span>            : static PyObject *</a>
+<a name="437"><span class="lineNum">     437 </span><span class="lineNoCov">          0 : instancemethod_call(PyObject *self, PyObject *arg, PyObject *kw)</span></a>
+<a name="438"><span class="lineNum">     438 </span>            : {</a>
+<a name="439"><span class="lineNum">     439 </span><span class="lineNoCov">          0 :     return PyObject_Call(PyInstanceMethod_GET_FUNCTION(self), arg, kw);</span></a>
+<a name="440"><span class="lineNum">     440 </span>            : }</a>
+<a name="441"><span class="lineNum">     441 </span>            : </a>
+<a name="442"><span class="lineNum">     442 </span>            : static PyObject *</a>
+<a name="443"><span class="lineNum">     443 </span><span class="lineCov">          6 : instancemethod_descr_get(PyObject *descr, PyObject *obj, PyObject *type) {</span></a>
+<a name="444"><span class="lineNum">     444 </span><span class="lineCov">          6 :     PyObject *func = PyInstanceMethod_GET_FUNCTION(descr);</span></a>
+<a name="445"><span class="lineNum">     445 </span><span class="lineCov">          6 :     if (obj == NULL) {</span></a>
+<a name="446"><span class="lineNum">     446 </span><span class="lineCov">          2 :         Py_INCREF(func);</span></a>
+<a name="447"><span class="lineNum">     447 </span><span class="lineCov">          2 :         return func;</span></a>
+<a name="448"><span class="lineNum">     448 </span>            :     }</a>
+<a name="449"><span class="lineNum">     449 </span>            :     else</a>
+<a name="450"><span class="lineNum">     450 </span><span class="lineCov">          4 :         return PyMethod_New(func, obj);</span></a>
+<a name="451"><span class="lineNum">     451 </span>            : }</a>
+<a name="452"><span class="lineNum">     452 </span>            : </a>
+<a name="453"><span class="lineNum">     453 </span>            : static PyObject *</a>
+<a name="454"><span class="lineNum">     454 </span><span class="lineNoCov">          0 : instancemethod_richcompare(PyObject *self, PyObject *other, int op)</span></a>
+<a name="455"><span class="lineNum">     455 </span>            : {</a>
+<a name="456"><span class="lineNum">     456 </span>            :     PyInstanceMethodObject *a, *b;</a>
+<a name="457"><span class="lineNum">     457 </span>            :     PyObject *res;</a>
+<a name="458"><span class="lineNum">     458 </span>            :     int eq;</a>
+<a name="459"><span class="lineNum">     459 </span>            : </a>
+<a name="460"><span class="lineNum">     460 </span><span class="lineNoCov">          0 :     if ((op != Py_EQ &amp;&amp; op != Py_NE) ||</span></a>
+<a name="461"><span class="lineNum">     461 </span><span class="lineNoCov">          0 :         !PyInstanceMethod_Check(self) ||</span></a>
+<a name="462"><span class="lineNum">     462 </span><span class="lineNoCov">          0 :         !PyInstanceMethod_Check(other))</span></a>
+<a name="463"><span class="lineNum">     463 </span>            :     {</a>
+<a name="464"><span class="lineNum">     464 </span><span class="lineNoCov">          0 :         Py_RETURN_NOTIMPLEMENTED;</span></a>
+<a name="465"><span class="lineNum">     465 </span>            :     }</a>
+<a name="466"><span class="lineNum">     466 </span><span class="lineNoCov">          0 :     a = (PyInstanceMethodObject *)self;</span></a>
+<a name="467"><span class="lineNum">     467 </span><span class="lineNoCov">          0 :     b = (PyInstanceMethodObject *)other;</span></a>
+<a name="468"><span class="lineNum">     468 </span><span class="lineNoCov">          0 :     eq = PyObject_RichCompareBool(a-&gt;func, b-&gt;func, Py_EQ);</span></a>
+<a name="469"><span class="lineNum">     469 </span><span class="lineNoCov">          0 :     if (eq &lt; 0)</span></a>
+<a name="470"><span class="lineNum">     470 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="471"><span class="lineNum">     471 </span><span class="lineNoCov">          0 :     if (op == Py_EQ)</span></a>
+<a name="472"><span class="lineNum">     472 </span><span class="lineNoCov">          0 :         res = eq ? Py_True : Py_False;</span></a>
+<a name="473"><span class="lineNum">     473 </span>            :     else</a>
+<a name="474"><span class="lineNum">     474 </span><span class="lineNoCov">          0 :         res = eq ? Py_False : Py_True;</span></a>
+<a name="475"><span class="lineNum">     475 </span><span class="lineNoCov">          0 :     Py_INCREF(res);</span></a>
+<a name="476"><span class="lineNum">     476 </span><span class="lineNoCov">          0 :     return res;</span></a>
+<a name="477"><span class="lineNum">     477 </span>            : }</a>
+<a name="478"><span class="lineNum">     478 </span>            : </a>
+<a name="479"><span class="lineNum">     479 </span>            : static PyObject *</a>
+<a name="480"><span class="lineNum">     480 </span><span class="lineNoCov">          0 : instancemethod_repr(PyObject *self)</span></a>
+<a name="481"><span class="lineNum">     481 </span>            : {</a>
+<a name="482"><span class="lineNum">     482 </span><span class="lineNoCov">          0 :     PyObject *func = PyInstanceMethod_Function(self);</span></a>
+<a name="483"><span class="lineNum">     483 </span>            :     PyObject *funcname, *result;</a>
+<a name="484"><span class="lineNum">     484 </span><span class="lineNoCov">          0 :     const char *defname = &quot;?&quot;;</span></a>
+<a name="485"><span class="lineNum">     485 </span>            : </a>
+<a name="486"><span class="lineNum">     486 </span><span class="lineNoCov">          0 :     if (func == NULL) {</span></a>
+<a name="487"><span class="lineNum">     487 </span><span class="lineNoCov">          0 :         PyErr_BadInternalCall();</span></a>
+<a name="488"><span class="lineNum">     488 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="489"><span class="lineNum">     489 </span>            :     }</a>
+<a name="490"><span class="lineNum">     490 </span>            : </a>
+<a name="491"><span class="lineNum">     491 </span><span class="lineNoCov">          0 :     if (_PyObject_LookupAttr(func, &amp;_Py_ID(__name__), &amp;funcname) &lt; 0) {</span></a>
+<a name="492"><span class="lineNum">     492 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="493"><span class="lineNum">     493 </span>            :     }</a>
+<a name="494"><span class="lineNum">     494 </span><span class="lineNoCov">          0 :     if (funcname != NULL &amp;&amp; !PyUnicode_Check(funcname)) {</span></a>
+<a name="495"><span class="lineNum">     495 </span><span class="lineNoCov">          0 :         Py_DECREF(funcname);</span></a>
+<a name="496"><span class="lineNum">     496 </span><span class="lineNoCov">          0 :         funcname = NULL;</span></a>
+<a name="497"><span class="lineNum">     497 </span>            :     }</a>
+<a name="498"><span class="lineNum">     498 </span>            : </a>
+<a name="499"><span class="lineNum">     499 </span><span class="lineNoCov">          0 :     result = PyUnicode_FromFormat(&quot;&lt;instancemethod %V at %p&gt;&quot;,</span></a>
+<a name="500"><span class="lineNum">     500 </span>            :                                   funcname, defname, self);</a>
+<a name="501"><span class="lineNum">     501 </span>            : </a>
+<a name="502"><span class="lineNum">     502 </span><span class="lineNoCov">          0 :     Py_XDECREF(funcname);</span></a>
+<a name="503"><span class="lineNum">     503 </span><span class="lineNoCov">          0 :     return result;</span></a>
+<a name="504"><span class="lineNum">     504 </span>            : }</a>
+<a name="505"><span class="lineNum">     505 </span>            : </a>
+<a name="506"><span class="lineNum">     506 </span>            : /*[clinic input]</a>
+<a name="507"><span class="lineNum">     507 </span>            : @classmethod</a>
+<a name="508"><span class="lineNum">     508 </span>            : instancemethod.__new__ as instancemethod_new</a>
+<a name="509"><span class="lineNum">     509 </span>            :     function: object</a>
+<a name="510"><span class="lineNum">     510 </span>            :     /</a>
+<a name="511"><span class="lineNum">     511 </span>            : </a>
+<a name="512"><span class="lineNum">     512 </span>            : Bind a function to a class.</a>
+<a name="513"><span class="lineNum">     513 </span>            : [clinic start generated code]*/</a>
+<a name="514"><span class="lineNum">     514 </span>            : </a>
+<a name="515"><span class="lineNum">     515 </span>            : static PyObject *</a>
+<a name="516"><span class="lineNum">     516 </span><span class="lineCov">          2 : instancemethod_new_impl(PyTypeObject *type, PyObject *function)</span></a>
+<a name="517"><span class="lineNum">     517 </span>            : /*[clinic end generated code: output=5e0397b2bdb750be input=cfc54e8b973664a8]*/</a>
+<a name="518"><span class="lineNum">     518 </span>            : {</a>
+<a name="519"><span class="lineNum">     519 </span><span class="lineCov">          2 :     if (!PyCallable_Check(function)) {</span></a>
+<a name="520"><span class="lineNum">     520 </span><span class="lineNoCov">          0 :         PyErr_SetString(PyExc_TypeError,</span></a>
+<a name="521"><span class="lineNum">     521 </span>            :                         &quot;first argument must be callable&quot;);</a>
+<a name="522"><span class="lineNum">     522 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="523"><span class="lineNum">     523 </span>            :     }</a>
+<a name="524"><span class="lineNum">     524 </span>            : </a>
+<a name="525"><span class="lineNum">     525 </span><span class="lineCov">          2 :     return PyInstanceMethod_New(function);</span></a>
+<a name="526"><span class="lineNum">     526 </span>            : }</a>
+<a name="527"><span class="lineNum">     527 </span>            : </a>
+<a name="528"><span class="lineNum">     528 </span>            : PyTypeObject PyInstanceMethod_Type = {</a>
+<a name="529"><span class="lineNum">     529 </span>            :     PyVarObject_HEAD_INIT(&amp;PyType_Type, 0)</a>
+<a name="530"><span class="lineNum">     530 </span>            :     .tp_name = &quot;instancemethod&quot;,</a>
+<a name="531"><span class="lineNum">     531 </span>            :     .tp_basicsize = sizeof(PyInstanceMethodObject),</a>
+<a name="532"><span class="lineNum">     532 </span>            :     .tp_dealloc = instancemethod_dealloc,</a>
+<a name="533"><span class="lineNum">     533 </span>            :     .tp_repr = (reprfunc)instancemethod_repr,</a>
+<a name="534"><span class="lineNum">     534 </span>            :     .tp_call = instancemethod_call,</a>
+<a name="535"><span class="lineNum">     535 </span>            :     .tp_getattro = instancemethod_getattro,</a>
+<a name="536"><span class="lineNum">     536 </span>            :     .tp_setattro = PyObject_GenericSetAttr,</a>
+<a name="537"><span class="lineNum">     537 </span>            :     .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC,</a>
+<a name="538"><span class="lineNum">     538 </span>            :     .tp_doc = instancemethod_new__doc__,</a>
+<a name="539"><span class="lineNum">     539 </span>            :     .tp_traverse = instancemethod_traverse,</a>
+<a name="540"><span class="lineNum">     540 </span>            :     .tp_richcompare = instancemethod_richcompare,</a>
+<a name="541"><span class="lineNum">     541 </span>            :     .tp_members = instancemethod_memberlist,</a>
+<a name="542"><span class="lineNum">     542 </span>            :     .tp_getset = instancemethod_getset,</a>
+<a name="543"><span class="lineNum">     543 </span>            :     .tp_descr_get = instancemethod_descr_get,</a>
+<a name="544"><span class="lineNum">     544 </span>            :     .tp_new = instancemethod_new,</a>
+<a name="545"><span class="lineNum">     545 </span>            : };</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

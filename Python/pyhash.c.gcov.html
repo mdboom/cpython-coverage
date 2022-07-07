@@ -1,0 +1,584 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Python/pyhash.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Python</a> - pyhash.c<span style="font-size: 80%;"> (source / <a href="pyhash.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">83</td>
+            <td class="headerCovTableEntry">86</td>
+            <td class="headerCovTableEntryHi">96.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /* Set of hash utility functions to help maintaining the invariant that</a>
+<a name="2"><span class="lineNum">       2 </span>            :     if a==b then hash(a)==hash(b)</a>
+<a name="3"><span class="lineNum">       3 </span>            : </a>
+<a name="4"><span class="lineNum">       4 </span>            :    All the utility functions (_Py_Hash*()) return &quot;-1&quot; to signify an error.</a>
+<a name="5"><span class="lineNum">       5 </span>            : */</a>
+<a name="6"><span class="lineNum">       6 </span>            : #include &quot;Python.h&quot;</a>
+<a name="7"><span class="lineNum">       7 </span>            : </a>
+<a name="8"><span class="lineNum">       8 </span>            : #ifdef __APPLE__</a>
+<a name="9"><span class="lineNum">       9 </span>            : #  include &lt;libkern/OSByteOrder.h&gt;</a>
+<a name="10"><span class="lineNum">      10 </span>            : #elif defined(HAVE_LE64TOH) &amp;&amp; defined(HAVE_ENDIAN_H)</a>
+<a name="11"><span class="lineNum">      11 </span>            : #  include &lt;endian.h&gt;</a>
+<a name="12"><span class="lineNum">      12 </span>            : #elif defined(HAVE_LE64TOH) &amp;&amp; defined(HAVE_SYS_ENDIAN_H)</a>
+<a name="13"><span class="lineNum">      13 </span>            : #  include &lt;sys/endian.h&gt;</a>
+<a name="14"><span class="lineNum">      14 </span>            : #endif</a>
+<a name="15"><span class="lineNum">      15 </span>            : </a>
+<a name="16"><span class="lineNum">      16 </span>            : #ifdef __cplusplus</a>
+<a name="17"><span class="lineNum">      17 </span>            : extern &quot;C&quot; {</a>
+<a name="18"><span class="lineNum">      18 </span>            : #endif</a>
+<a name="19"><span class="lineNum">      19 </span>            : </a>
+<a name="20"><span class="lineNum">      20 </span>            : _Py_HashSecret_t _Py_HashSecret = {{0}};</a>
+<a name="21"><span class="lineNum">      21 </span>            : </a>
+<a name="22"><span class="lineNum">      22 </span>            : #if Py_HASH_ALGORITHM == Py_HASH_EXTERNAL</a>
+<a name="23"><span class="lineNum">      23 </span>            : extern PyHash_FuncDef PyHash_Func;</a>
+<a name="24"><span class="lineNum">      24 </span>            : #else</a>
+<a name="25"><span class="lineNum">      25 </span>            : static PyHash_FuncDef PyHash_Func;</a>
+<a name="26"><span class="lineNum">      26 </span>            : #endif</a>
+<a name="27"><span class="lineNum">      27 </span>            : </a>
+<a name="28"><span class="lineNum">      28 </span>            : /* Count _Py_HashBytes() calls */</a>
+<a name="29"><span class="lineNum">      29 </span>            : #ifdef Py_HASH_STATS</a>
+<a name="30"><span class="lineNum">      30 </span>            : #define Py_HASH_STATS_MAX 32</a>
+<a name="31"><span class="lineNum">      31 </span>            : static Py_ssize_t hashstats[Py_HASH_STATS_MAX + 1] = {0};</a>
+<a name="32"><span class="lineNum">      32 </span>            : #endif</a>
+<a name="33"><span class="lineNum">      33 </span>            : </a>
+<a name="34"><span class="lineNum">      34 </span>            : /* For numeric types, the hash of a number x is based on the reduction</a>
+<a name="35"><span class="lineNum">      35 </span>            :    of x modulo the prime P = 2**_PyHASH_BITS - 1.  It's designed so that</a>
+<a name="36"><span class="lineNum">      36 </span>            :    hash(x) == hash(y) whenever x and y are numerically equal, even if</a>
+<a name="37"><span class="lineNum">      37 </span>            :    x and y have different types.</a>
+<a name="38"><span class="lineNum">      38 </span>            : </a>
+<a name="39"><span class="lineNum">      39 </span>            :    A quick summary of the hashing strategy:</a>
+<a name="40"><span class="lineNum">      40 </span>            : </a>
+<a name="41"><span class="lineNum">      41 </span>            :    (1) First define the 'reduction of x modulo P' for any rational</a>
+<a name="42"><span class="lineNum">      42 </span>            :    number x; this is a standard extension of the usual notion of</a>
+<a name="43"><span class="lineNum">      43 </span>            :    reduction modulo P for integers.  If x == p/q (written in lowest</a>
+<a name="44"><span class="lineNum">      44 </span>            :    terms), the reduction is interpreted as the reduction of p times</a>
+<a name="45"><span class="lineNum">      45 </span>            :    the inverse of the reduction of q, all modulo P; if q is exactly</a>
+<a name="46"><span class="lineNum">      46 </span>            :    divisible by P then define the reduction to be infinity.  So we've</a>
+<a name="47"><span class="lineNum">      47 </span>            :    got a well-defined map</a>
+<a name="48"><span class="lineNum">      48 </span>            : </a>
+<a name="49"><span class="lineNum">      49 </span>            :       reduce : { rational numbers } -&gt; { 0, 1, 2, ..., P-1, infinity }.</a>
+<a name="50"><span class="lineNum">      50 </span>            : </a>
+<a name="51"><span class="lineNum">      51 </span>            :    (2) Now for a rational number x, define hash(x) by:</a>
+<a name="52"><span class="lineNum">      52 </span>            : </a>
+<a name="53"><span class="lineNum">      53 </span>            :       reduce(x)   if x &gt;= 0</a>
+<a name="54"><span class="lineNum">      54 </span>            :       -reduce(-x) if x &lt; 0</a>
+<a name="55"><span class="lineNum">      55 </span>            : </a>
+<a name="56"><span class="lineNum">      56 </span>            :    If the result of the reduction is infinity (this is impossible for</a>
+<a name="57"><span class="lineNum">      57 </span>            :    integers, floats and Decimals) then use the predefined hash value</a>
+<a name="58"><span class="lineNum">      58 </span>            :    _PyHASH_INF for x &gt;= 0, or -_PyHASH_INF for x &lt; 0, instead.</a>
+<a name="59"><span class="lineNum">      59 </span>            :    _PyHASH_INF and -_PyHASH_INF are also used for the</a>
+<a name="60"><span class="lineNum">      60 </span>            :    hashes of float and Decimal infinities.</a>
+<a name="61"><span class="lineNum">      61 </span>            : </a>
+<a name="62"><span class="lineNum">      62 </span>            :    NaNs hash with a pointer hash.  Having distinct hash values prevents</a>
+<a name="63"><span class="lineNum">      63 </span>            :    catastrophic pileups from distinct NaN instances which used to always</a>
+<a name="64"><span class="lineNum">      64 </span>            :    have the same hash value but would compare unequal.</a>
+<a name="65"><span class="lineNum">      65 </span>            : </a>
+<a name="66"><span class="lineNum">      66 </span>            :    A selling point for the above strategy is that it makes it possible</a>
+<a name="67"><span class="lineNum">      67 </span>            :    to compute hashes of decimal and binary floating-point numbers</a>
+<a name="68"><span class="lineNum">      68 </span>            :    efficiently, even if the exponent of the binary or decimal number</a>
+<a name="69"><span class="lineNum">      69 </span>            :    is large.  The key point is that</a>
+<a name="70"><span class="lineNum">      70 </span>            : </a>
+<a name="71"><span class="lineNum">      71 </span>            :       reduce(x * y) == reduce(x) * reduce(y) (modulo _PyHASH_MODULUS)</a>
+<a name="72"><span class="lineNum">      72 </span>            : </a>
+<a name="73"><span class="lineNum">      73 </span>            :    provided that {reduce(x), reduce(y)} != {0, infinity}.  The reduction of a</a>
+<a name="74"><span class="lineNum">      74 </span>            :    binary or decimal float is never infinity, since the denominator is a power</a>
+<a name="75"><span class="lineNum">      75 </span>            :    of 2 (for binary) or a divisor of a power of 10 (for decimal).  So we have,</a>
+<a name="76"><span class="lineNum">      76 </span>            :    for nonnegative x,</a>
+<a name="77"><span class="lineNum">      77 </span>            : </a>
+<a name="78"><span class="lineNum">      78 </span>            :       reduce(x * 2**e) == reduce(x) * reduce(2**e) % _PyHASH_MODULUS</a>
+<a name="79"><span class="lineNum">      79 </span>            : </a>
+<a name="80"><span class="lineNum">      80 </span>            :       reduce(x * 10**e) == reduce(x) * reduce(10**e) % _PyHASH_MODULUS</a>
+<a name="81"><span class="lineNum">      81 </span>            : </a>
+<a name="82"><span class="lineNum">      82 </span>            :    and reduce(10**e) can be computed efficiently by the usual modular</a>
+<a name="83"><span class="lineNum">      83 </span>            :    exponentiation algorithm.  For reduce(2**e) it's even better: since</a>
+<a name="84"><span class="lineNum">      84 </span>            :    P is of the form 2**n-1, reduce(2**e) is 2**(e mod n), and multiplication</a>
+<a name="85"><span class="lineNum">      85 </span>            :    by 2**(e mod n) modulo 2**n-1 just amounts to a rotation of bits.</a>
+<a name="86"><span class="lineNum">      86 </span>            : </a>
+<a name="87"><span class="lineNum">      87 </span>            :    */</a>
+<a name="88"><span class="lineNum">      88 </span>            : </a>
+<a name="89"><span class="lineNum">      89 </span>            : Py_hash_t _Py_HashPointer(const void *);</a>
+<a name="90"><span class="lineNum">      90 </span>            : </a>
+<a name="91"><span class="lineNum">      91 </span>            : Py_hash_t</a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">     197666 : _Py_HashDouble(PyObject *inst, double v)</span></a>
+<a name="93"><span class="lineNum">      93 </span>            : {</a>
+<a name="94"><span class="lineNum">      94 </span>            :     int e, sign;</a>
+<a name="95"><span class="lineNum">      95 </span>            :     double m;</a>
+<a name="96"><span class="lineNum">      96 </span>            :     Py_uhash_t x, y;</a>
+<a name="97"><span class="lineNum">      97 </span>            : </a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">     197666 :     if (!Py_IS_FINITE(v)) {</span></a>
+<a name="99"><span class="lineNum">      99 </span><span class="lineCov">        306 :         if (Py_IS_INFINITY(v))</span></a>
+<a name="100"><span class="lineNum">     100 </span><span class="lineCov">        215 :             return v &gt; 0 ? _PyHASH_INF : -_PyHASH_INF;</span></a>
+<a name="101"><span class="lineNum">     101 </span>            :         else</a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         91 :             return _Py_HashPointer(inst);</span></a>
+<a name="103"><span class="lineNum">     103 </span>            :     }</a>
+<a name="104"><span class="lineNum">     104 </span>            : </a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">     197360 :     m = frexp(v, &amp;e);</span></a>
+<a name="106"><span class="lineNum">     106 </span>            : </a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">     197360 :     sign = 1;</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">     197360 :     if (m &lt; 0) {</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">      21810 :         sign = -1;</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">      21810 :         m = -m;</span></a>
+<a name="111"><span class="lineNum">     111 </span>            :     }</a>
+<a name="112"><span class="lineNum">     112 </span>            : </a>
+<a name="113"><span class="lineNum">     113 </span>            :     /* process 28 bits at a time;  this should work well both for binary</a>
+<a name="114"><span class="lineNum">     114 </span>            :        and hexadecimal floating point. */</a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">     197360 :     x = 0;</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">     458051 :     while (m) {</span></a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">     260691 :         x = ((x &lt;&lt; 28) &amp; _PyHASH_MODULUS) | x &gt;&gt; (_PyHASH_BITS - 28);</span></a>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">     260691 :         m *= 268435456.0;  /* 2**28 */</span></a>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">     260691 :         e -= 28;</span></a>
+<a name="120"><span class="lineNum">     120 </span><span class="lineCov">     260691 :         y = (Py_uhash_t)m;  /* pull out integer part */</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">     260691 :         m -= y;</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">     260691 :         x += y;</span></a>
+<a name="123"><span class="lineNum">     123 </span><span class="lineCov">     260691 :         if (x &gt;= _PyHASH_MODULUS)</span></a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineNoCov">          0 :             x -= _PyHASH_MODULUS;</span></a>
+<a name="125"><span class="lineNum">     125 </span>            :     }</a>
+<a name="126"><span class="lineNum">     126 </span>            : </a>
+<a name="127"><span class="lineNum">     127 </span>            :     /* adjust for the exponent;  first reduce it modulo _PyHASH_BITS */</a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">     197360 :     e = e &gt;= 0 ? e % _PyHASH_BITS : _PyHASH_BITS-1-((-1-e) % _PyHASH_BITS);</span></a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">     197360 :     x = ((x &lt;&lt; e) &amp; _PyHASH_MODULUS) | x &gt;&gt; (_PyHASH_BITS - e);</span></a>
+<a name="130"><span class="lineNum">     130 </span>            : </a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineCov">     197360 :     x = x * sign;</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineCov">     197360 :     if (x == (Py_uhash_t)-1)</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">       1664 :         x = (Py_uhash_t)-2;</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">     197360 :     return (Py_hash_t)x;</span></a>
+<a name="135"><span class="lineNum">     135 </span>            : }</a>
+<a name="136"><span class="lineNum">     136 </span>            : </a>
+<a name="137"><span class="lineNum">     137 </span>            : Py_hash_t</a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">   41366900 : _Py_HashPointerRaw(const void *p)</span></a>
+<a name="139"><span class="lineNum">     139 </span>            : {</a>
+<a name="140"><span class="lineNum">     140 </span><span class="lineCov">   41366900 :     size_t y = (size_t)p;</span></a>
+<a name="141"><span class="lineNum">     141 </span>            :     /* bottom 3 or 4 bits are likely to be 0; rotate y by 4 to avoid</a>
+<a name="142"><span class="lineNum">     142 </span>            :        excessive hash collisions for dicts and sets */</a>
+<a name="143"><span class="lineNum">     143 </span><span class="lineCov">   41366900 :     y = (y &gt;&gt; 4) | (y &lt;&lt; (8 * SIZEOF_VOID_P - 4));</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">   41366900 :     return (Py_hash_t)y;</span></a>
+<a name="145"><span class="lineNum">     145 </span>            : }</a>
+<a name="146"><span class="lineNum">     146 </span>            : </a>
+<a name="147"><span class="lineNum">     147 </span>            : Py_hash_t</a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">   23803100 : _Py_HashPointer(const void *p)</span></a>
+<a name="149"><span class="lineNum">     149 </span>            : {</a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">   23803100 :     Py_hash_t x = _Py_HashPointerRaw(p);</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">   23803100 :     if (x == -1) {</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineNoCov">          0 :         x = -2;</span></a>
+<a name="153"><span class="lineNum">     153 </span>            :     }</a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">   23803100 :     return x;</span></a>
+<a name="155"><span class="lineNum">     155 </span>            : }</a>
+<a name="156"><span class="lineNum">     156 </span>            : </a>
+<a name="157"><span class="lineNum">     157 </span>            : Py_hash_t</a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">  125786000 : _Py_HashBytes(const void *src, Py_ssize_t len)</span></a>
+<a name="159"><span class="lineNum">     159 </span>            : {</a>
+<a name="160"><span class="lineNum">     160 </span>            :     Py_hash_t x;</a>
+<a name="161"><span class="lineNum">     161 </span>            :     /*</a>
+<a name="162"><span class="lineNum">     162 </span>            :       We make the hash of the empty string be 0, rather than using</a>
+<a name="163"><span class="lineNum">     163 </span>            :       (prefix ^ suffix), since this slightly obfuscates the hash secret</a>
+<a name="164"><span class="lineNum">     164 </span>            :     */</a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">  125786000 :     if (len == 0) {</span></a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">       5821 :         return 0;</span></a>
+<a name="167"><span class="lineNum">     167 </span>            :     }</a>
+<a name="168"><span class="lineNum">     168 </span>            : </a>
+<a name="169"><span class="lineNum">     169 </span>            : #ifdef Py_HASH_STATS</a>
+<a name="170"><span class="lineNum">     170 </span>            :     hashstats[(len &lt;= Py_HASH_STATS_MAX) ? len : 0]++;</a>
+<a name="171"><span class="lineNum">     171 </span>            : #endif</a>
+<a name="172"><span class="lineNum">     172 </span>            : </a>
+<a name="173"><span class="lineNum">     173 </span>            : #if Py_HASH_CUTOFF &gt; 0</a>
+<a name="174"><span class="lineNum">     174 </span>            :     if (len &lt; Py_HASH_CUTOFF) {</a>
+<a name="175"><span class="lineNum">     175 </span>            :         /* Optimize hashing of very small strings with inline DJBX33A. */</a>
+<a name="176"><span class="lineNum">     176 </span>            :         Py_uhash_t hash;</a>
+<a name="177"><span class="lineNum">     177 </span>            :         const unsigned char *p = src;</a>
+<a name="178"><span class="lineNum">     178 </span>            :         hash = 5381; /* DJBX33A starts with 5381 */</a>
+<a name="179"><span class="lineNum">     179 </span>            : </a>
+<a name="180"><span class="lineNum">     180 </span>            :         switch(len) {</a>
+<a name="181"><span class="lineNum">     181 </span>            :             /* ((hash &lt;&lt; 5) + hash) + *p == hash * 33 + *p */</a>
+<a name="182"><span class="lineNum">     182 </span>            :             case 7: hash = ((hash &lt;&lt; 5) + hash) + *p++; /* fallthrough */</a>
+<a name="183"><span class="lineNum">     183 </span>            :             case 6: hash = ((hash &lt;&lt; 5) + hash) + *p++; /* fallthrough */</a>
+<a name="184"><span class="lineNum">     184 </span>            :             case 5: hash = ((hash &lt;&lt; 5) + hash) + *p++; /* fallthrough */</a>
+<a name="185"><span class="lineNum">     185 </span>            :             case 4: hash = ((hash &lt;&lt; 5) + hash) + *p++; /* fallthrough */</a>
+<a name="186"><span class="lineNum">     186 </span>            :             case 3: hash = ((hash &lt;&lt; 5) + hash) + *p++; /* fallthrough */</a>
+<a name="187"><span class="lineNum">     187 </span>            :             case 2: hash = ((hash &lt;&lt; 5) + hash) + *p++; /* fallthrough */</a>
+<a name="188"><span class="lineNum">     188 </span>            :             case 1: hash = ((hash &lt;&lt; 5) + hash) + *p++; break;</a>
+<a name="189"><span class="lineNum">     189 </span>            :             default:</a>
+<a name="190"><span class="lineNum">     190 </span>            :                 Py_UNREACHABLE();</a>
+<a name="191"><span class="lineNum">     191 </span>            :         }</a>
+<a name="192"><span class="lineNum">     192 </span>            :         hash ^= len;</a>
+<a name="193"><span class="lineNum">     193 </span>            :         hash ^= (Py_uhash_t) _Py_HashSecret.djbx33a.suffix;</a>
+<a name="194"><span class="lineNum">     194 </span>            :         x = (Py_hash_t)hash;</a>
+<a name="195"><span class="lineNum">     195 </span>            :     }</a>
+<a name="196"><span class="lineNum">     196 </span>            :     else</a>
+<a name="197"><span class="lineNum">     197 </span>            : #endif /* Py_HASH_CUTOFF */</a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">  125780000 :         x = PyHash_Func.hash(src, len);</span></a>
+<a name="199"><span class="lineNum">     199 </span>            : </a>
+<a name="200"><span class="lineNum">     200 </span><span class="lineCov">  125780000 :     if (x == -1)</span></a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineNoCov">          0 :         return -2;</span></a>
+<a name="202"><span class="lineNum">     202 </span><span class="lineCov">  125780000 :     return x;</span></a>
+<a name="203"><span class="lineNum">     203 </span>            : }</a>
+<a name="204"><span class="lineNum">     204 </span>            : </a>
+<a name="205"><span class="lineNum">     205 </span>            : void</a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineCov">       2952 : _PyHash_Fini(void)</span></a>
+<a name="207"><span class="lineNum">     207 </span>            : {</a>
+<a name="208"><span class="lineNum">     208 </span>            : #ifdef Py_HASH_STATS</a>
+<a name="209"><span class="lineNum">     209 </span>            :     fprintf(stderr, &quot;len   calls    total\n&quot;);</a>
+<a name="210"><span class="lineNum">     210 </span>            :     Py_ssize_t total = 0;</a>
+<a name="211"><span class="lineNum">     211 </span>            :     for (int i = 1; i &lt;= Py_HASH_STATS_MAX; i++) {</a>
+<a name="212"><span class="lineNum">     212 </span>            :         total += hashstats[i];</a>
+<a name="213"><span class="lineNum">     213 </span>            :         fprintf(stderr, &quot;%2i %8zd %8zd\n&quot;, i, hashstats[i], total);</a>
+<a name="214"><span class="lineNum">     214 </span>            :     }</a>
+<a name="215"><span class="lineNum">     215 </span>            :     total += hashstats[0];</a>
+<a name="216"><span class="lineNum">     216 </span>            :     fprintf(stderr, &quot;&gt;  %8zd %8zd\n&quot;, hashstats[0], total);</a>
+<a name="217"><span class="lineNum">     217 </span>            : #endif</a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">       2952 : }</span></a>
+<a name="219"><span class="lineNum">     219 </span>            : </a>
+<a name="220"><span class="lineNum">     220 </span>            : PyHash_FuncDef *</a>
+<a name="221"><span class="lineNum">     221 </span><span class="lineCov">       3134 : PyHash_GetFuncDef(void)</span></a>
+<a name="222"><span class="lineNum">     222 </span>            : {</a>
+<a name="223"><span class="lineNum">     223 </span><span class="lineCov">       3134 :     return &amp;PyHash_Func;</span></a>
+<a name="224"><span class="lineNum">     224 </span>            : }</a>
+<a name="225"><span class="lineNum">     225 </span>            : </a>
+<a name="226"><span class="lineNum">     226 </span>            : /* Optimized memcpy() for Windows */</a>
+<a name="227"><span class="lineNum">     227 </span>            : #ifdef _MSC_VER</a>
+<a name="228"><span class="lineNum">     228 </span>            : #  if SIZEOF_PY_UHASH_T == 4</a>
+<a name="229"><span class="lineNum">     229 </span>            : #    define PY_UHASH_CPY(dst, src) do {                                    \</a>
+<a name="230"><span class="lineNum">     230 </span>            :        dst[0] = src[0]; dst[1] = src[1]; dst[2] = src[2]; dst[3] = src[3]; \</a>
+<a name="231"><span class="lineNum">     231 </span>            :        } while(0)</a>
+<a name="232"><span class="lineNum">     232 </span>            : #  elif SIZEOF_PY_UHASH_T == 8</a>
+<a name="233"><span class="lineNum">     233 </span>            : #    define PY_UHASH_CPY(dst, src) do {                                    \</a>
+<a name="234"><span class="lineNum">     234 </span>            :        dst[0] = src[0]; dst[1] = src[1]; dst[2] = src[2]; dst[3] = src[3]; \</a>
+<a name="235"><span class="lineNum">     235 </span>            :        dst[4] = src[4]; dst[5] = src[5]; dst[6] = src[6]; dst[7] = src[7]; \</a>
+<a name="236"><span class="lineNum">     236 </span>            :        } while(0)</a>
+<a name="237"><span class="lineNum">     237 </span>            : #  else</a>
+<a name="238"><span class="lineNum">     238 </span>            : #    error SIZEOF_PY_UHASH_T must be 4 or 8</a>
+<a name="239"><span class="lineNum">     239 </span>            : #  endif /* SIZEOF_PY_UHASH_T */</a>
+<a name="240"><span class="lineNum">     240 </span>            : #else /* not Windows */</a>
+<a name="241"><span class="lineNum">     241 </span>            : #  define PY_UHASH_CPY(dst, src) memcpy(dst, src, SIZEOF_PY_UHASH_T)</a>
+<a name="242"><span class="lineNum">     242 </span>            : #endif /* _MSC_VER */</a>
+<a name="243"><span class="lineNum">     243 </span>            : </a>
+<a name="244"><span class="lineNum">     244 </span>            : </a>
+<a name="245"><span class="lineNum">     245 </span>            : #if Py_HASH_ALGORITHM == Py_HASH_FNV</a>
+<a name="246"><span class="lineNum">     246 </span>            : /* **************************************************************************</a>
+<a name="247"><span class="lineNum">     247 </span>            :  * Modified Fowler-Noll-Vo (FNV) hash function</a>
+<a name="248"><span class="lineNum">     248 </span>            :  */</a>
+<a name="249"><span class="lineNum">     249 </span>            : static Py_hash_t</a>
+<a name="250"><span class="lineNum">     250 </span>            : fnv(const void *src, Py_ssize_t len)</a>
+<a name="251"><span class="lineNum">     251 </span>            : {</a>
+<a name="252"><span class="lineNum">     252 </span>            :     const unsigned char *p = src;</a>
+<a name="253"><span class="lineNum">     253 </span>            :     Py_uhash_t x;</a>
+<a name="254"><span class="lineNum">     254 </span>            :     Py_ssize_t remainder, blocks;</a>
+<a name="255"><span class="lineNum">     255 </span>            :     union {</a>
+<a name="256"><span class="lineNum">     256 </span>            :         Py_uhash_t value;</a>
+<a name="257"><span class="lineNum">     257 </span>            :         unsigned char bytes[SIZEOF_PY_UHASH_T];</a>
+<a name="258"><span class="lineNum">     258 </span>            :     } block;</a>
+<a name="259"><span class="lineNum">     259 </span>            : </a>
+<a name="260"><span class="lineNum">     260 </span>            : #ifdef Py_DEBUG</a>
+<a name="261"><span class="lineNum">     261 </span>            :     assert(_Py_HashSecret_Initialized);</a>
+<a name="262"><span class="lineNum">     262 </span>            : #endif</a>
+<a name="263"><span class="lineNum">     263 </span>            :     remainder = len % SIZEOF_PY_UHASH_T;</a>
+<a name="264"><span class="lineNum">     264 </span>            :     if (remainder == 0) {</a>
+<a name="265"><span class="lineNum">     265 </span>            :         /* Process at least one block byte by byte to reduce hash collisions</a>
+<a name="266"><span class="lineNum">     266 </span>            :          * for strings with common prefixes. */</a>
+<a name="267"><span class="lineNum">     267 </span>            :         remainder = SIZEOF_PY_UHASH_T;</a>
+<a name="268"><span class="lineNum">     268 </span>            :     }</a>
+<a name="269"><span class="lineNum">     269 </span>            :     blocks = (len - remainder) / SIZEOF_PY_UHASH_T;</a>
+<a name="270"><span class="lineNum">     270 </span>            : </a>
+<a name="271"><span class="lineNum">     271 </span>            :     x = (Py_uhash_t) _Py_HashSecret.fnv.prefix;</a>
+<a name="272"><span class="lineNum">     272 </span>            :     x ^= (Py_uhash_t) *p &lt;&lt; 7;</a>
+<a name="273"><span class="lineNum">     273 </span>            :     while (blocks--) {</a>
+<a name="274"><span class="lineNum">     274 </span>            :         PY_UHASH_CPY(block.bytes, p);</a>
+<a name="275"><span class="lineNum">     275 </span>            :         x = (_PyHASH_MULTIPLIER * x) ^ block.value;</a>
+<a name="276"><span class="lineNum">     276 </span>            :         p += SIZEOF_PY_UHASH_T;</a>
+<a name="277"><span class="lineNum">     277 </span>            :     }</a>
+<a name="278"><span class="lineNum">     278 </span>            :     /* add remainder */</a>
+<a name="279"><span class="lineNum">     279 </span>            :     for (; remainder &gt; 0; remainder--)</a>
+<a name="280"><span class="lineNum">     280 </span>            :         x = (_PyHASH_MULTIPLIER * x) ^ (Py_uhash_t) *p++;</a>
+<a name="281"><span class="lineNum">     281 </span>            :     x ^= (Py_uhash_t) len;</a>
+<a name="282"><span class="lineNum">     282 </span>            :     x ^= (Py_uhash_t) _Py_HashSecret.fnv.suffix;</a>
+<a name="283"><span class="lineNum">     283 </span>            :     if (x == (Py_uhash_t) -1) {</a>
+<a name="284"><span class="lineNum">     284 </span>            :         x = (Py_uhash_t) -2;</a>
+<a name="285"><span class="lineNum">     285 </span>            :     }</a>
+<a name="286"><span class="lineNum">     286 </span>            :     return x;</a>
+<a name="287"><span class="lineNum">     287 </span>            : }</a>
+<a name="288"><span class="lineNum">     288 </span>            : </a>
+<a name="289"><span class="lineNum">     289 </span>            : static PyHash_FuncDef PyHash_Func = {fnv, &quot;fnv&quot;, 8 * SIZEOF_PY_HASH_T,</a>
+<a name="290"><span class="lineNum">     290 </span>            :                                      16 * SIZEOF_PY_HASH_T};</a>
+<a name="291"><span class="lineNum">     291 </span>            : </a>
+<a name="292"><span class="lineNum">     292 </span>            : #endif /* Py_HASH_ALGORITHM == Py_HASH_FNV */</a>
+<a name="293"><span class="lineNum">     293 </span>            : </a>
+<a name="294"><span class="lineNum">     294 </span>            : </a>
+<a name="295"><span class="lineNum">     295 </span>            : /* **************************************************************************</a>
+<a name="296"><span class="lineNum">     296 </span>            :  &lt;MIT License&gt;</a>
+<a name="297"><span class="lineNum">     297 </span>            :  Copyright (c) 2013  Marek Majkowski &lt;marek@popcount.org&gt;</a>
+<a name="298"><span class="lineNum">     298 </span>            : </a>
+<a name="299"><span class="lineNum">     299 </span>            :  Permission is hereby granted, free of charge, to any person obtaining a copy</a>
+<a name="300"><span class="lineNum">     300 </span>            :  of this software and associated documentation files (the &quot;Software&quot;), to deal</a>
+<a name="301"><span class="lineNum">     301 </span>            :  in the Software without restriction, including without limitation the rights</a>
+<a name="302"><span class="lineNum">     302 </span>            :  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</a>
+<a name="303"><span class="lineNum">     303 </span>            :  copies of the Software, and to permit persons to whom the Software is</a>
+<a name="304"><span class="lineNum">     304 </span>            :  furnished to do so, subject to the following conditions:</a>
+<a name="305"><span class="lineNum">     305 </span>            : </a>
+<a name="306"><span class="lineNum">     306 </span>            :  The above copyright notice and this permission notice shall be included in</a>
+<a name="307"><span class="lineNum">     307 </span>            :  all copies or substantial portions of the Software.</a>
+<a name="308"><span class="lineNum">     308 </span>            : </a>
+<a name="309"><span class="lineNum">     309 </span>            :  THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</a>
+<a name="310"><span class="lineNum">     310 </span>            :  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</a>
+<a name="311"><span class="lineNum">     311 </span>            :  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</a>
+<a name="312"><span class="lineNum">     312 </span>            :  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</a>
+<a name="313"><span class="lineNum">     313 </span>            :  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</a>
+<a name="314"><span class="lineNum">     314 </span>            :  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</a>
+<a name="315"><span class="lineNum">     315 </span>            :  THE SOFTWARE.</a>
+<a name="316"><span class="lineNum">     316 </span>            :  &lt;/MIT License&gt;</a>
+<a name="317"><span class="lineNum">     317 </span>            : </a>
+<a name="318"><span class="lineNum">     318 </span>            :  Original location:</a>
+<a name="319"><span class="lineNum">     319 </span>            :     https://github.com/majek/csiphash/</a>
+<a name="320"><span class="lineNum">     320 </span>            : </a>
+<a name="321"><span class="lineNum">     321 </span>            :  Solution inspired by code from:</a>
+<a name="322"><span class="lineNum">     322 </span>            :     Samuel Neves (supercop/crypto_auth/siphash24/little)</a>
+<a name="323"><span class="lineNum">     323 </span>            :     djb (supercop/crypto_auth/siphash24/little2)</a>
+<a name="324"><span class="lineNum">     324 </span>            :     Jean-Philippe Aumasson (https://131002.net/siphash/siphash24.c)</a>
+<a name="325"><span class="lineNum">     325 </span>            : </a>
+<a name="326"><span class="lineNum">     326 </span>            :  Modified for Python by Christian Heimes:</a>
+<a name="327"><span class="lineNum">     327 </span>            :     - C89 / MSVC compatibility</a>
+<a name="328"><span class="lineNum">     328 </span>            :     - _rotl64() on Windows</a>
+<a name="329"><span class="lineNum">     329 </span>            :     - letoh64() fallback</a>
+<a name="330"><span class="lineNum">     330 </span>            : */</a>
+<a name="331"><span class="lineNum">     331 </span>            : </a>
+<a name="332"><span class="lineNum">     332 </span>            : /* byte swap little endian to host endian</a>
+<a name="333"><span class="lineNum">     333 </span>            :  * Endian conversion not only ensures that the hash function returns the same</a>
+<a name="334"><span class="lineNum">     334 </span>            :  * value on all platforms. It is also required to for a good dispersion of</a>
+<a name="335"><span class="lineNum">     335 </span>            :  * the hash values' least significant bits.</a>
+<a name="336"><span class="lineNum">     336 </span>            :  */</a>
+<a name="337"><span class="lineNum">     337 </span>            : #if PY_LITTLE_ENDIAN</a>
+<a name="338"><span class="lineNum">     338 </span>            : #  define _le64toh(x) ((uint64_t)(x))</a>
+<a name="339"><span class="lineNum">     339 </span>            : #elif defined(__APPLE__)</a>
+<a name="340"><span class="lineNum">     340 </span>            : #  define _le64toh(x) OSSwapLittleToHostInt64(x)</a>
+<a name="341"><span class="lineNum">     341 </span>            : #elif defined(HAVE_LETOH64)</a>
+<a name="342"><span class="lineNum">     342 </span>            : #  define _le64toh(x) le64toh(x)</a>
+<a name="343"><span class="lineNum">     343 </span>            : #else</a>
+<a name="344"><span class="lineNum">     344 </span>            : #  define _le64toh(x) (((uint64_t)(x) &lt;&lt; 56) | \</a>
+<a name="345"><span class="lineNum">     345 </span>            :                       (((uint64_t)(x) &lt;&lt; 40) &amp; 0xff000000000000ULL) | \</a>
+<a name="346"><span class="lineNum">     346 </span>            :                       (((uint64_t)(x) &lt;&lt; 24) &amp; 0xff0000000000ULL) | \</a>
+<a name="347"><span class="lineNum">     347 </span>            :                       (((uint64_t)(x) &lt;&lt; 8)  &amp; 0xff00000000ULL) | \</a>
+<a name="348"><span class="lineNum">     348 </span>            :                       (((uint64_t)(x) &gt;&gt; 8)  &amp; 0xff000000ULL) | \</a>
+<a name="349"><span class="lineNum">     349 </span>            :                       (((uint64_t)(x) &gt;&gt; 24) &amp; 0xff0000ULL) | \</a>
+<a name="350"><span class="lineNum">     350 </span>            :                       (((uint64_t)(x) &gt;&gt; 40) &amp; 0xff00ULL) | \</a>
+<a name="351"><span class="lineNum">     351 </span>            :                       ((uint64_t)(x)  &gt;&gt; 56))</a>
+<a name="352"><span class="lineNum">     352 </span>            : #endif</a>
+<a name="353"><span class="lineNum">     353 </span>            : </a>
+<a name="354"><span class="lineNum">     354 </span>            : </a>
+<a name="355"><span class="lineNum">     355 </span>            : #ifdef _MSC_VER</a>
+<a name="356"><span class="lineNum">     356 </span>            : #  define ROTATE(x, b)  _rotl64(x, b)</a>
+<a name="357"><span class="lineNum">     357 </span>            : #else</a>
+<a name="358"><span class="lineNum">     358 </span>            : #  define ROTATE(x, b) (uint64_t)( ((x) &lt;&lt; (b)) | ( (x) &gt;&gt; (64 - (b))) )</a>
+<a name="359"><span class="lineNum">     359 </span>            : #endif</a>
+<a name="360"><span class="lineNum">     360 </span>            : </a>
+<a name="361"><span class="lineNum">     361 </span>            : #define HALF_ROUND(a,b,c,d,s,t)     \</a>
+<a name="362"><span class="lineNum">     362 </span>            :     a += b; c += d;                 \</a>
+<a name="363"><span class="lineNum">     363 </span>            :     b = ROTATE(b, s) ^ a;           \</a>
+<a name="364"><span class="lineNum">     364 </span>            :     d = ROTATE(d, t) ^ c;           \</a>
+<a name="365"><span class="lineNum">     365 </span>            :     a = ROTATE(a, 32);</a>
+<a name="366"><span class="lineNum">     366 </span>            : </a>
+<a name="367"><span class="lineNum">     367 </span>            : #define SINGLE_ROUND(v0,v1,v2,v3)   \</a>
+<a name="368"><span class="lineNum">     368 </span>            :     HALF_ROUND(v0,v1,v2,v3,13,16);  \</a>
+<a name="369"><span class="lineNum">     369 </span>            :     HALF_ROUND(v2,v1,v0,v3,17,21);</a>
+<a name="370"><span class="lineNum">     370 </span>            : </a>
+<a name="371"><span class="lineNum">     371 </span>            : #define DOUBLE_ROUND(v0,v1,v2,v3)   \</a>
+<a name="372"><span class="lineNum">     372 </span>            :     SINGLE_ROUND(v0,v1,v2,v3);      \</a>
+<a name="373"><span class="lineNum">     373 </span>            :     SINGLE_ROUND(v0,v1,v2,v3);</a>
+<a name="374"><span class="lineNum">     374 </span>            : </a>
+<a name="375"><span class="lineNum">     375 </span>            : </a>
+<a name="376"><span class="lineNum">     376 </span>            : static uint64_t</a>
+<a name="377"><span class="lineNum">     377 </span><span class="lineCov">  125781000 : siphash13(uint64_t k0, uint64_t k1, const void *src, Py_ssize_t src_sz) {</span></a>
+<a name="378"><span class="lineNum">     378 </span><span class="lineCov">  125781000 :     uint64_t b = (uint64_t)src_sz &lt;&lt; 56;</span></a>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">  125781000 :     const uint8_t *in = (const uint8_t*)src;</span></a>
+<a name="380"><span class="lineNum">     380 </span>            : </a>
+<a name="381"><span class="lineNum">     381 </span><span class="lineCov">  125781000 :     uint64_t v0 = k0 ^ 0x736f6d6570736575ULL;</span></a>
+<a name="382"><span class="lineNum">     382 </span><span class="lineCov">  125781000 :     uint64_t v1 = k1 ^ 0x646f72616e646f6dULL;</span></a>
+<a name="383"><span class="lineNum">     383 </span><span class="lineCov">  125781000 :     uint64_t v2 = k0 ^ 0x6c7967656e657261ULL;</span></a>
+<a name="384"><span class="lineNum">     384 </span><span class="lineCov">  125781000 :     uint64_t v3 = k1 ^ 0x7465646279746573ULL;</span></a>
+<a name="385"><span class="lineNum">     385 </span>            : </a>
+<a name="386"><span class="lineNum">     386 </span>            :     uint64_t t;</a>
+<a name="387"><span class="lineNum">     387 </span>            :     uint8_t *pt;</a>
+<a name="388"><span class="lineNum">     388 </span>            : </a>
+<a name="389"><span class="lineNum">     389 </span><span class="lineCov">  251324000 :     while (src_sz &gt;= 8) {</span></a>
+<a name="390"><span class="lineNum">     390 </span>            :         uint64_t mi;</a>
+<a name="391"><span class="lineNum">     391 </span><span class="lineCov">  125543000 :         memcpy(&amp;mi, in, sizeof(mi));</span></a>
+<a name="392"><span class="lineNum">     392 </span><span class="lineCov">  125543000 :         mi = _le64toh(mi);</span></a>
+<a name="393"><span class="lineNum">     393 </span><span class="lineCov">  125543000 :         in += sizeof(mi);</span></a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">  125543000 :         src_sz -= sizeof(mi);</span></a>
+<a name="395"><span class="lineNum">     395 </span><span class="lineCov">  125543000 :         v3 ^= mi;</span></a>
+<a name="396"><span class="lineNum">     396 </span><span class="lineCov">  125543000 :         SINGLE_ROUND(v0,v1,v2,v3);</span></a>
+<a name="397"><span class="lineNum">     397 </span><span class="lineCov">  125543000 :         v0 ^= mi;</span></a>
+<a name="398"><span class="lineNum">     398 </span>            :     }</a>
+<a name="399"><span class="lineNum">     399 </span>            : </a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineCov">  125781000 :     t = 0;</span></a>
+<a name="401"><span class="lineNum">     401 </span><span class="lineCov">  125781000 :     pt = (uint8_t *)&amp;t;</span></a>
+<a name="402"><span class="lineNum">     402 </span><span class="lineCov">  125781000 :     switch (src_sz) {</span></a>
+<a name="403"><span class="lineNum">     403 </span><span class="lineCov">   17300300 :         case 7: pt[6] = in[6]; /* fall through */</span></a>
+<a name="404"><span class="lineNum">     404 </span><span class="lineCov">   35429700 :         case 6: pt[5] = in[5]; /* fall through */</span></a>
+<a name="405"><span class="lineNum">     405 </span><span class="lineCov">   48131600 :         case 5: pt[4] = in[4]; /* fall through */</span></a>
+<a name="406"><span class="lineNum">     406 </span><span class="lineCov">   70812900 :         case 4: memcpy(pt, in, sizeof(uint32_t)); break;</span></a>
+<a name="407"><span class="lineNum">     407 </span><span class="lineCov">   17574600 :         case 3: pt[2] = in[2]; /* fall through */</span></a>
+<a name="408"><span class="lineNum">     408 </span><span class="lineCov">   32495900 :         case 2: pt[1] = in[1]; /* fall through */</span></a>
+<a name="409"><span class="lineNum">     409 </span><span class="lineCov">   41308300 :         case 1: pt[0] = in[0]; /* fall through */</span></a>
+<a name="410"><span class="lineNum">     410 </span>            :     }</a>
+<a name="411"><span class="lineNum">     411 </span><span class="lineCov">  125781000 :     b |= _le64toh(t);</span></a>
+<a name="412"><span class="lineNum">     412 </span>            : </a>
+<a name="413"><span class="lineNum">     413 </span><span class="lineCov">  125781000 :     v3 ^= b;</span></a>
+<a name="414"><span class="lineNum">     414 </span><span class="lineCov">  125781000 :     SINGLE_ROUND(v0,v1,v2,v3);</span></a>
+<a name="415"><span class="lineNum">     415 </span><span class="lineCov">  125781000 :     v0 ^= b;</span></a>
+<a name="416"><span class="lineNum">     416 </span><span class="lineCov">  125781000 :     v2 ^= 0xff;</span></a>
+<a name="417"><span class="lineNum">     417 </span><span class="lineCov">  125781000 :     SINGLE_ROUND(v0,v1,v2,v3);</span></a>
+<a name="418"><span class="lineNum">     418 </span><span class="lineCov">  125781000 :     SINGLE_ROUND(v0,v1,v2,v3);</span></a>
+<a name="419"><span class="lineNum">     419 </span><span class="lineCov">  125781000 :     SINGLE_ROUND(v0,v1,v2,v3);</span></a>
+<a name="420"><span class="lineNum">     420 </span>            : </a>
+<a name="421"><span class="lineNum">     421 </span>            :     /* modified */</a>
+<a name="422"><span class="lineNum">     422 </span><span class="lineCov">  125781000 :     t = (v0 ^ v1) ^ (v2 ^ v3);</span></a>
+<a name="423"><span class="lineNum">     423 </span><span class="lineCov">  125781000 :     return t;</span></a>
+<a name="424"><span class="lineNum">     424 </span>            : }</a>
+<a name="425"><span class="lineNum">     425 </span>            : </a>
+<a name="426"><span class="lineNum">     426 </span>            : #if Py_HASH_ALGORITHM == Py_HASH_SIPHASH24</a>
+<a name="427"><span class="lineNum">     427 </span>            : static uint64_t</a>
+<a name="428"><span class="lineNum">     428 </span>            : siphash24(uint64_t k0, uint64_t k1, const void *src, Py_ssize_t src_sz) {</a>
+<a name="429"><span class="lineNum">     429 </span>            :     uint64_t b = (uint64_t)src_sz &lt;&lt; 56;</a>
+<a name="430"><span class="lineNum">     430 </span>            :     const uint8_t *in = (const uint8_t*)src;</a>
+<a name="431"><span class="lineNum">     431 </span>            : </a>
+<a name="432"><span class="lineNum">     432 </span>            :     uint64_t v0 = k0 ^ 0x736f6d6570736575ULL;</a>
+<a name="433"><span class="lineNum">     433 </span>            :     uint64_t v1 = k1 ^ 0x646f72616e646f6dULL;</a>
+<a name="434"><span class="lineNum">     434 </span>            :     uint64_t v2 = k0 ^ 0x6c7967656e657261ULL;</a>
+<a name="435"><span class="lineNum">     435 </span>            :     uint64_t v3 = k1 ^ 0x7465646279746573ULL;</a>
+<a name="436"><span class="lineNum">     436 </span>            : </a>
+<a name="437"><span class="lineNum">     437 </span>            :     uint64_t t;</a>
+<a name="438"><span class="lineNum">     438 </span>            :     uint8_t *pt;</a>
+<a name="439"><span class="lineNum">     439 </span>            : </a>
+<a name="440"><span class="lineNum">     440 </span>            :     while (src_sz &gt;= 8) {</a>
+<a name="441"><span class="lineNum">     441 </span>            :         uint64_t mi;</a>
+<a name="442"><span class="lineNum">     442 </span>            :         memcpy(&amp;mi, in, sizeof(mi));</a>
+<a name="443"><span class="lineNum">     443 </span>            :         mi = _le64toh(mi);</a>
+<a name="444"><span class="lineNum">     444 </span>            :         in += sizeof(mi);</a>
+<a name="445"><span class="lineNum">     445 </span>            :         src_sz -= sizeof(mi);</a>
+<a name="446"><span class="lineNum">     446 </span>            :         v3 ^= mi;</a>
+<a name="447"><span class="lineNum">     447 </span>            :         DOUBLE_ROUND(v0,v1,v2,v3);</a>
+<a name="448"><span class="lineNum">     448 </span>            :         v0 ^= mi;</a>
+<a name="449"><span class="lineNum">     449 </span>            :     }</a>
+<a name="450"><span class="lineNum">     450 </span>            : </a>
+<a name="451"><span class="lineNum">     451 </span>            :     t = 0;</a>
+<a name="452"><span class="lineNum">     452 </span>            :     pt = (uint8_t *)&amp;t;</a>
+<a name="453"><span class="lineNum">     453 </span>            :     switch (src_sz) {</a>
+<a name="454"><span class="lineNum">     454 </span>            :         case 7: pt[6] = in[6]; /* fall through */</a>
+<a name="455"><span class="lineNum">     455 </span>            :         case 6: pt[5] = in[5]; /* fall through */</a>
+<a name="456"><span class="lineNum">     456 </span>            :         case 5: pt[4] = in[4]; /* fall through */</a>
+<a name="457"><span class="lineNum">     457 </span>            :         case 4: memcpy(pt, in, sizeof(uint32_t)); break;</a>
+<a name="458"><span class="lineNum">     458 </span>            :         case 3: pt[2] = in[2]; /* fall through */</a>
+<a name="459"><span class="lineNum">     459 </span>            :         case 2: pt[1] = in[1]; /* fall through */</a>
+<a name="460"><span class="lineNum">     460 </span>            :         case 1: pt[0] = in[0]; /* fall through */</a>
+<a name="461"><span class="lineNum">     461 </span>            :     }</a>
+<a name="462"><span class="lineNum">     462 </span>            :     b |= _le64toh(t);</a>
+<a name="463"><span class="lineNum">     463 </span>            : </a>
+<a name="464"><span class="lineNum">     464 </span>            :     v3 ^= b;</a>
+<a name="465"><span class="lineNum">     465 </span>            :     DOUBLE_ROUND(v0,v1,v2,v3);</a>
+<a name="466"><span class="lineNum">     466 </span>            :     v0 ^= b;</a>
+<a name="467"><span class="lineNum">     467 </span>            :     v2 ^= 0xff;</a>
+<a name="468"><span class="lineNum">     468 </span>            :     DOUBLE_ROUND(v0,v1,v2,v3);</a>
+<a name="469"><span class="lineNum">     469 </span>            :     DOUBLE_ROUND(v0,v1,v2,v3);</a>
+<a name="470"><span class="lineNum">     470 </span>            : </a>
+<a name="471"><span class="lineNum">     471 </span>            :     /* modified */</a>
+<a name="472"><span class="lineNum">     472 </span>            :     t = (v0 ^ v1) ^ (v2 ^ v3);</a>
+<a name="473"><span class="lineNum">     473 </span>            :     return t;</a>
+<a name="474"><span class="lineNum">     474 </span>            : }</a>
+<a name="475"><span class="lineNum">     475 </span>            : #endif</a>
+<a name="476"><span class="lineNum">     476 </span>            : </a>
+<a name="477"><span class="lineNum">     477 </span>            : uint64_t</a>
+<a name="478"><span class="lineNum">     478 </span><span class="lineCov">        665 : _Py_KeyedHash(uint64_t key, const void *src, Py_ssize_t src_sz)</span></a>
+<a name="479"><span class="lineNum">     479 </span>            : {</a>
+<a name="480"><span class="lineNum">     480 </span><span class="lineCov">        665 :     return siphash13(key, 0, src, src_sz);</span></a>
+<a name="481"><span class="lineNum">     481 </span>            : }</a>
+<a name="482"><span class="lineNum">     482 </span>            : </a>
+<a name="483"><span class="lineNum">     483 </span>            : </a>
+<a name="484"><span class="lineNum">     484 </span>            : #if Py_HASH_ALGORITHM == Py_HASH_SIPHASH13</a>
+<a name="485"><span class="lineNum">     485 </span>            : static Py_hash_t</a>
+<a name="486"><span class="lineNum">     486 </span><span class="lineCov">  125780000 : pysiphash(const void *src, Py_ssize_t src_sz) {</span></a>
+<a name="487"><span class="lineNum">     487 </span><span class="lineCov">  125780000 :     return (Py_hash_t)siphash13(</span></a>
+<a name="488"><span class="lineNum">     488 </span><span class="lineCov">  125780000 :         _le64toh(_Py_HashSecret.siphash.k0), _le64toh(_Py_HashSecret.siphash.k1),</span></a>
+<a name="489"><span class="lineNum">     489 </span>            :         src, src_sz);</a>
+<a name="490"><span class="lineNum">     490 </span>            : }</a>
+<a name="491"><span class="lineNum">     491 </span>            : </a>
+<a name="492"><span class="lineNum">     492 </span>            : static PyHash_FuncDef PyHash_Func = {pysiphash, &quot;siphash13&quot;, 64, 128};</a>
+<a name="493"><span class="lineNum">     493 </span>            : #endif</a>
+<a name="494"><span class="lineNum">     494 </span>            : </a>
+<a name="495"><span class="lineNum">     495 </span>            : #if Py_HASH_ALGORITHM == Py_HASH_SIPHASH24</a>
+<a name="496"><span class="lineNum">     496 </span>            : static Py_hash_t</a>
+<a name="497"><span class="lineNum">     497 </span>            : pysiphash(const void *src, Py_ssize_t src_sz) {</a>
+<a name="498"><span class="lineNum">     498 </span>            :     return (Py_hash_t)siphash24(</a>
+<a name="499"><span class="lineNum">     499 </span>            :         _le64toh(_Py_HashSecret.siphash.k0), _le64toh(_Py_HashSecret.siphash.k1),</a>
+<a name="500"><span class="lineNum">     500 </span>            :         src, src_sz);</a>
+<a name="501"><span class="lineNum">     501 </span>            : }</a>
+<a name="502"><span class="lineNum">     502 </span>            : </a>
+<a name="503"><span class="lineNum">     503 </span>            : static PyHash_FuncDef PyHash_Func = {pysiphash, &quot;siphash24&quot;, 64, 128};</a>
+<a name="504"><span class="lineNum">     504 </span>            : #endif</a>
+<a name="505"><span class="lineNum">     505 </span>            : </a>
+<a name="506"><span class="lineNum">     506 </span>            : #ifdef __cplusplus</a>
+<a name="507"><span class="lineNum">     507 </span>            : }</a>
+<a name="508"><span class="lineNum">     508 </span>            : #endif</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

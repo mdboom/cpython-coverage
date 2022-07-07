@@ -1,0 +1,964 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Modules/_datetimemodule.c - functions</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Modules</a> - _datetimemodule.c<span style="font-size: 80%;"> (<a href="_datetimemodule.c.gcov.html">source</a> / functions)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2556</td>
+            <td class="headerCovTableEntry">2794</td>
+            <td class="headerCovTableEntryHi">91.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">222</td>
+            <td class="headerCovTableEntry">223</td>
+            <td class="headerCovTableEntryHi">99.6 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <center>
+  <table width="60%" cellpadding=1 cellspacing=1 border=0>
+    <tr><td><br></td></tr>
+    <tr>
+      <td width="80%" class="tableHead">Function Name <span class="tableHeadSort"><img src="../glass.png" width=10 height=14 alt="Sort by function name" title="Sort by function name" border=0></span></td>
+      <td width="20%" class="tableHead">Hit count <span class="tableHeadSort"><a href="_datetimemodule.c.func-sort-c.html"><img src="../updown.png" width=10 height=14 alt="Sort by hit count" title="Sort by hit count" border=0></a></span></td>
+    </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6896">PyInit__datetime</a></td>
+              <td class="coverFnHi">150</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6706">_datetime_exec</a></td>
+              <td class="coverFnHi">150</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5316">_find_isoformat_datetime_separator</a></td>
+              <td class="coverFnHi">1047</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5259">_sanitize_isoformat_str</a></td>
+              <td class="coverFnHi">1065</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3938">_timezone_check_argument</a></td>
+              <td class="coverFnHi">4616</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2415">accum</a></td>
+              <td class="coverFnHi">15204</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3135">add_date_timedelta</a></td>
+              <td class="coverFnHi">103</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5551">add_datetime_timedelta</a></td>
+              <td class="coverFnHi">21564</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1380">append_keyword_fold</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1355">append_keyword_tzinfo</a></td>
+              <td class="coverFnHi">7</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1762">build_struct_time</a></td>
+              <td class="coverFnHi">5269</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1309">call_dst</a></td>
+              <td class="coverFnHi">7725</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1249">call_tzinfo_method</a></td>
+              <td class="coverFnHi">22717</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1321">call_tzname</a></td>
+              <td class="coverFnHi">5941</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1295">call_utcoffset</a></td>
+              <td class="coverFnHi">14992</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#451">check_date_args</a></td>
+              <td class="coverFnHi">95085</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#437">check_delta_day_range</a></td>
+              <td class="coverFnHi">23130</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#475">check_time_args</a></td>
+              <td class="coverFnHi">75983</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1213">check_tzinfo_subclass</a></td>
+              <td class="coverFnHi">85486</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1882">checked_divmod</a></td>
+              <td class="coverFnHi">24919</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1797">cmperror</a></td>
+              <td class="coverFnHi">8</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1158">create_timezone</a></td>
+              <td class="coverFnHi">1325</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3151">date_add</a></td>
+              <td class="coverFnHi">80</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3231">date_ctime</a></td>
+              <td class="coverFnHi">1</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2855">date_day</a></td>
+              <td class="coverFnHi">5556</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3262">date_format</a></td>
+              <td class="coverFnHi">87</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2872">date_from_pickle</a></td>
+              <td class="coverFnHi">48</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3084">date_fromisocalendar</a></td>
+              <td class="coverFnHi">148</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3044">date_fromisoformat</a></td>
+              <td class="coverFnHi">51</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3021">date_fromordinal</a></td>
+              <td class="coverFnHi">15067</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2936">date_fromtimestamp</a></td>
+              <td class="coverFnHi">16</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3528">date_getstate</a></td>
+              <td class="coverFnHi">32</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3499">date_hash</a></td>
+              <td class="coverFnHi">1502</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3418">date_isocalendar</a></td>
+              <td class="coverFnHi">5200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3216">date_isoformat</a></td>
+              <td class="coverFnHi">43</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3280">date_isoweekday</a></td>
+              <td class="coverFnHi">153</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2849">date_month</a></td>
+              <td class="coverFnHi">5578</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2886">date_new</a></td>
+              <td class="coverFnHi">15277</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3537">date_reduce</a></td>
+              <td class="coverFnHi">32</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3470">date_replace</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3208">date_repr</a></td>
+              <td class="coverFnHi">19</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3448">date_richcompare</a></td>
+              <td class="coverFnHi">4274</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3224">date_str</a></td>
+              <td class="coverFnHi">26</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3237">date_strftime</a></td>
+              <td class="coverFnHi">4626</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3178">date_subtract</a></td>
+              <td class="coverFnHi">44</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3461">date_timetuple</a></td>
+              <td class="coverFnHi">4618</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2959">date_today</a></td>
+              <td class="coverFnHi">17</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3510">date_toordinal</a></td>
+              <td class="coverFnHi">33383</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3517">date_weekday</a></td>
+              <td class="coverFnHi">12490</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2843">date_year</a></td>
+              <td class="coverFnHi">7378</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5579">datetime_add</a></td>
+              <td class="coverFnHi">14239</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#684">datetime_alloc</a></td>
+              <td class="coverFnHi">62200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6185">datetime_astimezone</a></td>
+              <td class="coverFnHi">3112</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5107">datetime_best_possible</a></td>
+              <td class="coverFnHi">60</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5227">datetime_combine</a></td>
+              <td class="coverFnHi">41</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5799">datetime_ctime</a></td>
+              <td class="coverFnHi">9</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2994">datetime_date_fromtimestamp</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3005">datetime_date_fromtimestamp_capi</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5134">datetime_datetime_now_impl</a></td>
+              <td class="coverFnHi">47</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5515">datetime_dealloc</a></td>
+              <td class="coverFnHi">74365</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6699">datetime_destructor</a></td>
+              <td class="coverFnHi">150</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5534">datetime_dst</a></td>
+              <td class="coverFnHi">6646</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4844">datetime_fold</a></td>
+              <td class="coverFnHi">19086</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4869">datetime_from_pickle</a></td>
+              <td class="coverFnHi">138</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5089">datetime_from_timestamp</a></td>
+              <td class="coverFnHi">1186</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5017">datetime_from_timet_and_us</a></td>
+              <td class="coverFnHi">1234</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5415">datetime_fromisoformat</a></td>
+              <td class="coverFnHi">1074</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5167">datetime_fromtimestamp</a></td>
+              <td class="coverFnHi">422</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6394">datetime_getdate</a></td>
+              <td class="coverFnHi">374</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6472">datetime_getstate</a></td>
+              <td class="coverFnHi">89</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6402">datetime_gettime</a></td>
+              <td class="coverFnHi">23</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6413">datetime_gettimetz</a></td>
+              <td class="coverFnHi">7</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5971">datetime_hash</a></td>
+              <td class="coverFnHi">2079</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4812">datetime_hour</a></td>
+              <td class="coverFnHi">17950</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5732">datetime_isoformat</a></td>
+              <td class="coverFnHi">1340</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4830">datetime_microsecond</a></td>
+              <td class="coverFnHi">417</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4818">datetime_minute</a></td>
+              <td class="coverFnHi">18093</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4902">datetime_new</a></td>
+              <td class="coverFnHi">44577</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6503">datetime_reduce</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6493">datetime_reduce_ex</a></td>
+              <td class="coverFnHi">85</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6035">datetime_replace</a></td>
+              <td class="coverFnHi">23098</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5689">datetime_repr</a></td>
+              <td class="coverFnHi">9</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5874">datetime_richcompare</a></td>
+              <td class="coverFnHi">20966</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4824">datetime_second</a></td>
+              <td class="coverFnHi">17913</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5726">datetime_str</a></td>
+              <td class="coverFnHi">535</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5207">datetime_strptime</a></td>
+              <td class="coverFnHi">90</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5600">datetime_subtract</a></td>
+              <td class="coverFnHi">2843</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6364">datetime_timestamp</a></td>
+              <td class="coverFnHi">105</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6289">datetime_timetuple</a></td>
+              <td class="coverFnHi">645</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4836">datetime_tzinfo</a></td>
+              <td class="coverFnHi">11408</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5539">datetime_tzname</a></td>
+              <td class="coverFnHi">5804</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5194">datetime_utcfromtimestamp</a></td>
+              <td class="coverFnHi">770</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5160">datetime_utcnow</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5529">datetime_utcoffset</a></td>
+              <td class="coverFnHi">10345</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6424">datetime_utctimetuple</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#247">days_before_month</a></td>
+              <td class="coverFnHi">71825</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#263">days_before_year</a></td>
+              <td class="coverFnHi">67006</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#235">days_in_month</a></td>
+              <td class="coverFnHi">131977</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2183">delta_abs</a></td>
+              <td class="coverFnHi">15</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2140">delta_add</a></td>
+              <td class="coverFnHi">948</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2608">delta_bool</a></td>
+              <td class="coverFnHi">1529</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2221">delta_cmp</a></td>
+              <td class="coverFnHi">20948</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2287">delta_divide</a></td>
+              <td class="coverFnHi">1406</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2367">delta_divmod</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2697">delta_getstate</a></td>
+              <td class="coverFnHi">115</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2248">delta_hash</a></td>
+              <td class="coverFnHi">27</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2261">delta_multiply</a></td>
+              <td class="coverFnHi">914</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2162">delta_negative</a></td>
+              <td class="coverFnHi">1210</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2496">delta_new</a></td>
+              <td class="coverFnHi">11495</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2171">delta_positive</a></td>
+              <td class="coverFnHi">11</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2721">delta_reduce</a></td>
+              <td class="coverFnHi">92</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2332">delta_remainder</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2616">delta_repr</a></td>
+              <td class="coverFnHi">38</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2234">delta_richcompare</a></td>
+              <td class="coverFnHi">20415</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2665">delta_str</a></td>
+              <td class="coverFnHi">18</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2199">delta_subtract</a></td>
+              <td class="coverFnHi">6258</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1833">delta_to_microseconds</a></td>
+              <td class="coverFnHi">4357</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2705">delta_total_seconds</a></td>
+              <td class="coverFnHi">515</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2309">delta_truedivide</a></td>
+              <td class="coverFnHi">73</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1790">diff_to_bool</a></td>
+              <td class="coverFnHi">45665</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#187">divide_nearest</a></td>
+              <td class="coverFnHi">407</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2055">divide_timedelta_int</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2076">divide_timedelta_timedelta</a></td>
+              <td class="coverFnHi">1416</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#168">divmod</a></td>
+              <td class="coverFnHi">42132</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5810">flip_fold</a></td>
+              <td class="coverFnHi">826</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1429">format_ctime</a></td>
+              <td class="coverFnHi">10</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1460">format_utcoffset</a></td>
+              <td class="coverFnHi">1284</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3490">generic_hash</a></td>
+              <td class="coverFnHi">780</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6670">get_datetime_capi</a></td>
+              <td class="coverFnHi">150</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5826">get_flip_fold_offset</a></td>
+              <td class="coverFnHi">826</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1995">get_float_as_integer_ratio</a></td>
+              <td class="coverFnHi">367</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1229">get_tzinfo_member</a></td>
+              <td class="coverFnHi">108</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#715">is_digit</a></td>
+              <td class="coverFnHi">916</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#222">is_leap</a></td>
+              <td class="coverFnHi">64002</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3399">iso_calendar_date_new_impl</a></td>
+              <td class="coverFnHi">5200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3318">iso_calendar_date_reduce</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3298">iso_calendar_date_repr</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3343">iso_calendar_date_week</a></td>
+              <td class="coverFnHi">168</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3354">iso_calendar_date_weekday</a></td>
+              <td class="coverFnHi">168</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3332">iso_calendar_date_year</a></td>
+              <td class="coverFnHi">168</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#397">iso_to_ymd</a></td>
+              <td class="coverFnHi">252</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#383">iso_week1_monday</a></td>
+              <td class="coverFnHi">8440</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4991">local</a></td>
+              <td class="coverFnHi">346</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6133">local_timezone</a></td>
+              <td class="coverFnHi">29</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6166">local_timezone_from_local</a></td>
+              <td class="coverFnHi">23</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6071">local_timezone_from_timestamp</a></td>
+              <td class="coverFnHi">52</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#6314">local_to_seconds</a></td>
+              <td class="coverFnHi">68</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1508">make_Zreplacement</a></td>
+              <td class="coverFnHi">43</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1552">make_freplacement</a></td>
+              <td class="coverFnHi">9</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1907">microseconds_to_delta_ex</a></td>
+              <td class="coverFnHi">12468</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1974">multiply_int_timedelta</a></td>
+              <td class="coverFnHi">555</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2023">multiply_truedivide_timedelta_float</a></td>
+              <td class="coverFnHi">367</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#943">new_date_ex</a></td>
+              <td class="coverFnHi">20315</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#966">new_date_subclass_ex</a></td>
+              <td class="coverFnHi">15266</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1020">new_datetime_ex</a></td>
+              <td class="coverFnHi">7226</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#986">new_datetime_ex2</a></td>
+              <td class="coverFnHi">74770</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1057">new_datetime_subclass_ex</a></td>
+              <td class="coverFnHi">22477</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1032">new_datetime_subclass_fold_ex</a></td>
+              <td class="coverFnHi">23726</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1114">new_delta_ex</a></td>
+              <td class="coverFnHi">23130</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1098">new_time_ex</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1067">new_time_ex2</a></td>
+              <td class="coverFnHi">1267</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1181">new_timezone</a></td>
+              <td class="coverFnHi">934</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#536">normalize_d_s_us</a></td>
+              <td class="coverFnHi">9433</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#630">normalize_date</a></td>
+              <td class="coverFnHi">21667</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#639">normalize_datetime</a></td>
+              <td class="coverFnHi">21564</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#516">normalize_pair</a></td>
+              <td class="coverFnHi">91313</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#563">normalize_y_m_d</a></td>
+              <td class="coverFnHi">21667</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#283">ord_to_ymd</a></td>
+              <td class="coverFnHi">15617</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#720">parse_digits</a></td>
+              <td class="coverFnHi">8676</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#807">parse_hh_mm_ss_ff</a></td>
+              <td class="coverFnHi">1906</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#735">parse_isoformat_date</a></td>
+              <td class="coverFnHi">1090</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#873">parse_isoformat_time</a></td>
+              <td class="coverFnHi">1205</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#5845">pep495_eq_exception</a></td>
+              <td class="coverFnHi">414</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4149">py_time_second</a></td>
+              <td class="coverFnHi">47</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#702">set_date_fields</a></td>
+              <td class="coverFnHi">94980</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#672">time_alloc</a></td>
+              <td class="coverFnHi">1265</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4288">time_dealloc</a></td>
+              <td class="coverFnHi">995</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4307">time_dst</a></td>
+              <td class="coverFnHi">104</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4169">time_fold</a></td>
+              <td class="coverFnHi">26</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4192">time_from_pickle</a></td>
+              <td class="coverFnHi">56</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4614">time_fromisoformat</a></td>
+              <td class="coverFnHi">288</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4679">time_getstate</a></td>
+              <td class="coverFnHi">42</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4526">time_hash</a></td>
+              <td class="coverFnHi">38</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4136">time_hour</a></td>
+              <td class="coverFnHi">47</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4353">time_isoformat</a></td>
+              <td class="coverFnHi">363</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4155">time_microsecond</a></td>
+              <td class="coverFnHi">17</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4142">time_minute</a></td>
+              <td class="coverFnHi">149</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4225">time_new</a></td>
+              <td class="coverFnHi">734</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4710">time_reduce</a></td>
+              <td class="coverFnHi">3</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4700">time_reduce_ex</a></td>
+              <td class="coverFnHi">39</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4582">time_replace</a></td>
+              <td class="coverFnHi">80</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4321">time_repr</a></td>
+              <td class="coverFnHi">19</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4453">time_richcompare</a></td>
+              <td class="coverFnHi">735</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4347">time_str</a></td>
+              <td class="coverFnHi">54</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4418">time_strftime</a></td>
+              <td class="coverFnHi">21</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1746">time_time</a></td>
+              <td class="coverFnHi">17</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4161">time_tzinfo</a></td>
+              <td class="coverFnHi">26</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4312">time_tzname</a></td>
+              <td class="coverFnHi">116</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4302">time_utcoffset</a></td>
+              <td class="coverFnHi">423</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3908">timezone_dealloc</a></td>
+              <td class="coverFnHi">875</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4031">timezone_dst</a></td>
+              <td class="coverFnHi">331</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4040">timezone_fromutc</a></td>
+              <td class="coverFnHi">1029</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4057">timezone_getinitargs</a></td>
+              <td class="coverFnHi">67</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3928">timezone_hash</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3896">timezone_new</a></td>
+              <td class="coverFnHi">401</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3948">timezone_repr</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3916">timezone_richcompare</a></td>
+              <td class="coverFnHi">323</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3966">timezone_str</a></td>
+              <td class="coverFnHi">77</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4012">timezone_tzname</a></td>
+              <td class="coverFnHi">74</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4021">timezone_utcoffset</a></td>
+              <td class="coverFnHi">4211</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2122">truedivide_timedelta_int</a></td>
+              <td class="coverFnHi">50</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#2099">truedivide_timedelta_timedelta</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3707">tzinfo_dst</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1399">tzinfo_from_isoformat_results</a></td>
+              <td class="coverFnHi">1224</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3720">tzinfo_fromutc</a></td>
+              <td class="coverFnHi">647</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3684">tzinfo_nogo</a></td>
+              <td class="coverFnHi">7</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3798">tzinfo_reduce</a></td>
+              <td class="coverFnHi">97</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3695">tzinfo_tzname</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#3701">tzinfo_utcoffset</a></td>
+              <td class="coverFnHi">3</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#4975">utc_to_seconds</a></td>
+              <td class="coverFnHi">565</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#374">weekday</a></td>
+              <td class="coverFnHi">17976</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#1573">wrap_strftime</a></td>
+              <td class="coverFnHi">4635</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_datetimemodule.c.gcov.html#367">ymd_to_ord</a></td>
+              <td class="coverFnHi">66556</td>
+            </tr>
+  </table>
+  <br>
+  </center>
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

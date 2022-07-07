@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Objects/call.c - functions</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Objects</a> - call.c<span style="font-size: 80%;"> (<a href="call.c.gcov.html">source</a> / functions)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">346</td>
+            <td class="headerCovTableEntry">445</td>
+            <td class="headerCovTableEntryMed">77.8 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntry">40</td>
+            <td class="headerCovTableEntryMed">85.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <center>
+  <table width="60%" cellpadding=1 cellspacing=1 border=0>
+    <tr><td><br></td></tr>
+    <tr>
+      <td width="80%" class="tableHead">Function Name <span class="tableHeadSort"><img src="../glass.png" width=10 height=14 alt="Sort by function name" title="Sort by function name" border=0></span></td>
+      <td width="20%" class="tableHead">Hit count <span class="tableHeadSort"><a href="call.c.func-sort-c.html"><img src="../updown.png" width=10 height=14 alt="Sort by hit count" title="Sort by hit count" border=0></a></span></td>
+    </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#359">PyCFunction_Call</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#570">PyEval_CallFunction</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#640">PyEval_CallMethod</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#406">PyEval_CallObjectWithKeywords</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#351">PyObject_Call</a></td>
+              <td class="coverFnHi">13442700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#552">PyObject_CallFunction</a></td>
+              <td class="coverFnHi">851754</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#925">PyObject_CallFunctionObjArgs</a></td>
+              <td class="coverFnHi">2331580</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#613">PyObject_CallMethod</a></td>
+              <td class="coverFnHi">140731</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#870">PyObject_CallMethodObjArgs</a></td>
+              <td class="coverFnHi">1204780</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#107">PyObject_CallNoArgs</a></td>
+              <td class="coverFnHi">189528</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#439">PyObject_CallObject</a></td>
+              <td class="coverFnHi">1635640</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#367">PyObject_CallOneArg</a></td>
+              <td class="coverFnHi">20355500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#294">PyObject_Vectorcall</a></td>
+              <td class="coverFnHi">145145000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#160">PyObject_VectorcallDict</a></td>
+              <td class="coverFnHi">3137550</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#835">PyObject_VectorcallMethod</a></td>
+              <td class="coverFnHi">6493470</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#265">PyVectorcall_Call</a></td>
+              <td class="coverFnHi">341770</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#228">PyVectorcall_Function</a></td>
+              <td class="coverFnHi">42076100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#383">_PyFunction_Vectorcall</a></td>
+              <td class="coverFnHi">69922500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#312">_PyObject_Call</a></td>
+              <td class="coverFnHi">15070000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#496">_PyObject_CallFunctionVa</a></td>
+              <td class="coverFnHi">2304620</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#585">_PyObject_CallFunction_SizeT</a></td>
+              <td class="coverFnHi">953497</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#663">_PyObject_CallMethod</a></td>
+              <td class="coverFnHi">210921</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#710">_PyObject_CallMethodFormat</a></td>
+              <td class="coverFnHi">164</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#687">_PyObject_CallMethodId</a></td>
+              <td class="coverFnHi">861</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#895">_PyObject_CallMethodIdObjArgs</a></td>
+              <td class="coverFnHi">852</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#746">_PyObject_CallMethodId_SizeT</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#722">_PyObject_CallMethod_SizeT</a></td>
+              <td class="coverFnHi">146693</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#457">_PyObject_Call_Prepend</a></td>
+              <td class="coverFnHi">23768300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#304">_PyObject_FastCall</a></td>
+              <td class="coverFnHi">1361320</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#116">_PyObject_FastCallDictTstate</a></td>
+              <td class="coverFnHi">26905800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#169">_PyObject_MakeTpCall</a></td>
+              <td class="coverFnHi">76949600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#942">_PyStack_AsDict</a></td>
+              <td class="coverFnHi">3510160</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#966">_PyStack_UnpackDict</a></td>
+              <td class="coverFnHi">3401430</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#1038">_PyStack_UnpackDict_Free</a></td>
+              <td class="coverFnHi">3401410</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#235">_PyVectorcall_Call</a></td>
+              <td class="coverFnHi">7602010</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#30">_Py_CheckFunctionResult</a></td>
+              <td class="coverFnHi">334776000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#80">_Py_CheckSlotResult</a></td>
+              <td class="coverFnHi">385045000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#599">callmethod</a></td>
+              <td class="coverFnHi">499370</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#19">null_error</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="call.c.gcov.html#772">object_vacall</a></td>
+              <td class="coverFnHi">3537210</td>
+            </tr>
+  </table>
+  <br>
+  </center>
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

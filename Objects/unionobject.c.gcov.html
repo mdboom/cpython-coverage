@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Objects/unionobject.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Objects</a> - unionobject.c<span style="font-size: 80%;"> (source / <a href="unionobject.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">175</td>
+            <td class="headerCovTableEntry">200</td>
+            <td class="headerCovTableEntryMed">87.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : // types.UnionType -- used to represent e.g. Union[int, str], int | str</a>
+<a name="2"><span class="lineNum">       2 </span>            : #include &quot;Python.h&quot;</a>
+<a name="3"><span class="lineNum">       3 </span>            : #include &quot;pycore_object.h&quot;  // _PyObject_GC_TRACK/UNTRACK</a>
+<a name="4"><span class="lineNum">       4 </span>            : #include &quot;pycore_unionobject.h&quot;</a>
+<a name="5"><span class="lineNum">       5 </span>            : #include &quot;structmember.h&quot;</a>
+<a name="6"><span class="lineNum">       6 </span>            : </a>
+<a name="7"><span class="lineNum">       7 </span>            : </a>
+<a name="8"><span class="lineNum">       8 </span>            : static PyObject *make_union(PyObject *);</a>
+<a name="9"><span class="lineNum">       9 </span>            : </a>
+<a name="10"><span class="lineNum">      10 </span>            : </a>
+<a name="11"><span class="lineNum">      11 </span>            : typedef struct {</a>
+<a name="12"><span class="lineNum">      12 </span>            :     PyObject_HEAD</a>
+<a name="13"><span class="lineNum">      13 </span>            :     PyObject *args;</a>
+<a name="14"><span class="lineNum">      14 </span>            :     PyObject *parameters;</a>
+<a name="15"><span class="lineNum">      15 </span>            : } unionobject;</a>
+<a name="16"><span class="lineNum">      16 </span>            : </a>
+<a name="17"><span class="lineNum">      17 </span>            : static void</a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">       9383 : unionobject_dealloc(PyObject *self)</span></a>
+<a name="19"><span class="lineNum">      19 </span>            : {</a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">       9383 :     unionobject *alias = (unionobject *)self;</span></a>
+<a name="21"><span class="lineNum">      21 </span>            : </a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">       9383 :     _PyObject_GC_UNTRACK(self);</span></a>
+<a name="23"><span class="lineNum">      23 </span>            : </a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       9383 :     Py_XDECREF(alias-&gt;args);</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">       9383 :     Py_XDECREF(alias-&gt;parameters);</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       9383 :     Py_TYPE(self)-&gt;tp_free(self);</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">       9383 : }</span></a>
+<a name="28"><span class="lineNum">      28 </span>            : </a>
+<a name="29"><span class="lineNum">      29 </span>            : static int</a>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">     242786 : union_traverse(PyObject *self, visitproc visit, void *arg)</span></a>
+<a name="31"><span class="lineNum">      31 </span>            : {</a>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">     242786 :     unionobject *alias = (unionobject *)self;</span></a>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">     242786 :     Py_VISIT(alias-&gt;args);</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">     242786 :     Py_VISIT(alias-&gt;parameters);</span></a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineCov">     242786 :     return 0;</span></a>
+<a name="36"><span class="lineNum">      36 </span>            : }</a>
+<a name="37"><span class="lineNum">      37 </span>            : </a>
+<a name="38"><span class="lineNum">      38 </span>            : static Py_hash_t</a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         19 : union_hash(PyObject *self)</span></a>
+<a name="40"><span class="lineNum">      40 </span>            : {</a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">         19 :     unionobject *alias = (unionobject *)self;</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">         19 :     PyObject *args = PyFrozenSet_New(alias-&gt;args);</span></a>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">         19 :     if (args == NULL) {</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineNoCov">          0 :         return (Py_hash_t)-1;</span></a>
+<a name="45"><span class="lineNum">      45 </span>            :     }</a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">         19 :     Py_hash_t hash = PyObject_Hash(args);</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">         19 :     Py_DECREF(args);</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">         19 :     return hash;</span></a>
+<a name="49"><span class="lineNum">      49 </span>            : }</a>
+<a name="50"><span class="lineNum">      50 </span>            : </a>
+<a name="51"><span class="lineNum">      51 </span>            : static PyObject *</a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">        173 : union_richcompare(PyObject *a, PyObject *b, int op)</span></a>
+<a name="53"><span class="lineNum">      53 </span>            : {</a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">        173 :     if (!_PyUnion_Check(b) || (op != Py_EQ &amp;&amp; op != Py_NE)) {</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">        144 :         Py_RETURN_NOTIMPLEMENTED;</span></a>
+<a name="56"><span class="lineNum">      56 </span>            :     }</a>
+<a name="57"><span class="lineNum">      57 </span>            : </a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         29 :     PyObject *a_set = PySet_New(((unionobject*)a)-&gt;args);</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">         29 :     if (a_set == NULL) {</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="61"><span class="lineNum">      61 </span>            :     }</a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">         29 :     PyObject *b_set = PySet_New(((unionobject*)b)-&gt;args);</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">         29 :     if (b_set == NULL) {</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineNoCov">          0 :         Py_DECREF(a_set);</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="66"><span class="lineNum">      66 </span>            :     }</a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">         29 :     PyObject *result = PyObject_RichCompare(a_set, b_set, op);</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">         29 :     Py_DECREF(b_set);</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         29 :     Py_DECREF(a_set);</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">         29 :     return result;</span></a>
+<a name="71"><span class="lineNum">      71 </span>            : }</a>
+<a name="72"><span class="lineNum">      72 </span>            : </a>
+<a name="73"><span class="lineNum">      73 </span>            : static int</a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">       9958 : is_same(PyObject *left, PyObject *right)</span></a>
+<a name="75"><span class="lineNum">      75 </span>            : {</a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">       9958 :     int is_ga = _PyGenericAlias_Check(left) &amp;&amp; _PyGenericAlias_Check(right);</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">       9958 :     return is_ga ? PyObject_RichCompareBool(left, right, Py_EQ) : left == right;</span></a>
+<a name="78"><span class="lineNum">      78 </span>            : }</a>
+<a name="79"><span class="lineNum">      79 </span>            : </a>
+<a name="80"><span class="lineNum">      80 </span>            : static int</a>
+<a name="81"><span class="lineNum">      81 </span><span class="lineCov">       9404 : contains(PyObject **items, Py_ssize_t size, PyObject *obj)</span></a>
+<a name="82"><span class="lineNum">      82 </span>            : {</a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">      19346 :     for (int i = 0; i &lt; size; i++) {</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">       9958 :         int is_duplicate = is_same(items[i], obj);</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">       9958 :         if (is_duplicate) {  // -1 or 1</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">         16 :             return is_duplicate;</span></a>
+<a name="87"><span class="lineNum">      87 </span>            :         }</a>
+<a name="88"><span class="lineNum">      88 </span>            :     }</a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">       9388 :     return 0;</span></a>
+<a name="90"><span class="lineNum">      90 </span>            : }</a>
+<a name="91"><span class="lineNum">      91 </span>            : </a>
+<a name="92"><span class="lineNum">      92 </span>            : static PyObject *</a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">       9395 : merge(PyObject **items1, Py_ssize_t size1,</span></a>
+<a name="94"><span class="lineNum">      94 </span>            :       PyObject **items2, Py_ssize_t size2)</a>
+<a name="95"><span class="lineNum">      95 </span>            : {</a>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">       9395 :     PyObject *tuple = NULL;</span></a>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">       9395 :     Py_ssize_t pos = 0;</span></a>
+<a name="98"><span class="lineNum">      98 </span>            : </a>
+<a name="99"><span class="lineNum">      99 </span><span class="lineCov">      18798 :     for (int i = 0; i &lt; size2; i++) {</span></a>
+<a name="100"><span class="lineNum">     100 </span><span class="lineCov">       9404 :         PyObject *arg = items2[i];</span></a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">       9404 :         int is_duplicate = contains(items1, size1, arg);</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">       9404 :         if (is_duplicate &lt; 0) {</span></a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">          1 :             Py_XDECREF(tuple);</span></a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">          1 :             return NULL;</span></a>
+<a name="105"><span class="lineNum">     105 </span>            :         }</a>
+<a name="106"><span class="lineNum">     106 </span><span class="lineCov">       9403 :         if (is_duplicate) {</span></a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">         15 :             continue;</span></a>
+<a name="108"><span class="lineNum">     108 </span>            :         }</a>
+<a name="109"><span class="lineNum">     109 </span>            : </a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">       9388 :         if (tuple == NULL) {</span></a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineCov">       9383 :             tuple = PyTuple_New(size1 + size2 - i);</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">       9383 :             if (tuple == NULL) {</span></a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineNoCov">          0 :                 return NULL;</span></a>
+<a name="114"><span class="lineNum">     114 </span>            :             }</a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">      19309 :             for (; pos &lt; size1; pos++) {</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">       9926 :                 PyObject *a = items1[pos];</span></a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">       9926 :                 Py_INCREF(a);</span></a>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">       9926 :                 PyTuple_SET_ITEM(tuple, pos, a);</span></a>
+<a name="119"><span class="lineNum">     119 </span>            :             }</a>
+<a name="120"><span class="lineNum">     120 </span>            :         }</a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">       9388 :         Py_INCREF(arg);</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">       9388 :         PyTuple_SET_ITEM(tuple, pos, arg);</span></a>
+<a name="123"><span class="lineNum">     123 </span><span class="lineCov">       9388 :         pos++;</span></a>
+<a name="124"><span class="lineNum">     124 </span>            :     }</a>
+<a name="125"><span class="lineNum">     125 </span>            : </a>
+<a name="126"><span class="lineNum">     126 </span><span class="lineCov">       9394 :     if (tuple) {</span></a>
+<a name="127"><span class="lineNum">     127 </span><span class="lineCov">       9383 :         (void) _PyTuple_Resize(&amp;tuple, pos);</span></a>
+<a name="128"><span class="lineNum">     128 </span>            :     }</a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">       9394 :     return tuple;</span></a>
+<a name="130"><span class="lineNum">     130 </span>            : }</a>
+<a name="131"><span class="lineNum">     131 </span>            : </a>
+<a name="132"><span class="lineNum">     132 </span>            : static PyObject **</a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">      18790 : get_types(PyObject **obj, Py_ssize_t *size)</span></a>
+<a name="134"><span class="lineNum">     134 </span>            : {</a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">      18790 :     if (*obj == Py_None) {</span></a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">       4313 :         *obj = (PyObject *)&amp;_PyNone_Type;</span></a>
+<a name="137"><span class="lineNum">     137 </span>            :     }</a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">      18790 :     if (_PyUnion_Check(*obj)) {</span></a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">        533 :         PyObject *args = ((unionobject *) *obj)-&gt;args;</span></a>
+<a name="140"><span class="lineNum">     140 </span><span class="lineCov">        533 :         *size = PyTuple_GET_SIZE(args);</span></a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">        533 :         return &amp;PyTuple_GET_ITEM(args, 0);</span></a>
+<a name="142"><span class="lineNum">     142 </span>            :     }</a>
+<a name="143"><span class="lineNum">     143 </span>            :     else {</a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">      18257 :         *size = 1;</span></a>
+<a name="145"><span class="lineNum">     145 </span><span class="lineCov">      18257 :         return obj;</span></a>
+<a name="146"><span class="lineNum">     146 </span>            :     }</a>
+<a name="147"><span class="lineNum">     147 </span>            : }</a>
+<a name="148"><span class="lineNum">     148 </span>            : </a>
+<a name="149"><span class="lineNum">     149 </span>            : static int</a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">      20676 : is_unionable(PyObject *obj)</span></a>
+<a name="151"><span class="lineNum">     151 </span>            : {</a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">      16363 :     return (obj == Py_None ||</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">      24137 :         PyType_Check(obj) ||</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">      44813 :         _PyGenericAlias_Check(obj) ||</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">       1480 :         _PyUnion_Check(obj));</span></a>
+<a name="156"><span class="lineNum">     156 </span>            : }</a>
+<a name="157"><span class="lineNum">     157 </span>            : </a>
+<a name="158"><span class="lineNum">     158 </span>            : PyObject *</a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">      10339 : _Py_union_type_or(PyObject* self, PyObject* other)</span></a>
+<a name="160"><span class="lineNum">     160 </span>            : {</a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">      10339 :     if (!is_unionable(self) || !is_unionable(other)) {</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">        944 :         Py_RETURN_NOTIMPLEMENTED;</span></a>
+<a name="163"><span class="lineNum">     163 </span>            :     }</a>
+<a name="164"><span class="lineNum">     164 </span>            : </a>
+<a name="165"><span class="lineNum">     165 </span>            :     Py_ssize_t size1, size2;</a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">       9395 :     PyObject **items1 = get_types(&amp;self, &amp;size1);</span></a>
+<a name="167"><span class="lineNum">     167 </span><span class="lineCov">       9395 :     PyObject **items2 = get_types(&amp;other, &amp;size2);</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">       9395 :     PyObject *tuple = merge(items1, size1, items2, size2);</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">       9395 :     if (tuple == NULL) {</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">         12 :         if (PyErr_Occurred()) {</span></a>
+<a name="171"><span class="lineNum">     171 </span><span class="lineCov">          1 :             return NULL;</span></a>
+<a name="172"><span class="lineNum">     172 </span>            :         }</a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">         11 :         Py_INCREF(self);</span></a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">         11 :         return self;</span></a>
+<a name="175"><span class="lineNum">     175 </span>            :     }</a>
+<a name="176"><span class="lineNum">     176 </span>            : </a>
+<a name="177"><span class="lineNum">     177 </span><span class="lineCov">       9383 :     PyObject *new_union = make_union(tuple);</span></a>
+<a name="178"><span class="lineNum">     178 </span><span class="lineCov">       9383 :     Py_DECREF(tuple);</span></a>
+<a name="179"><span class="lineNum">     179 </span><span class="lineCov">       9383 :     return new_union;</span></a>
+<a name="180"><span class="lineNum">     180 </span>            : }</a>
+<a name="181"><span class="lineNum">     181 </span>            : </a>
+<a name="182"><span class="lineNum">     182 </span>            : static int</a>
+<a name="183"><span class="lineNum">     183 </span><span class="lineCov">         52 : union_repr_item(_PyUnicodeWriter *writer, PyObject *p)</span></a>
+<a name="184"><span class="lineNum">     184 </span>            : {</a>
+<a name="185"><span class="lineNum">     185 </span><span class="lineCov">         52 :     PyObject *qualname = NULL;</span></a>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">         52 :     PyObject *module = NULL;</span></a>
+<a name="187"><span class="lineNum">     187 </span>            :     PyObject *tmp;</a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">         52 :     PyObject *r = NULL;</span></a>
+<a name="189"><span class="lineNum">     189 </span>            :     int err;</a>
+<a name="190"><span class="lineNum">     190 </span>            : </a>
+<a name="191"><span class="lineNum">     191 </span><span class="lineCov">         52 :     if (p == (PyObject *)&amp;_PyNone_Type) {</span></a>
+<a name="192"><span class="lineNum">     192 </span><span class="lineCov">          2 :         return _PyUnicodeWriter_WriteASCIIString(writer, &quot;None&quot;, 4);</span></a>
+<a name="193"><span class="lineNum">     193 </span>            :     }</a>
+<a name="194"><span class="lineNum">     194 </span>            : </a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">         50 :     if (_PyObject_LookupAttr(p, &amp;_Py_ID(__origin__), &amp;tmp) &lt; 0) {</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="197"><span class="lineNum">     197 </span>            :     }</a>
+<a name="198"><span class="lineNum">     198 </span>            : </a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">         50 :     if (tmp) {</span></a>
+<a name="200"><span class="lineNum">     200 </span><span class="lineCov">         11 :         Py_DECREF(tmp);</span></a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">         11 :         if (_PyObject_LookupAttr(p, &amp;_Py_ID(__args__), &amp;tmp) &lt; 0) {</span></a>
+<a name="202"><span class="lineNum">     202 </span><span class="lineNoCov">          0 :             goto exit;</span></a>
+<a name="203"><span class="lineNum">     203 </span>            :         }</a>
+<a name="204"><span class="lineNum">     204 </span><span class="lineCov">         11 :         if (tmp) {</span></a>
+<a name="205"><span class="lineNum">     205 </span>            :             // It looks like a GenericAlias</a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineCov">         11 :             Py_DECREF(tmp);</span></a>
+<a name="207"><span class="lineNum">     207 </span><span class="lineCov">         11 :             goto use_repr;</span></a>
+<a name="208"><span class="lineNum">     208 </span>            :         }</a>
+<a name="209"><span class="lineNum">     209 </span>            :     }</a>
+<a name="210"><span class="lineNum">     210 </span>            : </a>
+<a name="211"><span class="lineNum">     211 </span><span class="lineCov">         39 :     if (_PyObject_LookupAttr(p, &amp;_Py_ID(__qualname__), &amp;qualname) &lt; 0) {</span></a>
+<a name="212"><span class="lineNum">     212 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="213"><span class="lineNum">     213 </span>            :     }</a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">         39 :     if (qualname == NULL) {</span></a>
+<a name="215"><span class="lineNum">     215 </span><span class="lineNoCov">          0 :         goto use_repr;</span></a>
+<a name="216"><span class="lineNum">     216 </span>            :     }</a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">         39 :     if (_PyObject_LookupAttr(p, &amp;_Py_ID(__module__), &amp;module) &lt; 0) {</span></a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="219"><span class="lineNum">     219 </span>            :     }</a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineCov">         39 :     if (module == NULL || module == Py_None) {</span></a>
+<a name="221"><span class="lineNum">     221 </span><span class="lineNoCov">          0 :         goto use_repr;</span></a>
+<a name="222"><span class="lineNum">     222 </span>            :     }</a>
+<a name="223"><span class="lineNum">     223 </span>            : </a>
+<a name="224"><span class="lineNum">     224 </span>            :     // Looks like a class</a>
+<a name="225"><span class="lineNum">     225 </span><span class="lineCov">         78 :     if (PyUnicode_Check(module) &amp;&amp;</span></a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">         39 :         _PyUnicode_EqualToASCIIString(module, &quot;builtins&quot;))</span></a>
+<a name="227"><span class="lineNum">     227 </span>            :     {</a>
+<a name="228"><span class="lineNum">     228 </span>            :         // builtins don't need a module name</a>
+<a name="229"><span class="lineNum">     229 </span><span class="lineCov">         39 :         r = PyObject_Str(qualname);</span></a>
+<a name="230"><span class="lineNum">     230 </span><span class="lineCov">         39 :         goto exit;</span></a>
+<a name="231"><span class="lineNum">     231 </span>            :     }</a>
+<a name="232"><span class="lineNum">     232 </span>            :     else {</a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineNoCov">          0 :         r = PyUnicode_FromFormat(&quot;%S.%S&quot;, module, qualname);</span></a>
+<a name="234"><span class="lineNum">     234 </span><span class="lineNoCov">          0 :         goto exit;</span></a>
+<a name="235"><span class="lineNum">     235 </span>            :     }</a>
+<a name="236"><span class="lineNum">     236 </span>            : </a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">         11 : use_repr:</span></a>
+<a name="238"><span class="lineNum">     238 </span><span class="lineCov">         11 :     r = PyObject_Repr(p);</span></a>
+<a name="239"><span class="lineNum">     239 </span><span class="lineCov">         50 : exit:</span></a>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">         50 :     Py_XDECREF(qualname);</span></a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineCov">         50 :     Py_XDECREF(module);</span></a>
+<a name="242"><span class="lineNum">     242 </span><span class="lineCov">         50 :     if (r == NULL) {</span></a>
+<a name="243"><span class="lineNum">     243 </span><span class="lineNoCov">          0 :         return -1;</span></a>
+<a name="244"><span class="lineNum">     244 </span>            :     }</a>
+<a name="245"><span class="lineNum">     245 </span><span class="lineCov">         50 :     err = _PyUnicodeWriter_WriteStr(writer, r);</span></a>
+<a name="246"><span class="lineNum">     246 </span><span class="lineCov">         50 :     Py_DECREF(r);</span></a>
+<a name="247"><span class="lineNum">     247 </span><span class="lineCov">         50 :     return err;</span></a>
+<a name="248"><span class="lineNum">     248 </span>            : }</a>
+<a name="249"><span class="lineNum">     249 </span>            : </a>
+<a name="250"><span class="lineNum">     250 </span>            : static PyObject *</a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">         24 : union_repr(PyObject *self)</span></a>
+<a name="252"><span class="lineNum">     252 </span>            : {</a>
+<a name="253"><span class="lineNum">     253 </span><span class="lineCov">         24 :     unionobject *alias = (unionobject *)self;</span></a>
+<a name="254"><span class="lineNum">     254 </span><span class="lineCov">         24 :     Py_ssize_t len = PyTuple_GET_SIZE(alias-&gt;args);</span></a>
+<a name="255"><span class="lineNum">     255 </span>            : </a>
+<a name="256"><span class="lineNum">     256 </span>            :     _PyUnicodeWriter writer;</a>
+<a name="257"><span class="lineNum">     257 </span><span class="lineCov">         24 :     _PyUnicodeWriter_Init(&amp;writer);</span></a>
+<a name="258"><span class="lineNum">     258 </span><span class="lineCov">         76 :      for (Py_ssize_t i = 0; i &lt; len; i++) {</span></a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineCov">         52 :         if (i &gt; 0 &amp;&amp; _PyUnicodeWriter_WriteASCIIString(&amp;writer, &quot; | &quot;, 3) &lt; 0) {</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :             goto error;</span></a>
+<a name="261"><span class="lineNum">     261 </span>            :         }</a>
+<a name="262"><span class="lineNum">     262 </span><span class="lineCov">         52 :         PyObject *p = PyTuple_GET_ITEM(alias-&gt;args, i);</span></a>
+<a name="263"><span class="lineNum">     263 </span><span class="lineCov">         52 :         if (union_repr_item(&amp;writer, p) &lt; 0) {</span></a>
+<a name="264"><span class="lineNum">     264 </span><span class="lineNoCov">          0 :             goto error;</span></a>
+<a name="265"><span class="lineNum">     265 </span>            :         }</a>
+<a name="266"><span class="lineNum">     266 </span>            :     }</a>
+<a name="267"><span class="lineNum">     267 </span><span class="lineCov">         24 :     return _PyUnicodeWriter_Finish(&amp;writer);</span></a>
+<a name="268"><span class="lineNum">     268 </span><span class="lineNoCov">          0 : error:</span></a>
+<a name="269"><span class="lineNum">     269 </span><span class="lineNoCov">          0 :     _PyUnicodeWriter_Dealloc(&amp;writer);</span></a>
+<a name="270"><span class="lineNum">     270 </span><span class="lineNoCov">          0 :     return NULL;</span></a>
+<a name="271"><span class="lineNum">     271 </span>            : }</a>
+<a name="272"><span class="lineNum">     272 </span>            : </a>
+<a name="273"><span class="lineNum">     273 </span>            : static PyMemberDef union_members[] = {</a>
+<a name="274"><span class="lineNum">     274 </span>            :         {&quot;__args__&quot;, T_OBJECT, offsetof(unionobject, args), READONLY},</a>
+<a name="275"><span class="lineNum">     275 </span>            :         {0}</a>
+<a name="276"><span class="lineNum">     276 </span>            : };</a>
+<a name="277"><span class="lineNum">     277 </span>            : </a>
+<a name="278"><span class="lineNum">     278 </span>            : static PyObject *</a>
+<a name="279"><span class="lineNum">     279 </span><span class="lineCov">          5 : union_getitem(PyObject *self, PyObject *item)</span></a>
+<a name="280"><span class="lineNum">     280 </span>            : {</a>
+<a name="281"><span class="lineNum">     281 </span><span class="lineCov">          5 :     unionobject *alias = (unionobject *)self;</span></a>
+<a name="282"><span class="lineNum">     282 </span>            :     // Populate __parameters__ if needed.</a>
+<a name="283"><span class="lineNum">     283 </span><span class="lineCov">          5 :     if (alias-&gt;parameters == NULL) {</span></a>
+<a name="284"><span class="lineNum">     284 </span><span class="lineCov">          3 :         alias-&gt;parameters = _Py_make_parameters(alias-&gt;args);</span></a>
+<a name="285"><span class="lineNum">     285 </span><span class="lineCov">          3 :         if (alias-&gt;parameters == NULL) {</span></a>
+<a name="286"><span class="lineNum">     286 </span><span class="lineNoCov">          0 :             return NULL;</span></a>
+<a name="287"><span class="lineNum">     287 </span>            :         }</a>
+<a name="288"><span class="lineNum">     288 </span>            :     }</a>
+<a name="289"><span class="lineNum">     289 </span>            : </a>
+<a name="290"><span class="lineNum">     290 </span><span class="lineCov">          5 :     PyObject *newargs = _Py_subs_parameters(self, alias-&gt;args, alias-&gt;parameters, item);</span></a>
+<a name="291"><span class="lineNum">     291 </span><span class="lineCov">          5 :     if (newargs == NULL) {</span></a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="293"><span class="lineNum">     293 </span>            :     }</a>
+<a name="294"><span class="lineNum">     294 </span>            : </a>
+<a name="295"><span class="lineNum">     295 </span>            :     PyObject *res;</a>
+<a name="296"><span class="lineNum">     296 </span><span class="lineCov">          5 :     Py_ssize_t nargs = PyTuple_GET_SIZE(newargs);</span></a>
+<a name="297"><span class="lineNum">     297 </span><span class="lineCov">          5 :     if (nargs == 0) {</span></a>
+<a name="298"><span class="lineNum">     298 </span><span class="lineNoCov">          0 :         res = make_union(newargs);</span></a>
+<a name="299"><span class="lineNum">     299 </span>            :     }</a>
+<a name="300"><span class="lineNum">     300 </span>            :     else {</a>
+<a name="301"><span class="lineNum">     301 </span><span class="lineCov">          5 :         res = PyTuple_GET_ITEM(newargs, 0);</span></a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineCov">          5 :         Py_INCREF(res);</span></a>
+<a name="303"><span class="lineNum">     303 </span><span class="lineCov">         10 :         for (Py_ssize_t iarg = 1; iarg &lt; nargs; iarg++) {</span></a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">          5 :             PyObject *arg = PyTuple_GET_ITEM(newargs, iarg);</span></a>
+<a name="305"><span class="lineNum">     305 </span><span class="lineCov">          5 :             Py_SETREF(res, PyNumber_Or(res, arg));</span></a>
+<a name="306"><span class="lineNum">     306 </span><span class="lineCov">          5 :             if (res == NULL) {</span></a>
+<a name="307"><span class="lineNum">     307 </span><span class="lineNoCov">          0 :                 break;</span></a>
+<a name="308"><span class="lineNum">     308 </span>            :             }</a>
+<a name="309"><span class="lineNum">     309 </span>            :         }</a>
+<a name="310"><span class="lineNum">     310 </span>            :     }</a>
+<a name="311"><span class="lineNum">     311 </span><span class="lineCov">          5 :     Py_DECREF(newargs);</span></a>
+<a name="312"><span class="lineNum">     312 </span><span class="lineCov">          5 :     return res;</span></a>
+<a name="313"><span class="lineNum">     313 </span>            : }</a>
+<a name="314"><span class="lineNum">     314 </span>            : </a>
+<a name="315"><span class="lineNum">     315 </span>            : static PyMappingMethods union_as_mapping = {</a>
+<a name="316"><span class="lineNum">     316 </span>            :     .mp_subscript = union_getitem,</a>
+<a name="317"><span class="lineNum">     317 </span>            : };</a>
+<a name="318"><span class="lineNum">     318 </span>            : </a>
+<a name="319"><span class="lineNum">     319 </span>            : static PyObject *</a>
+<a name="320"><span class="lineNum">     320 </span><span class="lineCov">         26 : union_parameters(PyObject *self, void *Py_UNUSED(unused))</span></a>
+<a name="321"><span class="lineNum">     321 </span>            : {</a>
+<a name="322"><span class="lineNum">     322 </span><span class="lineCov">         26 :     unionobject *alias = (unionobject *)self;</span></a>
+<a name="323"><span class="lineNum">     323 </span><span class="lineCov">         26 :     if (alias-&gt;parameters == NULL) {</span></a>
+<a name="324"><span class="lineNum">     324 </span><span class="lineCov">         16 :         alias-&gt;parameters = _Py_make_parameters(alias-&gt;args);</span></a>
+<a name="325"><span class="lineNum">     325 </span><span class="lineCov">         16 :         if (alias-&gt;parameters == NULL) {</span></a>
+<a name="326"><span class="lineNum">     326 </span><span class="lineNoCov">          0 :             return NULL;</span></a>
+<a name="327"><span class="lineNum">     327 </span>            :         }</a>
+<a name="328"><span class="lineNum">     328 </span>            :     }</a>
+<a name="329"><span class="lineNum">     329 </span><span class="lineCov">         26 :     Py_INCREF(alias-&gt;parameters);</span></a>
+<a name="330"><span class="lineNum">     330 </span><span class="lineCov">         26 :     return alias-&gt;parameters;</span></a>
+<a name="331"><span class="lineNum">     331 </span>            : }</a>
+<a name="332"><span class="lineNum">     332 </span>            : </a>
+<a name="333"><span class="lineNum">     333 </span>            : static PyGetSetDef union_properties[] = {</a>
+<a name="334"><span class="lineNum">     334 </span>            :     {&quot;__parameters__&quot;, union_parameters, (setter)NULL, &quot;Type variables in the types.UnionType.&quot;, NULL},</a>
+<a name="335"><span class="lineNum">     335 </span>            :     {0}</a>
+<a name="336"><span class="lineNum">     336 </span>            : };</a>
+<a name="337"><span class="lineNum">     337 </span>            : </a>
+<a name="338"><span class="lineNum">     338 </span>            : static PyNumberMethods union_as_number = {</a>
+<a name="339"><span class="lineNum">     339 </span>            :         .nb_or = _Py_union_type_or, // Add __or__ function</a>
+<a name="340"><span class="lineNum">     340 </span>            : };</a>
+<a name="341"><span class="lineNum">     341 </span>            : </a>
+<a name="342"><span class="lineNum">     342 </span>            : static const char* const cls_attrs[] = {</a>
+<a name="343"><span class="lineNum">     343 </span>            :         &quot;__module__&quot;,  // Required for compatibility with typing module</a>
+<a name="344"><span class="lineNum">     344 </span>            :         NULL,</a>
+<a name="345"><span class="lineNum">     345 </span>            : };</a>
+<a name="346"><span class="lineNum">     346 </span>            : </a>
+<a name="347"><span class="lineNum">     347 </span>            : static PyObject *</a>
+<a name="348"><span class="lineNum">     348 </span><span class="lineCov">        748 : union_getattro(PyObject *self, PyObject *name)</span></a>
+<a name="349"><span class="lineNum">     349 </span>            : {</a>
+<a name="350"><span class="lineNum">     350 </span><span class="lineCov">        748 :     unionobject *alias = (unionobject *)self;</span></a>
+<a name="351"><span class="lineNum">     351 </span><span class="lineCov">        748 :     if (PyUnicode_Check(name)) {</span></a>
+<a name="352"><span class="lineNum">     352 </span><span class="lineCov">       1493 :         for (const char * const *p = cls_attrs; ; p++) {</span></a>
+<a name="353"><span class="lineNum">     353 </span><span class="lineCov">       1493 :             if (*p == NULL) {</span></a>
+<a name="354"><span class="lineNum">     354 </span><span class="lineCov">        745 :                 break;</span></a>
+<a name="355"><span class="lineNum">     355 </span>            :             }</a>
+<a name="356"><span class="lineNum">     356 </span><span class="lineCov">        748 :             if (_PyUnicode_EqualToASCIIString(name, *p)) {</span></a>
+<a name="357"><span class="lineNum">     357 </span><span class="lineCov">          3 :                 return PyObject_GetAttr((PyObject *) Py_TYPE(alias), name);</span></a>
+<a name="358"><span class="lineNum">     358 </span>            :             }</a>
+<a name="359"><span class="lineNum">     359 </span>            :         }</a>
+<a name="360"><span class="lineNum">     360 </span>            :     }</a>
+<a name="361"><span class="lineNum">     361 </span><span class="lineCov">        745 :     return PyObject_GenericGetAttr(self, name);</span></a>
+<a name="362"><span class="lineNum">     362 </span>            : }</a>
+<a name="363"><span class="lineNum">     363 </span>            : </a>
+<a name="364"><span class="lineNum">     364 </span>            : PyObject *</a>
+<a name="365"><span class="lineNum">     365 </span><span class="lineCov">         38 : _Py_union_args(PyObject *self)</span></a>
+<a name="366"><span class="lineNum">     366 </span>            : {</a>
+<a name="367"><span class="lineNum">     367 </span><span class="lineCov">         38 :     assert(_PyUnion_Check(self));</span></a>
+<a name="368"><span class="lineNum">     368 </span><span class="lineCov">         38 :     return ((unionobject *) self)-&gt;args;</span></a>
+<a name="369"><span class="lineNum">     369 </span>            : }</a>
+<a name="370"><span class="lineNum">     370 </span>            : </a>
+<a name="371"><span class="lineNum">     371 </span>            : PyTypeObject _PyUnion_Type = {</a>
+<a name="372"><span class="lineNum">     372 </span>            :     PyVarObject_HEAD_INIT(&amp;PyType_Type, 0)</a>
+<a name="373"><span class="lineNum">     373 </span>            :     .tp_name = &quot;types.UnionType&quot;,</a>
+<a name="374"><span class="lineNum">     374 </span>            :     .tp_doc = PyDoc_STR(&quot;Represent a PEP 604 union type\n&quot;</a>
+<a name="375"><span class="lineNum">     375 </span>            :               &quot;\n&quot;</a>
+<a name="376"><span class="lineNum">     376 </span>            :               &quot;E.g. for int | str&quot;),</a>
+<a name="377"><span class="lineNum">     377 </span>            :     .tp_basicsize = sizeof(unionobject),</a>
+<a name="378"><span class="lineNum">     378 </span>            :     .tp_dealloc = unionobject_dealloc,</a>
+<a name="379"><span class="lineNum">     379 </span>            :     .tp_alloc = PyType_GenericAlloc,</a>
+<a name="380"><span class="lineNum">     380 </span>            :     .tp_free = PyObject_GC_Del,</a>
+<a name="381"><span class="lineNum">     381 </span>            :     .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC,</a>
+<a name="382"><span class="lineNum">     382 </span>            :     .tp_traverse = union_traverse,</a>
+<a name="383"><span class="lineNum">     383 </span>            :     .tp_hash = union_hash,</a>
+<a name="384"><span class="lineNum">     384 </span>            :     .tp_getattro = union_getattro,</a>
+<a name="385"><span class="lineNum">     385 </span>            :     .tp_members = union_members,</a>
+<a name="386"><span class="lineNum">     386 </span>            :     .tp_richcompare = union_richcompare,</a>
+<a name="387"><span class="lineNum">     387 </span>            :     .tp_as_mapping = &amp;union_as_mapping,</a>
+<a name="388"><span class="lineNum">     388 </span>            :     .tp_as_number = &amp;union_as_number,</a>
+<a name="389"><span class="lineNum">     389 </span>            :     .tp_repr = union_repr,</a>
+<a name="390"><span class="lineNum">     390 </span>            :     .tp_getset = union_properties,</a>
+<a name="391"><span class="lineNum">     391 </span>            : };</a>
+<a name="392"><span class="lineNum">     392 </span>            : </a>
+<a name="393"><span class="lineNum">     393 </span>            : static PyObject *</a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">       9383 : make_union(PyObject *args)</span></a>
+<a name="395"><span class="lineNum">     395 </span>            : {</a>
+<a name="396"><span class="lineNum">     396 </span><span class="lineCov">       9383 :     assert(PyTuple_CheckExact(args));</span></a>
+<a name="397"><span class="lineNum">     397 </span>            : </a>
+<a name="398"><span class="lineNum">     398 </span><span class="lineCov">       9383 :     unionobject *result = PyObject_GC_New(unionobject, &amp;_PyUnion_Type);</span></a>
+<a name="399"><span class="lineNum">     399 </span><span class="lineCov">       9383 :     if (result == NULL) {</span></a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="401"><span class="lineNum">     401 </span>            :     }</a>
+<a name="402"><span class="lineNum">     402 </span>            : </a>
+<a name="403"><span class="lineNum">     403 </span><span class="lineCov">       9383 :     Py_INCREF(args);</span></a>
+<a name="404"><span class="lineNum">     404 </span><span class="lineCov">       9383 :     result-&gt;parameters = NULL;</span></a>
+<a name="405"><span class="lineNum">     405 </span><span class="lineCov">       9383 :     result-&gt;args = args;</span></a>
+<a name="406"><span class="lineNum">     406 </span><span class="lineCov">       9383 :     _PyObject_GC_TRACK(result);</span></a>
+<a name="407"><span class="lineNum">     407 </span><span class="lineCov">       9383 :     return (PyObject*)result;</span></a>
+<a name="408"><span class="lineNum">     408 </span>            : }</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

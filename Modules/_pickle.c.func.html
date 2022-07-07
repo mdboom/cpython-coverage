@@ -1,0 +1,884 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Modules/_pickle.c - functions</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Modules</a> - _pickle.c<span style="font-size: 80%;"> (<a href="_pickle.c.gcov.html">source</a> / functions)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2890</td>
+            <td class="headerCovTableEntry">3825</td>
+            <td class="headerCovTableEntryMed">75.6 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">191</td>
+            <td class="headerCovTableEntry">203</td>
+            <td class="headerCovTableEntryHi">94.1 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <center>
+  <table width="60%" cellpadding=1 cellspacing=1 border=0>
+    <tr><td><br></td></tr>
+    <tr>
+      <td width="80%" class="tableHead">Function Name <span class="tableHeadSort"><img src="../glass.png" width=10 height=14 alt="Sort by function name" title="Sort by function name" border=0></span></td>
+      <td width="20%" class="tableHead">Hit count <span class="tableHeadSort"><a href="_pickle.c.func-sort-c.html"><img src="../updown.png" width=10 height=14 alt="Sort by hit count" title="Sort by hit count" border=0></a></span></td>
+    </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#456">Pdata_New</a></td>
+              <td class="coverFnHi">85511</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#478">Pdata_clear</a></td>
+              <td class="coverFnHi">67986</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#437">Pdata_dealloc</a></td>
+              <td class="coverFnHi">85511</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#494">Pdata_grow</a></td>
+              <td class="coverFnHi">33497</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#534">Pdata_pop</a></td>
+              <td class="coverFnHi">326601</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#587">Pdata_poplist</a></td>
+              <td class="coverFnHi">115442</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#566">Pdata_poptuple</a></td>
+              <td class="coverFnHi">326237</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#546">Pdata_push</a></td>
+              <td class="coverFnHi">2732960</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#519">Pdata_stack_underflow</a></td>
+              <td class="coverFnHi">128</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4938">PicklerMemoProxy_New</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4900">PicklerMemoProxy_clear</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4884">PicklerMemoProxy_dealloc</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4892">PicklerMemoProxy_traverse</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4658">Pickler_clear</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4628">Pickler_dealloc</a></td>
+              <td class="coverFnHi">78311</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4954">Pickler_get_memo</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5022">Pickler_get_persid</a></td>
+              <td class="coverFnHi">41207</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4960">Pickler_set_memo</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5032">Pickler_set_persid</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4646">Pickler_traverse</a></td>
+              <td class="coverFnHi">36945</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7938">PyInit__pickle</a></td>
+              <td class="coverFnHi">754</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#782">PyMemoTable_Clear</a></td>
+              <td class="coverFnHi">78238</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#748">PyMemoTable_Copy</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#795">PyMemoTable_Del</a></td>
+              <td class="coverFnHi">78313</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#887">PyMemoTable_Get</a></td>
+              <td class="coverFnHi">1538220</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#725">PyMemoTable_New</a></td>
+              <td class="coverFnHi">78232</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#897">PyMemoTable_Set</a></td>
+              <td class="coverFnHi">895994</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#776">PyMemoTable_Size</a></td>
+              <td class="coverFnHi">895994</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7439">UnpicklerMemoProxy_New</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7401">UnpicklerMemoProxy_clear</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7385">UnpicklerMemoProxy_dealloc</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7393">UnpicklerMemoProxy_traverse</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7173">Unpickler_clear</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7135">Unpickler_dealloc</a></td>
+              <td class="coverFnHi">85514</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7457">Unpickler_get_memo</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7540">Unpickler_get_persload</a></td>
+              <td class="coverFnHi">12086</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7463">Unpickler_set_memo</a></td>
+              <td class="coverFnHi">4</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7550">Unpickler_set_persload</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7160">Unpickler_traverse</a></td>
+              <td class="coverFnHi">75039</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#209">_Pickle_ClearState</a></td>
+              <td class="coverFnHi">932</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#356">_Pickle_FastCall</a></td>
+              <td class="coverFnHi">1607710</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#202">_Pickle_GetGlobalState</a></td>
+              <td class="coverFnHi">458953</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#194">_Pickle_GetState</a></td>
+              <td class="coverFnHi">481266</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#229">_Pickle_InitState</a></td>
+              <td class="coverFnHi">754</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#938">_Pickler_ClearBuffer</a></td>
+              <td class="coverFnHi">41614</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#965">_Pickler_CommitFrame</a></td>
+              <td class="coverFnHi">154708</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1004">_Pickler_FlushToFile</a></td>
+              <td class="coverFnHi">41112</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#987">_Pickler_GetString</a></td>
+              <td class="coverFnHi">77258</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1103">_Pickler_New</a></td>
+              <td class="coverFnHi">36867</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1021">_Pickler_OpcodeBoundary</a></td>
+              <td class="coverFnHi">2505300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1186">_Pickler_SetBufferCallback</a></td>
+              <td class="coverFnHi">78309</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1170">_Pickler_SetOutputStream</a></td>
+              <td class="coverFnHi">41476</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1141">_Pickler_SetProtocol</a></td>
+              <td class="coverFnHi">78310</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1053">_Pickler_Write</a></td>
+              <td class="coverFnHi">4574160</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2275">_Pickler_write_bytes</a></td>
+              <td class="coverFnHi">366849</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#808">_PyMemoTable_Lookup</a></td>
+              <td class="coverFnHi">2950120</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#833">_PyMemoTable_ResizeTable</a></td>
+              <td class="coverFnHi">37059</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1455">_Unpickler_CopyLine</a></td>
+              <td class="coverFnHi">448070</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1570">_Unpickler_MemoCleanup</a></td>
+              <td class="coverFnHi">85517</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1524">_Unpickler_MemoGet</a></td>
+              <td class="coverFnHi">140244</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1535">_Unpickler_MemoPut</a></td>
+              <td class="coverFnHi">1049410</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1586">_Unpickler_New</a></td>
+              <td class="coverFnHi">73353</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1557">_Unpickler_NewMemo</a></td>
+              <td class="coverFnHi">85515</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1265">_Unpickler_ReadFromFile</a></td>
+              <td class="coverFnHi">1623170</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1316">_Unpickler_ReadImpl</a></td>
+              <td class="coverFnHi">1461970</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1354">_Unpickler_ReadInto</a></td>
+              <td class="coverFnHi">49571</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1476">_Unpickler_Readline</a></td>
+              <td class="coverFnHi">448124</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1503">_Unpickler_ResizeMemoList</a></td>
+              <td class="coverFnHi">2000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1679">_Unpickler_SetBuffers</a></td>
+              <td class="coverFnHi">85513</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1658">_Unpickler_SetInputEncoding</a></td>
+              <td class="coverFnHi">85513</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1630">_Unpickler_SetInputStream</a></td>
+              <td class="coverFnHi">13077</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1205">_Unpickler_SetStringInput</a></td>
+              <td class="coverFnHi">1695640</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1228">_Unpickler_SkipConsumed</a></td>
+              <td class="coverFnHi">1709700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1874">_checkmodule</a></td>
+              <td class="coverFnHi">474</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4850">_pickle_PicklerMemoProxy___reduce___impl</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4791">_pickle_PicklerMemoProxy_clear_impl</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4806">_pickle_PicklerMemoProxy_copy_impl</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4720">_pickle_Pickler___init___impl</a></td>
+              <td class="coverFnHi">41443</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4601">_pickle_Pickler___sizeof___impl</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4547">_pickle_Pickler_clear_memo_impl</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4567">_pickle_Pickler_dump</a></td>
+              <td class="coverFnHi">41383</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7350">_pickle_UnpicklerMemoProxy___reduce___impl</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7295">_pickle_UnpicklerMemoProxy_clear_impl</a></td>
+              <td class="coverFnHi">1</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7312">_pickle_UnpicklerMemoProxy_copy_impl</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7234">_pickle_Unpickler___init___impl</a></td>
+              <td class="coverFnHi">12160</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7108">_pickle_Unpickler___sizeof___impl</a></td>
+              <td class="coverFnHi">15</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7019">_pickle_Unpickler_find_class_impl</a></td>
+              <td class="coverFnHi">140558</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6976">_pickle_Unpickler_load_impl</a></td>
+              <td class="coverFnHi">12240</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7662">_pickle_dump_impl</a></td>
+              <td class="coverFnHi">33</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7727">_pickle_dumps_impl</a></td>
+              <td class="coverFnHi">36834</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7792">_pickle_load_impl</a></td>
+              <td class="coverFnHi">917</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7852">_pickle_loads_impl</a></td>
+              <td class="coverFnHi">72436</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2439">_save_bytearray_data</a></td>
+              <td class="coverFnHi">159</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2341">_save_bytes_data</a></td>
+              <td class="coverFnHi">50971</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#950">_write_size64</a></td>
+              <td class="coverFnHi">41682</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1219">bad_readline</a></td>
+              <td class="coverFnHi">195</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3105">batch_dict</a></td>
+              <td class="coverFnHi">1794</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3236">batch_dict_exact</a></td>
+              <td class="coverFnHi">55043</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2864">batch_list</a></td>
+              <td class="coverFnHi">6462</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2980">batch_list_exact</a></td>
+              <td class="coverFnHi">32645</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5238">calc_binint</a></td>
+              <td class="coverFnHi">1317530</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5206">calc_binsize</a></td>
+              <td class="coverFnHi">640594</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#415">call_method</a></td>
+              <td class="coverFnHi">853</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6428">do_append</a></td>
+              <td class="coverFnHi">108717</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6520">do_setitems</a></td>
+              <td class="coverFnHi">66518</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4483">dump</a></td>
+              <td class="coverFnHi">78158</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1979">fast_save_enter</a></td>
+              <td class="coverFnHi">44</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2016">fast_save_leave</a></td>
+              <td class="coverFnHi">44</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5118">find_class</a></td>
+              <td class="coverFnHi">140558</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3522">fix_imports</a></td>
+              <td class="coverFnHi">69925</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3928">get_class</a></td>
+              <td class="coverFnHi">14475</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1825">get_deep_attribute</a></td>
+              <td class="coverFnHi">198521</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1798">get_dotted_path</a></td>
+              <td class="coverFnHi">198154</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1852">getattribute</a></td>
+              <td class="coverFnHi">140557</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#370">init_method_ref</a></td>
+              <td class="coverFnHi">53521</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5801">instantiate</a></td>
+              <td class="coverFnHi">22</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6834">load</a></td>
+              <td class="coverFnHi">85590</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6573">load_additems</a></td>
+              <td class="coverFnHi">92</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6503">load_append</a></td>
+              <td class="coverFnHi">81576</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6511">load_appends</a></td>
+              <td class="coverFnHi">27149</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5402">load_binfloat</a></td>
+              <td class="coverFnHi">11838</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6198">load_binget</a></td>
+              <td class="coverFnHi">126565</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5275">load_binint</a></td>
+              <td class="coverFnHi">308036</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5286">load_binint1</a></td>
+              <td class="coverFnHi">193742</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5297">load_binint2</a></td>
+              <td class="coverFnHi">809596</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5260">load_binintx</a></td>
+              <td class="coverFnHi">1311360</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6081">load_binpersid</a></td>
+              <td class="coverFnHi">97</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6373">load_binput</a></td>
+              <td class="coverFnHi">178181</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5195">load_bool</a></td>
+              <td class="coverFnHi">5154</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6627">load_build</a></td>
+              <td class="coverFnHi">14699</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5509">load_counted_binbytes</a></td>
+              <td class="coverFnHi">49347</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5471">load_counted_binstring</a></td>
+              <td class="coverFnHi">122</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5641">load_counted_binunicode</a></td>
+              <td class="coverFnHi">374201</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5539">load_counted_bytearray</a></td>
+              <td class="coverFnHi">238</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5338">load_counted_long</a></td>
+              <td class="coverFnHi">6139</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5670">load_counted_tuple</a></td>
+              <td class="coverFnHi">326123</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5745">load_dict</a></td>
+              <td class="coverFnHi">1450</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6148">load_dup</a></td>
+              <td class="coverFnHi">8</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5707">load_empty_dict</a></td>
+              <td class="coverFnHi">55400</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5696">load_empty_list</a></td>
+              <td class="coverFnHi">35620</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5718">load_empty_set</a></td>
+              <td class="coverFnHi">72</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6255">load_extension</a></td>
+              <td class="coverFnHi">42</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5373">load_float</a></td>
+              <td class="coverFnHi">303</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6809">load_frame</a></td>
+              <td class="coverFnHi">47334</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5778">load_frozenset</a></td>
+              <td class="coverFnHi">20</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6161">load_get</a></td>
+              <td class="coverFnHi">13332</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5979">load_global</a></td>
+              <td class="coverFnHi">91883</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5850">load_inst</a></td>
+              <td class="coverFnHi">16</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5150">load_int</a></td>
+              <td class="coverFnHi">85888</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5729">load_list</a></td>
+              <td class="coverFnHi">6833</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5308">load_long</a></td>
+              <td class="coverFnHi">3360</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6225">load_long_binget</a></td>
+              <td class="coverFnHi">357</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6392">load_long_binput</a></td>
+              <td class="coverFnHi">169042</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6736">load_mark</a></td>
+              <td class="coverFnHi">143306</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6416">load_memoize</a></td>
+              <td class="coverFnHi">582782</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5914">load_newobj</a></td>
+              <td class="coverFnHi">8033</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5571">load_next_buffer</a></td>
+              <td class="coverFnHi">108</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5143">load_none</a></td>
+              <td class="coverFnHi">72053</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5821">load_obj</a></td>
+              <td class="coverFnHi">20</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6041">load_persid</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6108">load_pop</a></td>
+              <td class="coverFnHi">378</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6135">load_pop_mark</a></td>
+              <td class="coverFnHi">42</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6790">load_proto</a></td>
+              <td class="coverFnHi">68721</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6342">load_put</a></td>
+              <td class="coverFnHi">119430</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5595">load_readonly_buffer</a></td>
+              <td class="coverFnHi">38</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6763">load_reduce</a></td>
+              <td class="coverFnHi">56650</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6558">load_setitem</a></td>
+              <td class="coverFnHi">60358</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6564">load_setitems</a></td>
+              <td class="coverFnHi">6162</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#6015">load_stack_global</a></td>
+              <td class="coverFnHi">48653</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5423">load_string</a></td>
+              <td class="coverFnHi">74</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5685">load_tuple</a></td>
+              <td class="coverFnHi">101434</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5621">load_unicode</a></td>
+              <td class="coverFnHi">41937</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5125">marker</a></td>
+              <td class="coverFnHi">143218</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1695">memo_get</a></td>
+              <td class="coverFnHi">165095</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1744">memo_put</a></td>
+              <td class="coverFnHi">896050</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#5905">newobj_unpickling_error</a></td>
+              <td class="coverFnHi">14</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7892">pickle_clear</a></td>
+              <td class="coverFnHi">178</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7899">pickle_free</a></td>
+              <td class="coverFnHi">754</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#7905">pickle_traverse</a></td>
+              <td class="coverFnHi">20627</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2563">raw_unicode_escape</a></td>
+              <td class="coverFnHi">17447</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#403">reconstruct_method</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#4257">save</a></td>
+              <td class="coverFnHi">2505300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2042">save_bool</a></td>
+              <td class="coverFnHi">9758</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2466">save_bytearray</a></td>
+              <td class="coverFnHi">456</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2389">save_bytes</a></td>
+              <td class="coverFnHi">57639</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3306">save_dict</a></td>
+              <td class="coverFnHi">72293</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2226">save_float</a></td>
+              <td class="coverFnHi">32774</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3442">save_frozenset</a></td>
+              <td class="coverFnHi">78</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3588">save_global</a></td>
+              <td class="coverFnHi">149510</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3031">save_list</a></td>
+              <td class="coverFnHi">43842</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2063">save_long</a></td>
+              <td class="coverFnHi">1261390</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2032">save_none</a></td>
+              <td class="coverFnHi">74703</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3871">save_pers</a></td>
+              <td class="coverFnHi">743</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2502">save_picklebuffer</a></td>
+              <td class="coverFnHi">130</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3943">save_reduce</a></td>
+              <td class="coverFnHi">87416</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3373">save_set</a></td>
+              <td class="coverFnHi">227</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3841">save_singleton_type</a></td>
+              <td class="coverFnHi">84</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2758">save_tuple</a></td>
+              <td class="coverFnHi">223960</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#3856">save_type</a></td>
+              <td class="coverFnHi">128680</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2695">save_unicode</a></td>
+              <td class="coverFnHi">333166</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2733">store_tuple_elements</a></td>
+              <td class="coverFnHi">183348</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#1898">whichmodule</a></td>
+              <td class="coverFnHi">149409</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="_pickle.c.gcov.html#2635">write_unicode_binary</a></td>
+              <td class="coverFnHi">315719</td>
+            </tr>
+  </table>
+  <br>
+  </center>
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

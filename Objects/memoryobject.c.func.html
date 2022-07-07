@@ -1,0 +1,500 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Objects/memoryobject.c - functions</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Objects</a> - memoryobject.c<span style="font-size: 80%;"> (<a href="memoryobject.c.gcov.html">source</a> / functions)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1334</td>
+            <td class="headerCovTableEntry">1433</td>
+            <td class="headerCovTableEntryHi">93.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">106</td>
+            <td class="headerCovTableEntry">107</td>
+            <td class="headerCovTableEntryHi">99.1 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <center>
+  <table width="60%" cellpadding=1 cellspacing=1 border=0>
+    <tr><td><br></td></tr>
+    <tr>
+      <td width="80%" class="tableHead">Function Name <span class="tableHeadSort"><img src="../glass.png" width=10 height=14 alt="Sort by function name" title="Sort by function name" border=0></span></td>
+      <td width="20%" class="tableHead">Hit count <span class="tableHeadSort"><a href="memoryobject.c.func-sort-c.html"><img src="../updown.png" width=10 height=14 alt="Sort by hit count" title="Sort by hit count" border=0></a></span></td>
+    </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#981">PyBuffer_ToContiguous</a></td>
+              <td class="coverFnHi">572733</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#754">PyMemoryView_FromBuffer</a></td>
+              <td class="coverFnHi">976440</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#725">PyMemoryView_FromMemory</a></td>
+              <td class="coverFnHi">150783</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#784">PyMemoryView_FromObject</a></td>
+              <td class="coverFnHi">750039</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#916">PyMemoryView_GetContiguous</a></td>
+              <td class="coverFnHi">33789</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2991">_IntTupleFromSsizet</a></td>
+              <td class="coverFnHi">245656</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#86">_PyManagedBuffer_FromObject</a></td>
+              <td class="coverFnHi">742211</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1033">_memory_release</a></td>
+              <td class="coverFnHi">2247450</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2045">adjust_fmt</a></td>
+              <td class="coverFnHi">155861</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#478">buffer_to_contiguous</a></td>
+              <td class="coverFnHi">190416</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1192">cast_to_1D</a></td>
+              <td class="coverFnHi">39814</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1294">cast_to_ND</a></td>
+              <td class="coverFnHi">11884</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2771">cmp_base</a></td>
+              <td class="coverFnHi">412999</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2793">cmp_rec</a></td>
+              <td class="coverFnHi">412656</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#327">copy_base</a></td>
+              <td class="coverFnHi">325546</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#420">copy_buffer</a></td>
+              <td class="coverFnHi">212083</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#357">copy_rec</a></td>
+              <td class="coverFnHi">418675</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1255">copy_shape</a></td>
+              <td class="coverFnHi">11883</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#387">copy_single</a></td>
+              <td class="coverFnHi">5663</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#270">equiv_format</a></td>
+              <td class="coverFnHi">217744</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#290">equiv_shape</a></td>
+              <td class="coverFnHi">379809</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#310">equiv_structure</a></td>
+              <td class="coverFnHi">217744</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1563">fix_error_int</a></td>
+              <td class="coverFnHi">663</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2658">fix_struct_error_int</a></td>
+              <td class="coverFnHi">5</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1121">get_native_fmtchar</a></td>
+              <td class="coverFnHi">396382</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1149">get_native_fmtstr</a></td>
+              <td class="coverFnHi">31613</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#593">init_flags</a></td>
+              <td class="coverFnHi">2442280</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#463">init_fortran_strides_from_shape</a></td>
+              <td class="coverFnHi">51259</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#579">init_len</a></td>
+              <td class="coverFnHi">236439</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#538">init_shape_strides</a></td>
+              <td class="coverFnHi">2331100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#525">init_shared_values</a></td>
+              <td class="coverFnHi">2392580</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2392">init_slice</a></td>
+              <td class="coverFnHi">242105</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#450">init_strides_from_shape</a></td>
+              <td class="coverFnHi">172704</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#565">init_suboffsets</a></td>
+              <td class="coverFnHi">2331100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2440">is_multiindex</a></td>
+              <td class="coverFnHi">109</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2421">is_multislice</a></td>
+              <td class="coverFnHi">69</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#254">last_dim_is_contiguous</a></td>
+              <td class="coverFnHi">216958</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2275">lookup_dimension</a></td>
+              <td class="coverFnHi">83076</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#696">mbuf_add_incomplete_view</a></td>
+              <td class="coverFnHi">61481</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#658">mbuf_add_view</a></td>
+              <td class="coverFnHi">2140700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#69">mbuf_alloc</a></td>
+              <td class="coverFnHi">1869430</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#136">mbuf_clear</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#811">mbuf_copy_format</a></td>
+              <td class="coverFnHi">21667</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#119">mbuf_dealloc</a></td>
+              <td class="coverFnHi">1869390</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#104">mbuf_release</a></td>
+              <td class="coverFnHi">3738260</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#129">mbuf_traverse</a></td>
+              <td class="coverFnHi">47842</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#626">memory_alloc</a></td>
+              <td class="coverFnHi">2202170</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2525">memory_ass_sub</a></td>
+              <td class="coverFnHi">26974</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3084">memory_c_contiguous</a></td>
+              <td class="coverFnHi">3368</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1092">memory_clear</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3098">memory_contiguous</a></td>
+              <td class="coverFnHi">1119</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1073">memory_dealloc</a></td>
+              <td class="coverFnHi">2202120</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1100">memory_enter</a></td>
+              <td class="coverFnHi">44993</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1108">memory_exit</a></td>
+              <td class="coverFnHi">44966</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3091">memory_f_contiguous</a></td>
+              <td class="coverFnHi">1079</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3035">memory_format_get</a></td>
+              <td class="coverFnHi">87978</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#839">memory_from_contiguous_copy</a></td>
+              <td class="coverFnHi">21667</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1443">memory_getbuf</a></td>
+              <td class="coverFnHi">3697720</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2937">memory_hash</a></td>
+              <td class="coverFnHi">293</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2338">memory_item</a></td>
+              <td class="coverFnHi">61861</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2367">memory_item_multi</a></td>
+              <td class="coverFnHi">16</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3042">memory_itemsize_get</a></td>
+              <td class="coverFnHi">101398</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3221">memory_iter</a></td>
+              <td class="coverFnHi">84</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2627">memory_length</a></td>
+              <td class="coverFnHi">203874</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3028">memory_nbytes_get</a></td>
+              <td class="coverFnHi">93407</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3077">memory_ndim_get</a></td>
+              <td class="coverFnHi">80867</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3015">memory_obj_get</a></td>
+              <td class="coverFnHi">91622</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3070">memory_readonly_get</a></td>
+              <td class="coverFnHi">98201</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1522">memory_releasebuf</a></td>
+              <td class="coverFnHi">3683590</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2261">memory_repr</a></td>
+              <td class="coverFnHi">57</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2829">memory_richcompare</a></td>
+              <td class="coverFnHi">162312</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3049">memory_shape_get</a></td>
+              <td class="coverFnHi">73479</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3056">memory_strides_get</a></td>
+              <td class="coverFnHi">71524</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3063">memory_suboffsets_get</a></td>
+              <td class="coverFnHi">100710</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2463">memory_subscript</a></td>
+              <td class="coverFnHi">298296</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1085">memory_traverse</a></td>
+              <td class="coverFnHi">47908</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3179">memoryiter_dealloc</a></td>
+              <td class="coverFnHi">82</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3194">memoryiter_next</a></td>
+              <td class="coverFnHi">342</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#3187">memoryiter_traverse</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1364">memoryview_cast_impl</a></td>
+              <td class="coverFnHi">40003</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2229">memoryview_hex_impl</a></td>
+              <td class="coverFnHi">11254</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#964">memoryview_impl</a></td>
+              <td class="coverFnHi">644209</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1064">memoryview_release_impl</a></td>
+              <td class="coverFnHi">45325</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2170">memoryview_tobytes_impl</a></td>
+              <td class="coverFnHi">219503</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2129">memoryview_tolist_impl</a></td>
+              <td class="coverFnHi">66968</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1423">memoryview_toreadonly_impl</a></td>
+              <td class="coverFnHi">27597</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1776">pack_single</a></td>
+              <td class="coverFnHi">21152</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2301">ptr_from_index</a></td>
+              <td class="coverFnHi">83028</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2309">ptr_from_tuple</a></td>
+              <td class="coverFnHi">37</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1581">pylong_as_ld</a></td>
+              <td class="coverFnHi">16104</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1611">pylong_as_lld</a></td>
+              <td class="coverFnHi">66</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1626">pylong_as_llu</a></td>
+              <td class="coverFnHi">67</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1596">pylong_as_lu</a></td>
+              <td class="coverFnHi">3100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1641">pylong_as_zd</a></td>
+              <td class="coverFnHi">62</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1656">pylong_as_zu</a></td>
+              <td class="coverFnHi">62</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1966">struct_get_unpacker</a></td>
+              <td class="coverFnHi">30131</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2673">struct_unpack_cmp</a></td>
+              <td class="coverFnHi">43531</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2019">struct_unpack_single</a></td>
+              <td class="coverFnHi">87062</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2060">tolist_base</a></td>
+              <td class="coverFnHi">335116</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2087">tolist_rec</a></td>
+              <td class="coverFnHi">326322</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1547">type_error_int</a></td>
+              <td class="coverFnHi">690</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#2715">unpack_cmp</a></td>
+              <td class="coverFnHi">5407540</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1684">unpack_single</a></td>
+              <td class="coverFnHi">3060510</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1954">unpacker_free</a></td>
+              <td class="coverFnHi">324629</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1936">unpacker_new</a></td>
+              <td class="coverFnHi">30131</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1555">value_error_int</a></td>
+              <td class="coverFnHi">33</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="memoryobject.c.gcov.html#1330">zero_in_shape</a></td>
+              <td class="coverFnHi">26264</td>
+            </tr>
+  </table>
+  <br>
+  </center>
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

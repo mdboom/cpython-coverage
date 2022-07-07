@@ -1,0 +1,686 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Modules/_ctypes/callbacks.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">Modules/_ctypes</a> - callbacks.c<span style="font-size: 80%;"> (source / <a href="callbacks.c.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">125</td>
+            <td class="headerCovTableEntry">164</td>
+            <td class="headerCovTableEntryMed">76.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryMed">87.5 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef Py_BUILD_CORE_BUILTIN</a>
+<a name="2"><span class="lineNum">       2 </span>            : #  define Py_BUILD_CORE_MODULE 1</a>
+<a name="3"><span class="lineNum">       3 </span>            : #endif</a>
+<a name="4"><span class="lineNum">       4 </span>            : #define NEEDS_PY_IDENTIFIER</a>
+<a name="5"><span class="lineNum">       5 </span>            : </a>
+<a name="6"><span class="lineNum">       6 </span>            : #include &quot;Python.h&quot;</a>
+<a name="7"><span class="lineNum">       7 </span>            : // windows.h must be included before pycore internal headers</a>
+<a name="8"><span class="lineNum">       8 </span>            : #ifdef MS_WIN32</a>
+<a name="9"><span class="lineNum">       9 </span>            : #  include &lt;windows.h&gt;</a>
+<a name="10"><span class="lineNum">      10 </span>            : #endif</a>
+<a name="11"><span class="lineNum">      11 </span>            : </a>
+<a name="12"><span class="lineNum">      12 </span>            : #include &quot;pycore_call.h&quot;          // _PyObject_CallNoArgs()</a>
+<a name="13"><span class="lineNum">      13 </span>            : </a>
+<a name="14"><span class="lineNum">      14 </span>            : #include &lt;stdbool.h&gt;</a>
+<a name="15"><span class="lineNum">      15 </span>            : </a>
+<a name="16"><span class="lineNum">      16 </span>            : #ifdef MS_WIN32</a>
+<a name="17"><span class="lineNum">      17 </span>            : #  include &lt;malloc.h&gt;</a>
+<a name="18"><span class="lineNum">      18 </span>            : #endif</a>
+<a name="19"><span class="lineNum">      19 </span>            : </a>
+<a name="20"><span class="lineNum">      20 </span>            : #include &lt;ffi.h&gt;</a>
+<a name="21"><span class="lineNum">      21 </span>            : #include &quot;ctypes.h&quot;</a>
+<a name="22"><span class="lineNum">      22 </span>            : </a>
+<a name="23"><span class="lineNum">      23 </span>            : #ifdef HAVE_ALLOCA_H</a>
+<a name="24"><span class="lineNum">      24 </span>            : /* AIX needs alloca.h for alloca() */</a>
+<a name="25"><span class="lineNum">      25 </span>            : #include &lt;alloca.h&gt;</a>
+<a name="26"><span class="lineNum">      26 </span>            : #endif</a>
+<a name="27"><span class="lineNum">      27 </span>            : </a>
+<a name="28"><span class="lineNum">      28 </span>            : /**************************************************************/</a>
+<a name="29"><span class="lineNum">      29 </span>            : </a>
+<a name="30"><span class="lineNum">      30 </span>            : static void</a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">        151 : CThunkObject_dealloc(PyObject *myself)</span></a>
+<a name="32"><span class="lineNum">      32 </span>            : {</a>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">        151 :     CThunkObject *self = (CThunkObject *)myself;</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">        151 :     PyObject_GC_UnTrack(self);</span></a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineCov">        151 :     Py_XDECREF(self-&gt;converters);</span></a>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">        151 :     Py_XDECREF(self-&gt;callable);</span></a>
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">        151 :     Py_XDECREF(self-&gt;restype);</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">        151 :     if (self-&gt;pcl_write)</span></a>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">        151 :         Py_ffi_closure_free(self-&gt;pcl_write);</span></a>
+<a name="40"><span class="lineNum">      40 </span><span class="lineCov">        151 :     PyObject_GC_Del(self);</span></a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">        151 : }</span></a>
+<a name="42"><span class="lineNum">      42 </span>            : </a>
+<a name="43"><span class="lineNum">      43 </span>            : static int</a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">        249 : CThunkObject_traverse(PyObject *myself, visitproc visit, void *arg)</span></a>
+<a name="45"><span class="lineNum">      45 </span>            : {</a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">        249 :     CThunkObject *self = (CThunkObject *)myself;</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">        249 :     Py_VISIT(self-&gt;converters);</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">        249 :     Py_VISIT(self-&gt;callable);</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">        249 :     Py_VISIT(self-&gt;restype);</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">        249 :     return 0;</span></a>
+<a name="51"><span class="lineNum">      51 </span>            : }</a>
+<a name="52"><span class="lineNum">      52 </span>            : </a>
+<a name="53"><span class="lineNum">      53 </span>            : static int</a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          1 : CThunkObject_clear(PyObject *myself)</span></a>
+<a name="55"><span class="lineNum">      55 </span>            : {</a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          1 :     CThunkObject *self = (CThunkObject *)myself;</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          1 :     Py_CLEAR(self-&gt;converters);</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          1 :     Py_CLEAR(self-&gt;callable);</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          1 :     Py_CLEAR(self-&gt;restype);</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :     return 0;</span></a>
+<a name="61"><span class="lineNum">      61 </span>            : }</a>
+<a name="62"><span class="lineNum">      62 </span>            : </a>
+<a name="63"><span class="lineNum">      63 </span>            : PyTypeObject PyCThunk_Type = {</a>
+<a name="64"><span class="lineNum">      64 </span>            :     PyVarObject_HEAD_INIT(NULL, 0)</a>
+<a name="65"><span class="lineNum">      65 </span>            :     &quot;_ctypes.CThunkObject&quot;,</a>
+<a name="66"><span class="lineNum">      66 </span>            :     sizeof(CThunkObject),                       /* tp_basicsize */</a>
+<a name="67"><span class="lineNum">      67 </span>            :     sizeof(ffi_type),                           /* tp_itemsize */</a>
+<a name="68"><span class="lineNum">      68 </span>            :     CThunkObject_dealloc,                       /* tp_dealloc */</a>
+<a name="69"><span class="lineNum">      69 </span>            :     0,                                          /* tp_vectorcall_offset */</a>
+<a name="70"><span class="lineNum">      70 </span>            :     0,                                          /* tp_getattr */</a>
+<a name="71"><span class="lineNum">      71 </span>            :     0,                                          /* tp_setattr */</a>
+<a name="72"><span class="lineNum">      72 </span>            :     0,                                          /* tp_as_async */</a>
+<a name="73"><span class="lineNum">      73 </span>            :     0,                                          /* tp_repr */</a>
+<a name="74"><span class="lineNum">      74 </span>            :     0,                                          /* tp_as_number */</a>
+<a name="75"><span class="lineNum">      75 </span>            :     0,                                          /* tp_as_sequence */</a>
+<a name="76"><span class="lineNum">      76 </span>            :     0,                                          /* tp_as_mapping */</a>
+<a name="77"><span class="lineNum">      77 </span>            :     0,                                          /* tp_hash */</a>
+<a name="78"><span class="lineNum">      78 </span>            :     0,                                          /* tp_call */</a>
+<a name="79"><span class="lineNum">      79 </span>            :     0,                                          /* tp_str */</a>
+<a name="80"><span class="lineNum">      80 </span>            :     0,                                          /* tp_getattro */</a>
+<a name="81"><span class="lineNum">      81 </span>            :     0,                                          /* tp_setattro */</a>
+<a name="82"><span class="lineNum">      82 </span>            :     0,                                          /* tp_as_buffer */</a>
+<a name="83"><span class="lineNum">      83 </span>            :     Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC,                            /* tp_flags */</a>
+<a name="84"><span class="lineNum">      84 </span>            :     PyDoc_STR(&quot;CThunkObject&quot;),                  /* tp_doc */</a>
+<a name="85"><span class="lineNum">      85 </span>            :     CThunkObject_traverse,                      /* tp_traverse */</a>
+<a name="86"><span class="lineNum">      86 </span>            :     CThunkObject_clear,                         /* tp_clear */</a>
+<a name="87"><span class="lineNum">      87 </span>            :     0,                                          /* tp_richcompare */</a>
+<a name="88"><span class="lineNum">      88 </span>            :     0,                                          /* tp_weaklistoffset */</a>
+<a name="89"><span class="lineNum">      89 </span>            :     0,                                          /* tp_iter */</a>
+<a name="90"><span class="lineNum">      90 </span>            :     0,                                          /* tp_iternext */</a>
+<a name="91"><span class="lineNum">      91 </span>            :     0,                                          /* tp_methods */</a>
+<a name="92"><span class="lineNum">      92 </span>            :     0,                                          /* tp_members */</a>
+<a name="93"><span class="lineNum">      93 </span>            : };</a>
+<a name="94"><span class="lineNum">      94 </span>            : </a>
+<a name="95"><span class="lineNum">      95 </span>            : /**************************************************************/</a>
+<a name="96"><span class="lineNum">      96 </span>            : </a>
+<a name="97"><span class="lineNum">      97 </span>            : static void</a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineNoCov">          0 : PrintError(const char *msg, ...)</span></a>
+<a name="99"><span class="lineNum">      99 </span>            : {</a>
+<a name="100"><span class="lineNum">     100 </span>            :     char buf[512];</a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineNoCov">          0 :     PyObject *f = PySys_GetObject(&quot;stderr&quot;);</span></a>
+<a name="102"><span class="lineNum">     102 </span>            :     va_list marker;</a>
+<a name="103"><span class="lineNum">     103 </span>            : </a>
+<a name="104"><span class="lineNum">     104 </span><span class="lineNoCov">          0 :     va_start(marker, msg);</span></a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineNoCov">          0 :     PyOS_vsnprintf(buf, sizeof(buf), msg, marker);</span></a>
+<a name="106"><span class="lineNum">     106 </span><span class="lineNoCov">          0 :     va_end(marker);</span></a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineNoCov">          0 :     if (f != NULL &amp;&amp; f != Py_None)</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 :         PyFile_WriteString(buf, f);</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 :     PyErr_Print();</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineNoCov">          0 : }</span></a>
+<a name="111"><span class="lineNum">     111 </span>            : </a>
+<a name="112"><span class="lineNum">     112 </span>            : </a>
+<a name="113"><span class="lineNum">     113 </span>            : #ifdef MS_WIN32</a>
+<a name="114"><span class="lineNum">     114 </span>            : /*</a>
+<a name="115"><span class="lineNum">     115 </span>            :  * We must call AddRef() on non-NULL COM pointers we receive as arguments</a>
+<a name="116"><span class="lineNum">     116 </span>            :  * to callback functions - these functions are COM method implementations.</a>
+<a name="117"><span class="lineNum">     117 </span>            :  * The Python instances we create have a __del__ method which calls Release().</a>
+<a name="118"><span class="lineNum">     118 </span>            :  *</a>
+<a name="119"><span class="lineNum">     119 </span>            :  * The presence of a class attribute named '_needs_com_addref_' triggers this</a>
+<a name="120"><span class="lineNum">     120 </span>            :  * behaviour.  It would also be possible to call the AddRef() Python method,</a>
+<a name="121"><span class="lineNum">     121 </span>            :  * after checking for PyObject_IsTrue(), but this would probably be somewhat</a>
+<a name="122"><span class="lineNum">     122 </span>            :  * slower.</a>
+<a name="123"><span class="lineNum">     123 </span>            :  */</a>
+<a name="124"><span class="lineNum">     124 </span>            : static void</a>
+<a name="125"><span class="lineNum">     125 </span>            : TryAddRef(StgDictObject *dict, CDataObject *obj)</a>
+<a name="126"><span class="lineNum">     126 </span>            : {</a>
+<a name="127"><span class="lineNum">     127 </span>            :     IUnknown *punk;</a>
+<a name="128"><span class="lineNum">     128 </span>            :     _Py_IDENTIFIER(_needs_com_addref_);</a>
+<a name="129"><span class="lineNum">     129 </span>            : </a>
+<a name="130"><span class="lineNum">     130 </span>            :     int r = _PyDict_ContainsId((PyObject *)dict, &amp;PyId__needs_com_addref_);</a>
+<a name="131"><span class="lineNum">     131 </span>            :     if (r &lt;= 0) {</a>
+<a name="132"><span class="lineNum">     132 </span>            :         if (r &lt; 0) {</a>
+<a name="133"><span class="lineNum">     133 </span>            :             PrintError(&quot;getting _needs_com_addref_&quot;);</a>
+<a name="134"><span class="lineNum">     134 </span>            :         }</a>
+<a name="135"><span class="lineNum">     135 </span>            :         return;</a>
+<a name="136"><span class="lineNum">     136 </span>            :     }</a>
+<a name="137"><span class="lineNum">     137 </span>            : </a>
+<a name="138"><span class="lineNum">     138 </span>            :     punk = *(IUnknown **)obj-&gt;b_ptr;</a>
+<a name="139"><span class="lineNum">     139 </span>            :     if (punk)</a>
+<a name="140"><span class="lineNum">     140 </span>            :         punk-&gt;lpVtbl-&gt;AddRef(punk);</a>
+<a name="141"><span class="lineNum">     141 </span>            :     return;</a>
+<a name="142"><span class="lineNum">     142 </span>            : }</a>
+<a name="143"><span class="lineNum">     143 </span>            : #endif</a>
+<a name="144"><span class="lineNum">     144 </span>            : </a>
+<a name="145"><span class="lineNum">     145 </span>            : /******************************************************************************</a>
+<a name="146"><span class="lineNum">     146 </span>            :  *</a>
+<a name="147"><span class="lineNum">     147 </span>            :  * Call the python object with all arguments</a>
+<a name="148"><span class="lineNum">     148 </span>            :  *</a>
+<a name="149"><span class="lineNum">     149 </span>            :  */</a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">        462 : static void _CallPythonObject(void *mem,</span></a>
+<a name="151"><span class="lineNum">     151 </span>            :                               ffi_type *restype,</a>
+<a name="152"><span class="lineNum">     152 </span>            :                               SETFUNC setfunc,</a>
+<a name="153"><span class="lineNum">     153 </span>            :                               PyObject *callable,</a>
+<a name="154"><span class="lineNum">     154 </span>            :                               PyObject *converters,</a>
+<a name="155"><span class="lineNum">     155 </span>            :                               int flags,</a>
+<a name="156"><span class="lineNum">     156 </span>            :                               void **pArgs)</a>
+<a name="157"><span class="lineNum">     157 </span>            : {</a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">        462 :     PyObject *result = NULL;</span></a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">        462 :     Py_ssize_t i = 0, j = 0, nargs = 0;</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">        462 :     PyObject *error_object = NULL;</span></a>
+<a name="161"><span class="lineNum">     161 </span>            :     int *space;</a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">        462 :     PyGILState_STATE state = PyGILState_Ensure();</span></a>
+<a name="163"><span class="lineNum">     163 </span>            : </a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">        462 :     assert(PyTuple_Check(converters));</span></a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">        462 :     nargs = PyTuple_GET_SIZE(converters);</span></a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">        462 :     assert(nargs &lt;= CTYPES_MAX_ARGCOUNT);</span></a>
+<a name="167"><span class="lineNum">     167 </span><span class="lineCov">        462 :     PyObject **args = alloca(nargs * sizeof(PyObject *));</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">        462 :     PyObject **cnvs = PySequence_Fast_ITEMS(converters);</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">       2062 :     for (i = 0; i &lt; nargs; i++) {</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">       1600 :         PyObject *cnv = cnvs[i]; // borrowed ref</span></a>
+<a name="171"><span class="lineNum">     171 </span>            :         StgDictObject *dict;</a>
+<a name="172"><span class="lineNum">     172 </span><span class="lineCov">       1600 :         dict = PyType_stgdict(cnv);</span></a>
+<a name="173"><span class="lineNum">     173 </span>            : </a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">       1600 :         if (dict &amp;&amp; dict-&gt;getfunc &amp;&amp; !_ctypes_simple_instance(cnv)) {</span></a>
+<a name="175"><span class="lineNum">     175 </span><span class="lineCov">       1456 :             PyObject *v = dict-&gt;getfunc(*pArgs, dict-&gt;size);</span></a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">       1456 :             if (!v) {</span></a>
+<a name="177"><span class="lineNum">     177 </span><span class="lineNoCov">          0 :                 PrintError(&quot;create argument %zd:\n&quot;, i);</span></a>
+<a name="178"><span class="lineNum">     178 </span><span class="lineNoCov">          0 :                 goto Done;</span></a>
+<a name="179"><span class="lineNum">     179 </span>            :             }</a>
+<a name="180"><span class="lineNum">     180 </span><span class="lineCov">       1456 :             args[i] = v;</span></a>
+<a name="181"><span class="lineNum">     181 </span>            :             /* XXX XXX XX</a>
+<a name="182"><span class="lineNum">     182 </span>            :                We have the problem that c_byte or c_short have dict-&gt;size of</a>
+<a name="183"><span class="lineNum">     183 </span>            :                1 resp. 4, but these parameters are pushed as sizeof(int) bytes.</a>
+<a name="184"><span class="lineNum">     184 </span>            :                BTW, the same problem occurs when they are pushed as parameters</a>
+<a name="185"><span class="lineNum">     185 </span>            :             */</a>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">        144 :         } else if (dict) {</span></a>
+<a name="187"><span class="lineNum">     187 </span>            :             /* Hm, shouldn't we use PyCData_AtAddress() or something like that instead? */</a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">        144 :             CDataObject *obj = (CDataObject *)_PyObject_CallNoArgs(cnv);</span></a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">        144 :             if (!obj) {</span></a>
+<a name="190"><span class="lineNum">     190 </span><span class="lineNoCov">          0 :                 PrintError(&quot;create argument %zd:\n&quot;, i);</span></a>
+<a name="191"><span class="lineNum">     191 </span><span class="lineNoCov">          0 :                 goto Done;</span></a>
+<a name="192"><span class="lineNum">     192 </span>            :             }</a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">        144 :             if (!CDataObject_Check(obj)) {</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineNoCov">          0 :                 Py_DECREF(obj);</span></a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineNoCov">          0 :                 PrintError(&quot;unexpected result of create argument %zd:\n&quot;, i);</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineNoCov">          0 :                 goto Done;</span></a>
+<a name="197"><span class="lineNum">     197 </span>            :             }</a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">        144 :             memcpy(obj-&gt;b_ptr, *pArgs, dict-&gt;size);</span></a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">        144 :             args[i] = (PyObject *)obj;</span></a>
+<a name="200"><span class="lineNum">     200 </span>            : #ifdef MS_WIN32</a>
+<a name="201"><span class="lineNum">     201 </span>            :             TryAddRef(dict, obj);</a>
+<a name="202"><span class="lineNum">     202 </span>            : #endif</a>
+<a name="203"><span class="lineNum">     203 </span>            :         } else {</a>
+<a name="204"><span class="lineNum">     204 </span><span class="lineNoCov">          0 :             PyErr_SetString(PyExc_TypeError,</span></a>
+<a name="205"><span class="lineNum">     205 </span>            :                             &quot;cannot build parameter&quot;);</a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineNoCov">          0 :             PrintError(&quot;Parsing argument %zd\n&quot;, i);</span></a>
+<a name="207"><span class="lineNum">     207 </span><span class="lineNoCov">          0 :             goto Done;</span></a>
+<a name="208"><span class="lineNum">     208 </span>            :         }</a>
+<a name="209"><span class="lineNum">     209 </span>            :         /* XXX error handling! */</a>
+<a name="210"><span class="lineNum">     210 </span><span class="lineCov">       1600 :         pArgs++;</span></a>
+<a name="211"><span class="lineNum">     211 </span>            :     }</a>
+<a name="212"><span class="lineNum">     212 </span>            : </a>
+<a name="213"><span class="lineNum">     213 </span><span class="lineCov">        462 :     if (flags &amp; (FUNCFLAG_USE_ERRNO | FUNCFLAG_USE_LASTERROR)) {</span></a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineNoCov">          0 :         error_object = _ctypes_get_errobj(&amp;space);</span></a>
+<a name="215"><span class="lineNum">     215 </span><span class="lineNoCov">          0 :         if (error_object == NULL)</span></a>
+<a name="216"><span class="lineNum">     216 </span><span class="lineNoCov">          0 :             goto Done;</span></a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineNoCov">          0 :         if (flags &amp; FUNCFLAG_USE_ERRNO) {</span></a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineNoCov">          0 :             int temp = space[0];</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineNoCov">          0 :             space[0] = errno;</span></a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineNoCov">          0 :             errno = temp;</span></a>
+<a name="221"><span class="lineNum">     221 </span>            :         }</a>
+<a name="222"><span class="lineNum">     222 </span>            : #ifdef MS_WIN32</a>
+<a name="223"><span class="lineNum">     223 </span>            :         if (flags &amp; FUNCFLAG_USE_LASTERROR) {</a>
+<a name="224"><span class="lineNum">     224 </span>            :             int temp = space[1];</a>
+<a name="225"><span class="lineNum">     225 </span>            :             space[1] = GetLastError();</a>
+<a name="226"><span class="lineNum">     226 </span>            :             SetLastError(temp);</a>
+<a name="227"><span class="lineNum">     227 </span>            :         }</a>
+<a name="228"><span class="lineNum">     228 </span>            : #endif</a>
+<a name="229"><span class="lineNum">     229 </span>            :     }</a>
+<a name="230"><span class="lineNum">     230 </span>            : </a>
+<a name="231"><span class="lineNum">     231 </span><span class="lineCov">        462 :     result = PyObject_Vectorcall(callable, args, nargs, NULL);</span></a>
+<a name="232"><span class="lineNum">     232 </span><span class="lineCov">        462 :     if (result == NULL) {</span></a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">          4 :         _PyErr_WriteUnraisableMsg(&quot;on calling ctypes callback function&quot;,</span></a>
+<a name="234"><span class="lineNum">     234 </span>            :                                   callable);</a>
+<a name="235"><span class="lineNum">     235 </span>            :     }</a>
+<a name="236"><span class="lineNum">     236 </span>            : </a>
+<a name="237"><span class="lineNum">     237 </span>            : #ifdef MS_WIN32</a>
+<a name="238"><span class="lineNum">     238 </span>            :     if (flags &amp; FUNCFLAG_USE_LASTERROR) {</a>
+<a name="239"><span class="lineNum">     239 </span>            :         int temp = space[1];</a>
+<a name="240"><span class="lineNum">     240 </span>            :         space[1] = GetLastError();</a>
+<a name="241"><span class="lineNum">     241 </span>            :         SetLastError(temp);</a>
+<a name="242"><span class="lineNum">     242 </span>            :     }</a>
+<a name="243"><span class="lineNum">     243 </span>            : #endif</a>
+<a name="244"><span class="lineNum">     244 </span><span class="lineCov">        462 :     if (flags &amp; FUNCFLAG_USE_ERRNO) {</span></a>
+<a name="245"><span class="lineNum">     245 </span><span class="lineNoCov">          0 :         int temp = space[0];</span></a>
+<a name="246"><span class="lineNum">     246 </span><span class="lineNoCov">          0 :         space[0] = errno;</span></a>
+<a name="247"><span class="lineNum">     247 </span><span class="lineNoCov">          0 :         errno = temp;</span></a>
+<a name="248"><span class="lineNum">     248 </span>            :     }</a>
+<a name="249"><span class="lineNum">     249 </span><span class="lineCov">        462 :     Py_XDECREF(error_object);</span></a>
+<a name="250"><span class="lineNum">     250 </span>            : </a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">        462 :     if (restype != &amp;ffi_type_void &amp;&amp; result) {</span></a>
+<a name="252"><span class="lineNum">     252 </span><span class="lineCov">        451 :         assert(setfunc);</span></a>
+<a name="253"><span class="lineNum">     253 </span>            : </a>
+<a name="254"><span class="lineNum">     254 </span>            : #ifdef WORDS_BIGENDIAN</a>
+<a name="255"><span class="lineNum">     255 </span>            :         /* See the corresponding code in _ctypes_callproc():</a>
+<a name="256"><span class="lineNum">     256 </span>            :            in callproc.c, around line 1219. */</a>
+<a name="257"><span class="lineNum">     257 </span>            :         if (restype-&gt;type != FFI_TYPE_FLOAT &amp;&amp; restype-&gt;size &lt; sizeof(ffi_arg)) {</a>
+<a name="258"><span class="lineNum">     258 </span>            :             mem = (char *)mem + sizeof(ffi_arg) - restype-&gt;size;</a>
+<a name="259"><span class="lineNum">     259 </span>            :         }</a>
+<a name="260"><span class="lineNum">     260 </span>            : #endif</a>
+<a name="261"><span class="lineNum">     261 </span>            : </a>
+<a name="262"><span class="lineNum">     262 </span>            :         /* keep is an object we have to keep alive so that the result</a>
+<a name="263"><span class="lineNum">     263 </span>            :            stays valid.  If there is no such object, the setfunc will</a>
+<a name="264"><span class="lineNum">     264 </span>            :            have returned Py_None.</a>
+<a name="265"><span class="lineNum">     265 </span>            : </a>
+<a name="266"><span class="lineNum">     266 </span>            :            If there is such an object, we have no choice than to keep</a>
+<a name="267"><span class="lineNum">     267 </span>            :            it alive forever - but a refcount and/or memory leak will</a>
+<a name="268"><span class="lineNum">     268 </span>            :            be the result.  EXCEPT when restype is py_object - Python</a>
+<a name="269"><span class="lineNum">     269 </span>            :            itself knows how to manage the refcount of these objects.</a>
+<a name="270"><span class="lineNum">     270 </span>            :         */</a>
+<a name="271"><span class="lineNum">     271 </span><span class="lineCov">        451 :         PyObject *keep = setfunc(mem, result, 0);</span></a>
+<a name="272"><span class="lineNum">     272 </span>            : </a>
+<a name="273"><span class="lineNum">     273 </span><span class="lineCov">        451 :         if (keep == NULL) {</span></a>
+<a name="274"><span class="lineNum">     274 </span>            :             /* Could not convert callback result. */</a>
+<a name="275"><span class="lineNum">     275 </span><span class="lineCov">          1 :             _PyErr_WriteUnraisableMsg(&quot;on converting result &quot;</span></a>
+<a name="276"><span class="lineNum">     276 </span>            :                                       &quot;of ctypes callback function&quot;,</a>
+<a name="277"><span class="lineNum">     277 </span>            :                                       callable);</a>
+<a name="278"><span class="lineNum">     278 </span>            :         }</a>
+<a name="279"><span class="lineNum">     279 </span><span class="lineCov">        450 :         else if (keep == Py_None) {</span></a>
+<a name="280"><span class="lineNum">     280 </span>            :             /* Nothing to keep */</a>
+<a name="281"><span class="lineNum">     281 </span><span class="lineCov">        438 :             Py_DECREF(keep);</span></a>
+<a name="282"><span class="lineNum">     282 </span>            :         }</a>
+<a name="283"><span class="lineNum">     283 </span><span class="lineCov">         12 :         else if (setfunc != _ctypes_get_fielddesc(&quot;O&quot;)-&gt;setfunc) {</span></a>
+<a name="284"><span class="lineNum">     284 </span><span class="lineNoCov">          0 :             if (-1 == PyErr_WarnEx(PyExc_RuntimeWarning,</span></a>
+<a name="285"><span class="lineNum">     285 </span>            :                                    &quot;memory leak in callback function.&quot;,</a>
+<a name="286"><span class="lineNum">     286 </span>            :                                    1))</a>
+<a name="287"><span class="lineNum">     287 </span>            :             {</a>
+<a name="288"><span class="lineNum">     288 </span><span class="lineNoCov">          0 :                 _PyErr_WriteUnraisableMsg(&quot;on converting result &quot;</span></a>
+<a name="289"><span class="lineNum">     289 </span>            :                                           &quot;of ctypes callback function&quot;,</a>
+<a name="290"><span class="lineNum">     290 </span>            :                                           callable);</a>
+<a name="291"><span class="lineNum">     291 </span>            :             }</a>
+<a name="292"><span class="lineNum">     292 </span>            :         }</a>
+<a name="293"><span class="lineNum">     293 </span>            :     }</a>
+<a name="294"><span class="lineNum">     294 </span>            : </a>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">        462 :     Py_XDECREF(result);</span></a>
+<a name="296"><span class="lineNum">     296 </span>            : </a>
+<a name="297"><span class="lineNum">     297 </span><span class="lineCov">        462 :   Done:</span></a>
+<a name="298"><span class="lineNum">     298 </span><span class="lineCov">       2062 :     for (j = 0; j &lt; i; j++) {</span></a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineCov">       1600 :         Py_DECREF(args[j]);</span></a>
+<a name="300"><span class="lineNum">     300 </span>            :     }</a>
+<a name="301"><span class="lineNum">     301 </span><span class="lineCov">        462 :     PyGILState_Release(state);</span></a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineCov">        462 : }</span></a>
+<a name="303"><span class="lineNum">     303 </span>            : </a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">        462 : static void closure_fcn(ffi_cif *cif,</span></a>
+<a name="305"><span class="lineNum">     305 </span>            :                         void *resp,</a>
+<a name="306"><span class="lineNum">     306 </span>            :                         void **args,</a>
+<a name="307"><span class="lineNum">     307 </span>            :                         void *userdata)</a>
+<a name="308"><span class="lineNum">     308 </span>            : {</a>
+<a name="309"><span class="lineNum">     309 </span><span class="lineCov">        462 :     CThunkObject *p = (CThunkObject *)userdata;</span></a>
+<a name="310"><span class="lineNum">     310 </span>            : </a>
+<a name="311"><span class="lineNum">     311 </span><span class="lineCov">        462 :     _CallPythonObject(resp,</span></a>
+<a name="312"><span class="lineNum">     312 </span>            :                       p-&gt;ffi_restype,</a>
+<a name="313"><span class="lineNum">     313 </span>            :                       p-&gt;setfunc,</a>
+<a name="314"><span class="lineNum">     314 </span>            :                       p-&gt;callable,</a>
+<a name="315"><span class="lineNum">     315 </span>            :                       p-&gt;converters,</a>
+<a name="316"><span class="lineNum">     316 </span>            :                       p-&gt;flags,</a>
+<a name="317"><span class="lineNum">     317 </span>            :                       args);</a>
+<a name="318"><span class="lineNum">     318 </span><span class="lineCov">        462 : }</span></a>
+<a name="319"><span class="lineNum">     319 </span>            : </a>
+<a name="320"><span class="lineNum">     320 </span><span class="lineCov">        151 : static CThunkObject* CThunkObject_new(Py_ssize_t nargs)</span></a>
+<a name="321"><span class="lineNum">     321 </span>            : {</a>
+<a name="322"><span class="lineNum">     322 </span>            :     CThunkObject *p;</a>
+<a name="323"><span class="lineNum">     323 </span>            :     Py_ssize_t i;</a>
+<a name="324"><span class="lineNum">     324 </span>            : </a>
+<a name="325"><span class="lineNum">     325 </span><span class="lineCov">        151 :     p = PyObject_GC_NewVar(CThunkObject, &amp;PyCThunk_Type, nargs);</span></a>
+<a name="326"><span class="lineNum">     326 </span><span class="lineCov">        151 :     if (p == NULL) {</span></a>
+<a name="327"><span class="lineNum">     327 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="328"><span class="lineNum">     328 </span>            :     }</a>
+<a name="329"><span class="lineNum">     329 </span>            : </a>
+<a name="330"><span class="lineNum">     330 </span><span class="lineCov">        151 :     p-&gt;pcl_write = NULL;</span></a>
+<a name="331"><span class="lineNum">     331 </span><span class="lineCov">        151 :     p-&gt;pcl_exec = NULL;</span></a>
+<a name="332"><span class="lineNum">     332 </span><span class="lineCov">        151 :     memset(&amp;p-&gt;cif, 0, sizeof(p-&gt;cif));</span></a>
+<a name="333"><span class="lineNum">     333 </span><span class="lineCov">        151 :     p-&gt;flags = 0;</span></a>
+<a name="334"><span class="lineNum">     334 </span><span class="lineCov">        151 :     p-&gt;converters = NULL;</span></a>
+<a name="335"><span class="lineNum">     335 </span><span class="lineCov">        151 :     p-&gt;callable = NULL;</span></a>
+<a name="336"><span class="lineNum">     336 </span><span class="lineCov">        151 :     p-&gt;restype = NULL;</span></a>
+<a name="337"><span class="lineNum">     337 </span><span class="lineCov">        151 :     p-&gt;setfunc = NULL;</span></a>
+<a name="338"><span class="lineNum">     338 </span><span class="lineCov">        151 :     p-&gt;ffi_restype = NULL;</span></a>
+<a name="339"><span class="lineNum">     339 </span>            : </a>
+<a name="340"><span class="lineNum">     340 </span><span class="lineCov">       1495 :     for (i = 0; i &lt; nargs + 1; ++i)</span></a>
+<a name="341"><span class="lineNum">     341 </span><span class="lineCov">       1344 :         p-&gt;atypes[i] = NULL;</span></a>
+<a name="342"><span class="lineNum">     342 </span><span class="lineCov">        151 :     PyObject_GC_Track((PyObject *)p);</span></a>
+<a name="343"><span class="lineNum">     343 </span><span class="lineCov">        151 :     return p;</span></a>
+<a name="344"><span class="lineNum">     344 </span>            : }</a>
+<a name="345"><span class="lineNum">     345 </span>            : </a>
+<a name="346"><span class="lineNum">     346 </span><span class="lineCov">        151 : CThunkObject *_ctypes_alloc_callback(PyObject *callable,</span></a>
+<a name="347"><span class="lineNum">     347 </span>            :                                     PyObject *converters,</a>
+<a name="348"><span class="lineNum">     348 </span>            :                                     PyObject *restype,</a>
+<a name="349"><span class="lineNum">     349 </span>            :                                     int flags)</a>
+<a name="350"><span class="lineNum">     350 </span>            : {</a>
+<a name="351"><span class="lineNum">     351 </span>            :     int result;</a>
+<a name="352"><span class="lineNum">     352 </span>            :     CThunkObject *p;</a>
+<a name="353"><span class="lineNum">     353 </span>            :     Py_ssize_t nargs, i;</a>
+<a name="354"><span class="lineNum">     354 </span>            :     ffi_abi cc;</a>
+<a name="355"><span class="lineNum">     355 </span>            : </a>
+<a name="356"><span class="lineNum">     356 </span><span class="lineCov">        151 :     assert(PyTuple_Check(converters));</span></a>
+<a name="357"><span class="lineNum">     357 </span><span class="lineCov">        151 :     nargs = PyTuple_GET_SIZE(converters);</span></a>
+<a name="358"><span class="lineNum">     358 </span><span class="lineCov">        151 :     p = CThunkObject_new(nargs);</span></a>
+<a name="359"><span class="lineNum">     359 </span><span class="lineCov">        151 :     if (p == NULL)</span></a>
+<a name="360"><span class="lineNum">     360 </span><span class="lineNoCov">          0 :         return NULL;</span></a>
+<a name="361"><span class="lineNum">     361 </span>            : </a>
+<a name="362"><span class="lineNum">     362 </span><span class="lineCov">        151 :     assert(CThunk_CheckExact((PyObject *)p));</span></a>
+<a name="363"><span class="lineNum">     363 </span>            : </a>
+<a name="364"><span class="lineNum">     364 </span><span class="lineCov">        151 :     p-&gt;pcl_write = Py_ffi_closure_alloc(sizeof(ffi_closure), &amp;p-&gt;pcl_exec);</span></a>
+<a name="365"><span class="lineNum">     365 </span><span class="lineCov">        151 :     if (p-&gt;pcl_write == NULL) {</span></a>
+<a name="366"><span class="lineNum">     366 </span><span class="lineNoCov">          0 :         PyErr_NoMemory();</span></a>
+<a name="367"><span class="lineNum">     367 </span><span class="lineNoCov">          0 :         goto error;</span></a>
+<a name="368"><span class="lineNum">     368 </span>            :     }</a>
+<a name="369"><span class="lineNum">     369 </span>            : </a>
+<a name="370"><span class="lineNum">     370 </span><span class="lineCov">        151 :     p-&gt;flags = flags;</span></a>
+<a name="371"><span class="lineNum">     371 </span><span class="lineCov">        151 :     PyObject **cnvs = PySequence_Fast_ITEMS(converters);</span></a>
+<a name="372"><span class="lineNum">     372 </span><span class="lineCov">       1344 :     for (i = 0; i &lt; nargs; ++i) {</span></a>
+<a name="373"><span class="lineNum">     373 </span><span class="lineCov">       1193 :         PyObject *cnv = cnvs[i]; // borrowed ref</span></a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineCov">       1193 :         p-&gt;atypes[i] = _ctypes_get_ffi_type(cnv);</span></a>
+<a name="375"><span class="lineNum">     375 </span>            :     }</a>
+<a name="376"><span class="lineNum">     376 </span><span class="lineCov">        151 :     p-&gt;atypes[i] = NULL;</span></a>
+<a name="377"><span class="lineNum">     377 </span>            : </a>
+<a name="378"><span class="lineNum">     378 </span><span class="lineCov">        151 :     Py_INCREF(restype);</span></a>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">        151 :     p-&gt;restype = restype;</span></a>
+<a name="380"><span class="lineNum">     380 </span><span class="lineCov">        151 :     if (restype == Py_None) {</span></a>
+<a name="381"><span class="lineNum">     381 </span><span class="lineCov">         38 :         p-&gt;setfunc = NULL;</span></a>
+<a name="382"><span class="lineNum">     382 </span><span class="lineCov">         38 :         p-&gt;ffi_restype = &amp;ffi_type_void;</span></a>
+<a name="383"><span class="lineNum">     383 </span>            :     } else {</a>
+<a name="384"><span class="lineNum">     384 </span><span class="lineCov">        113 :         StgDictObject *dict = PyType_stgdict(restype);</span></a>
+<a name="385"><span class="lineNum">     385 </span><span class="lineCov">        113 :         if (dict == NULL || dict-&gt;setfunc == NULL) {</span></a>
+<a name="386"><span class="lineNum">     386 </span><span class="lineCov">          2 :           PyErr_SetString(PyExc_TypeError,</span></a>
+<a name="387"><span class="lineNum">     387 </span>            :                           &quot;invalid result type for callback function&quot;);</a>
+<a name="388"><span class="lineNum">     388 </span><span class="lineCov">          2 :           goto error;</span></a>
+<a name="389"><span class="lineNum">     389 </span>            :         }</a>
+<a name="390"><span class="lineNum">     390 </span><span class="lineCov">        111 :         p-&gt;setfunc = dict-&gt;setfunc;</span></a>
+<a name="391"><span class="lineNum">     391 </span><span class="lineCov">        111 :         p-&gt;ffi_restype = &amp;dict-&gt;ffi_type_pointer;</span></a>
+<a name="392"><span class="lineNum">     392 </span>            :     }</a>
+<a name="393"><span class="lineNum">     393 </span>            : </a>
+<a name="394"><span class="lineNum">     394 </span><span class="lineCov">        149 :     cc = FFI_DEFAULT_ABI;</span></a>
+<a name="395"><span class="lineNum">     395 </span>            : #if defined(MS_WIN32) &amp;&amp; !defined(_WIN32_WCE) &amp;&amp; !defined(MS_WIN64) &amp;&amp; !defined(_M_ARM)</a>
+<a name="396"><span class="lineNum">     396 </span>            :     if ((flags &amp; FUNCFLAG_CDECL) == 0)</a>
+<a name="397"><span class="lineNum">     397 </span>            :         cc = FFI_STDCALL;</a>
+<a name="398"><span class="lineNum">     398 </span>            : #endif</a>
+<a name="399"><span class="lineNum">     399 </span><span class="lineCov">        447 :     result = ffi_prep_cif(&amp;p-&gt;cif, cc,</span></a>
+<a name="400"><span class="lineNum">     400 </span><span class="lineCov">        149 :                           Py_SAFE_DOWNCAST(nargs, Py_ssize_t, int),</span></a>
+<a name="401"><span class="lineNum">     401 </span>            :                           p-&gt;ffi_restype,</a>
+<a name="402"><span class="lineNum">     402 </span>            :                           &amp;p-&gt;atypes[0]);</a>
+<a name="403"><span class="lineNum">     403 </span><span class="lineCov">        149 :     if (result != FFI_OK) {</span></a>
+<a name="404"><span class="lineNum">     404 </span><span class="lineNoCov">          0 :         PyErr_Format(PyExc_RuntimeError,</span></a>
+<a name="405"><span class="lineNum">     405 </span>            :                      &quot;ffi_prep_cif failed with %d&quot;, result);</a>
+<a name="406"><span class="lineNum">     406 </span><span class="lineNoCov">          0 :         goto error;</span></a>
+<a name="407"><span class="lineNum">     407 </span>            :     }</a>
+<a name="408"><span class="lineNum">     408 </span>            : #if HAVE_FFI_PREP_CLOSURE_LOC</a>
+<a name="409"><span class="lineNum">     409 </span>            : #   ifdef USING_APPLE_OS_LIBFFI</a>
+<a name="410"><span class="lineNum">     410 </span>            : #      define HAVE_FFI_PREP_CLOSURE_LOC_RUNTIME __builtin_available(macos 10.15, ios 13, watchos 6, tvos 13, *)</a>
+<a name="411"><span class="lineNum">     411 </span>            : #   else</a>
+<a name="412"><span class="lineNum">     412 </span>            : #      define HAVE_FFI_PREP_CLOSURE_LOC_RUNTIME 1</a>
+<a name="413"><span class="lineNum">     413 </span>            : #   endif</a>
+<a name="414"><span class="lineNum">     414 </span>            :     if (HAVE_FFI_PREP_CLOSURE_LOC_RUNTIME) {</a>
+<a name="415"><span class="lineNum">     415 </span><span class="lineCov">        149 :         result = ffi_prep_closure_loc(p-&gt;pcl_write, &amp;p-&gt;cif, closure_fcn,</span></a>
+<a name="416"><span class="lineNum">     416 </span>            :                                     p,</a>
+<a name="417"><span class="lineNum">     417 </span>            :                                     p-&gt;pcl_exec);</a>
+<a name="418"><span class="lineNum">     418 </span>            :     } else</a>
+<a name="419"><span class="lineNum">     419 </span>            : #endif</a>
+<a name="420"><span class="lineNum">     420 </span>            :     {</a>
+<a name="421"><span class="lineNum">     421 </span>            : #if defined(USING_APPLE_OS_LIBFFI) &amp;&amp; defined(__arm64__)</a>
+<a name="422"><span class="lineNum">     422 </span>            :         PyErr_Format(PyExc_NotImplementedError, &quot;ffi_prep_closure_loc() is missing&quot;);</a>
+<a name="423"><span class="lineNum">     423 </span>            :         goto error;</a>
+<a name="424"><span class="lineNum">     424 </span>            : #else</a>
+<a name="425"><span class="lineNum">     425 </span>            : #if defined(__clang__) || defined(MACOSX)</a>
+<a name="426"><span class="lineNum">     426 </span>            :         #pragma clang diagnostic push</a>
+<a name="427"><span class="lineNum">     427 </span>            :         #pragma clang diagnostic ignored &quot;-Wdeprecated-declarations&quot;</a>
+<a name="428"><span class="lineNum">     428 </span>            : #endif</a>
+<a name="429"><span class="lineNum">     429 </span>            : #if defined(__GNUC__) &amp;&amp; ((__GNUC__ &gt; 4) || ((__GNUC__ == 4) &amp;&amp; (__GNUC_MINOR__ &gt; 5)))</a>
+<a name="430"><span class="lineNum">     430 </span>            :         #pragma GCC diagnostic push</a>
+<a name="431"><span class="lineNum">     431 </span>            :         #pragma GCC diagnostic ignored &quot;-Wdeprecated-declarations&quot;</a>
+<a name="432"><span class="lineNum">     432 </span>            : #endif</a>
+<a name="433"><span class="lineNum">     433 </span>            :         result = ffi_prep_closure(p-&gt;pcl_write, &amp;p-&gt;cif, closure_fcn, p);</a>
+<a name="434"><span class="lineNum">     434 </span>            : </a>
+<a name="435"><span class="lineNum">     435 </span>            : #if defined(__clang__) || defined(MACOSX)</a>
+<a name="436"><span class="lineNum">     436 </span>            :         #pragma clang diagnostic pop</a>
+<a name="437"><span class="lineNum">     437 </span>            : #endif</a>
+<a name="438"><span class="lineNum">     438 </span>            : #if defined(__GNUC__) &amp;&amp; ((__GNUC__ &gt; 4) || ((__GNUC__ == 4) &amp;&amp; (__GNUC_MINOR__ &gt; 5)))</a>
+<a name="439"><span class="lineNum">     439 </span>            :         #pragma GCC diagnostic pop</a>
+<a name="440"><span class="lineNum">     440 </span>            : #endif</a>
+<a name="441"><span class="lineNum">     441 </span>            : </a>
+<a name="442"><span class="lineNum">     442 </span>            : #endif</a>
+<a name="443"><span class="lineNum">     443 </span>            :     }</a>
+<a name="444"><span class="lineNum">     444 </span><span class="lineCov">        149 :     if (result != FFI_OK) {</span></a>
+<a name="445"><span class="lineNum">     445 </span><span class="lineNoCov">          0 :         PyErr_Format(PyExc_RuntimeError,</span></a>
+<a name="446"><span class="lineNum">     446 </span>            :                      &quot;ffi_prep_closure failed with %d&quot;, result);</a>
+<a name="447"><span class="lineNum">     447 </span><span class="lineNoCov">          0 :         goto error;</span></a>
+<a name="448"><span class="lineNum">     448 </span>            :     }</a>
+<a name="449"><span class="lineNum">     449 </span>            : </a>
+<a name="450"><span class="lineNum">     450 </span><span class="lineCov">        149 :     Py_INCREF(converters);</span></a>
+<a name="451"><span class="lineNum">     451 </span><span class="lineCov">        149 :     p-&gt;converters = converters;</span></a>
+<a name="452"><span class="lineNum">     452 </span><span class="lineCov">        149 :     Py_INCREF(callable);</span></a>
+<a name="453"><span class="lineNum">     453 </span><span class="lineCov">        149 :     p-&gt;callable = callable;</span></a>
+<a name="454"><span class="lineNum">     454 </span><span class="lineCov">        149 :     return p;</span></a>
+<a name="455"><span class="lineNum">     455 </span>            : </a>
+<a name="456"><span class="lineNum">     456 </span><span class="lineCov">          2 :   error:</span></a>
+<a name="457"><span class="lineNum">     457 </span><span class="lineCov">          2 :     Py_XDECREF(p);</span></a>
+<a name="458"><span class="lineNum">     458 </span><span class="lineCov">          2 :     return NULL;</span></a>
+<a name="459"><span class="lineNum">     459 </span>            : }</a>
+<a name="460"><span class="lineNum">     460 </span>            : </a>
+<a name="461"><span class="lineNum">     461 </span>            : #ifdef MS_WIN32</a>
+<a name="462"><span class="lineNum">     462 </span>            : </a>
+<a name="463"><span class="lineNum">     463 </span>            : static void LoadPython(void)</a>
+<a name="464"><span class="lineNum">     464 </span>            : {</a>
+<a name="465"><span class="lineNum">     465 </span>            :     if (!Py_IsInitialized()) {</a>
+<a name="466"><span class="lineNum">     466 </span>            :         Py_Initialize();</a>
+<a name="467"><span class="lineNum">     467 </span>            :     }</a>
+<a name="468"><span class="lineNum">     468 </span>            : }</a>
+<a name="469"><span class="lineNum">     469 </span>            : </a>
+<a name="470"><span class="lineNum">     470 </span>            : /******************************************************************/</a>
+<a name="471"><span class="lineNum">     471 </span>            : </a>
+<a name="472"><span class="lineNum">     472 </span>            : long Call_GetClassObject(REFCLSID rclsid, REFIID riid, LPVOID *ppv)</a>
+<a name="473"><span class="lineNum">     473 </span>            : {</a>
+<a name="474"><span class="lineNum">     474 </span>            :     PyObject *func, *result;</a>
+<a name="475"><span class="lineNum">     475 </span>            :     long retval;</a>
+<a name="476"><span class="lineNum">     476 </span>            :     static PyObject *context;</a>
+<a name="477"><span class="lineNum">     477 </span>            : </a>
+<a name="478"><span class="lineNum">     478 </span>            :     if (context == NULL)</a>
+<a name="479"><span class="lineNum">     479 </span>            :         context = PyUnicode_InternFromString(&quot;_ctypes.DllGetClassObject&quot;);</a>
+<a name="480"><span class="lineNum">     480 </span>            : </a>
+<a name="481"><span class="lineNum">     481 </span>            :     func = _PyImport_GetModuleAttrString(&quot;ctypes&quot;, &quot;DllGetClassObject&quot;);</a>
+<a name="482"><span class="lineNum">     482 </span>            :     if (!func) {</a>
+<a name="483"><span class="lineNum">     483 </span>            :         PyErr_WriteUnraisable(context ? context : Py_None);</a>
+<a name="484"><span class="lineNum">     484 </span>            :         /* There has been a warning before about this already */</a>
+<a name="485"><span class="lineNum">     485 </span>            :         return E_FAIL;</a>
+<a name="486"><span class="lineNum">     486 </span>            :     }</a>
+<a name="487"><span class="lineNum">     487 </span>            : </a>
+<a name="488"><span class="lineNum">     488 </span>            :     {</a>
+<a name="489"><span class="lineNum">     489 </span>            :         PyObject *py_rclsid = PyLong_FromVoidPtr((void *)rclsid);</a>
+<a name="490"><span class="lineNum">     490 </span>            :         PyObject *py_riid = PyLong_FromVoidPtr((void *)riid);</a>
+<a name="491"><span class="lineNum">     491 </span>            :         PyObject *py_ppv = PyLong_FromVoidPtr(ppv);</a>
+<a name="492"><span class="lineNum">     492 </span>            :         if (!py_rclsid || !py_riid || !py_ppv) {</a>
+<a name="493"><span class="lineNum">     493 </span>            :             Py_XDECREF(py_rclsid);</a>
+<a name="494"><span class="lineNum">     494 </span>            :             Py_XDECREF(py_riid);</a>
+<a name="495"><span class="lineNum">     495 </span>            :             Py_XDECREF(py_ppv);</a>
+<a name="496"><span class="lineNum">     496 </span>            :             Py_DECREF(func);</a>
+<a name="497"><span class="lineNum">     497 </span>            :             PyErr_WriteUnraisable(context ? context : Py_None);</a>
+<a name="498"><span class="lineNum">     498 </span>            :             return E_FAIL;</a>
+<a name="499"><span class="lineNum">     499 </span>            :         }</a>
+<a name="500"><span class="lineNum">     500 </span>            :         result = PyObject_CallFunctionObjArgs(func,</a>
+<a name="501"><span class="lineNum">     501 </span>            :                                               py_rclsid,</a>
+<a name="502"><span class="lineNum">     502 </span>            :                                               py_riid,</a>
+<a name="503"><span class="lineNum">     503 </span>            :                                               py_ppv,</a>
+<a name="504"><span class="lineNum">     504 </span>            :                                               NULL);</a>
+<a name="505"><span class="lineNum">     505 </span>            :         Py_DECREF(py_rclsid);</a>
+<a name="506"><span class="lineNum">     506 </span>            :         Py_DECREF(py_riid);</a>
+<a name="507"><span class="lineNum">     507 </span>            :         Py_DECREF(py_ppv);</a>
+<a name="508"><span class="lineNum">     508 </span>            :     }</a>
+<a name="509"><span class="lineNum">     509 </span>            :     Py_DECREF(func);</a>
+<a name="510"><span class="lineNum">     510 </span>            :     if (!result) {</a>
+<a name="511"><span class="lineNum">     511 </span>            :         PyErr_WriteUnraisable(context ? context : Py_None);</a>
+<a name="512"><span class="lineNum">     512 </span>            :         return E_FAIL;</a>
+<a name="513"><span class="lineNum">     513 </span>            :     }</a>
+<a name="514"><span class="lineNum">     514 </span>            : </a>
+<a name="515"><span class="lineNum">     515 </span>            :     retval = PyLong_AsLong(result);</a>
+<a name="516"><span class="lineNum">     516 </span>            :     if (PyErr_Occurred()) {</a>
+<a name="517"><span class="lineNum">     517 </span>            :         PyErr_WriteUnraisable(context ? context : Py_None);</a>
+<a name="518"><span class="lineNum">     518 </span>            :         retval = E_FAIL;</a>
+<a name="519"><span class="lineNum">     519 </span>            :     }</a>
+<a name="520"><span class="lineNum">     520 </span>            :     Py_DECREF(result);</a>
+<a name="521"><span class="lineNum">     521 </span>            :     return retval;</a>
+<a name="522"><span class="lineNum">     522 </span>            : }</a>
+<a name="523"><span class="lineNum">     523 </span>            : </a>
+<a name="524"><span class="lineNum">     524 </span>            : STDAPI DllGetClassObject(REFCLSID rclsid,</a>
+<a name="525"><span class="lineNum">     525 </span>            :                          REFIID riid,</a>
+<a name="526"><span class="lineNum">     526 </span>            :                          LPVOID *ppv)</a>
+<a name="527"><span class="lineNum">     527 </span>            : {</a>
+<a name="528"><span class="lineNum">     528 </span>            :     long result;</a>
+<a name="529"><span class="lineNum">     529 </span>            :     PyGILState_STATE state;</a>
+<a name="530"><span class="lineNum">     530 </span>            : </a>
+<a name="531"><span class="lineNum">     531 </span>            :     LoadPython();</a>
+<a name="532"><span class="lineNum">     532 </span>            :     state = PyGILState_Ensure();</a>
+<a name="533"><span class="lineNum">     533 </span>            :     result = Call_GetClassObject(rclsid, riid, ppv);</a>
+<a name="534"><span class="lineNum">     534 </span>            :     PyGILState_Release(state);</a>
+<a name="535"><span class="lineNum">     535 </span>            :     return result;</a>
+<a name="536"><span class="lineNum">     536 </span>            : }</a>
+<a name="537"><span class="lineNum">     537 </span>            : </a>
+<a name="538"><span class="lineNum">     538 </span>            : long Call_CanUnloadNow(void)</a>
+<a name="539"><span class="lineNum">     539 </span>            : {</a>
+<a name="540"><span class="lineNum">     540 </span>            :     PyObject *mod, *func, *result;</a>
+<a name="541"><span class="lineNum">     541 </span>            :     long retval;</a>
+<a name="542"><span class="lineNum">     542 </span>            :     static PyObject *context;</a>
+<a name="543"><span class="lineNum">     543 </span>            : </a>
+<a name="544"><span class="lineNum">     544 </span>            :     if (context == NULL)</a>
+<a name="545"><span class="lineNum">     545 </span>            :         context = PyUnicode_InternFromString(&quot;_ctypes.DllCanUnloadNow&quot;);</a>
+<a name="546"><span class="lineNum">     546 </span>            : </a>
+<a name="547"><span class="lineNum">     547 </span>            :     mod = PyImport_ImportModule(&quot;ctypes&quot;);</a>
+<a name="548"><span class="lineNum">     548 </span>            :     if (!mod) {</a>
+<a name="549"><span class="lineNum">     549 </span>            : /*              OutputDebugString(&quot;Could not import ctypes&quot;); */</a>
+<a name="550"><span class="lineNum">     550 </span>            :         /* We assume that this error can only occur when shutting</a>
+<a name="551"><span class="lineNum">     551 </span>            :            down, so we silently ignore it */</a>
+<a name="552"><span class="lineNum">     552 </span>            :         PyErr_Clear();</a>
+<a name="553"><span class="lineNum">     553 </span>            :         return E_FAIL;</a>
+<a name="554"><span class="lineNum">     554 </span>            :     }</a>
+<a name="555"><span class="lineNum">     555 </span>            :     /* Other errors cannot be raised, but are printed to stderr */</a>
+<a name="556"><span class="lineNum">     556 </span>            :     func = PyObject_GetAttrString(mod, &quot;DllCanUnloadNow&quot;);</a>
+<a name="557"><span class="lineNum">     557 </span>            :     Py_DECREF(mod);</a>
+<a name="558"><span class="lineNum">     558 </span>            :     if (!func) {</a>
+<a name="559"><span class="lineNum">     559 </span>            :         PyErr_WriteUnraisable(context ? context : Py_None);</a>
+<a name="560"><span class="lineNum">     560 </span>            :         return E_FAIL;</a>
+<a name="561"><span class="lineNum">     561 </span>            :     }</a>
+<a name="562"><span class="lineNum">     562 </span>            : </a>
+<a name="563"><span class="lineNum">     563 </span>            :     result = _PyObject_CallNoArgs(func);</a>
+<a name="564"><span class="lineNum">     564 </span>            :     Py_DECREF(func);</a>
+<a name="565"><span class="lineNum">     565 </span>            :     if (!result) {</a>
+<a name="566"><span class="lineNum">     566 </span>            :         PyErr_WriteUnraisable(context ? context : Py_None);</a>
+<a name="567"><span class="lineNum">     567 </span>            :         return E_FAIL;</a>
+<a name="568"><span class="lineNum">     568 </span>            :     }</a>
+<a name="569"><span class="lineNum">     569 </span>            : </a>
+<a name="570"><span class="lineNum">     570 </span>            :     retval = PyLong_AsLong(result);</a>
+<a name="571"><span class="lineNum">     571 </span>            :     if (PyErr_Occurred()) {</a>
+<a name="572"><span class="lineNum">     572 </span>            :         PyErr_WriteUnraisable(context ? context : Py_None);</a>
+<a name="573"><span class="lineNum">     573 </span>            :         retval = E_FAIL;</a>
+<a name="574"><span class="lineNum">     574 </span>            :     }</a>
+<a name="575"><span class="lineNum">     575 </span>            :     Py_DECREF(result);</a>
+<a name="576"><span class="lineNum">     576 </span>            :     return retval;</a>
+<a name="577"><span class="lineNum">     577 </span>            : }</a>
+<a name="578"><span class="lineNum">     578 </span>            : </a>
+<a name="579"><span class="lineNum">     579 </span>            : /*</a>
+<a name="580"><span class="lineNum">     580 </span>            :   DllRegisterServer and DllUnregisterServer still missing</a>
+<a name="581"><span class="lineNum">     581 </span>            : */</a>
+<a name="582"><span class="lineNum">     582 </span>            : </a>
+<a name="583"><span class="lineNum">     583 </span>            : STDAPI DllCanUnloadNow(void)</a>
+<a name="584"><span class="lineNum">     584 </span>            : {</a>
+<a name="585"><span class="lineNum">     585 </span>            :     long result;</a>
+<a name="586"><span class="lineNum">     586 </span>            :     PyGILState_STATE state = PyGILState_Ensure();</a>
+<a name="587"><span class="lineNum">     587 </span>            :     result = Call_CanUnloadNow();</a>
+<a name="588"><span class="lineNum">     588 </span>            :     PyGILState_Release(state);</a>
+<a name="589"><span class="lineNum">     589 </span>            :     return result;</a>
+<a name="590"><span class="lineNum">     590 </span>            : }</a>
+<a name="591"><span class="lineNum">     591 </span>            : </a>
+<a name="592"><span class="lineNum">     592 </span>            : #ifndef Py_NO_ENABLE_SHARED</a>
+<a name="593"><span class="lineNum">     593 </span>            : BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvRes)</a>
+<a name="594"><span class="lineNum">     594 </span>            : {</a>
+<a name="595"><span class="lineNum">     595 </span>            :     switch(fdwReason) {</a>
+<a name="596"><span class="lineNum">     596 </span>            :     case DLL_PROCESS_ATTACH:</a>
+<a name="597"><span class="lineNum">     597 </span>            :         DisableThreadLibraryCalls(hinstDLL);</a>
+<a name="598"><span class="lineNum">     598 </span>            :         break;</a>
+<a name="599"><span class="lineNum">     599 </span>            :     }</a>
+<a name="600"><span class="lineNum">     600 </span>            :     return TRUE;</a>
+<a name="601"><span class="lineNum">     601 </span>            : }</a>
+<a name="602"><span class="lineNum">     602 </span>            : #endif</a>
+<a name="603"><span class="lineNum">     603 </span>            : </a>
+<a name="604"><span class="lineNum">     604 </span>            : #endif</a>
+<a name="605"><span class="lineNum">     605 </span>            : </a>
+<a name="606"><span class="lineNum">     606 </span>            : /*</a>
+<a name="607"><span class="lineNum">     607 </span>            :  Local Variables:</a>
+<a name="608"><span class="lineNum">     608 </span>            :  compile-command: &quot;cd .. &amp;&amp; python setup.py -q build_ext&quot;</a>
+<a name="609"><span class="lineNum">     609 </span>            :  End:</a>
+<a name="610"><span class="lineNum">     610 </span>            : */</a>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,1028 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - CPython lcov report - Python/compile.c - functions</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Python</a> - compile.c<span style="font-size: 80%;"> (<a href="compile.c.gcov.html">source</a> / functions)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">CPython lcov report</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">4694</td>
+            <td class="headerCovTableEntry">5216</td>
+            <td class="headerCovTableEntryHi">90.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2022-07-07 18:19:46</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">238</td>
+            <td class="headerCovTableEntry">239</td>
+            <td class="headerCovTableEntryHi">99.6 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <center>
+  <table width="60%" cellpadding=1 cellspacing=1 border=0>
+    <tr><td><br></td></tr>
+    <tr>
+      <td width="80%" class="tableHead">Function Name <span class="tableHeadSort"><a href="compile.c.func.html"><img src="../updown.png" width=10 height=14 alt="Sort by function name" title="Sort by function name" border=0></a></span></td>
+      <td width="20%" class="tableHead">Hit count <span class="tableHeadSort"><img src="../glass.png" width=10 height=14 alt="Sort by hit count" title="Sort by hit count" border=0></span></td>
+    </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9588">PyCode_Optimize</a></td>
+              <td class="coverFnLo">0</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5988">check_ann_subscr</a></td>
+              <td class="coverFnHi">2</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6298">compiler_error_duplicate_store</a></td>
+              <td class="coverFnHi">6</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6387">pattern_helper_sequence_subscr</a></td>
+              <td class="coverFnHi">23</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3314">compiler_try_star_finally</a></td>
+              <td class="coverFnHi">25</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6914">compiler_pattern_singleton</a></td>
+              <td class="coverFnHi">36</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6468">validate_kwd_attrs</a></td>
+              <td class="coverFnHi">45</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5240">compiler_async_comprehension_generator</a></td>
+              <td class="coverFnHi">63</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6460">compiler_pattern_star</a></td>
+              <td class="coverFnHi">63</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3071">compiler_async_for</a></td>
+              <td class="coverFnHi">81</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3774">compiler_try_star</a></td>
+              <td class="coverFnHi">108</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3577">compiler_try_star_except</a></td>
+              <td class="coverFnHi">108</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6690">compiler_pattern_or</a></td>
+              <td class="coverFnHi">110</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6119">compiler_warn</a></td>
+              <td class="coverFnHi">138</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6492">compiler_pattern_class</a></td>
+              <td class="coverFnHi">184</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5541">compiler_async_with</a></td>
+              <td class="coverFnHi">235</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6556">compiler_pattern_mapping</a></td>
+              <td class="coverFnHi">271</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6085">compiler_error</a></td>
+              <td class="coverFnHi">289</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6366">pattern_helper_sequence_unpack</a></td>
+              <td class="coverFnHi">350</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6339">pattern_unpack_helper</a></td>
+              <td class="coverFnHi">350</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5963">check_ann_expr</a></td>
+              <td class="coverFnHi">385</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5461">compiler_setcomp</a></td>
+              <td class="coverFnHi">407</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6842">compiler_pattern_sequence</a></td>
+              <td class="coverFnHi">446</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1233">PyCompile_OpcodeStackEffectWithJump</a></td>
+              <td class="coverFnHi">646</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7030">compiler_match</a></td>
+              <td class="coverFnHi">679</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6952">compiler_match_inner</a></td>
+              <td class="coverFnHi">679</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6434">compiler_pattern_as</a></td>
+              <td class="coverFnHi">721</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6899">compiler_pattern_value</a></td>
+              <td class="coverFnHi">769</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6314">pattern_helper_store_name</a></td>
+              <td class="coverFnHi">788</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6305">pattern_helper_rotate</a></td>
+              <td class="coverFnHi">971</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5472">compiler_dictcomp</a></td>
+              <td class="coverFnHi">1169</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6276">emit_and_reset_fail_pop</a></td>
+              <td class="coverFnHi">1192</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6424">compiler_pattern_subpattern</a></td>
+              <td class="coverFnHi">1276</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3785">compiler_import_as</a></td>
+              <td class="coverFnHi">1320</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4918">compiler_subkwargs</a></td>
+              <td class="coverFnHi">1378</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4444">compiler_set</a></td>
+              <td class="coverFnHi">1807</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5971">check_annotation</a></td>
+              <td class="coverFnHi">1932</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6924">compiler_pattern</a></td>
+              <td class="coverFnHi">2600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6264">jump_to_fail_pop</a></td>
+              <td class="coverFnHi">2664</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6241">ensure_fail_pop</a></td>
+              <td class="coverFnHi">2769</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2345">compiler_visit_annexpr</a></td>
+              <td class="coverFnHi">3493</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1912">compiler_add_yield_from</a></td>
+              <td class="coverFnHi">4577</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1239">PyCompile_OpcodeStackEffect</a></td>
+              <td class="coverFnHi">5468</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3269">compiler_try_finally</a></td>
+              <td class="coverFnHi">5933</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4074">unaryop</a></td>
+              <td class="coverFnHi">7500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3223">compiler_continue</a></td>
+              <td class="coverFnHi">7537</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5441">compiler_genexp</a></td>
+              <td class="coverFnHi">7748</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3929">compiler_assert</a></td>
+              <td class="coverFnHi">8453</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5451">compiler_listcomp</a></td>
+              <td class="coverFnHi">8523</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3204">compiler_break</a></td>
+              <td class="coverFnHi">8573</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2926">compiler_ifexp</a></td>
+              <td class="coverFnHi">9762</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6020">compiler_annassign</a></td>
+              <td class="coverFnHi">9866</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3127">compiler_while</a></td>
+              <td class="coverFnHi">9960</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#875">copy_basicblock</a></td>
+              <td class="coverFnHi">15879</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#863">basicblock_new_b_list_successor</a></td>
+              <td class="coverFnHi">15980</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4255">compiler_boolop</a></td>
+              <td class="coverFnHi">17368</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5339">compiler_comprehension</a></td>
+              <td class="coverFnHi">17847</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5126">compiler_sync_comprehension_generator</a></td>
+              <td class="coverFnHi">18326</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5109">compiler_comprehension_generator</a></td>
+              <td class="coverFnHi">18389</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8927">apply_static_swaps</a></td>
+              <td class="coverFnHi">19164</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8800">swaptimize</a></td>
+              <td class="coverFnHi">19164</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4147">addop_yield</a></td>
+              <td class="coverFnHi">19270</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5647">compiler_with</a></td>
+              <td class="coverFnHi">21031</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5491">compiler_with_except_finish</a></td>
+              <td class="coverFnHi">21258</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5882">compiler_augassign</a></td>
+              <td class="coverFnHi">21588</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1903">compiler_call_exit_with_nones</a></td>
+              <td class="coverFnHi">23673</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8903">next_swappable_instruction</a></td>
+              <td class="coverFnHi">26144</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4847">compiler_joined_str</a></td>
+              <td class="coverFnHi">30390</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6189">compiler_slice</a></td>
+              <td class="coverFnHi">31132</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4502">compiler_dict</a></td>
+              <td class="coverFnHi">32250</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7673">write_location_info_no_column</a></td>
+              <td class="coverFnHi">33286</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2948">compiler_lambda</a></td>
+              <td class="coverFnHi">34765</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3398">compiler_try_except</a></td>
+              <td class="coverFnHi">34786</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2170">get_ref_type</a></td>
+              <td class="coverFnHi">35036</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2443">compiler_visit_defaults</a></td>
+              <td class="coverFnHi">35291</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3825">compiler_import</a></td>
+              <td class="coverFnHi">36461</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2629">compiler_class</a></td>
+              <td class="coverFnHi">37741</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2191">compiler_lookup_arg</a></td>
+              <td class="coverFnHi">39831</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3766">compiler_try</a></td>
+              <td class="coverFnHi">40246</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3871">compiler_from_import</a></td>
+              <td class="coverFnHi">41616</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4400">assignment_helper</a></td>
+              <td class="coverFnHi">42322</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4373">unpack_helper</a></td>
+              <td class="coverFnHi">42322</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1953">compiler_unwind_fblock</a></td>
+              <td class="coverFnHi">44850</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3036">compiler_for</a></td>
+              <td class="coverFnHi">46446</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4463">compiler_subdict</a></td>
+              <td class="coverFnHi">50961</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8965">jump_thread</a></td>
+              <td class="coverFnHi">55796</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1932">compiler_pop_except_and_reraise</a></td>
+              <td class="coverFnHi">62084</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4412">compiler_list</a></td>
+              <td class="coverFnHi">63421</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4965">compiler_call_simple_kw_helper</a></td>
+              <td class="coverFnHi">68012</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2086">compiler_body</a></td>
+              <td class="coverFnHi">75715</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4451">are_all_items_const</a></td>
+              <td class="coverFnHi">77993</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8328">insert_instruction</a></td>
+              <td class="coverFnHi">84073</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9226">basicblock_has_lineno</a></td>
+              <td class="coverFnHi">91057</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2125">compiler_mod</a></td>
+              <td class="coverFnHi">114525</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#561">_PyAST_Compile</a></td>
+              <td class="coverFnHi">114687</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#610">compiler_free</a></td>
+              <td class="coverFnHi">114687</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#542">compiler_init</a></td>
+              <td class="coverFnHi">114687</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4873">compiler_formatted_value</a></td>
+              <td class="coverFnHi">118027</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7216">pop_except_block</a></td>
+              <td class="coverFnHi">121220</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5483">compiler_visit_keyword</a></td>
+              <td class="coverFnHi">124098</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8710">get_const_value</a></td>
+              <td class="coverFnHi">125059</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7204">push_except_block</a></td>
+              <td class="coverFnHi">131559</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7373">mark_cold</a></td>
+              <td class="coverFnHi">148799</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7342">mark_warm</a></td>
+              <td class="coverFnHi">148799</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4682">check_index</a></td>
+              <td class="coverFnHi">152212</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4655">check_subscripter</a></td>
+              <td class="coverFnHi">152222</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4603">infer_type</a></td>
+              <td class="coverFnHi">152320</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4428">compiler_tuple</a></td>
+              <td class="coverFnHi">166950</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7538">assemble_emit_exception_table_entry</a></td>
+              <td class="coverFnHi">183362</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#6146">compiler_subscript</a></td>
+              <td class="coverFnHi">184581</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5875">is_two_element_slice</a></td>
+              <td class="coverFnHi">186996</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4288">starunpack_helper</a></td>
+              <td class="coverFnHi">196746</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1893">compiler_pop_fblock</a></td>
+              <td class="coverFnHi">197907</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1877">compiler_push_fblock</a></td>
+              <td class="coverFnHi">197983</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4562">compiler_compare</a></td>
+              <td class="coverFnHi">210496</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3164">compiler_return</a></td>
+              <td class="coverFnHi">212398</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2765">check_compare</a></td>
+              <td class="coverFnHi">212746</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2786">compiler_addcompare</a></td>
+              <td class="coverFnHi">216929</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4093">addop_binary</a></td>
+              <td class="coverFnHi">217650</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8734">fold_tuple_on_constants</a></td>
+              <td class="coverFnHi">217862</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2404">compiler_visit_annotations</a></td>
+              <td class="coverFnHi">260662</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2526">compiler_function</a></td>
+              <td class="coverFnHi">260668</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2056">compiler_unwind_fblock_stack</a></td>
+              <td class="coverFnHi">264779</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2288">compiler_visit_kwonlydefaults</a></td>
+              <td class="coverFnHi">295425</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2451">compiler_default_arguments</a></td>
+              <td class="coverFnHi">295428</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2510">compiler_check_debug_args</a></td>
+              <td class="coverFnHi">295433</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2273">compiler_apply_decorators</a></td>
+              <td class="coverFnHi">298309</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2259">compiler_decorators</a></td>
+              <td class="coverFnHi">298407</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7667">write_location_info_none</a></td>
+              <td class="coverFnHi">308073</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2201">compiler_make_closure</a></td>
+              <td class="coverFnHi">350877</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#755">compiler_set_qualname</a></td>
+              <td class="coverFnHi">351007</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2748">check_is_arg</a></td>
+              <td class="coverFnHi">428236</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7949">add_checks_for_loads_of_unknown_variables</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8527">assemble</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7562">assemble_exception_table</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7184">assemble_free</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7156">assemble_init</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7820">assemble_jump_offsets</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#271">basicblock_returns</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8295">build_cellfixedoffsets</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8031">compute_code_flags</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8100">compute_localsplus_info</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8006">consts_dict_keys_inorder</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7491">convert_exception_handlers_to_nops</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7987">dict_keys_inorder</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9543">duplicate_exits_without_lineno</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8447">fix_cell_offsets</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8423">guarantee_lineno_for_exits</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8340">insert_prefix_instructions</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7250">label_exception_targets</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7227">make_except_stack</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8145">makecode</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9341">mark_reachable</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7761">normalize_jumps</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9461">optimize_cfg</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9419">propagate_line_numbers</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7423">push_cold_blocks_to_end</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8500">remove_redundant_jumps</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7086">stackdepth</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9494">trim_unused_consts</a></td>
+              <td class="coverFnHi">465113</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1672">compiler_enter_scope</a></td>
+              <td class="coverFnHi">465532</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1775">compiler_exit_scope</a></td>
+              <td class="coverFnHi">465532</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#729">compiler_unit_free</a></td>
+              <td class="coverFnHi">465532</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#622">list2dict</a></td>
+              <td class="coverFnHi">465532</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3005">compiler_if</a></td>
+              <td class="coverFnHi">486138</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9382">eliminate_empty_basic_blocks</a></td>
+              <td class="coverFnHi">488398</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1806">find_ann</a></td>
+              <td class="coverFnHi">518491</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3964">compiler_visit_stmt_expr</a></td>
+              <td class="coverFnHi">558991</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4632">check_caller</a></td>
+              <td class="coverFnHi">594412</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4991">compiler_call_helper</a></td>
+              <td class="coverFnHi">632117</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4716">is_import_originated</a></td>
+              <td class="coverFnHi">633656</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2830">compiler_jump_if</a></td>
+              <td class="coverFnHi">666330</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2352">compiler_visit_argannotation</a></td>
+              <td class="coverFnHi">729303</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7511">assemble_emit_exception_table_item</a></td>
+              <td class="coverFnHi">733448</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7239">copy_except_stack</a></td>
+              <td class="coverFnHi">767937</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2387">compiler_visit_argannotations</a></td>
+              <td class="coverFnHi">781979</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#711">compiler_unit_check</a></td>
+              <td class="coverFnHi">816539</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2498">compiler_check_debug_args_seq</a></td>
+              <td class="coverFnHi">886296</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#656">dictbytype</a></td>
+              <td class="coverFnHi">931064</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7503">write_except_byte</a></td>
+              <td class="coverFnHi">1047840</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4733">update_location_to_match_attr</a></td>
+              <td class="coverFnHi">1067320</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#171">is_relative_jump</a></td>
+              <td class="coverFnHi">1069810</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4744">maybe_optimize_method_call</a></td>
+              <td class="coverFnHi">1128070</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4825">compiler_call</a></td>
+              <td class="coverFnHi">1128080</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1525">compiler_addop_j</a></td>
+              <td class="coverFnHi">1164750</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2488">compiler_check_debug_one_arg</a></td>
+              <td class="coverFnHi">1225770</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1478">compiler_addop_name</a></td>
+              <td class="coverFnHi">1492720</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4801">validate_keywords</a></td>
+              <td class="coverFnHi">1760190</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#854">compiler_use_next_block</a></td>
+              <td class="coverFnHi">1996470</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7058">make_cfg_traversal_stack</a></td>
+              <td class="coverFnHi">2158050</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9521">is_exit_without_lineno</a></td>
+              <td class="coverFnHi">2210000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7222">except_stack_top</a></td>
+              <td class="coverFnHi">2241920</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8986">optimize_basic_block</a></td>
+              <td class="coverFnHi">2461350</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9316">normalize_basic_block</a></td>
+              <td class="coverFnHi">2461400</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#840">compiler_new_block</a></td>
+              <td class="coverFnHi">2462320</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#829">new_basicblock</a></td>
+              <td class="coverFnHi">2478300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#3986">compiler_visit_stmt</a></td>
+              <td class="coverFnHi">2524490</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7192">blocksize</a></td>
+              <td class="coverFnHi">2544110</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1296">compiler_addop</a></td>
+              <td class="coverFnHi">2739540</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#277">basicblock_exits_scope</a></td>
+              <td class="coverFnHi">2763310</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7072">stackdepth_push</a></td>
+              <td class="coverFnHi">2806670</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#8066">merge_const_one</a></td>
+              <td class="coverFnHi">2827030</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1468">compiler_addop_o</a></td>
+              <td class="coverFnHi">2918390</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1459">compiler_addop_load_const</a></td>
+              <td class="coverFnHi">3415690</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1446">compiler_add_const</a></td>
+              <td class="coverFnHi">3779120</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9239">extend_block</a></td>
+              <td class="coverFnHi">4922750</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7655">write_location_info_long_form</a></td>
+              <td class="coverFnHi">5073840</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1336">merge_consts_recursive</a></td>
+              <td class="coverFnHi">5082540</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7623">write_location_signed_varint</a></td>
+              <td class="coverFnHi">5107120</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#4157">compiler_nameop</a></td>
+              <td class="coverFnHi">5280440</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7643">write_location_info_oneline_form</a></td>
+              <td class="coverFnHi">5931190</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#2473">forbidden_name</a></td>
+              <td class="coverFnHi">6306690</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#9268">clean_basic_block</a></td>
+              <td class="coverFnHi">6961710</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7630">write_location_info_short_form</a></td>
+              <td class="coverFnHi">7232700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5865">compiler_visit_expr</a></td>
+              <td class="coverFnHi">10033600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#5718">compiler_visit_expr1</a></td>
+              <td class="coverFnHi">10033600</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1308">compiler_add_o</a></td>
+              <td class="coverFnHi">10552700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#474">_Py_Mangle</a></td>
+              <td class="coverFnHi">13014000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1505">compiler_addop_i</a></td>
+              <td class="coverFnHi">14460800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7893">scan_block_for_local</a></td>
+              <td class="coverFnHi">15150100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7615">write_location_varint</a></td>
+              <td class="coverFnHi">15221500</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#283">basicblock_nofallthrough</a></td>
+              <td class="coverFnHi">16021300</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1245">is_end_of_basic_block</a></td>
+              <td class="coverFnHi">16717200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7742">assemble_emit</a></td>
+              <td class="coverFnHi">17368800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7724">assemble_emit_location</a></td>
+              <td class="coverFnHi">17368800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#200">write_instr</a></td>
+              <td class="coverFnHi">17368800</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1252">compiler_use_new_implicit_block_if_needed</a></td>
+              <td class="coverFnHi">18365100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#1270">basicblock_addop</a></td>
+              <td class="coverFnHi">18365200</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7608">write_location_first_byte</a></td>
+              <td class="coverFnHi">18579100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7682">write_location_info_entry</a></td>
+              <td class="coverFnHi">18579100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#901">basicblock_next_instr</a></td>
+              <td class="coverFnHi">18594400</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#974">stack_effect</a></td>
+              <td class="coverFnHi">18688000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7593">write_location_byte</a></td>
+              <td class="coverFnHi">19095100</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#263">basicblock_last_instr</a></td>
+              <td class="coverFnHi">35966900</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#7601">location_pointer</a></td>
+              <td class="coverFnHi">38907700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#189">instr_size</a></td>
+              <td class="coverFnHi">92666700</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#177">is_block_push</a></td>
+              <td class="coverFnHi">107123000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#183">is_jump</a></td>
+              <td class="coverFnHi">133168000</td>
+            </tr>
+    <tr>
+              <td class="coverFn"><a href="compile.c.gcov.html#155">is_bit_set_in_table</a></td>
+              <td class="coverFnHi">171648000</td>
+            </tr>
+  </table>
+  <br>
+  </center>
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
